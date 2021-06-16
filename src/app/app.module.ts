@@ -14,13 +14,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TfNgCoreModule } from 'tf-ng-core';
 import { TfNgNzModule } from 'tf-ng-nz';
 import { TfNgFormModule } from 'tf-ng-form';
-import { NgZorroModule } from './modules/ng-zorro.module'
+import { NgZorroModule } from './modules/ng-zorro.module';
+import { PreviewFormComponent } from './pages/preview-form/preview-form.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CreateFormComponent } from './pages/create-form/create-form.component';
+import { EditFormComponent } from './pages/edit-form/edit-form.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PreviewFormComponent,
+    DashboardComponent,
+    CreateFormComponent,
+    EditFormComponent,
   ],
   imports: [
     BrowserModule,
