@@ -7,7 +7,7 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_GB } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,10 +15,14 @@ import { TfNgCoreModule } from 'tf-ng-core';
 import { TfNgNzModule } from 'tf-ng-nz';
 import { TfNgFormModule } from 'tf-ng-form';
 import { NgZorroModule } from './modules/ng-zorro.module';
+//
+import { TfNgFormEditorModule } from 'projects/tf-ng-form-editor/src/public-api';
+//
 import { PreviewFormComponent } from './pages/preview-form/preview-form.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateFormComponent } from './pages/create-form/create-form.component';
 import { EditFormComponent } from './pages/edit-form/edit-form.component';
+
 
 registerLocaleData(en);
 
@@ -38,8 +42,10 @@ registerLocaleData(en);
     TfNgFormModule,
     NgZorroModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    TfNgFormEditorModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]

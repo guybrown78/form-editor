@@ -15,7 +15,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "tf-ng-form-editor": [
+        "dist/tf-ng-form-editor/tf-ng-form-editor",
+        "dist/tf-ng-form-editor"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
