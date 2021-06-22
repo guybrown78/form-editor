@@ -1,0 +1,508 @@
+{
+  "meta":{
+    "title":"Engineering Service Line CAF",
+    "version":"1",
+    "description":"Lorum ipsum ...",
+    "jsonSchema":true,
+    "showTitle":true,
+    "formWidth":"large",
+    "showSubmitButton":false,
+    "showResetButton":false
+  },
+  "schema":[
+    {
+      "type":"tabs",
+      "componentOptions":{
+        "tabsOptions":{
+          "size":"small",
+          "showSubmitButton":true,
+          "submitLabel":"Complete"
+        }
+      },
+      "fieldGroup":[
+        {
+          "key":"candidateInfo",
+          "label":"Candidate Information",
+          "fieldGroup":[
+            {
+              "label": "Name",
+              "type": "input"
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "label": "Email",
+              "type": "input",
+              "help":"Lorum ipsum"
+            },
+            {
+              "label":"Function",
+              "type":"radio",
+              "componentOptions":{
+                "options":[
+                  {
+                    "label":"Originate",
+                    "value":"originate"
+                  },
+                  {
+                    "label":"Check",
+                    "value":"check"
+                  },
+                  {
+                    "label":"Approve",
+                    "value":"approve"
+                  },
+                  {
+                    "label":"Other",
+                    "value":"other"
+                  }
+                ]
+              }
+            },
+            {
+              "key":"otherFunction",
+              "type":"input",
+              "label":"If 'Other' specify below",
+              "hideExpression":"model?.function !== 'other'"
+            },
+            {
+              "label":"Role",
+              "type":"radio-group",
+              "wrappers": ["form-field"],
+              "componentOptions":{
+                "checkboxOptions":{
+                  "layout":"vertical",
+                  "showBlocks":true
+                },
+                "options":[
+                  {
+                    "label":"Discipline Technical Authority - Engineering/Design",
+                    "value":"1"
+                  },
+                  {
+                    "label":"Discipline Technical Authority - Duty Holder Operation Assignment",
+                    "value":"2"
+                  },
+                  {
+                    "label":"Discipline Subject Matter Expert (specify below)",
+                    "value":"3"
+                  },
+                  {
+                    "label":"Other",
+                    "value":"other"
+                  }
+                ]
+              }
+            },
+            {
+              "key":"otherRole",
+              "type":"input",
+              "label":"If 'Other' specify below",
+              "hideExpression":"model?.role !== 'other'"
+            },
+            {
+              "type":"select",
+              "label":"Discipline",
+              "placeholder":"Select area of discipline",
+              "componentOptions":{
+                "options":[
+                  {
+                    "label":"Architectural (Mustang)",
+                    "value":"Architectural (Mustang)"
+                  },
+                  {
+                    "label":"CAD Op.",
+                    "value":"CAD Op."
+                  },
+                  {
+                    "label":"Document Control",
+                    "value":"Document Control"
+                  },
+                  {
+                    "label":"E&I Design",
+                    "value":"E&I Design"
+                  },
+                  {
+                    "label":"Electrical Engineering",
+                    "value":"Electrical Engineering"
+                  },
+                  {
+                    "label":"Engineering Managers",
+                    "value":"Engineering Managers"
+                  },
+                  {
+                    "label":"Inst. & Control Engineering",
+                    "value":"Inst. & Control Engineering"
+                  },
+                  {
+                    "label":"Mechanical Engineering",
+                    "value":"Mechanical Engineering"
+                  },
+                  {
+                    "label":"Architectural",
+                    "value":"Architectural"
+                  },
+                  {
+                    "label":"Multi Discipline Design",
+                    "value":"Multi Discipline Design"
+                  },
+                  {
+                    "label":"Piping Design",
+                    "value":"Piping Design"
+                  },
+                  {
+                    "label":"Pipeline Design (Onshore)",
+                    "value":"Pipeline Design (Onshore)"
+                  },
+                  {
+                    "label":"Piping Engineering",
+                    "value":"Piping Engineering"
+                  },
+                  {
+                    "label":"Piping Engineering (Onshore)",
+                    "value":"Piping Engineering (Onshore)"
+                  },
+                  {
+                    "label":"Process Engineering",
+                    "value":"Process Engineering"
+                  },
+                  {
+                    "label":"Structural & Civil Design",
+                    "value":"Structural & Civil Design"
+                  },
+                  {
+                    "label":"Structural & Civil Engineering",
+                    "value":"Structural & Civil Engineering"
+                  },
+                  {
+                    "label":"Subsea Pipelines (Mustang)",
+                    "value":"Subsea Pipelines (Mustang)"
+                  },
+                  {
+                    "label":"Telecoms & Security (Mustang)",
+                    "value":"Telecoms & Security (Mustang)"
+                  },
+                  {
+                    "label":"Technical Applications",
+                    "value":"Technical Applications"
+                  },
+                  {
+                    "label":"Technical Safety Engineering",
+                    "value":"Technical Safety Engineering"
+                  }
+                ]
+              }
+            },
+            {
+              "type":"text",
+              "wrappers": ["grid-cell-field"],
+              "description":"I have conducted a review and confirm that the attached Competency Assessment is valid from the dates specified"
+            },
+            {
+              "label":"Areas of exclusion",
+              "type":"input"
+            }
+          ]
+        },
+        {
+          "key":"knowledgeBase",
+          "label":"Knowledge Base",
+          "fieldGroup":[
+            {
+              "label":"Qualifications",
+              "type":"input"
+            },
+            {
+              "label":"Professional Associations",
+              "type":"input"
+            },
+            {
+              "label":"Total Years of Experience",
+              "type":"input"
+            },
+            {
+              "label":"Breakdown of Experience",
+              "type":"input"
+            }
+          ]
+        },
+        {
+          "key":"assessmentSummary",
+          "label":"Assessment Summary",
+          "fieldGroup":[
+            {
+              "key":"candidate",
+              "type":"nested",
+              "label":"Candidate Complete",
+              "description":"I understand the role and responsibility for the Job Title, and agree with this Assessment including any exclusions identified.",
+              "fieldGroup":[
+                {
+                  "type":"input",
+                  "label":"Signed"
+                },
+                {
+                  "key":"date-format",
+                  "type":"date",
+                  "wrappers": ["date-field"],
+                  "label":"Date",
+                  "componentOptions":{
+                    "dateOptions":{
+                      "format":"dd/MM/yyyy"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type":"divider"
+            },
+            {
+              "key":"assessor",
+              "type":"nested",
+              "label":"Assessor to Complete",
+              "fieldGroup":[
+                {
+                  "type":"radio",
+                  "label":"Function",
+                  "componentOptions":{
+                    "options":[
+                      {
+                        "label":"Originate",
+                        "value":"originate"
+                      },
+                      {
+                        "label":"Check",
+                        "value":"check"
+                      },
+                      {
+                        "label":"Approve",
+                        "value":"approve"
+                      },
+											{
+                        "label":"Other",
+                        "value":"other"
+                      }
+                    ]
+                  }
+                },
+								{
+                  "key":"otherFunction",
+                  "type":"input",
+                  "label":"If 'Other' specify below",
+                  "hideExpression":"model?.function !== 'other'"
+                },
+                {
+                  "type":"input",
+                  "key":"text",
+                  "label":"Text Input"
+                },
+
+                {
+                  "type":"radio-group",
+                  "wrappers": ["form-field"],
+                  "label":"Role",
+                  "componentOptions":{
+                    "checkboxOptions":{
+                      "layout":"vertical",
+                      "showBlocks":true
+                    },
+                    "options":[
+                      {
+                        "label":"Discipline Technical Authority - Engineering/Design",
+                        "value":"1"
+                      },
+                      {
+                        "label":"Discipline Technical Authority - Duty Holder Operation Assignment",
+                        "value":"2"
+                      },
+                      {
+                        "label":"Discipline Subject Matter Expert (specify below)",
+                        "value":"3"
+                      },
+                      {
+                        "label":"Other",
+                        "value":"other"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key":"otherRole",
+                  "type":"input",
+                  "label":"If 'Other' specify below",
+                  "hideExpression":"model?.role !== 'other'"
+                },
+                {
+                  "key":"name",
+                  "type":"input",
+                  "label":"Name of Assessor"
+                },
+                {
+                  "type":"input",
+                  "label":"Job Title"
+                },
+                {
+                  "type":"input",
+                  "label":"On behalf of",
+                  "placeholder":"Wood"
+                },
+                {
+                  "type":"text",
+                  "wrappers": ["grid-cell-field"],
+                  "description":"I have conducted a review and confirm that the attached Competency Assessment is valid from the dates specified "
+                },
+                {
+                  "type":"input",
+                  "label":"Areas of exclusion"
+                },
+                {
+                  "type":"input",
+                  "label":"Assessment Validity Record From"
+                },
+                {
+                  "type":"input",
+                  "label":"Signed"
+                },
+                {
+                  "key":"date-format",
+                  "type":"date",
+                  "wrappers": ["date-field"],
+                  "label":"Date",
+                  "componentOptions":{
+                    "dateOptions":{
+                      "format":"dd/MM/yyyy"
+                    }
+                  }
+                }
+
+
+              ]
+            }
+          ]
+        },
+        {
+          "label":"Knowledge Table Key",
+          "fieldGroup":[
+            {
+              "type":"grid",
+              "label":"Knowledge Table Key",
+              "componentOptions":{
+                "gridOptions":{
+                  "columnDefs":[
+                    {
+                      "headerName":"Level",
+                      "field":"level",
+                      "width":8
+                    },
+                    {
+                      "headerName":"Description",
+                      "field":"descriptions",
+                      "width":16
+                    }
+                  ]
+                }
+              },
+              "fieldGroup":[
+                {
+                  "type":"grid-row",
+                  "fieldGroup":[
+                    {
+                      "type":"text",
+                      "key":"level",
+                      "description":"N/A",
+                      "wrappers": ["grid-cell-field"]
+                    },
+                    {
+                      "type":"text",
+                      "key":"descriptions",
+                      "description":"Not applicable to role",
+                      "wrappers": ["grid-cell-field"]
+                    }
+                  ]
+                },
+                {
+                  "type":"grid-row",
+                  "fieldGroup":[
+                    {
+                      "type":"text",
+                      "key":"level",
+                      "description":"1 - Awareness",
+                      "wrappers": ["grid-cell-field"]
+                    },
+                    {
+                      "type":"text",
+                      "key":"descriptions",
+                      "description":"Work activities routine and predicable. Member of a work group assisting others in delivery of objectives. Key words: assists, acknowledges, seeks, shows, applies",
+                      "wrappers": ["grid-cell-field"]
+                    }
+
+                  ]
+                },
+                {
+                  "type":"grid-row",
+                  "fieldGroup":[
+                    {
+                      "type":"text",
+                      "key":"level",
+                      "description":"2 - Basic",
+                      "wrappers": ["grid-cell-field"]
+                    },
+                    {
+                      "type":"text",
+                      "key":"descriptions",
+                      "description":"Varied work activities performed in a range of contexts. Some individual responsibility. Limited guidance needed. Results reviewed for quality. Contributes to delivering team or functional objectives. Key words: contributes, identifies, anticipates, delivers, shares, recognises",
+                      "wrappers": ["grid-cell-field"]
+                    }
+                  ]
+                },
+                {
+                  "type":"grid-row",
+                  "fieldGroup":[
+                    {
+                      "type":"text",
+                      "key":"level",
+                      "description":"3 - Skilful",
+                      "wrappers": ["grid-cell-field"]
+                    },
+                    {
+                      "type":"text",
+                      "key":"descriptions",
+                      "description":"Broad range of work in a complex and non-routine context. Significant personal autonomy and team authority. Coordinates and manages work to deliver successful outcomes. Key words: manages, encourages, challenges, develops, adapts",
+                      "wrappers": ["grid-cell-field"]
+                    }
+                  ]
+                },
+                {
+                  "type":"grid-row",
+                  "fieldGroup":[
+                    {
+                      "type":"text",
+                      "key":"level",
+                      "description":"4 - Mastery / Expert",
+                      "wrappers": ["grid-cell-field"]
+                    },
+                    {
+                      "type":"text",
+                      "key":"descriptions",
+                      "description":"Complex technical or professional activities in a wide variety of contexts. High confidence in results. Works across the organisation to deliver on operational and strategic objectives. Able to identify capability of others in this activity and is recognised as an authority by company and/or industry peers. Key words: champions, inspires, motivates, enables, shapes",
+                      "wrappers": ["grid-cell-field"]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key":"behaviouralCompetencies",
+          "label":"Behavioural Competencies (Behavioural Standard)",
+          "fieldGroup":[]
+        }
+      ]
+
+
+    }
+  ],
+  "model":{}
+}

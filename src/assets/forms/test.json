@@ -1,0 +1,17 @@
+{
+  "meta":{
+    "title":"New form",
+    "version":"001",
+    "jsonSchema":true
+  },
+  "schema":[
+    {
+      "uuid":"f5dfdef2-91ee-4de5-acfe-e7bd2b513d60",
+      "label":"Name",
+      "type":"input"
+    }
+  ],
+  "model":{
+
+  }
+}

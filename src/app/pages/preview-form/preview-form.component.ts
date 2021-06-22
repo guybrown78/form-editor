@@ -18,7 +18,9 @@ export class PreviewFormComponent implements OnInit {
 
   ngOnInit(): void {
     //
-    this.formService.getData('assets/forms/engineeringServiceLineCAF.json').subscribe(data => {
+    //const url = 'assets/forms/engineeringServiceLine.json'
+    const url = 'assets/forms/test.json'
+    this.formService.getData(url).subscribe(data => {
       // data has loaded, the formService getData parses the data before it is returned here and stores the formFields, model and meta for the form.
       // only thing left to do is listen for the submit button to be pressed
       this.submittedSubscription = this.formService.submitted.subscribe(

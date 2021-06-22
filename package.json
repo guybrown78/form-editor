@@ -26,10 +26,11 @@
     "ng-zorro-antd": "^11.4.2",
     "rxjs": "~6.6.0",
     "tf-ng-core": "^0.0.36",
-    "tf-ng-form": "^0.0.19",
+    "tf-ng-form": "^0.0.20",
     "tf-ng-nz": "^0.0.11",
     "tf-ng-zorro-theme": "^1.0.28",
     "tslib": "^2.0.0",
+    "uuid": "^8.3.2",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.11.3"
   },

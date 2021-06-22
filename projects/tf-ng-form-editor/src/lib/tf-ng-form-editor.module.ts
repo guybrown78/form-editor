@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TfNgFormEditorComponent } from './tf-ng-form-editor.component';
 import { FieldPickerComponent } from './components/field-picker/field-picker.component';
-
+import { TfNgFormModule} from 'tf-ng-form'
 
 
 @NgModule({
@@ -15,6 +15,7 @@ import { FieldPickerComponent } from './components/field-picker/field-picker.com
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TfNgFormModule
   ],
   exports: [
     TfNgFormEditorComponent
