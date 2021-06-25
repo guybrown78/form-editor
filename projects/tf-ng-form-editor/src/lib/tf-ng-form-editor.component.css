@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+.form-editor-page{
+  display: flex;
+  /* flex-direction: column; */
+  min-height: 100vh;
+  position: relative;
+
+  margin-top: -98px;
+  margin-left: -0.6rem;
+}
+
+@media (min-width: 640px) {
+	.form-editor-page{
+    margin-left: -1.4rem;
+  }
+}
+
+
+.form-editor-content{
+  display: flex;
+  flex-direction: column;
+}
+.form-editor-page-title{
+  height:85px;
+}
+.form-editor-page-details{
+  flex: 1 0 0;
+  padding-bottom: 1.4rem;
+}
+
+.form-editor-navigation{
+
+}
+.form-editor-field-detail{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1 0 0;
+}
+.form-editor-fields{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1 0 0;
+  padding:1.4rem;
+}

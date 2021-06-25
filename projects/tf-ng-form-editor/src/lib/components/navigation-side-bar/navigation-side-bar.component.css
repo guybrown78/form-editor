@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  height: 100vh;
+}
+.side-bar-left-column{
+  flex: 1 0 0%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+.header-content{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 74px;
+  height: 74px;
+  overflow: hidden;
+}
+.content{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding:0.7rem 0;
+}
+.content > div{
+  display: flex;
+  flex-direction: column;
+}
+.body-content{
+  flex:1 0 0%;
+}
+.footer-content{
+  align-items: flex-end;
+  margin: 20px 0;
+}

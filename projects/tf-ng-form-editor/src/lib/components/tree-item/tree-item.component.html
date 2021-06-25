@@ -1,0 +1,13 @@
+<div
+  class="custom-node bg-white"
+  [ngClass]="node.selected ? 'selected' : 'unselected'"
+>
+  <div
+    class="custom-node-inner"
+  >
+    <h4 nz-typography class="blue"><strong>{{ node.title }}</strong></h4>
+    <div class="custom-node-details" [ngClass]="node.selected ? 'show' : 'hide' ">
+      <form-editor-field-item [key]="node.key"></form-editor-field-item>
+    </div>
+  </div>
+</div>

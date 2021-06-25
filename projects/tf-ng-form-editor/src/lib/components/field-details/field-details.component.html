@@ -1,0 +1,10 @@
+
+<div *ngIf="!fieldItem">
+  no item
+</div>
+<div *ngIf="fieldItem">
+  item
+  <pre>{{ fieldItem |json }}</pre>
+  editable
+  <pre>{{ selectableItem |json }}</pre>
+</div>

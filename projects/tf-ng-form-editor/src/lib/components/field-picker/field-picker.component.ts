@@ -1,7 +1,7 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+
+import { take } from 'rxjs/operators';
 import { FormEditorConfigService, SelectableFieldItemModel, SelectableCategory } from '../../form-editor-config.service';
-import { FieldItemModel } from '../../to-share/field-item-model.interface';
 
 @Component({
   selector: 'form-editor-field-picker',
@@ -12,30 +12,39 @@ export class FieldPickerComponent {
 
   types: SelectableFieldItemModel[]
 
-  @Output() selectedField = new EventEmitter<any>();
+  // @Output('selected') selected = new EventEmitter<boolean>();
+  @Output('selectedField') selectedField = new EventEmitter<any>();
 
-  form: FormGroup;
-  readonly fieldEdit = new FormControl({});
-  readonly type: FormControl;
-  fieldGroup: boolean;
+  private _category:SelectableCategory = SelectableCategory.SIMPLE;
+  @Input('category') set category(value:SelectableCategory){
+    this._category = value;
+    this.setTypes();
+  }
+  get category():SelectableCategory{
+    return this._category
+  }
 
   constructor(
-    fb: FormBuilder,
     private formEditorConfig:FormEditorConfigService
   ) {
-    this.form = fb.group({
-      type: this.type = fb.control('', Validators.compose([Validators.required, Validators.pattern(/^\s*\S.*$/)]))
-    });
-    this.types = [ ...formEditorConfig.types.filter(t => t.category === SelectableCategory.SIMPLE)]
+
   }
 
-  add(): void {
-    const selectedFieldItem:SelectableFieldItemModel = this.formEditorConfig.types.filter(t => t.id === this.form.value.type)[0];
-    if(!selectedFieldItem){
-      return
-    }
-    this.selectedField.emit(selectedFieldItem);
+  setTypes(){
+    this.formEditorConfig.selectableItems.pipe(take(1)).subscribe(types => {
+      if(types){
+        this.types = [ ...types.filter(t => t.category === this.category)]
+      }else {
+        this.types = []
+      }
+    })
   }
 
+  add(id): void {
+    this.formEditorConfig.getSelectableItemFromId(id).pipe(take(1)).subscribe(item => {
+      this.selectedField.emit(item);
+    })
+
+  }
 
 }

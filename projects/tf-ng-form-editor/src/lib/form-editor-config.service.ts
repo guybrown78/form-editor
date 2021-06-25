@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Field } from '@ngx-formly/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { FieldItemModel } from './to-share/field-item-model.interface';
 
 
@@ -8,11 +11,16 @@ export interface SelectableFieldItemModel {
   type:string
   label:string
   category:SelectableCategory
+  description?:string
+  editableConfig?:SelectableFieldItemEditableConfigModel
 }
-
+export interface SelectableFieldItemEditableConfigModel {
+  setHelp?:boolean
+}
 export enum SelectableCategory {
   SIMPLE = "Simple",
-  COMPLEX = "Complex"
+  COMPLEX = "Complex",
+  LAYOUT = "Layout"
 }
 
 @Injectable({
@@ -20,25 +28,96 @@ export enum SelectableCategory {
 })
 export class FormEditorConfigService {
 
-  types: SelectableFieldItemModel[] = [
+  readonly _types: SelectableFieldItemModel[] = [
     {
-      type:"input", id:"1", label:"Input",
+      type:"input",
+      id:"1",
+      label:"Input",
+      category:SelectableCategory.SIMPLE,
+      description:"Lorum ipsum",
+    },
+    {
+      type:"select",
+      id:"2",
+      label:"Select Dropdown",
       category:SelectableCategory.SIMPLE
     },
     {
-      type:"select", id:"2", label:"Select Dropdown", category:SelectableCategory.SIMPLE
-    },
-    {
-      type:"radio", id:"3", label:"Radio Select",
+      type:"radio",
+      id:"3",
+      label:"Radio Select",
       category:SelectableCategory.SIMPLE
     },
     {
-      type:"checkbox", id:"4", label:"Checkbox Select", category:SelectableCategory.SIMPLE
+      type:"checkbox",
+      id:"4",
+      label:"Checkbox Select",
+      category:SelectableCategory.SIMPLE
     },
     {
-      type:"address", id:"6", label:"Address", category:SelectableCategory.COMPLEX
+      type:"address",
+      id:"6",
+      label:"Address",
+      category:SelectableCategory.COMPLEX
+    },
+    {
+      type:"tab",
+      id:"8",
+      label:"Tab",
+      category:SelectableCategory.LAYOUT,
+      description:"Descriptions explaining the tabs and how to use them etc..."
+    },
+    {
+      type:"divider",
+      id:"7",
+      label:"Divider",
+      category:SelectableCategory.LAYOUT,
+      description:"Lorum ipsum divider ..."
     }
   ]
+
+  private _selectableItems = new BehaviorSubject<SelectableFieldItemModel[]>(this._types);
+  private _selectableItem = new Subject<SelectableFieldItemModel>()
+
+  get selectableItems(){
+    return this._selectableItems.asObservable().pipe(map(items => {
+      if(items){
+        return [ ...items ]
+      }else{
+        return null;
+      }
+    }))
+  }
+
+  getSelectableItemFromType(type:string){
+    return this._selectableItems.asObservable().pipe(map(items => {
+      if(items){
+        const typeItems:SelectableFieldItemModel[] = items.filter(item => item.type === type);
+        if(typeItems.length){
+          return typeItems[0];
+        }else{
+          return null;
+        }
+      }else{
+        return null;
+      }
+    }))
+  }
+
+  getSelectableItemFromId(id:string){
+    return this._selectableItems.asObservable().pipe(map(items => {
+      if(items){
+        const typeItems:SelectableFieldItemModel[] = items.filter(item => item.id === id);
+        if(typeItems.length){
+          return typeItems[0];
+        }else{
+          return null;
+        }
+      }else{
+        return null;
+      }
+    }))
+  }
 
   constructor() { }
 

@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+.navigation-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.navigation-item tf-ng-hexagon{
+  margin-right: 12px;
+  margin-top: 2px;
+}

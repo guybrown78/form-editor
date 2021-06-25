@@ -1,4 +1,4 @@
-<form novalidate [formGroup]="form">
+<!-- <form novalidate [formGroup]="form">
   <div class="form-group">
 
     <select [formControl]="type">
@@ -9,4 +9,14 @@
       Add
     </button>
   </div>
-</form>
+</form> -->
+
+<ul nz-menu nzMode="inline" class="inline-menu-blue" nzTheme="dark">
+  <li nz-menu-item *ngFor="let item of types">
+    <form-editor-navigation-item
+      [item]="item"
+      (click)="add(item.id)"
+    ></form-editor-navigation-item>
+  </li>
+</ul>
+

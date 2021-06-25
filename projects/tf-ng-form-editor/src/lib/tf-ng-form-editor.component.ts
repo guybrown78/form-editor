@@ -8,22 +8,15 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'tf-ng-form-editor',
-  template: `
-    <form-editor-field-picker
-      (selectedField)="onSelectedField($event)"
-    ></form-editor-field-picker>
-    <!-- <div *ngIf="formReady"> -->
-      <tf-ng-form></tf-ng-form>
-    <!-- </div> -->
-
-  `,
-  styles: [
-  ]
+  templateUrl: './tf-ng-form-editor.component.html',
+  styleUrls: ['./tf-ng-form-editor.component.css']
 })
 export class TfNgFormEditorComponent implements OnInit {
 
   formSubscription:Subscription
   // formReady:boolean = false
+
+
   constructor(
     private formService:TfNgFormService,
     private formEditorService:TfNgFormEditorService
@@ -54,17 +47,17 @@ export class TfNgFormEditorComponent implements OnInit {
       // get current form
       this.formEditorService.form.pipe(take(1)).subscribe(form => {
         // stringify and set to json
-        this.formService.setData(JSON.stringify(form)).subscribe(data => {
-          // console.log(" *** complete *** ")
-        })
+        // this.formService.setData(JSON.stringify(form)).subscribe(data => {
+          console.log(" *** UPDATED *** ")
+          //
+        // })
       })
 
     })
   }
 
-  onSelectedField(selectedField:SelectableFieldItemModel): void {
-   const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
-   this.formEditorService.addFormItem(formFieldItem);
-}
+  destroy(){
+    this.formSubscription.unsubscribe;
+  }
 
 }

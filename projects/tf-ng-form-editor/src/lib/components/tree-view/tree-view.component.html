@@ -1,0 +1,14 @@
+<nz-tree
+  class="tf-form-edit-tree tf-custom-tree tf-app-tree tf-app-tree-hidden-line bg-grey"
+  #nzTreeComponent
+  [nzData]="nodes"
+  nzShowExpand=false
+  (nzClick)="nzClick($event)"
+  (nzContextMenu)="nzClick($event)"
+  [nzTreeTemplate]="nzTreeTemplate"
+></nz-tree>
+
+
+<ng-template #nzTreeTemplate let-node let-origin="origin">
+  <form-editor-tree-item [node]="origin"></form-editor-tree-item>
+</ng-template>

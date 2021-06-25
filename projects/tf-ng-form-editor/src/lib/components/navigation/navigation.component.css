@@ -1,0 +1,85 @@
+:host {
+  display: block;
+}
+.wrapper{
+  display: flex;
+  position: relative;
+}
+tf-ng-side-bar{
+  height: calc(100vh - 0px)!important;
+}
+.form-editor-side-bar{
+  min-height: calc(100vh - 20px);
+  position: relative;
+  /*  */
+  min-width:80px;
+  max-width:80px;
+  /*  */
+  display: none;
+  flex-direction: column;
+  /*  */
+  transition-property: color, background-color, border-color;
+	transition-duration: 150ms;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  /*  */
+  z-index: 50;
+}
+.form-editor-side-bar.active{
+  /* z-index: 1005; */
+}
+.form-editor-side-bar.inactive{
+  /* z-index: 10; */
+}
+.form-editor-side-bar.hide{
+  left:-80px;
+  opacity:1;
+  pointer-events: none;
+}
+.form-editor-side-bar.show{
+  left:0px;
+  opacity:1;
+  pointer-events:all;
+  display: flex;
+}
+.form-editor-side-bar.hide-toggle-animate{
+  transition-property: opacity, left;
+}
+
+
+.form-editor-navigation-drawer{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  z-index: 25;
+  transition: left 0.3s cubic-bezier(0.7, 0.3, 0.1, 1), box-shadow 0.3s cubic-bezier(0.7, 0.3, 0.1, 1);
+}
+.form-editor-navigation-drawer.form-menu{
+  width:320px;
+}
+.form-editor-navigation-drawer.layout-menu,
+.form-editor-navigation-drawer.complex-menu,
+.form-editor-navigation-drawer.single-menu{
+  width:250px;
+}
+
+.form-editor-navigation-drawer.show{
+  left: 80px;
+  box-shadow: 6px 0 16px -8px rgb(0 0 0 / 8%), 9px 0 28px 0 rgb(0 0 0 / 5%), 12px 0 48px 16px rgb(0 0 0 / 3%);
+  pointer-events: all;
+}
+.form-editor-navigation-drawer.hide{
+  left: -170px;
+  box-shadow: 6px 0 16px -8px rgb(0 0 0 / 0%), 9px 0 28px 0 rgb(0 0 0 / 0%), 12px 0 48px 16px rgb(0 0 0 / 0%);
+  pointer-events: none;
+}
+.form-editor-navigation-drawer.form-menu.hide{
+  left: -240px;
+}
+.form-editor-navigation-drawer .title-wrapper{
+  padding: 1.4rem 1.4rem 0;
+  margin-top: 55px;
+}
+.form-editor-navigation-drawer .content-wrapper{
+  padding: 0 1.4rem 1.4rem;
+}

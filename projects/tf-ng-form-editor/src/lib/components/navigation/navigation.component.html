@@ -1,0 +1,84 @@
+
+<div class="wrapper">
+  <nz-layout
+    class="form-editor-side-bar"
+    [ngClass]="[
+      'bg-'+currentMenuColour,
+      !sideBarIsActive ? ' inactive' : ' active',
+      hide || hideNavigation ? 'hide' : 'show',
+      animateHideToggles ? 'hide-toggle-animate' : 'hide-toggle-static',
+    ]"
+  >
+
+    <form-editor-navigation-side-bar>
+      <div body>
+
+        <tf-ng-hexagon
+          *ngFor="let item of navigationItems"
+          (click)="onToggleDrawer(item.type)"
+          [colour]="getHexMenuColour(item.type).hex"
+          outline-colour="white"
+          size="m"
+          [as-button]="false"
+        >
+          <i
+            nz-icon
+            [ngClass]="getHexMenuColour(item.type).icon"
+            [nzType]="item.icon" nzTheme="outline"
+          ></i>
+        </tf-ng-hexagon>
+
+      </div>
+    </form-editor-navigation-side-bar>
+  </nz-layout>
+
+
+  <div
+    *ngFor="let item of navigationItems"
+    class="form-editor-navigation-drawer"
+    [ngClass]="[
+      getMenuDrawerStateClass(item.type),
+      item.type,
+      item.type === 'form-menu' ? 'bg-white' : 'bg-blue'
+    ]"
+  >
+    <div class="title-wrapper">
+      <tf-ng-form-title class="title">
+        <h4 [ngClass]="item.type === 'form-menu' ? 'blue' : 'white'">
+          {{ item.label }}
+        </h4>
+      </tf-ng-form-title>
+    </div>
+
+
+    <form-editor-field-picker
+      *ngIf="item.type === 'layout-menu'"
+      category="Layout"
+      (selectedField)="onSelectedField($event)"
+    ></form-editor-field-picker>
+
+    <form-editor-field-picker
+      *ngIf="item.type === 'complex-menu'"
+      category="Complex"
+      (selectedField)="onSelectedField($event)"
+    ></form-editor-field-picker>
+
+
+    <form-editor-field-picker
+      *ngIf="item.type === 'single-menu'"
+      category="Simple"
+      (selectedField)="onSelectedField($event)"
+    ></form-editor-field-picker>
+
+    <div
+      class="content-wrapper"
+      *ngIf="item.type === 'form-menu'"
+    >
+      <form-editor-meta-settings></form-editor-meta-settings>
+    </div>
+
+
+  </div>
+
+</div>
+

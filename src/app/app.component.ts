@@ -38,7 +38,7 @@ const navigationData:AppNavigationItem[] = [
 export class AppComponent {
   title = 'Form Editor';
   appReady:boolean = false;
-
+  hideHeader:boolean = true;
   constructor(
     private appHeaderService: AppHeaderService,
     private appNavigationService: AppNavigationService,
