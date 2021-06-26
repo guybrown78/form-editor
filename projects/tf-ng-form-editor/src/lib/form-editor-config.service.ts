@@ -76,6 +76,67 @@ export class FormEditorConfigService {
     }
   ]
 
+  readonly _editableFields: any[] = [
+    {
+      type:"inputType",
+      id:"100",
+      setLabel:true,
+      setDesc:true,
+      setHelp:true,
+      setPlaceholder:true,
+      setRequired:true,
+      setPermissions:true,
+      setReadonlyPermissions:true,
+      setHideExpressions:false,
+      hasComponentOptions:false,
+      hasFieldGroup:false,
+    },
+    {
+      type:"selectType",
+      id:"101",
+      setLabel:true,
+      setDesc:true,
+      setHelp:true,
+      setPlaceholder:true,
+      setRequired:true,
+      setPermissions:true,
+      setReadonlyPermissions:true,
+      setHideExpressions:false,
+      hasComponentOptions:true,
+      hasFieldGroup:false,
+      componentOptionsType:"dropdown"
+    },
+    {
+      type:"radioCheckType",
+      id:"102",
+      setLabel:true,
+      setDesc:true,
+      setHelp:true,
+      setPlaceholder:false,
+      setRequired:true,
+      setPermissions:true,
+      setReadonlyPermissions:true,
+      setHideExpressions:false,
+      hasComponentOptions:true,
+      hasFieldGroup:false,
+      componentOptionsType:"singleSelect"
+    },
+    {
+      type:"layoutType",
+      id:"103",
+      setLabel:false,
+      setDesc:false,
+      setHelp:false,
+      setPlaceholder:false,
+      setRequired:false,
+      setPermissions:false,
+      setReadonlyPermissions:false,
+      setHideExpressions:false,
+      hasComponentOptions:true,
+      hasFieldGroup:false,
+      componentOptionsType:"singleSelect"
+    }
+  ]
   private _selectableItems = new BehaviorSubject<SelectableFieldItemModel[]>(this._types);
   private _selectableItem = new Subject<SelectableFieldItemModel>()
 

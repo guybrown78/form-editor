@@ -63,7 +63,6 @@ export class TfNgFormEditorService {
 
   getFieldItemFromSelection(selectedField:SelectableFieldItemModel):FieldItemModel{
     const fieldItem:FieldItemModel = {}
-    console.log(selectedField)
     const uuid:string = uuidv4();
     fieldItem.uuid = fieldItem.key = uuid
     fieldItem.label = selectedField.label;

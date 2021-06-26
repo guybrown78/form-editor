@@ -34,8 +34,6 @@ export class FieldDetailsComponent implements OnInit {
             // when item has been inited get config data...
             this.formEditorConfig.getSelectableItemFromType(this.fieldItem.type).pipe(take(1)).subscribe(selectableItem => {
               if(selectableItem){
-                console.log("item ...")
-                console.log(selectableItem);
                 this.selectableItem = selectableItem;
               }else{
                 this.selectableItem = null;
