@@ -1,0 +1,55 @@
+<div class="wrapper" *ngIf="loaded">
+  <div class="title">
+    <h4 nz-typography class="white">{{ metaData.title }}</h4>
+  </div>
+  <div class="save">
+    <button
+      nz-button
+      class="aqua"
+      nz-dropdown
+      nzPlacement="bottomRight"
+      [nzDropdownMenu]="menu2"
+    >
+      Save<i nz-icon nzType="down"></i>
+    </button>
+  </div>
+  <div class="buttons">
+
+    <tf-ng-hexagon
+      [colour]="editorMode === 'edit' ? 'blue' : 'aqua' "
+      outline-colour="aqua"
+      size="m"
+      [as-button]="true"
+      (click)="onModeToggle()"
+    >
+      <i
+        nz-icon
+        [ngClass]="editorMode === 'edit' ? 'aqua' : 'blue'"
+        [nzType]="editorMode === 'edit' ? 'eye' : 'edit'"
+        nzTheme="outline"
+      ></i>
+    </tf-ng-hexagon>
+
+
+    <tf-ng-hexagon
+      colour="blue"
+      outline-colour="white"
+      size="m"
+      [as-button]="true"
+    >
+      <i
+        nz-icon
+        class="white"
+        nzType="close" nzTheme="outline"
+      ></i>
+    </tf-ng-hexagon>
+  </div>
+</div>
+
+
+<nz-dropdown-menu #menu2="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item>Save as draft</li>
+    <li nz-menu-item>Save and publish</li>
+  </ul>
+</nz-dropdown-menu>

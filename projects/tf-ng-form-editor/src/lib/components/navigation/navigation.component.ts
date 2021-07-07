@@ -12,6 +12,16 @@ import { SelectableFieldItemModel } from '../../form-editor-config.service';
 
 export class NavigationComponent implements OnInit {
 
+  private _disabled:boolean = false;
+  @Input('disabled') set disabled(value:boolean){
+    if(value){
+      this.closeAll();
+    }
+    this._disabled = value;
+  }
+  get disabled():boolean{
+    return this._disabled;
+  }
   @Input('hide') hide:boolean = false;
   @Input('hideNavigation') hideNavigation:boolean = false;
   @Input('animateHideToggles') animateHideToggles:boolean = true;
@@ -48,6 +58,10 @@ export class NavigationComponent implements OnInit {
 
 
   onToggleDrawer(menu:string){
+    if(this.disabled){
+      return
+    }
+
     switch(menu){
       case "layout-menu":
         this.layoutMenuVisible = !this.layoutMenuVisible

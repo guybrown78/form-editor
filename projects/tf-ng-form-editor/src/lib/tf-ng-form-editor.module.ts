@@ -21,6 +21,8 @@ import { FieldItemComponent } from './components/field-item/field-item.component
 import { TreeItemComponent } from './components/tree-item/tree-item.component';
 import { FieldDetailsComponent } from './components/field-details/field-details.component';
 import { HeaderComponent } from './components/field-item/header/header.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
+
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { HeaderComponent } from './components/field-item/header/header.component
     TreeItemComponent,
     FieldDetailsComponent,
     HeaderComponent,
+    PageHeaderComponent,
   ],
   imports: [
     CommonModule,

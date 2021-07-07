@@ -25,8 +25,10 @@
 }
 .form-editor-page-title{
   height:85px;
+  display: flex;
 }
-.form-editor-page-details{
+.form-editor-page-details,
+.form-editor-preview-wrapper{
   flex: 1 0 0;
   padding-bottom: 1.4rem;
   flex-flow: row;

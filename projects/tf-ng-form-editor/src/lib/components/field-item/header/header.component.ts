@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormTreeModel } from '../../../tf-ng-form-editor.service';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { TfNgFormEditorService, OrdinalDirection } from '../../../tf-ng-form-editor.service';
+import { TfNgFormEditorService, OrdinalDirectionEnum } from '../../../tf-ng-form-editor.service';
 import { FieldItemModel } from '../../../to-share/field-item-model.interface';
 
 @Component({
@@ -28,11 +28,11 @@ export class HeaderComponent implements OnInit {
 
   onOrderUp(event){
     this.stopButtonEvent(event);
-    this.formEditorService.updateFormItemOrdinal(this.node.key, OrdinalDirection.UP);
+    this.formEditorService.updateFormItemOrdinal(this.node.key, OrdinalDirectionEnum.UP);
   }
   onOrderDown(event){
     this.stopButtonEvent(event);
-    this.formEditorService.updateFormItemOrdinal(this.node.key, OrdinalDirection.DOWN);
+    this.formEditorService.updateFormItemOrdinal(this.node.key, OrdinalDirectionEnum.DOWN);
   }
   onDuplicate(event){
     this.stopButtonEvent(event);

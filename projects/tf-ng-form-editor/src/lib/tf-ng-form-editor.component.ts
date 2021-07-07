@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TfNgFormService } from 'tf-ng-form';
-import { TfNgFormEditorService } from './tf-ng-form-editor.service';
+import { EditorModeEnum, TfNgFormEditorService } from './tf-ng-form-editor.service';
 import { FormEditorConfigService, SelectableFieldItemModel } from './form-editor-config.service';
 import { FieldItemModel } from './to-share/field-item-model.interface';
 import { take } from 'rxjs/operators';
@@ -14,8 +14,10 @@ import { Subscription } from 'rxjs';
 export class TfNgFormEditorComponent implements OnInit {
 
   formSubscription:Subscription
+  editorModeSubscription:Subscription;
   // formReady:boolean = false
 
+  editorMode:EditorModeEnum;
 
   constructor(
     private formService:TfNgFormService,
@@ -23,7 +25,9 @@ export class TfNgFormEditorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    //
+    this.initialiseEditorModeSubscription();
+    //
     // check if the form model has been initialised
     this.formEditorService.form.pipe(take(1)).subscribe(form => {
       if(form){
@@ -47,17 +51,23 @@ export class TfNgFormEditorComponent implements OnInit {
       // get current form
       this.formEditorService.form.pipe(take(1)).subscribe(form => {
         // stringify and set to json
-        // this.formService.setData(JSON.stringify(form)).subscribe(data => {
+        this.formService.setData(JSON.stringify(form)).subscribe(data => {
           // CAN UPDATE PREVIEW HERE
-          //
-        // })
+        })
       })
 
     })
   }
 
+  initialiseEditorModeSubscription(){
+    this.editorModeSubscription = this.formEditorService.editorMode.subscribe((mode:EditorModeEnum) => {
+      this.editorMode = mode;
+    })
+  }
+
   destroy(){
     this.formSubscription.unsubscribe;
+    this.editorModeSubscription.unsubscribe;
   }
 
 }

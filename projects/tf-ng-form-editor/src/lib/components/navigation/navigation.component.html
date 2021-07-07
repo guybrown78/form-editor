@@ -11,12 +11,13 @@
   >
 
     <form-editor-navigation-side-bar>
-      <div body>
+      <div body class="form-editor-side-bar-nav-wrapper">
 
         <tf-ng-hexagon
           *ngFor="let item of navigationItems"
           (click)="onToggleDrawer(item.type)"
           [colour]="getHexMenuColour(item.type).hex"
+          [disabled]="disabled"
           outline-colour="white"
           size="m"
           [as-button]="false"

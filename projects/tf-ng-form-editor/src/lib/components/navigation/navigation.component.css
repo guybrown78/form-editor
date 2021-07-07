@@ -81,5 +81,10 @@ tf-ng-side-bar{
   margin-top: 55px;
 }
 .form-editor-navigation-drawer .content-wrapper{
-  padding: 0 1.4rem 1.4rem;
+  padding: 0 0 1.4rem;
+}
+
+.form-editor-side-bar-nav-wrapper tf-ng-hexagon{
+  margin-bottom: 1rem;
+  cursor: pointer;
 }

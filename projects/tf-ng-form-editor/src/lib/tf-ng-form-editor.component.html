@@ -2,14 +2,19 @@
 <div nz-row class="form-editor-page">
 
   <div nz-col nzFlex="80px" class="form-editor-navigation">
-    <form-editor-navigation></form-editor-navigation>
+    <form-editor-navigation
+      [disabled]="editorMode !== 'edit'"
+    ></form-editor-navigation>
   </div>
 
   <div nz-col nzFlex="auto" class="form-editor-content">
     <div nz-row nzFlex="auto" class="form-editor-page-title">
+
+      <form-editor-page-header></form-editor-page-header>
+
     </div> <!-- END form-editor-title-->
 
-    <div nz-row nzGutter="16" class="form-editor-page-details">
+    <div nz-row nzGutter="16" class="form-editor-page-details" *ngIf="editorMode === 'edit'">
 
       <div nz-col nzFlex="345px">
         <div class="form-editor-field-detail rounded bg-white">
@@ -21,6 +26,23 @@
         <div class="form-editor-fields rounded bg-grey">
           <!-- <tf-ng-form></tf-ng-form> -->
           <form-editor-tree-view></form-editor-tree-view>
+        </div>
+      </div>
+
+    </div> <!-- END form-editor-details-->
+
+
+    <div nz-row nzGutter="16" class="form-editor-page-details" *ngIf="editorMode === 'preview'">
+
+      <div nz-col nzFlex="auto">
+        <div class="form-editor-fields rounded bg-white">
+          <tf-ng-form></tf-ng-form>
+        </div>
+      </div>
+
+      <div nz-col nzFlex="280px">
+        <div class="form-editor-field-detail rounded bg-white">
+          <!--  -->
         </div>
       </div>
 

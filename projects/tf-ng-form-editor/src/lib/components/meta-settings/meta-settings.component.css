@@ -1,3 +1,13 @@
 :host {
   display: block;
 }
+.wrapper{
+  padding: 0;
+}
+.switch-wrapper .ant-form-item-label,
+.no-padding{
+  padding: 0!important;
+}
+.switch-wrapper{
+  margin-bottom: 8px;
+}

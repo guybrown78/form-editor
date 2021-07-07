@@ -1,1 +1,44 @@
-<p>meta-settings works!</p>
+
+<div class="wrapper" *ngIf="loaded">
+
+  <form nz-form [formGroup]="metaForm" nzLayout="vertical" class="width-all">
+
+    <nz-form-item>
+      <nz-form-control>
+        <nz-form-label nzFor="title">Form Title</nz-form-label>
+        <input nz-input formControlName="title"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <div
+      nz-row nzAlign="middle" nzJustify="end"
+      class="switch-wrapper"
+    >
+      <nz-form-label
+        nz-col nzFlex="auto"
+        nzFor="showTitle"
+      >Show title in form</nz-form-label>
+      <nz-form-control nz-col nzFlex="45px">
+        <nz-switch formControlName="showTitle"></nz-switch>
+      </nz-form-control>
+    </div>
+    <!-- <nz-divider></nz-divider> -->
+
+    <nz-form-item>
+      <nz-form-control>
+        <nz-form-label nzFor="code">Code</nz-form-label>
+        <input nz-input formControlName="code" placeholder="eg: form-001"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <nz-form-label nzFor="code">Version</nz-form-label>
+        <input nz-input formControlName="version"/>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+
+  <!-- <pre>{{ selectableItem |json }}</pre> -->
+</div>

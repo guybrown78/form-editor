@@ -17,7 +17,11 @@ export interface FormTreeModel {
   children?:FormTreeModel[]
 }
 
-export enum OrdinalDirection {
+export enum EditorModeEnum {
+  EDIT = "edit",
+  PREVIEW = "preview",
+}
+export enum OrdinalDirectionEnum {
   UP,
   DOWN,
 }
@@ -33,11 +37,15 @@ export class TfNgFormEditorService {
   private _form = new BehaviorSubject<FormModel>(null);
   private _formTree = new BehaviorSubject<FormTreeModel[]>(null);
   private _selectedTreeKey = new BehaviorSubject<string>(null);
+  private _editorMode = new BehaviorSubject<EditorModeEnum>(EditorModeEnum.EDIT);
+  private _metaUpdated = new Subject<boolean>();
 
   // Observable stream
   form = this._form.asObservable();
   formTree = this._formTree.asObservable();
   selectedTreeKey = this._selectedTreeKey.asObservable();
+  editorMode = this._editorMode.asObservable();
+  metaUpdated = this._metaUpdated.asObservable();
 
   constructor(
     private formEditorConfig:FormEditorConfigService
@@ -126,7 +134,7 @@ export class TfNgFormEditorService {
     })
   }
 
-  updateFormItemOrdinal(key:string, direction:OrdinalDirection, increment:number = 1){
+  updateFormItemOrdinal(key:string, direction:OrdinalDirectionEnum, increment:number = 1){
     this.form.pipe(take(1)).subscribe(form => {
       // create tempFormData from existing
       const updatedForm:FormModel = { ...form }
@@ -134,9 +142,9 @@ export class TfNgFormEditorService {
       // find index
       const index = updatedForm.schema.findIndex(i => i.uuid === key)
       //
-      if(direction === OrdinalDirection.UP ? index > 0 : index < maxIndex){
+      if(direction === OrdinalDirectionEnum.UP ? index > 0 : index < maxIndex){
         // get the swapped index depending on the direction
-        const swappedIndex = direction === OrdinalDirection.UP ? index - increment : index + increment;
+        const swappedIndex = direction === OrdinalDirectionEnum.UP ? index - increment : index + increment;
         // get an instance of the item
         const item:FieldItemModel = updatedForm.schema[index]
         // get an instance of the item to be swapped
@@ -180,6 +188,17 @@ export class TfNgFormEditorService {
     })
   }
 
+  updateMetaData(meta:FormMetaModel){
+    this.form.pipe(take(1)).subscribe(form => {
+      if(form){
+        // create tempFormData from existing
+        const updatedForm:FormModel = { ...form, meta }
+        // set tempFormData to live
+        this._form.next(updatedForm);
+        this._metaUpdated.next(true);
+      }
+    })
+  }
   nullifyForm():Observable<boolean>{
     this._form.next(null)
     return of(true);
@@ -223,6 +242,10 @@ export class TfNgFormEditorService {
 
   nullifySelectedTreeKey(){
     this._selectedTreeKey.next(null);
+  }
+
+  setEditorMode(mode:EditorModeEnum){
+    this._editorMode.next(mode);
   }
 
   destroy(){
