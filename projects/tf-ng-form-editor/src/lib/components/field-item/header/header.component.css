@@ -1,0 +1,50 @@
+:host {
+  display: block;
+}
+
+.node-header-wrapper{
+  display: flex;
+  height: 50px;
+  position: relative;
+  width: 100%;
+  justify-content: start;
+  align-items: start;
+}
+
+.custom-node-header{
+  display: flex;
+  width: 100%;
+  position: absolute;
+}
+.custom-node-header .text{
+  flex: 1 0 0%;
+}
+.custom-node-header h5{
+  pointer-events: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+.custom-node-header.padding{
+  padding: 0 1.4rem;
+}
+.custom-node-header.show{
+  opacity: 1;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.custom-node-header.hide{
+  opacity: 0;
+  pointer-events: none;
+}
+.header-button-container{
+  height: 30px;
+}
+.header-button-container button{
+  margin: 0 3px;
+}

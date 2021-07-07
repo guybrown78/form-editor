@@ -11,7 +11,8 @@ import { FieldItemModel } from '../../to-share/field-item-model.interface';
   styleUrls: ['./tree-item.component.css']
 })
 export class TreeItemComponent implements OnInit {
-  @Input() node:FormTreeModel;
+  @Input('node') node:FormTreeModel;
+  @Input('isOpen') isOpen:boolean;
 
   selectedKeySubscription:Subscription
   fieldItem:FieldItemModel
@@ -32,9 +33,16 @@ export class TreeItemComponent implements OnInit {
   initialiseFormSubscription(){
     this.selectedKeySubscription = this.formEditorService.selectedTreeKey.subscribe(key => {
       if(key){
-        this.node.selected = key === this.node.key;
+        this.isOpen = key === this.node.key;
+      }else{
+        this.isOpen = false;
       }
     })
+  }
+
+  onDetailsClicked(event){
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   destroy(){

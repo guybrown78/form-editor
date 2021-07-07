@@ -20,6 +20,7 @@ import { TreeViewComponent } from './components/tree-view/tree-view.component';
 import { FieldItemComponent } from './components/field-item/field-item.component';
 import { TreeItemComponent } from './components/tree-item/tree-item.component';
 import { FieldDetailsComponent } from './components/field-details/field-details.component';
+import { HeaderComponent } from './components/field-item/header/header.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { FieldDetailsComponent } from './components/field-details/field-details.
     FieldItemComponent,
     TreeItemComponent,
     FieldDetailsComponent,
+    HeaderComponent,
   ],
   imports: [
     CommonModule,

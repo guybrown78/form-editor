@@ -30,6 +30,8 @@ const navigationData:AppNavigationItem[] = [
   }
 ]
 
+
+// https://xd.adobe.com/view/0a077198-1588-4c4f-aba5-b1a13caa4fde-5f54/screen/6921a962-d6cc-4cc4-ab06-571c99282869
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

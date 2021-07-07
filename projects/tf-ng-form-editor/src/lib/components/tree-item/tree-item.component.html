@@ -1,13 +1,23 @@
 <div
   class="custom-node bg-white"
-  [ngClass]="node.selected ? 'selected' : 'unselected'"
+  [ngClass]="isOpen ? 'selected' : 'unselected'"
 >
   <div
     class="custom-node-inner"
   >
-    <h4 nz-typography class="blue"><strong>{{ node.title }}</strong></h4>
-    <div class="custom-node-details" [ngClass]="node.selected ? 'show' : 'hide' ">
+
+    <form-editor-field-item-header
+      [isOpen]="isOpen"
+      [node]="node"
+    ></form-editor-field-item-header>
+
+    <div
+      class="custom-node-details"
+      [ngClass]="isOpen ? 'show' : 'hide' "
+      (click)="onDetailsClicked($event)"
+    >
       <form-editor-field-item [key]="node.key"></form-editor-field-item>
     </div>
+
   </div>
 </div>

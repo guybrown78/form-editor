@@ -1,0 +1,62 @@
+<div class="node-header-wrapper">
+  <!-- Closed -->
+  <div
+    class="custom-node-header padding"
+    [ngClass]="isOpen ? 'hide' : 'show' "
+  >
+    <h5 nz-typography class="text blue"><strong>{{ node.title }}</strong></h5>
+  </div>
+
+  <!-- Opened -->
+
+  <div
+    class="custom-node-header"
+    [ngClass]="isOpen ? 'show' : 'hide' "
+  >
+    <div class="header-button-container bg-navy">
+      <button
+        (click)="onOrderUp($event)"
+        nz-button nzShape="square"
+        nzSize="extra-small"
+        class="grey"
+      >
+        <i nz-icon nzType="arrow-up" nzTheme="outline"></i>
+      </button>
+      <button
+        (click)="onOrderDown($event)"
+        nz-button nzShape="square"
+        nzSize="extra-small"
+        class="grey"
+      >
+        <i nz-icon nzType="arrow-down" nzTheme="outline"></i>
+      </button>
+    </div>
+    <h5 nz-typography class="text text-center blue">{{ node.title }}</h5>
+    <div class="header-button-container bg-navy">
+      <button
+        (click)="onUser($event)"
+        nz-button nzShape="square"
+        nzSize="extra-small"
+        class="grey"
+      >
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+      </button>
+      <button
+        (click)="onDuplicate($event)"
+        nz-button nzShape="square"
+        nzSize="extra-small"
+        class="grey"
+      >
+        <i nz-icon nzType="copy" nzTheme="outline"></i>
+      </button>
+      <button
+        (click)="onDelete($event)"
+        nz-button nzShape="square"
+        nzSize="extra-small"
+        class="grey"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+      </button>
+    </div>
+  </div>
+</div>

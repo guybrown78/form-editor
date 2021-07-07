@@ -2,9 +2,59 @@
 <div *ngIf="!fieldItem">
   no item
 </div>
-<div *ngIf="fieldItem">
-  item
-  <pre>{{ fieldItem |json }}</pre>
-  editable
-  <pre>{{ selectableItem |json }}</pre>
+
+
+<!-- <tf-ng-item colour="white" padding="none">
+  bbkk
+</tf-ng-item>
+<tf-ng-item colour="white">
+  bbkk
+</tf-ng-item> -->
+
+
+<div class="wrapper" *ngIf="fieldItem && selectableItem">
+
+
+  <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+    <div class="title-wrapper">
+      <tf-ng-form-title class="title">
+        <h4 class="blue">
+          {{ selectableItem?.label }}
+        </h4>
+      </tf-ng-form-title>
+
+      <p *ngIf="selectableItem.description" >
+        {{ selectableItem?.description }}
+      </p>
+
+
+      <div
+        *ngIf="selectableItem?.editableConfig.setRequired"
+        nz-row nzAlign="middle" nzJustify="end"
+        class="switch-wrapper"
+      >
+        <nz-form-label
+          nz-col nzFlex="auto"
+          nzFor="required"
+        >Required</nz-form-label>
+        <nz-form-control nz-col nzFlex="45px">
+          <nz-switch formControlName="required"></nz-switch>
+        </nz-form-control>
+      </div>
+
+      <nz-form-item *ngIf="selectableItem?.editableConfig.setHelp">
+        <nz-form-control>
+          <nz-form-label nzFor="help">Help text</nz-form-label>
+          <input nz-input formControlName="help" />
+        </nz-form-control>
+      </nz-form-item>
+
+    </div>
+
+  </form>
+
+
+  <!-- <pre>{{ selectableItem |json }}</pre> -->
+
 </div>
+

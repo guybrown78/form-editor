@@ -2,25 +2,27 @@
   display: block;
 }
 .custom-node {
-  cursor: pointer;
   line-height: 24px;
   display: inline-flex;
   width: 100%;
   border: solid 2px white;
 }
 .custom-node.selected{
-  border-color: tomato;
+  /* border-color: #b92950; */
+  border-color: #363154;
 }
 .custom-node.unselected{
   border-color: white;
+  cursor: pointer;
 }
 .custom-node-inner{
   display: flex;
   flex:1 0 0%;
   flex-direction: column;
 }
-.custom-node-details{
 
+.custom-node-details{
+  /*  */
 }
 .custom-node-details.show{
   opacity: 1;

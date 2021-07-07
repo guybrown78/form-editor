@@ -19,6 +19,7 @@ body {
   border-color: transparent;
   background-color: transparent;
   padding: 0;
+  cursor:auto
 }
 
 .tf-form-edit-tree.ant-tree .ant-tree-treenode-selected .ant-tree-node-content-wrapper{

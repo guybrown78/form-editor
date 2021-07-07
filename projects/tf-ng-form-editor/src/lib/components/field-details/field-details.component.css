@@ -1,3 +1,15 @@
 :host {
   display: block;
 }
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+}
+.switch-wrapper .ant-form-item-label,
+.no-padding{
+  padding: 0!important;
+}
+.switch-wrapper{
+  margin-bottom: 8px;
+}

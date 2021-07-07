@@ -29,6 +29,7 @@
 .form-editor-page-details{
   flex: 1 0 0;
   padding-bottom: 1.4rem;
+  flex-flow: row;
 }
 
 .form-editor-navigation{

@@ -17,6 +17,11 @@ export interface FormTreeModel {
   children?:FormTreeModel[]
 }
 
+export enum OrdinalDirection {
+  UP,
+  DOWN,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,6 +52,101 @@ export class TfNgFormEditorService {
       updatedForm.schema.push(item);
       this.setSelectedTreeKey(item.uuid);
       this._form.next(updatedForm);
+    })
+  }
+
+  updateFormItem(item:FieldItemModel){
+    this.form.pipe(take(1)).subscribe(form => {
+      // create tempory form data from existing
+      const updatedForm:FormModel = { ...form }
+      // find index
+      const index = updatedForm.schema.findIndex(i => i.uuid === item.uuid)
+      updatedForm.schema[index] = item;
+      this._form.next(updatedForm);
+    })
+  }
+
+  deleteFormItem(key:string){
+    this.form.pipe(take(1)).subscribe(form => {
+      // create tempFormData from existing
+      const updatedForm:FormModel = { ...form }
+      // find index
+      const index = updatedForm.schema.findIndex(i => i.uuid === key)
+      // remove item from tempFormData
+      updatedForm.schema.splice(index, 1);
+      // check current selectedTreeKey
+      this.selectedTreeKey.pipe(take(1)).subscribe(currKey => {
+        // if it matches the passed key, nullify
+        if(currKey === key){
+          this.nullifySelectedTreeKey()
+        }
+        // set tempFormData to live
+        this._form.next(updatedForm);
+      })
+    })
+
+    // this.getFieldItemFromTreeKey(key).pipe(take(1)).subscribe(item => {
+    //   if(item){
+    //     console.log(item)
+    //     // find index
+    //     const index = updatedForm.schema.findIndex(i => i.uuid === item.uuid)
+    //   }
+    // }, err => {
+    //   console.log(err);
+    //   // TODO - handle/display error
+    //   console.log("TODO couldn't delete")
+    // })
+  }
+
+  duplicateFormItem(key:string){
+    this.form.pipe(take(1)).subscribe(form => {
+      // create tempFormData from existing
+      const updatedForm:FormModel = { ...form }
+      // find index
+      const index = updatedForm.schema.findIndex(i => i.uuid === key)
+      // duplicate the item
+      const currItem:FieldItemModel = updatedForm.schema[index]
+      const uuid:string = uuidv4();
+      const newItem:FieldItemModel = {
+        ...currItem,
+        key:uuid,
+        uuid
+      }
+      //
+      const first:FieldItemModel[] = updatedForm.schema.slice(0, index + 1)
+      first.push(newItem)
+      // place newItem into schema, directly after the original item
+      const schema:FieldItemModel[] = first.concat(updatedForm.schema.slice(index + 1, updatedForm.schema.length));
+      //
+      updatedForm.schema = schema;
+      // set tempFormData to live
+      this._form.next(updatedForm);
+      // set the selectedTreeKey
+      this.setSelectedTreeKey(uuid);
+    })
+  }
+
+  updateFormItemOrdinal(key:string, direction:OrdinalDirection, increment:number = 1){
+    this.form.pipe(take(1)).subscribe(form => {
+      // create tempFormData from existing
+      const updatedForm:FormModel = { ...form }
+      const maxIndex:number = updatedForm.schema.length - 1;
+      // find index
+      const index = updatedForm.schema.findIndex(i => i.uuid === key)
+      //
+      if(direction === OrdinalDirection.UP ? index > 0 : index < maxIndex){
+        // get the swapped index depending on the direction
+        const swappedIndex = direction === OrdinalDirection.UP ? index - increment : index + increment;
+        // get an instance of the item
+        const item:FieldItemModel = updatedForm.schema[index]
+        // get an instance of the item to be swapped
+        const swappedItem:FieldItemModel = updatedForm.schema[swappedIndex]
+        // swap
+        updatedForm.schema[index] = swappedItem;
+        updatedForm.schema[swappedIndex] = item;
+        // set tempFormData to live
+        this._form.next(updatedForm);
+      }
     })
   }
 
@@ -119,6 +219,10 @@ export class TfNgFormEditorService {
 
   setSelectedTreeKey(key:string){
     this._selectedTreeKey.next(key);
+  }
+
+  nullifySelectedTreeKey(){
+    this._selectedTreeKey.next(null);
   }
 
   destroy(){

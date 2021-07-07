@@ -29,6 +29,10 @@ export class TreeViewComponent implements OnInit {
     this.initialiseFormSubscription()
   }
 
+  nzEvent(event: NzFormatEmitEvent): void {
+    console.log(event);
+  }
+
   initialiseFormSubscription(){
     this.formSubscription = this.formEditorService.formTree.subscribe(tree => {
       this.nodes = [ ...tree ];

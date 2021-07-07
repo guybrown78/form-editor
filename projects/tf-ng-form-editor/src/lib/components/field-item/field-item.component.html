@@ -1,1 +1,26 @@
-<p>field-item works! {{ key }}</p>
+<!-- <p>field-item works! {{ key }}</p> -->
+<div *ngIf="!fieldItem">
+  no item
+</div>
+
+
+<div class="wrapper" *ngIf="fieldItem && selectableItem">
+
+
+  <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+
+
+    <nz-form-item *ngIf="selectableItem?.editableConfig.setLabel">
+      <nz-form-control>
+        <nz-form-label nzFor="help">Label</nz-form-label>
+        <input nz-input formControlName="label" placeholder="Label"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-divider></nz-divider>
+
+  </form>
+
+
+  <!-- <pre>{{ selectableItem |json }}</pre> -->
+</div>
