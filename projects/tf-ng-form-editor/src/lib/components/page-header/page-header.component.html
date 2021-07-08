@@ -8,7 +8,8 @@
       class="aqua"
       nz-dropdown
       nzPlacement="bottomRight"
-      [nzDropdownMenu]="menu2"
+      [nzDropdownMenu]="saveOptions"
+      [disabled]="disabledSave || editorMode !== 'edit'"
     >
       Save<i nz-icon nzType="down"></i>
     </button>
@@ -36,6 +37,7 @@
       outline-colour="white"
       size="m"
       [as-button]="true"
+      (click)="onClose()"
     >
       <i
         nz-icon
@@ -47,9 +49,9 @@
 </div>
 
 
-<nz-dropdown-menu #menu2="nzDropdownMenu">
+<nz-dropdown-menu #saveOptions="nzDropdownMenu">
   <ul nz-menu>
-    <li nz-menu-item>Save as draft</li>
-    <li nz-menu-item>Save and publish</li>
+    <li (click)="onDraftSave()" nz-menu-item>Save as draft</li>
+    <li (click)="onPublishSave()" nz-menu-item>Save and publish</li>
   </ul>
 </nz-dropdown-menu>

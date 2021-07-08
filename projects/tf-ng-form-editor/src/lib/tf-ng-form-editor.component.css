@@ -50,3 +50,10 @@
   flex: 1 0 0;
   padding:1.4rem;
 }
+.form-editor-preview{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1 0 0;
+  padding:0;
+}

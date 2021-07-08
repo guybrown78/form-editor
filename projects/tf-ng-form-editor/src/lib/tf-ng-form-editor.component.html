@@ -32,10 +32,14 @@
     </div> <!-- END form-editor-details-->
 
 
-    <div nz-row nzGutter="16" class="form-editor-page-details" *ngIf="editorMode === 'preview'">
+    <div
+      nz-row nzGutter="16"
+      class="form-editor-preview-wrapper"
+      *ngIf="editorMode === 'preview'"
+    >
 
       <div nz-col nzFlex="auto">
-        <div class="form-editor-fields rounded bg-white">
+        <div class="form-editor-preview rounded bg-white">
           <tf-ng-form></tf-ng-form>
         </div>
       </div>

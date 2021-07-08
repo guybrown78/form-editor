@@ -16,10 +16,17 @@ export interface FormTreeModel {
   selected?:boolean
   children?:FormTreeModel[]
 }
-
+export interface SaveFormModel {
+  type:SaveTypeEnum
+  data:string
+}
 export enum EditorModeEnum {
   EDIT = "edit",
   PREVIEW = "preview",
+}
+export enum SaveTypeEnum {
+  DRAFT = "draft",
+  PUBLISH = "publish",
 }
 export enum OrdinalDirectionEnum {
   UP,
@@ -39,6 +46,9 @@ export class TfNgFormEditorService {
   private _selectedTreeKey = new BehaviorSubject<string>(null);
   private _editorMode = new BehaviorSubject<EditorModeEnum>(EditorModeEnum.EDIT);
   private _metaUpdated = new Subject<boolean>();
+  private _formUpdated = new Subject<boolean>();
+  private _save = new Subject<SaveFormModel>();
+  private _close = new Subject<boolean>();
 
   // Observable stream
   form = this._form.asObservable();
@@ -46,6 +56,9 @@ export class TfNgFormEditorService {
   selectedTreeKey = this._selectedTreeKey.asObservable();
   editorMode = this._editorMode.asObservable();
   metaUpdated = this._metaUpdated.asObservable();
+  formUpdated = this._formUpdated.asObservable();
+  save = this._save.asObservable();
+  close = this._close.asObservable();
 
   constructor(
     private formEditorConfig:FormEditorConfigService
@@ -220,6 +233,8 @@ export class TfNgFormEditorService {
           })
           //
         })
+        // trigger the formUpdate subscr
+        this._formUpdated.next(true);
       }
     })
   }
@@ -247,6 +262,22 @@ export class TfNgFormEditorService {
   setEditorMode(mode:EditorModeEnum){
     this._editorMode.next(mode);
   }
+
+  saveForm(type:SaveTypeEnum) {
+    this.form.pipe(take(1)).subscribe(form => {
+      if(form){
+        const data:SaveFormModel = {
+          type,
+          data:JSON.stringify(form)
+        }
+        this._save.next(data);
+      }
+    })
+	}
+
+  closeFormEditor() {
+    this._close.next(true);
+	}
 
   destroy(){
     this.formSubscription.unsubscribe
