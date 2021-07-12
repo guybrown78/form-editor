@@ -93,19 +93,27 @@ export class PageHeaderComponent implements OnInit {
 
 
     if(!this.disabledSave){
-      this.modal.create({
-        nzTitle: 'Close form editor',
+      this.modal.warning({
+        nzTitle: 'You have unsaved changes to your form.',
         nzContent: `
-          <p>You have unsaved changes to your form.</p>
-          <p>If you close this form without saving, you will loose your changes.</p>
-          <p>Are you sure you want to close and loose the changes?</p>`,
+          <p>If you close this form without saving, you will lose your changes.</p>
+          <p>Are you sure you want to close the form editor with unsaved changes?</p>`,
         nzCancelText:'Cancel',
         nzOnCancel: () => this.handleCancelClose(),
-        nzOkText:'Yes, Close form without saving',
+        nzOkText:'Yes, close form without saving',
         nzOnOk: () => this.formEditorService.closeFormEditor()
       })
 		}else{
-      this.formEditorService.closeFormEditor();
+
+      this.modal.confirm({
+        nzTitle: 'Form Editor',
+        nzContent: `
+          <p>Are you sure you want to close the form editor?</p>`,
+        nzCancelText:'Cancel',
+        nzOnCancel: () => this.handleCancelClose(),
+        nzOkText:'Yes, close form editor',
+        nzOnOk: () => this.formEditorService.closeFormEditor()
+      })
     }
 
   }

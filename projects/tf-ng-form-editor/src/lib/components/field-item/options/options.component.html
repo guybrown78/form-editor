@@ -1,0 +1,20 @@
+
+<form [formGroup]="form">
+  <div
+    formArrayName="options"
+    *ngFor="let optionItem of form.get('options')['controls']; let i = index"
+  >
+    <nz-form-control [formGroup]="optionItem">
+      <input formControlName="label">
+    </nz-form-control>
+    <button nz-button nzShape="square" (click)="removeItem(i)" ><i nz-icon nzType="close" nzTheme="outline"></i></button>
+  </div>
+  <button
+    (click)="addItem()"
+    nz-button nzShape="square"
+    class="aqua"
+  >
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+  </button>
+</form>
+

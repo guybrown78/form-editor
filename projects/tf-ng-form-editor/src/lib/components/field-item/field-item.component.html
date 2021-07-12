@@ -12,15 +12,35 @@
 
     <nz-form-item *ngIf="selectableItem?.editableConfig.setLabel">
       <nz-form-control>
-        <nz-form-label nzFor="help">Label</nz-form-label>
+        <nz-form-label nzFor="label">Label</nz-form-label>
         <input nz-input formControlName="label" placeholder="Label"/>
       </nz-form-control>
     </nz-form-item>
 
     <nz-divider></nz-divider>
 
+    <nz-form-item *ngIf="selectableItem?.editableConfig.setDesc">
+      <nz-form-control>
+        <nz-form-label nzFor="description">Description</nz-form-label>
+        <textarea rows="1" nz-input formControlName="description"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="selectableItem?.editableConfig.setPlaceholder">
+      <nz-form-control>
+        <nz-form-label nzFor="placeholder">Placeholder</nz-form-label>
+        <input nz-input formControlName="placeholder"/>
+      </nz-form-control>
+    </nz-form-item>
+
   </form>
 
+  <div *ngIf="selectableItem.editableConfig.hasComponentOptions">
+    <form-editor-field-item-options
+      [optionItems]="fieldItem.componentOptions?.options"
+      (updated)="onOptionsUpdated($event)"
+    ></form-editor-field-item-options>
+  </div>
 
-  <!-- <pre>{{ selectableItem |json }}</pre> -->
+
 </div>

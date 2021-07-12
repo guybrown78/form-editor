@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
 import { Subscription } from 'rxjs';
 //
@@ -15,8 +17,9 @@ export class CreateFormComponent implements OnInit {
   formCloseSubscription:Subscription;
 
   constructor(
-    private formEditorService:TfNgFormEditorService,
-
+    private formEditorService: TfNgFormEditorService,
+    private message: NzMessageService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,8 +33,10 @@ export class CreateFormComponent implements OnInit {
       if(data){
         if(data.type === SaveTypeEnum.DRAFT){
           console.log("Save as DRAF", data.data);
+          this.message.create('success', `Your form has been saved as ${data.type}`);
         }else if(data.type === SaveTypeEnum.PUBLISH){
           console.log("PUBLISH", data.data)
+          this.message.create('success', `Your form has been saved and published`);
         }
       }
     })
@@ -42,6 +47,7 @@ export class CreateFormComponent implements OnInit {
       if(close){
         // handle form close - change route?
         console.log("form closed");
+        this.router.navigate(['dashboard'])
       }
     })
   }

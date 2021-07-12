@@ -1,3 +1,5 @@
+import { FieldItemComponentOptionsModel } from './field-item-component-options-model.interface'
+
 export interface FieldItemModel {
   uuid?:string
   key?:string
@@ -11,6 +13,6 @@ export interface FieldItemModel {
   permissions?:any[]
   readonlyPermissions?:any[]
   hideExpression?:boolean
-  componentOptions?:any
+  componentOptions?:FieldItemComponentOptionsModel
   fieldGroup?:FieldItemModel[]
 }

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { FormEditorConfigService, SelectableFieldItemModel } from '../../form-editor-config.service';
 import { TfNgFormEditorService } from '../../tf-ng-form-editor.service';
+import { FieldItemComponentOptionsModel, OptionModel } from '../../to-share/field-item-component-options-model.interface';
 import { FieldItemModel } from '../../to-share/field-item-model.interface';
 
 @Component({
@@ -60,18 +61,23 @@ export class FieldItemComponent implements OnInit {
 
   initForm(): void {
     this.form = this.fb.group({});
-    // help
-    // if(this.selectableItem.editableConfig.setHelp){
-    //   this.form.addControl(
-    //     'help',
-    //     new FormControl(this.fieldItem.help, [])
-    //   );
-    // }
+
     // label
     if(this.selectableItem.editableConfig.setLabel){
       this.form.addControl('label', new FormControl(this.fieldItem.label, []))
     }
-    //
+    // description
+    if(this.selectableItem.editableConfig.setDesc){
+      this.form.addControl('description', new FormControl(this.fieldItem.description, []))
+    }
+    // placeholder
+    if(this.selectableItem.editableConfig.setPlaceholder){
+      this.form.addControl('placeholder', new FormControl(this.fieldItem.placeholder, []))
+    }
+    // hasComponentOptions
+    if(this.selectableItem.editableConfig.hasComponentOptions){
+      this.form.addControl('componentOptions', new FormControl(this.fieldItem.componentOptions, []))
+    }
     this.onChanges();
   }
 
@@ -80,6 +86,19 @@ export class FieldItemComponent implements OnInit {
       this.fieldItem = { ...this.fieldItem, ...this.form.value}
       this.formEditorService.updateFormItem(this.fieldItem)
     });
+  }
+
+
+  onOptionsUpdated(options:OptionModel[]){
+    const componentOptions:FieldItemComponentOptionsModel = {
+      ...this.fieldItem.componentOptions,
+      options
+    }
+    this.fieldItem = {
+      ...this.fieldItem,
+      componentOptions
+    }
+    this.formEditorService.updateFormItem(this.fieldItem)
   }
 
   destroy(){

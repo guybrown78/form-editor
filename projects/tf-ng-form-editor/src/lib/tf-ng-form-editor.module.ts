@@ -22,6 +22,7 @@ import { TreeItemComponent } from './components/tree-item/tree-item.component';
 import { FieldDetailsComponent } from './components/field-details/field-details.component';
 import { HeaderComponent } from './components/field-item/header/header.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { OptionsComponent } from './components/field-item/options/options.component';
 
 
 
@@ -39,6 +40,7 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
     FieldDetailsComponent,
     HeaderComponent,
     PageHeaderComponent,
+    OptionsComponent,
   ],
   imports: [
     CommonModule,
