@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
+import { EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
 import { Subscription } from 'rxjs';
 //
 
@@ -15,6 +15,7 @@ export class CreateFormComponent implements OnInit {
 
   formSavedSubscription:Subscription;
   formCloseSubscription:Subscription;
+  loaded:boolean = false;
 
   constructor(
     private formEditorService: TfNgFormEditorService,
@@ -23,13 +24,28 @@ export class CreateFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // empty form
-    this.formEditorService.nullifyForm().subscribe(
-      nullified => {
-        this.initialiseFormSaveSubscription();
-        this.initialiseFormCloseSubscription();
-      }
-    );
+    // start with no data ...
+    // nullifyForm makes the form === null
+
+   this.formEditorService.nullifyForm().subscribe(
+     nullified => {
+
+        // or you can reset the form which makes it === to the blank dafualt formModel. Note, resetting the form incorporates nullifyForm
+        // this.formEditorService.resetForm().subscribe(
+        //   reset => {
+
+            // example on how to ensure the editor opens in editor mode
+            this.formEditorService.setEditorMode(EditorModeEnum.EDIT);
+            this.initialiseFormSaveSubscription();
+            this.initialiseFormCloseSubscription();
+            this.loaded = true;
+
+        //   }
+        // );
+
+     }
+   );
+
   }
 
 

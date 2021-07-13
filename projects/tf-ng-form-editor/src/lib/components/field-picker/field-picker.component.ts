@@ -41,9 +41,7 @@ export class FieldPickerComponent {
   }
 
   add(id): void {
-    console.log(id, " ... selected ")
     this.formEditorConfig.getSelectableItemFromId(id).pipe(take(1)).subscribe(item => {
-      console.log("item")
       this.selectedField.emit(item);
     })
 

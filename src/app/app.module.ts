@@ -22,6 +22,7 @@ import { PreviewFormComponent } from './pages/preview-form/preview-form.componen
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateFormComponent } from './pages/create-form/create-form.component';
 import { EditFormComponent } from './pages/edit-form/edit-form.component';
+import { StatsComponent } from './pages/dashboard/stats/stats.component';
 
 
 registerLocaleData(en);
@@ -33,6 +34,7 @@ registerLocaleData(en);
     DashboardComponent,
     CreateFormComponent,
     EditFormComponent,
+    StatsComponent,
   ],
   imports: [
     BrowserModule,

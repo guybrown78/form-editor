@@ -191,10 +191,6 @@ export class TfNgFormEditorService {
     fieldItem.label = selectedField.label;
     fieldItem.type = selectedField.type;
     //
-    console.log(selectedField);
-    console.log("vs");
-    console.log(fieldItem);
-    //
     return fieldItem;
   }
 
@@ -243,6 +239,15 @@ export class TfNgFormEditorService {
     return of(true);
   }
 
+  resetForm():Observable<boolean>{
+    const metaData:FormMetaModel = {
+      title:"",
+      version:""
+    }
+    this.initialiseNewForm(metaData);
+    return of(true);
+  }
+
   getFormDataAsJSON(){
     this.form.pipe(take(1)).subscribe(form => {
       return JSON.stringify(form);
@@ -269,7 +274,6 @@ export class TfNgFormEditorService {
     let tree:FormTreeModel[];
     tree = schema.map(f => {
       if(!f.uuid){
-        console.log("No uuid")
         f.uuid = uuidv4();
       }
       return {

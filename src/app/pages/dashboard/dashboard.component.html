@@ -1,1 +1,63 @@
-<p>dashboard works!</p>
+<tf-ng-page-title-breadcrumbs [show-back-button]="false">
+	<span nz-typography><strong>Now then,</strong> welcome to the form editor</span>
+</tf-ng-page-title-breadcrumbs>
+
+<app-stats></app-stats>
+
+<tf-ng-card>
+
+  <h3 nz-typography>Examples</h3>
+	<!-- <tf-ng-card-content colour="grey"> -->
+
+		<nz-table
+			#basicTable
+			[nzData]="listOfData"
+			nzTableLayout="fixed"
+			nzShowPagination="false"
+		>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Code</th>
+					<th>Status</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let data of basicTable.data">
+					<td nzEllipsis>{{ data.name }}</td>
+					<td>{{ data.code }}</td>
+					<td>
+						<tf-ng-status
+						[colour]="
+							data.status.toLowerCase() === 'published' ? 'green'
+							: data.status.toLowerCase() === 'archived' ? 'red'
+							: 'amber'
+						">
+							{{ data.status.toUpperCase() }}
+						</tf-ng-status>
+					</td>
+				<td align="right">
+
+					<button
+						nz-button
+						class="blue"
+						nz-dropdown
+						nzPlacement="bottomRight"
+						[nzDropdownMenu]="exampleActionMenu"
+					>
+						Actions<i nz-icon nzType="down"></i>
+					</button>
+
+					<nz-dropdown-menu #exampleActionMenu="nzDropdownMenu">
+						<ul nz-menu>
+							<li nz-menu-item><a>Edit</a></li>
+						</ul>
+					</nz-dropdown-menu>
+
+					</td>
+				</tr>
+			</tbody>
+		</nz-table>
+
+</tf-ng-card>

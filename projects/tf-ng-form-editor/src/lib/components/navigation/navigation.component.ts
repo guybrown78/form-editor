@@ -135,8 +135,6 @@ export class NavigationComponent implements OnInit {
     this.formMenuVisible = false;
   }
   onSelectedField(selectedField:SelectableFieldItemModel): void {
-    console.log("Selected field ...")
-
     const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
     this.formEditorService.addFormItem(formFieldItem);
     //

@@ -50,12 +50,13 @@ export class TfNgFormEditorComponent implements OnInit {
     this.formSubscription = this.formEditorService.form.subscribe(form => {
       // get current form
       this.formEditorService.form.pipe(take(1)).subscribe(form => {
-        // stringify and set to json
-        this.formService.setData(JSON.stringify(form)).subscribe(data => {
-          // CAN UPDATE PREVIEW HERE
-        })
+        // if(form){
+          // stringify and set to json
+          this.formService.setData(JSON.stringify(form)).subscribe(data => {
+            // CAN UPDATE PREVIEW HERE
+          })
+        // }
       })
-
     })
   }
 
