@@ -14,7 +14,14 @@ import { FieldItemModel } from '../../to-share/field-item-model.interface';
 })
 export class FieldItemComponent implements OnInit {
 
-  @Input('key') key:string;
+  private _key:string;
+  @Input('key') set key(value:string){
+    this._key = value;
+    this.initialiseFormSubscription()
+  }
+  get key():string{
+    return this._key;
+  }
 
   // selectedKeySubscription:Subscription
   fieldItem:FieldItemModel
@@ -28,35 +35,39 @@ export class FieldItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initialiseFormSubscription()
+    // this.initialiseFormSubscription()
   }
 
   initialiseFormSubscription(){
-    // this.selectedKeySubscription = this.formEditorService.selectedTreeKey.subscribe(key => {
-      if(this.key){
-        this.formEditorService.getFieldItemFromTreeKey(this.key).subscribe(
-          item => {
-
-            if(item){
-              this.fieldItem = item;
-              // when item has been inited get config data...
-              this.formEditorConfig.getSelectableItemFromType(this.fieldItem.type).pipe(take(1)).subscribe(selectableItem => {
-                if(selectableItem){
-                  this.selectableItem = selectableItem;
-                  this.initForm();
-                }else{
-                  this.selectableItem = null;
-                }
-              })
+    if(this.key){
+      this.formEditorService.getFieldItemFromTreeKey(this.key).subscribe(
+        item => {
+          if(item){
+            this.fieldItem = item;
+            if(!this.selectableItem){
+              this.initialiseItemConfigData()
             }
-
           }
-        )
+        }
+      )
+    }else{
+      this.fieldItem = null;
+      this.selectableItem = null;
+    }
+  }
+
+
+  initialiseItemConfigData(){
+     // when item has been inited get config data from 'type'...
+     this.formEditorConfig.getSelectableItemFromType(this.fieldItem.type).pipe(take(1)).subscribe(selectableItem => {
+
+      if(selectableItem){
+        this.selectableItem = { ...selectableItem};
+        this.initForm();
       }else{
-        this.fieldItem = null;
         this.selectableItem = null;
       }
-    // })
+    })
   }
 
   initForm(): void {

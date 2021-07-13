@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Subject, BehaviorSubject, throwError, Observable, Subscription } from 'rxjs';
 import { take, tap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -61,6 +62,7 @@ export class TfNgFormEditorService {
   close = this._close.asObservable();
 
   constructor(
+    private http: HttpClient,
     private formEditorConfig:FormEditorConfigService
   ) {
     this.initialiseFormSubscription();
@@ -212,6 +214,25 @@ export class TfNgFormEditorService {
       }
     })
   }
+
+
+  getData(url:string){
+    return this.http.get<FormModel>(url).pipe(
+      tap((data) => {
+        const { meta, schema, model } = data;
+        console.log(data);
+        this._form.next(data);
+      })
+    )
+  }
+  setFormFromJson(json:string){
+    const updatedForm:FormModel = { ...JSON.parse(json) }
+    this._form.next(updatedForm)
+  }
+  setFormFromModel(model:FormModel){
+    this._form.next(model)
+  }
+
   nullifyForm():Observable<boolean>{
     this._form.next(null)
     return of(true);

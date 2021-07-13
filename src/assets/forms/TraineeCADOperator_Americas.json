@@ -1,0 +1,2222 @@
+{
+  "meta":{
+    "title":"ENGINEERING SERVICE LINE - COMPETENCE ASSESSMENT",
+    "version":"1",
+    "description":"Competence Assessment Form",
+    "jsonSchema":true,
+    "showTitle":true,
+    "formWidth":"large",
+    "showSubmitButton":true,
+    "showResetButton":false
+  },
+  "schema":[
+    {
+      "key":"candidate",
+      "label":"Candidate Information",
+      "type":"nested",
+      "fieldGroup":[
+        {
+          "label": "Name",
+          "description":"Lorum ipsum solar dolar ....",
+          "type": "input"
+        },
+        {
+          "label": "ID No",
+          "type": "input"
+        },
+        {
+          "key": "disciplinero",
+          "label": "Disciplinecccccccc",
+          "type": "input",
+          "default": "Document Control",
+          "readOnly":true,
+          "help":"jhdjdhjdhjdhjdhjddjhdhd"
+        },
+        {
+          "type":"radio",
+          "label": "Type",
+          "key":"permitRoutineTemplateState",
+          "componentOptions":{ "options":[ { "label":"Staff", "value":"Staff" }, { "label":"PAYE", "value":"PAYE" }, { "label":"Ltd Co", "value":"Ltd Co" }] }
+        },
+        {
+          "label": "Ltd Co. / Agency Name",
+          "type": "input"
+        },
+        {
+          "label": "Discipline",
+          "type": "text",
+          "description": "Discipline<br><b>CAD OP.</b>"
+        },
+        {
+          "label": "Role Title",
+          "type": "text",
+          "description": "Role Title<br><b>Trainee CAD Operator</b>"
+        },
+        {
+          "label": "Job Title",
+          "type": "input"
+        },
+        {
+          "label": "Region",
+          "type": "text",
+          "description": "Region<br><b>Americas</b>"
+        }
+      ]
+    },
+
+
+    {
+      "type":"grid",
+      "label":"Example span colours",
+      "description":"Examples to show how to attach span colour classes from tf-ng-zorro-theme. These can be overriden or made unique",
+      "componentOptions":{
+        "gridOptions":{
+          "columnDefs":[
+            {
+              "field": "title"
+            }
+          ]
+        }
+      },
+      "fieldGroup":[
+
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"blue\">Blue</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"navy\">Navy</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"grey\">Grey / Gray</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"aqua\">Aqua</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"red\">Red</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"green\">Green</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"yellow\">Yellow</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"orange\">Orange / Amber</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"black\">Black</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"brown\">Brown</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"maroon\">Maroon</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"olive\">Olive</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"pink\">Pink</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"turqoise\">Turqoise</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"teal\">Teal</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"silver\">Silver</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description": "<b><span class=\"gold\">Gold</span></b>",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+
+      ]
+    },
+
+
+
+    {
+      "key":"knowledgebase",
+      "label":"Knowledge Base",
+      "type":"nested",
+      "fieldGroup":[
+        {
+          "label": "Qualifications",
+          "type": "input"
+        },
+        {
+          "label": "Professional Associations:",
+          "type": "input"
+        },
+        {
+          "label": "Total Years of Experience:",
+          "type": "input"
+        },
+        {
+          "label": "Breakdown of Experience:",
+          "type": "input"
+        }
+      ]
+    },
+
+    {
+      "key":"assessment_summary_candidate",
+      "label":"Assessment Summary - Candidate to Complete",
+      "type":"nested",
+      "description":"NESTED Lorum ipsum solar dolar ....",
+      "fieldGroup":[
+        {
+          "description": "<b>Candidate to Complete:</b><br>I understand the role and responsibilities for the Job Title, and agree with this Assessment including any exclusions identified.",
+          "type": "text"
+        },
+        {
+          "key": "candidate_sign",
+          "label": "Signed",
+          "type": "input"
+        },
+        {
+          "key":"candidate_date",
+          "type":"date",
+          "wrappers": ["date-field"],
+          "label":"Date",
+          "componentOptions":{
+            "dateOptions":{
+              "format":"dd/MM/yyyy"
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "key":"assessment_summary_assessor",
+      "label":"Assessment Summary - Assessor to Complete",
+      "type":"nested",
+      "fieldGroup":[
+        {
+          "description": "<b>Candidate's Sign Off Authority</b>",
+          "type": "text"
+        },
+        {
+          "type":"radio",
+          "label": "Is the candidate competent in the current role?",
+          "componentOptions":{ "options":[ { "label":"Yes", "value":"Yes" }, { "label":"No", "value":"No" }, { "label":"N/A", "value":"NA" }] }
+        },
+        {
+          "type":"radio",
+          "label": "ROLE",
+          "componentOptions":{ "options":[ { "label":"Discipline Technical Authority - Engineering / Design", "value":"Discipline Technical Authority - Engineering / Design" }, { "label":"Discipline Technical Authority - Duty Holder Operation Assignment", "value":"Discipline Technical Authority - Duty Holder Operation Assignment" }, { "label":"Discipline Subject Matter Expert (specify below)", "value":"Discipline Subject Matter Expert (specify below)" }] }
+        },
+        {
+          "label": "Name",
+          "type": "input"
+        },
+        {
+          "label": "Job Title",
+          "type": "input"
+        },
+        {
+          "label": "On Behalf of",
+          "type": "input"
+        },
+        {
+          "description": "I have conducted a review, and confirm the attached Competency Assessment is valid from the dates specified.",
+          "type": "text"
+        },
+        {
+          "label": "Areas of exclusion detailed below",
+          "type": "textarea"
+        },
+
+
+        {
+          "key":"assessment_valid_start_date",
+          "type":"date",
+          "wrappers": ["date-field"],
+          "label":"Assessment validity record from",
+          "componentOptions":{
+            "dateOptions":{
+              "format":"dd/MM/yyyy"
+            }
+          }
+        },
+        {
+          "key":"assessment_valid_end_date",
+          "type":"date",
+          "wrappers": ["date-field"],
+          "label":"Assessment validity record to",
+          "componentOptions":{
+            "dateOptions":{
+              "format":"dd/MM/yyyy"
+            }
+          }
+        },
+        {
+          "key": "sign",
+          "label": "Signed",
+          "type": "input"
+        },
+        {
+          "key":"date",
+          "type":"date",
+          "wrappers": ["date-field"],
+          "label":"Date",
+          "componentOptions":{
+            "dateOptions":{
+              "format":"dd/MM/yyyy"
+            }
+          }
+        }
+      ]
+    },
+
+
+    {
+      "type":"grid",
+      "description":"GRID!!! Lorum ipsum solar dolar ....",
+      "label":"Knowledge Table Key",
+      "componentOptions":{
+        "gridOptions":{
+          "columnDefs":[
+            {
+              "headerName":"Level",
+              "field":"title"
+            },
+            {
+              "headerName":"Description",
+              "field":"Description"
+            }
+          ]
+        }
+      },
+      "fieldGroup":[
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"<span class=\"red\">1 - AWARENESS<span>",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "Work activities routine and predicable.Member of a work group assisting others in delivery of objectives.<br><b>Key words:</b> assists, acknowledges, seeks, shows, applies",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"<span class=\"red\">2 - BASIC<span>",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "Varied work activities performed in a range of contexts. Some individual responsibility. Limited guidance needed. Results reviewed for quality. Contributes to delivering team or functional objectives. <br><b>Key words:</b> contributes, identifies, anticipates, delivers, shares, recognises",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"<span class=\"red\">3 - SKILLFUL<span>",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "Broad range of work in a complex and non-routine context. Significant personal autonomy and team authority. Coordinates and manages work to deliver successful outcomes. <br><b>Key words:</b> manages, encourages, challenges, develops, adapts",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        },
+        {
+          "type":"grid-row",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"<span class=\"yellow\">4 - MASTERY / EXPERT<span>",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "Complex technical or professional activities in a wide variety of contexts. High confidence in results. Works across the organisation to deliver on operational and strategic objectives. Able to identify capability of others in this activity and is recognised as an authority by company and/or industry peers. <br><b>Key words:</b> champions, inspires, motivates, enables, shapes",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+      ]
+    },
+
+
+    {
+      "type":"grid",
+      "label":"Behavioural Competencies (Safety Cacoon - Behavioural Standard)",
+      "componentOptions":{
+        "gridOptions":{
+          "columnDefs":[
+            {
+              "headerName":"",
+              "field": "title"
+            },
+            {
+              "headerName":"Candidate",
+              "field":"candidate"
+            },
+            {
+              "headerName":"Assessor",
+              "field":"assessor"
+            },
+            {
+              "headerName":"Target Level",
+              "field": "target_level"
+            },
+            {
+              "headerName":"Development Need",
+              "field":"devneeded"
+            }
+          ]
+        }
+      },
+      "fieldGroup":[
+
+        {
+          "type":"grid-row",
+          "key": "Standards",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Standards",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Communication",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Communication",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Risk Management",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Risk Management",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Involvement",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Involvement",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "key": "Behavioural Competencies (Safety Cacoon - Behavioural Standard)_candidate_comments",
+      "label": "Candidate's Comments:",
+      "type": "textarea"
+    },
+
+    {
+      "key": "Behavioural Competencies (Safety Cacoon - Behavioural Standard)_assessor_comments",
+      "label": "Assessor's Comments:",
+      "type": "textarea"
+    },
+
+    {
+      "type":"grid",
+      "label":"Leadership Competencies (Leadership Framework)",
+      "componentOptions":{
+        "gridOptions":{
+          "columnDefs":[
+            {
+              "headerName":"",
+              "field": "title"
+            },
+            {
+              "headerName":"Candidate",
+              "field":"candidate"
+            },
+            {
+              "headerName":"Assessor",
+              "field":"assessor"
+            },
+            {
+              "headerName":"Target Level",
+              "field": "target_level"
+            },
+            {
+              "headerName":"Development Need",
+              "field":"devneeded"
+            }
+          ]
+        }
+      },
+      "fieldGroup":[
+
+        {
+          "type":"grid-row",
+          "key": "Core Values Champion",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Core Values Champion",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "placeholder":"boom",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Inspiring Communicator",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Inspiring Communicator",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Visionary",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Visionary",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Performer",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Performer",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Trustworthy",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Trustworthy",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Flexible ",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Flexible ",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Collaborative",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Collaborative",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "key": "Leadership Competencies (Leadership Framework)_candidate_comments",
+      "label": "Candidate's Comments:",
+      "type": "textarea"
+    },
+
+    {
+      "key": "Leadership Competencies (Leadership Framework)_assessor_comments",
+      "label": "Assessor's Comments:",
+      "type": "textarea"
+    },
+
+    {
+      "type":"grid",
+      "label":"Application skills",
+      "componentOptions":{
+        "gridOptions":{
+          "columnDefs":[
+            {
+              "headerName":"",
+              "field": "title"
+            },
+            {
+              "headerName":"Candidate",
+              "field":"candidate"
+            },
+            {
+              "headerName":"Assessor",
+              "field":"assessor"
+            },
+            {
+              "headerName":"Target Level",
+              "field": "target_level"
+            },
+            {
+              "headerName":"Development Need",
+              "field":"devneeded"
+            }
+          ]
+        }
+      },
+      "fieldGroup":[
+
+        {
+          "type":"grid-row",
+          "key": "Creating and understanding project objectives",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Creating and understanding project objectives",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge and understanding of design",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge and understanding of design",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge and understanding of procurement",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge and understanding of procurement",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge and understanding of construction",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge and understanding of construction",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge and understanding of commissioning",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge and understanding of commissioning",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge and understanding of plant operations",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge and understanding of plant operations",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge and understanding of plant maintenance",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge and understanding of plant maintenance",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Interpret and understand workscope",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Interpret and understand workscope",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Broad understanding of other disciplines",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Broad understanding of other disciplines",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "key": "Application skills_candidate_comments",
+      "label": "Candidate's Comments:",
+      "type": "textarea"
+    },
+    {
+      "key": "Application skills_assessor_comments",
+      "label": "Assessor's Comments:",
+      "type": "textarea"
+    },
+
+    {
+      "type":"grid",
+      "label":"Enabling skills",
+      "componentOptions":{
+        "gridOptions":{
+          "columnDefs":[
+            {
+              "headerName":"",
+              "field": "title"
+            },
+            {
+              "headerName":"Candidate",
+              "field":"candidate"
+            },
+            {
+              "headerName":"Assessor",
+              "field":"assessor"
+            },
+            {
+              "headerName":"Target Level",
+              "field": "target_level"
+            },
+            {
+              "headerName":"Development Need",
+              "field":"devneeded"
+            }
+          ]
+        }
+      },
+      "fieldGroup":[
+
+        {
+          "type":"grid-row",
+          "key": "Microsoft Excel skills",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Microsoft Excel skills",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Microsoft Word skills",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Microsoft Word skills",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Microsoft Outlook & Lync skills: - email, meetings, calendar, Out of Office",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Microsoft Outlook & Lync skills: - email, meetings, calendar, Out of Office",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+
+      ]
+    },
+
+    {
+      "key": "Enabling skills_candidate_comments",
+      "label": "Candidate's Comments:",
+      "type": "textarea"
+    },
+
+    {
+      "key": "Enabling skills_assessor_comments",
+      "label": "Assessor's Comments:",
+      "type": "textarea"
+    },
+
+    {
+      "type":"grid",
+      "label":"Safety by Design",
+      "componentOptions":{
+        "gridOptions":{
+          "columnDefs":[
+            {
+              "headerName":"",
+              "field": "title"
+            },
+            {
+              "headerName":"Candidate",
+              "field":"candidate"
+            },
+            {
+              "headerName":"Assessor",
+              "field":"assessor"
+            },
+            {
+              "headerName":"Target Level",
+              "field": "target_level"
+            },
+            {
+              "headerName":"Development Need",
+              "field":"devneeded"
+            }
+          ]
+        }
+      },
+      "fieldGroup":[
+
+        {
+          "type":"grid-row",
+          "key": "Understand and apply Wood work procedures and practices",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Understand and apply Wood work procedures and practices",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Compliance with statutory requirements",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Compliance with statutory requirements",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Hazard and risk assessment",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Hazard and risk assessment",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Principles of ALARP and inherently safer design",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Principles of ALARP and inherently safer design",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Discipline codes and standards (ISO, IEC, API, International, etc.)",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Discipline codes and standards (ISO, IEC, API, International, etc.)",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+
+      ]
+    },
+    {
+      "key": "Safety by Design_candidate_comments",
+      "label": "Candidate's Comments:",
+      "type": "textarea"
+    },
+    {
+      "key": "Safety by Design_assessor_comments",
+      "label": "Assessor's Comments:",
+      "type": "textarea"
+    },    {
+      "type":"grid",
+      "label":"Draughting Skills",
+      "componentOptions":{
+        "gridOptions":{
+          "columnDefs":[
+            {
+              "headerName":"",
+              "field": "title"
+            },
+            {
+              "headerName":"Candidate",
+              "field":"candidate"
+            },
+            {
+              "headerName":"Assessor",
+              "field":"assessor"
+            },
+            {
+              "headerName":"Target Level",
+              "field": "target_level"
+            },
+            {
+              "headerName":"Development Need",
+              "field":"devneeded"
+            }
+          ]
+        }
+      },
+      "fieldGroup":[
+
+        {
+          "type":"grid-row",
+          "key": "Proficiency in using AutoCAD",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Proficiency in using AutoCAD",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "2",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Proficiency in using GTX Raster CAD or Wise Image",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Proficiency in using GTX Raster CAD or Wise Image",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "2",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Proficiency in using MicroStation",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Proficiency in using MicroStation",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "2",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Proficiency in using IRAS B",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Proficiency in using IRAS B",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "2",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Proficiency in using Content Management System",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Proficiency in using Content Management System",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Awareness of specific drawing requirements & their presentation ",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Awareness of specific drawing requirements & their presentation ",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Preparation of accurate drawings to satisfy engineering / construction requirements",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Preparation of accurate drawings to satisfy engineering / construction requirements",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Maintain and update as necessary client documentation & software",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Maintain and update as necessary client documentation & software",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Prepare accurate scaled detail layout drawings using a suitable CAD draughting package",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Prepare accurate scaled detail layout drawings using a suitable CAD draughting package",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge of correct checking colour codes and meaning",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge of correct checking colour codes and meaning",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "2",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge and understanding of client legend sheets",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge and understanding of client legend sheets",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Adopting drawing office best practice , standards / layering / blocks / snaps / attributes)",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Adopting drawing office best practice , standards / layering / blocks / snaps / attributes)",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "2",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+
+      ]
+    },
+    {
+      "key": "Draughting Skills_candidate_comments",
+      "label": "Candidate's Comments:",
+      "type": "textarea"
+    },
+    {
+      "key": "Draughting Skills_assessor_comments",
+      "label": "Assessor's Comments:",
+      "type": "textarea"
+    },    {
+      "type":"grid",
+      "label":"Knowledge - Discipline Appreciation",
+      "componentOptions":{
+        "gridOptions":{
+          "columnDefs":[
+            {
+              "headerName":"",
+              "field": "title"
+            },
+            {
+              "headerName":"Candidate",
+              "field":"candidate"
+            },
+            {
+              "headerName":"Assessor",
+              "field":"assessor"
+            },
+            {
+              "headerName":"Target Level",
+              "field": "target_level"
+            },
+            {
+              "headerName":"Development Need",
+              "field":"devneeded"
+            }
+          ]
+        }
+      },
+      "fieldGroup":[
+
+        {
+          "type":"grid-row",
+          "key": "Knowledge of Process Design Documentation (P&IDs, PFDs, UFDs & C&Es)",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge of Process Design Documentation (P&IDs, PFDs, UFDs & C&Es)",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge of Piping Design Documentation (e.g. Isometrics)",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge of Piping Design Documentation (e.g. Isometrics)",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge of Instrumentation & Electrical Design Documentation",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge of Instrumentation & Electrical Design Documentation",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge of Mechanical Design Documentation",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge of Mechanical Design Documentation",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+,
+        {
+          "type":"grid-row",
+          "key": "Knowledge of Structural Design Documentation",
+          "fieldGroup":[
+            {
+              "type":"text",
+              "description":"Knowledge of Structural Design Documentation",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"input",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "description": "1",
+              "wrappers": ["grid-cell-field"]
+            },
+            {
+              "type":"text",
+              "key": "yesno",
+              "value": "",
+              "wrappers": ["grid-cell-field"]
+            }
+          ]
+        }
+
+      ]
+    },
+    {
+      "key": "Knowledge - Discipline Appreciation_candidate_comments",
+      "label": "Candidate's Comments:",
+      "type": "textarea"
+    },
+    {
+      "key": "Knowledge - Discipline Appreciation_assessor_comments",
+      "label": "Assessor's Comments:",
+      "type": "textarea"
+    }
+
+
+    ,{
+      "key":"assessment_closeout",
+      "label":"Assessment Close Out",
+      "type":"nested",
+      "fieldGroup":[
+        {
+          "type":"radio",
+          "label": "Is the candidate competent in the current role?",
+          "componentOptions":{ "options":[ { "label":"Yes", "value":"Yes" }, { "label":"No", "value":"No" }] }
+        },
+        {
+          "type":"radio",
+          "label": "Is the candidate competent to progress to the next role profile level?",
+          "componentOptions":{ "options":[ { "label":"Yes", "value":"Yes" }, { "label":"No", "value":"No" }, { "label":"N/A", "value":"N/A" }] }
+        },
+        {
+          "key": "objectives",
+          "label": "Performance objectives",
+          "type": "textarea"
+        },
+        {
+          "key": "improvements",
+          "label": "Improvement / development / training required; if gaps are identified a time bound improvement plan should be specified below.",
+          "type": "textarea"
+        }
+      ]
+    }
+
+  ],
+  "model":{}
+}

@@ -23,6 +23,7 @@ import { FieldDetailsComponent } from './components/field-details/field-details.
 import { HeaderComponent } from './components/field-item/header/header.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { OptionsComponent } from './components/field-item/options/options.component';
+import { AddRowComponent } from './components/add-row/add-row.component';
 
 
 
@@ -41,6 +42,7 @@ import { OptionsComponent } from './components/field-item/options/options.compon
     HeaderComponent,
     PageHeaderComponent,
     OptionsComponent,
+    AddRowComponent,
   ],
   imports: [
     CommonModule,

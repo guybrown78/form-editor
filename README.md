@@ -16,3 +16,7 @@ ng g class  --project tf-ng-form-editor --skip-tests true --type model to-share/
 
 service ...
 `ng g s  --project tf-ng-form-editor --skip-tests true < SERVICE NAME >`
+
+
+
+`npm update --legacy-peer-deps`

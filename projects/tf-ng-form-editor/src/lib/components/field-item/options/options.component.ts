@@ -24,12 +24,9 @@ export class OptionsComponent implements OnInit {
 
   form: FormGroup;
 
-
   constructor(
     private fb:FormBuilder
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.initForm();
@@ -53,9 +50,9 @@ export class OptionsComponent implements OnInit {
     });
   }
 
-  get options() {
-    return this.form.get('options') as FormArray;
-  }
+  // get options() {
+  //   return this.form.get('options') as FormArray;
+  // }
 
   addItem(label:string = null) {
     const options = this.form.get('options') as FormArray;
