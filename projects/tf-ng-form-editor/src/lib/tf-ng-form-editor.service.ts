@@ -190,6 +190,9 @@ export class TfNgFormEditorService {
     fieldItem.uuid = fieldItem.key = uuid
     fieldItem.label = selectedField.label;
     fieldItem.type = selectedField.type;
+    if(selectedField.wrappers){
+      fieldItem.wrappers = [ ...selectedField.wrappers ]
+    }
     //
     return fieldItem;
   }

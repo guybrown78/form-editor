@@ -12,6 +12,7 @@ export interface SelectableFieldItemModel {
   label:string
   category:SelectableCategory
   description?:string
+  wrappers?:SelectableWrapper[]
   editableConfigType?:EditableConfigType
   editableConfig?:SelectableFieldItemEditableConfigModel
 }
@@ -28,6 +29,7 @@ export interface SelectableFieldItemEditableConfigModel {
   setHideExpressions?:boolean
   hasComponentOptions?:boolean
   hasFieldGroup?:boolean
+  hasLayoutOptions?:boolean
 }
 export enum SelectableCategory {
   SIMPLE = "Simple",
@@ -46,7 +48,11 @@ export enum EditableConfigType {
   TEXT = 7
 }
 
-
+export enum SelectableWrapper {
+  FORM_FIELD = "form-field",
+  DATE_FIELD = "date-field",
+  GRID_CELL_FIELD = "grid-cell-field",
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -78,7 +84,15 @@ export class FormEditorConfigService {
     {
       type:"checkbox",
       id:"checkbox",
-      label:"Checkbox Select",
+      label:"Checkbox Single Select",
+      category:SelectableCategory.SIMPLE,
+      editableConfigType:EditableConfigType.CHECKBOX
+    },
+    {
+      type:"checkbox-group",
+      id:"checkbox-group",
+      label:"Checkbox Group",
+      wrappers:[SelectableWrapper.FORM_FIELD],
       category:SelectableCategory.SIMPLE,
       editableConfigType:EditableConfigType.RADIO_CHECKBOX
     },
@@ -156,6 +170,7 @@ export class FormEditorConfigService {
       setHideExpressions:false,
       hasComponentOptions:true,
       hasFieldGroup:false,
+      hasLayoutOptions:true,
     },
     {
       type:EditableConfigType.LAYOUT,
@@ -175,16 +190,18 @@ export class FormEditorConfigService {
       type:EditableConfigType.TEXT,
       id:"104",
       setLabel:true,
+      setDesc:true
+    },
+    {
+      type:EditableConfigType.CHECKBOX,
+      id:"105",
+      setLabel:true,
       setDesc:true,
-      setHelp:false,
-      setPlaceholder:false,
-      setRequired:false,
-      setPermissions:false,
-      setReadonlyPermissions:false,
-      setHideExpressions:false,
-      hasComponentOptions:false,
-      hasFieldGroup:false,
-    }
+      setHelp:true,
+      setRequired:true,
+      setPermissions:true,
+      setReadonlyPermissions:true,
+    },
   ]
   private _selectableItems = new BehaviorSubject<SelectableFieldItemModel[]>(this._types);
   private _selectableItem = new Subject<SelectableFieldItemModel>()

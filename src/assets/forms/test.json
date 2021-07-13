@@ -65,6 +65,43 @@
       "label": "Region",
       "type": "text",
       "description": "Region<br><b>Americas</b>"
+    },
+    {
+      "type":"checkbox-group",
+      "wrappers": ["form-field"],
+      "label":"Color Preference",
+      "componentOptions":{
+        "options":[
+          {
+            "label":"Pink",
+            "value":"pink"
+          },
+          {
+            "label":"Green",
+            "value":"green"
+          },
+          {
+            "label":"Blue",
+            "value":"blue"
+          },
+          {
+            "label":"Red",
+            "value":"red"
+          },
+          {
+            "label":"Yellow",
+            "value":"yellow"
+          },
+          {
+            "label":"Purple",
+            "value":"purple"
+          },
+          {
+            "label":"Orange",
+            "value":"orange"
+          }
+        ]
+      }
     }
   ],
   "model":{
