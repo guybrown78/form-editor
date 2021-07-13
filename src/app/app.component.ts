@@ -19,12 +19,12 @@ const navigationData:AppNavigationItem[] = [
       {
         routerLink:"/edit",
         hasSub:false,
-        label:"Edit Wood form"
+        label:"Edit existing form"
       },
       {
         routerLink:"/preview",
         hasSub:false,
-        label:"Preview Wood form"
+        label:"Preview existing form"
       }
     ]
   }

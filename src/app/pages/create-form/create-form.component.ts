@@ -23,8 +23,13 @@ export class CreateFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initialiseFormSaveSubscription();
-    this.initialiseFormCloseSubscription();
+    // empty form
+    this.formEditorService.nullifyForm().subscribe(
+      nullified => {
+        this.initialiseFormSaveSubscription();
+        this.initialiseFormCloseSubscription();
+      }
+    );
   }
 
 

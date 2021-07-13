@@ -42,7 +42,8 @@ export enum EditableConfigType {
   RADIO = 3,
   CHECKBOX = 4,
   RADIO_CHECKBOX = 5,
-  LAYOUT = 6
+  LAYOUT = 6,
+  TEXT = 7
 }
 
 
@@ -54,7 +55,7 @@ export class FormEditorConfigService {
   private _types: SelectableFieldItemModel[] = [
     {
       type:"input",
-      id:"1",
+      id:"input",
       label:"Input",
       category:SelectableCategory.SIMPLE,
       description:"Lorum ipsum",
@@ -62,35 +63,35 @@ export class FormEditorConfigService {
     },
     {
       type:"select",
-      id:"2",
+      id:"select",
       label:"Select Dropdown",
       category:SelectableCategory.SIMPLE,
       editableConfigType:EditableConfigType.SELECT
     },
     {
       type:"radio",
-      id:"3",
+      id:"radio",
       label:"Radio Select",
       category:SelectableCategory.SIMPLE,
       editableConfigType:EditableConfigType.RADIO_CHECKBOX
     },
     {
       type:"checkbox",
-      id:"4",
+      id:"checkbox",
       label:"Checkbox Select",
       category:SelectableCategory.SIMPLE,
       editableConfigType:EditableConfigType.RADIO_CHECKBOX
     },
     {
       type:"address",
-      id:"6",
+      id:"address",
       label:"Address",
       category:SelectableCategory.COMPLEX,
       editableConfigType:EditableConfigType.RADIO_CHECKBOX
     },
     {
       type:"tab",
-      id:"8",
+      id:"tab",
       label:"Tab",
       category:SelectableCategory.LAYOUT,
       description:"Descriptions explaining the tabs and how to use them etc...",
@@ -98,11 +99,18 @@ export class FormEditorConfigService {
     },
     {
       type:"divider",
-      id:"7",
+      id:"divider",
       label:"Divider",
       category:SelectableCategory.LAYOUT,
       description:"Lorum ipsum divider ...",
       editableConfigType:EditableConfigType.LAYOUT
+    },
+    {
+      type:"text",
+      id:"text",
+      label:"Text",
+      category:SelectableCategory.SIMPLE,
+      editableConfigType:EditableConfigType.TEXT
     }
   ]
 
@@ -162,6 +170,20 @@ export class FormEditorConfigService {
       setHideExpressions:false,
       hasComponentOptions:true,
       hasFieldGroup:false,
+    },
+    {
+      type:EditableConfigType.TEXT,
+      id:"104",
+      setLabel:true,
+      setDesc:true,
+      setHelp:false,
+      setPlaceholder:false,
+      setRequired:false,
+      setPermissions:false,
+      setReadonlyPermissions:false,
+      setHideExpressions:false,
+      hasComponentOptions:false,
+      hasFieldGroup:false,
     }
   ]
   private _selectableItems = new BehaviorSubject<SelectableFieldItemModel[]>(this._types);
@@ -182,14 +204,13 @@ export class FormEditorConfigService {
       if(items){
         const typeItems:SelectableFieldItemModel[] = items.filter(item => item.type === type);
         if(typeItems.length){
-          const model:SelectableFieldItemModel = typeItems[0];
+          const model:SelectableFieldItemModel = { ...typeItems[0] };
           //
-          if(!model.editableConfig){
+
             // find editable config
             const editableConfigModel:SelectableFieldItemEditableConfigModel = this._editableConfigs.filter(c => c.type === model.editableConfigType)[0];
-            // add it to the selectableItems model so we don't need to do it for every instance
+            // add it to the selectableItems model
             this._types[index].editableConfig = model.editableConfig = editableConfigModel;
-          }
           //
           return model;
         }else{

@@ -1,14 +1,70 @@
 {
   "meta":{
-    "title":"New form",
-    "version":"001",
-    "jsonSchema":true
+    "title":"ENGINEERING SERVICE LINE - COMPETENCE ASSESSMENT",
+    "version":"1",
+    "description":"Competence Assessment Form",
+    "jsonSchema":true,
+    "showTitle":true,
+    "formWidth":"large",
+    "showSubmitButton":true,
+    "showResetButton":false
   },
   "schema":[
     {
-      "uuid":"f5dfdef2-91ee-4de5-acfe-e7bd2b513d60",
-      "label":"Name",
-      "type":"input"
+      "label": "Name",
+      "description":"Lorum ipsum solar dolar ....",
+      "type": "input"
+    },
+    {
+      "label": "some txt",
+      "type": "text",
+      "description": "Discipline<br><b>CAD OP.</b>"
+    },
+    {
+      "label": "ID No",
+      "type": "input"
+    },
+    {
+      "key": "disciplinero",
+      "label": "Disciplinecccccccc",
+      "type": "input",
+      "default": "Document Control",
+      "readOnly":true,
+      "help":"jhdjdhjdhjdhjdhjddjhdhd"
+    },
+    {
+      "type":"radio",
+      "label": "Type",
+      "key":"permitRoutineTemplateState",
+      "componentOptions":{
+        "options":[
+          { "label":"Staff", "value":"Staff" },
+          { "label":"PAYE", "value":"PAYE" },
+          { "label":"Ltd Co", "value":"Ltd Co" }
+      ]}
+    },
+    {
+      "label": "Ltd Co. / Agency Name",
+      "type": "input"
+    },
+    {
+      "label": "Discipline",
+      "type": "text",
+      "description": "Discipline<br><b>CAD OP.</b>"
+    },
+    {
+      "label": "Role Title",
+      "type": "text",
+      "description": "Role Title<br><b>Trainee CAD Operator</b>"
+    },
+    {
+      "label": "Job Title",
+      "type": "input"
+    },
+    {
+      "label": "Region",
+      "type": "text",
+      "description": "Region<br><b>Americas</b>"
     }
   ],
   "model":{

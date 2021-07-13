@@ -190,6 +190,11 @@ export class TfNgFormEditorService {
     fieldItem.uuid = fieldItem.key = uuid
     fieldItem.label = selectedField.label;
     fieldItem.type = selectedField.type;
+    //
+    console.log(selectedField);
+    console.log("vs");
+    console.log(fieldItem);
+    //
     return fieldItem;
   }
 
@@ -263,6 +268,10 @@ export class TfNgFormEditorService {
   parseFormToTree(schema:FieldItemModel[], currentSelectedKey:string):Observable<FormTreeModel[]>{
     let tree:FormTreeModel[];
     tree = schema.map(f => {
+      if(!f.uuid){
+        console.log("No uuid")
+        f.uuid = uuidv4();
+      }
       return {
         key:f.uuid,
         title:f.label,

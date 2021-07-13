@@ -35,8 +35,12 @@ export class FieldDetailsComponent implements OnInit {
           item => {
             if(item){
               this.fieldItem = item;
+              console.log("item loaded ...")
+              console.log(item.type)
               // when item has been inited get config data...
-              this.formEditorConfig.getSelectableItemFromType(this.fieldItem.type).pipe(take(1)).subscribe(selectableItem => {
+              this.formEditorConfig.getSelectableItemFromType(item.type).pipe(take(1)).subscribe(selectableItem => {
+                  console.log(" ______ ")
+                  console.log(selectableItem)
                   if(selectableItem){
                     this.selectableItem = selectableItem;
                     this.initForm();
@@ -44,6 +48,9 @@ export class FieldDetailsComponent implements OnInit {
                     this.selectableItem = null;
                   }
                 })
+              // if(!this.selectableItem){
+                // this.initialiseItemConfigData()
+              // }
             }else{
               this.fieldItem = null;
             }
@@ -56,6 +63,18 @@ export class FieldDetailsComponent implements OnInit {
     })
   }
 
+  initialiseItemConfigData(){
+    // when item has been inited get config data from 'type'...
+    this.formEditorConfig.getSelectableItemFromType(this.fieldItem.type).pipe(take(1)).subscribe(selectableItem => {
+
+     if(selectableItem){
+       this.selectableItem = { ...selectableItem};
+       this.initForm();
+     }else{
+       this.selectableItem = null;
+     }
+   })
+ }
 
   initForm(): void {
     this.form = this.fb.group({});
