@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { FormEditorConfigService, SelectableFieldItemModel, SelectableCategory } from '../../form-editor-config.service';
 import { TfNgFormEditorService } from '../../tf-ng-form-editor.service';
 import { FieldItemModel } from '../../to-share/field-item-model.interface';
+import { FieldItemComponentOptionsModel, OptionModel } from '../../to-share/field-item-component-options-model.interface';
 
 @Component({
   selector: 'form-editor-field-details',
@@ -104,6 +105,11 @@ export class FieldDetailsComponent implements OnInit {
     //     new FormControl(this.fieldItem, [])
     //   );
     // }
+    if(this.showDetailsComponentOptions()){
+      this.form.addControl('componentOptions', new FormControl(this.fieldItem.componentOptions, []))
+    }
+
+
     this.onChanges();
 
   }
@@ -115,6 +121,26 @@ export class FieldDetailsComponent implements OnInit {
     });
   }
 
+
+  onComponentOptionsUpdated(cmpOptions:FieldItemComponentOptionsModel){
+    const componentOptions:FieldItemComponentOptionsModel = {
+      ...this.fieldItem.componentOptions,
+      ...cmpOptions
+    }
+    this.fieldItem = {
+      ...this.fieldItem,
+      componentOptions
+    }
+    this.formEditorService.updateFormItem(this.fieldItem)
+  }
+
+  showDetailsComponentOptions():boolean{
+    let show:boolean = false;
+    if(this.selectableItem.editableConfig.hasLayoutOptions){
+      show = true;
+    }
+    return show
+  }
   destroy(){
     this.selectedKeySubscription.unsubscribe
   }

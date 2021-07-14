@@ -24,6 +24,8 @@ import { HeaderComponent } from './components/field-item/header/header.component
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { OptionsComponent } from './components/field-item/options/options.component';
 import { AddRowComponent } from './components/add-row/add-row.component';
+import { ComponentOptionsComponent } from './components/field-details/component-options/component-options.component';
+import { SwitchWrapperComponent } from './components/switch-wrapper/switch-wrapper.component';
 
 
 
@@ -43,6 +45,8 @@ import { AddRowComponent } from './components/add-row/add-row.component';
     PageHeaderComponent,
     OptionsComponent,
     AddRowComponent,
+    ComponentOptionsComponent,
+    SwitchWrapperComponent,
   ],
   imports: [
     CommonModule,

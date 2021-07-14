@@ -1,0 +1,43 @@
+<form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+  <nz-form-item *ngIf="selectableItem?.editableConfig.hasLayoutOptions">
+    <nz-form-control>
+      <nz-form-label nzFor="layout">Layout options</nz-form-label>
+      <nz-radio-group formControlName="layout" name="layout">
+        <label nz-radio nzValue="vertical">Vertical</label>
+        <label nz-radio nzValue="horizontal">Horizontal</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- <nz-form-item *ngIf="selectableItem?.editableConfig.hasShowBlocks"> -->
+    <!-- <nz-form-control>
+      <nz-form-label nzFor="showBlocks"></nz-form-label>
+
+      <nz-radio-group formControlName="showBlocks" name="showBlocks">
+
+      </nz-radio-group>
+    </nz-form-control> -->
+    <!-- <div
+      *ngIf="selectableItem?.editableConfig.hasShowBlocks"
+      nz-row nzAlign="middle" nzJustify="end"
+      class="switch-wrapper"
+    >
+      <nz-form-label
+        nz-col nzFlex="auto"
+        nzFor="showBlocks"
+      >Show options as blocks</nz-form-label>
+      <nz-form-control nz-col nzFlex="45px">
+        <nz-switch formControlName="showBlocks"></nz-switch>
+      </nz-form-control>
+    </div> -->
+    <form-editor-switch-wrapper *ngIf="selectableItem?.editableConfig.hasShowBlocks">
+      <nz-form-label label nzFor="showBlocks">
+        Show options as blocks
+      </nz-form-label>
+      <nz-switch switch formControlName="showBlocks"></nz-switch>
+    </form-editor-switch-wrapper>
+  <!-- </nz-form-item> -->
+
+
+
+</form>

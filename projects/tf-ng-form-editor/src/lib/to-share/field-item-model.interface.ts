@@ -8,11 +8,18 @@ export interface FieldItemModel {
   placeholder?:string
   help?:string
   description?:string
-  wrappers?:string[] | string
+  wrappers?:SelectableWrapper[] | SelectableWrapper | string
   required?:boolean
   permissions?:any[]
   readonlyPermissions?:any[]
   hideExpression?:boolean
   componentOptions?:FieldItemComponentOptionsModel
   fieldGroup?:FieldItemModel[]
+}
+
+
+export enum SelectableWrapper {
+  FORM_FIELD = "form-field",
+  DATE_FIELD = "date-field",
+  GRID_CELL_FIELD = "grid-cell-field",
 }

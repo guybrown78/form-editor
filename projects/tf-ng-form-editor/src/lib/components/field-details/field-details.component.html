@@ -53,6 +53,14 @@
 
   </form>
 
+  <div *ngIf="showDetailsComponentOptions()">
+    <field-details-component-options
+      [selectableItem]="selectableItem"
+      [fieldItem]="fieldItem"
+      (updated)="onComponentOptionsUpdated($event)"
+    ></field-details-component-options>
+  </div>
+
   <div>
     {{ selectableItem.editableConfig.type }}
     {{ selectableItem.editableConfig.id }}

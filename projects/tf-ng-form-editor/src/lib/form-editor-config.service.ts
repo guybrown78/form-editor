@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Field } from '@ngx-formly/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FieldItemModel } from './to-share/field-item-model.interface';
+import { FieldItemModel, SelectableWrapper } from './to-share/field-item-model.interface';
 
 
 
@@ -15,6 +15,7 @@ export interface SelectableFieldItemModel {
   wrappers?:SelectableWrapper[]
   editableConfigType?:EditableConfigType
   editableConfig?:SelectableFieldItemEditableConfigModel
+  editableConfigOptionsName?:string
 }
 export interface SelectableFieldItemEditableConfigModel {
   type:EditableConfigType
@@ -30,6 +31,7 @@ export interface SelectableFieldItemEditableConfigModel {
   hasComponentOptions?:boolean
   hasFieldGroup?:boolean
   hasLayoutOptions?:boolean
+  hasShowBlocks?:boolean
 }
 export enum SelectableCategory {
   SIMPLE = "Simple",
@@ -48,11 +50,6 @@ export enum EditableConfigType {
   TEXT = 7
 }
 
-export enum SelectableWrapper {
-  FORM_FIELD = "form-field",
-  DATE_FIELD = "date-field",
-  GRID_CELL_FIELD = "grid-cell-field",
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -94,7 +91,8 @@ export class FormEditorConfigService {
       label:"Checkbox Group",
       wrappers:[SelectableWrapper.FORM_FIELD],
       category:SelectableCategory.SIMPLE,
-      editableConfigType:EditableConfigType.RADIO_CHECKBOX
+      editableConfigType:EditableConfigType.RADIO_CHECKBOX,
+      editableConfigOptionsName:"checkboxOptions"
     },
     {
       type:"address",
@@ -138,10 +136,7 @@ export class FormEditorConfigService {
       setPlaceholder:true,
       setRequired:true,
       setPermissions:true,
-      setReadonlyPermissions:true,
-      setHideExpressions:false,
-      hasComponentOptions:false,
-      hasFieldGroup:false,
+      setReadonlyPermissions:true
     },
     {
       type:EditableConfigType.SELECT,
@@ -155,7 +150,6 @@ export class FormEditorConfigService {
       setReadonlyPermissions:true,
       setHideExpressions:false,
       hasComponentOptions:true,
-      hasFieldGroup:false,
     },
     {
       type:EditableConfigType.RADIO_CHECKBOX,
@@ -171,6 +165,7 @@ export class FormEditorConfigService {
       hasComponentOptions:true,
       hasFieldGroup:false,
       hasLayoutOptions:true,
+      hasShowBlocks:true
     },
     {
       type:EditableConfigType.LAYOUT,

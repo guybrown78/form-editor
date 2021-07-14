@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+.switch-wrapper .ant-form-item-label,
+.label-wrapper .ant-form-item-label,
+.no-padding{
+  padding: 0!important;
+}
+.switch-wrapper{
+  margin-bottom: 8px;
+}
+
+/* do this because the nz-label in the ng-container can't be targeted  (.label-wrapper .ant-form-item-label) */
+.label-wrapper{
+  margin-bottom: -8px;
+}
