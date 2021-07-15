@@ -6,9 +6,15 @@
 
 <div class="wrapper" *ngIf="fieldItem && selectableItem">
 
+<!-- <div class="wrapper rounded bg-white"> -->
 
   <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
 
+    <tf-ng-form-title class="title">
+      <h4 class="blue">
+        {{ fieldItem?.label }}
+      </h4>
+    </tf-ng-form-title>
 
     <nz-form-item *ngIf="selectableItem?.editableConfig.setLabel">
       <nz-form-control>
@@ -16,8 +22,6 @@
         <input nz-input formControlName="label" placeholder="Label"/>
       </nz-form-control>
     </nz-form-item>
-
-    <nz-divider></nz-divider>
 
     <nz-form-item *ngIf="selectableItem?.editableConfig.setDesc">
       <nz-form-control>
@@ -35,9 +39,12 @@
 
   </form>
 
+
+
+  <!-- [optionItems]="fieldItem.componentOptions?.options || null" -->
   <div *ngIf="selectableItem.editableConfig.hasComponentOptions">
     <form-editor-field-item-options
-      [optionItems]="fieldItem.componentOptions?.options"
+      [fieldItem]="fieldItem"
       (updated)="onOptionsUpdated($event)"
     ></form-editor-field-item-options>
   </div>
@@ -56,8 +63,11 @@
     {{ selectableItem.editableConfig.id }}
   </div>
 
-  <!-- <pre>
-    {{ selectableItem.editableConfig |json }}
-  </pre> -->
+  <pre>
+    {{ fieldItem |json }}
+  </pre>
 
 </div>
+
+
+<!-- </div> -->

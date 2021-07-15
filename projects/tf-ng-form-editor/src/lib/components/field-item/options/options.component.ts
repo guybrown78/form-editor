@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
 import { OptionModel } from '../../../to-share/field-item-component-options-model.interface'
+import { FieldItemModel } from '../../../to-share/field-item-model.interface';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class OptionsComponent implements OnInit {
   @Output('updated') updated = new EventEmitter<OptionModel[]>()
 
   private _optionItems: OptionModel[] = [];
-  @Input() set optionItems(values:OptionModel[]){
+  set optionItems(values:OptionModel[]){
     if(values){
       this._optionItems = [ ...values ]
     }
@@ -22,7 +23,36 @@ export class OptionsComponent implements OnInit {
   //   return this._optionItems;
   // }
 
+
+
+  private _fieldItem:FieldItemModel
+  @Input('fieldItem') set fieldItem(item:FieldItemModel){
+    //
+    if(this.fieldItem && item.uuid != this.fieldItem.uuid){
+      this.formReady = false;
+      this._optionItems = [];
+    }
+    //
+    if(item.componentOptions?.options){
+      this.optionItems = item.componentOptions.options;
+    }
+    //
+    if(this.fieldItem && item.uuid != this.fieldItem.uuid){
+      this._fieldItem = item;
+      this.initForm();
+    }else{
+      this._fieldItem = item;
+    }
+    //
+  }
+  get fieldItem():FieldItemModel{
+    return this._fieldItem
+  }
+
+
+
   form: FormGroup;
+  formReady:boolean = false;
 
   constructor(
     private fb:FormBuilder
@@ -42,6 +72,8 @@ export class OptionsComponent implements OnInit {
     this.form = this.fb.group({
       options: this.fb.array([ ...opts ])
     });
+    this.onChanges();
+    this.formReady = true;
   }
 
   onChanges(): void {

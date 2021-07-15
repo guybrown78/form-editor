@@ -19,6 +19,8 @@ export class TfNgFormEditorComponent implements OnInit {
 
   editorMode:EditorModeEnum;
 
+  treeDev:boolean = true;
+
   constructor(
     private formService:TfNgFormService,
     private formEditorService:TfNgFormEditorService
@@ -64,6 +66,11 @@ export class TfNgFormEditorComponent implements OnInit {
     this.editorModeSubscription = this.formEditorService.editorMode.subscribe((mode:EditorModeEnum) => {
       this.editorMode = mode;
     })
+  }
+
+
+  onToggleTreeDev(){
+    this.treeDev = !this.treeDev;
   }
 
   destroy(){

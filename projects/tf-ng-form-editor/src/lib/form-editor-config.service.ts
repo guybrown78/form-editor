@@ -45,9 +45,10 @@ export enum EditableConfigType {
   SELECT = 2,
   RADIO = 3,
   CHECKBOX = 4,
-  RADIO_CHECKBOX = 5,
+  CHECKBOX_GROUP = 5,
   LAYOUT = 6,
-  TEXT = 7
+  TEXT = 7,
+  NESTED = 8
 }
 
 @Injectable({
@@ -76,7 +77,7 @@ export class FormEditorConfigService {
       id:"radio",
       label:"Radio Select",
       category:SelectableCategory.SIMPLE,
-      editableConfigType:EditableConfigType.RADIO_CHECKBOX
+      editableConfigType:EditableConfigType.RADIO
     },
     {
       type:"checkbox",
@@ -91,7 +92,7 @@ export class FormEditorConfigService {
       label:"Checkbox Group",
       wrappers:[SelectableWrapper.FORM_FIELD],
       category:SelectableCategory.SIMPLE,
-      editableConfigType:EditableConfigType.RADIO_CHECKBOX,
+      editableConfigType:EditableConfigType.CHECKBOX_GROUP,
       editableConfigOptionsName:"checkboxOptions"
     },
     {
@@ -99,7 +100,7 @@ export class FormEditorConfigService {
       id:"address",
       label:"Address",
       category:SelectableCategory.COMPLEX,
-      editableConfigType:EditableConfigType.RADIO_CHECKBOX
+      editableConfigType:EditableConfigType.NESTED
     },
     {
       type:"tab",
@@ -123,6 +124,13 @@ export class FormEditorConfigService {
       label:"Text",
       category:SelectableCategory.SIMPLE,
       editableConfigType:EditableConfigType.TEXT
+    },
+    {
+      type:"nested",
+      id:"nested",
+      label:"Nested",
+      category:SelectableCategory.COMPLEX,
+      editableConfigType:EditableConfigType.NESTED
     }
   ]
 
@@ -152,7 +160,7 @@ export class FormEditorConfigService {
       hasComponentOptions:true,
     },
     {
-      type:EditableConfigType.RADIO_CHECKBOX,
+      type:EditableConfigType.RADIO,
       id:"102",
       setLabel:true,
       setDesc:true,
@@ -163,9 +171,6 @@ export class FormEditorConfigService {
       setReadonlyPermissions:true,
       setHideExpressions:false,
       hasComponentOptions:true,
-      hasFieldGroup:false,
-      hasLayoutOptions:true,
-      hasShowBlocks:true
     },
     {
       type:EditableConfigType.LAYOUT,
@@ -179,7 +184,6 @@ export class FormEditorConfigService {
       setReadonlyPermissions:false,
       setHideExpressions:false,
       hasComponentOptions:true,
-      hasFieldGroup:false,
     },
     {
       type:EditableConfigType.TEXT,
@@ -196,6 +200,29 @@ export class FormEditorConfigService {
       setRequired:true,
       setPermissions:true,
       setReadonlyPermissions:true,
+    },
+    {
+      type:EditableConfigType.NESTED,
+      id:"106",
+      setLabel:true,
+      setDesc:true,
+      setHelp:true,
+      hasFieldGroup:true
+    },
+    {
+      type:EditableConfigType.CHECKBOX_GROUP,
+      id:"107",
+      setLabel:true,
+      setDesc:true,
+      setHelp:true,
+      setPlaceholder:false,
+      setRequired:true,
+      setPermissions:true,
+      setReadonlyPermissions:true,
+      setHideExpressions:false,
+      hasComponentOptions:true,
+      hasLayoutOptions:true,
+      hasShowBlocks:true
     },
   ]
   private _selectableItems = new BehaviorSubject<SelectableFieldItemModel[]>(this._types);

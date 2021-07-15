@@ -102,9 +102,24 @@
           }
         ]
       }
+    },
+    {
+      "label":"Nested",
+      "type":"nested",
+      "fieldGroup":[
+        {
+          "label":"Input",
+          "type":"input"
+        }
+      ]
     }
   ],
   "model":{
 
   }
 }
+
+
+
+
+

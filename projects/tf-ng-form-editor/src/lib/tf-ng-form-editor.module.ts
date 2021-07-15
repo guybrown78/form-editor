@@ -26,6 +26,9 @@ import { OptionsComponent } from './components/field-item/options/options.compon
 import { AddRowComponent } from './components/add-row/add-row.component';
 import { ComponentOptionsComponent } from './components/field-details/component-options/component-options.component';
 import { SwitchWrapperComponent } from './components/switch-wrapper/switch-wrapper.component';
+import { FieldGroupComponent } from './components/field-item/field-group/field-group.component';
+import { TreeDevComponent } from './components/tree-dev/tree-dev.component';
+import { FieldComponent } from './components/field/field.component';
 
 
 
@@ -47,6 +50,9 @@ import { SwitchWrapperComponent } from './components/switch-wrapper/switch-wrapp
     AddRowComponent,
     ComponentOptionsComponent,
     SwitchWrapperComponent,
+    FieldGroupComponent,
+    TreeDevComponent,
+    FieldComponent,
   ],
   imports: [
     CommonModule,

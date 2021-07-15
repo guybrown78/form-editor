@@ -4,19 +4,12 @@
 </div>
 
 
-<!-- <tf-ng-item colour="white" padding="none">
-  bbkk
-</tf-ng-item>
-<tf-ng-item colour="white">
-  bbkk
-</tf-ng-item> -->
-
 
 <div class="wrapper" *ngIf="fieldItem && selectableItem">
 
-
   <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
     <div class="title-wrapper">
+
       <tf-ng-form-title class="title">
         <h4 class="blue">
           {{ selectableItem?.label }}
@@ -27,21 +20,15 @@
         {{ selectableItem?.description }}
       </p>
 
+      <!-- REQUIRED -->
+      <form-editor-switch-wrapper *ngIf="selectableItem?.editableConfig.setRequired">
+        <nz-form-label label nzFor="required">
+          Required
+        </nz-form-label>
+        <nz-switch switch formControlName="required"></nz-switch>
+      </form-editor-switch-wrapper>
 
-      <div
-        *ngIf="selectableItem?.editableConfig.setRequired"
-        nz-row nzAlign="middle" nzJustify="end"
-        class="switch-wrapper"
-      >
-        <nz-form-label
-          nz-col nzFlex="auto"
-          nzFor="required"
-        >Required</nz-form-label>
-        <nz-form-control nz-col nzFlex="45px">
-          <nz-switch formControlName="required"></nz-switch>
-        </nz-form-control>
-      </div>
-
+      <!-- HELP -->
       <nz-form-item *ngIf="selectableItem?.editableConfig.setHelp">
         <nz-form-control>
           <nz-form-label nzFor="help">Help text</nz-form-label>
@@ -53,9 +40,10 @@
 
   </form>
 
+  <!-- [selectableItem]="selectableItem" -->
   <div *ngIf="showDetailsComponentOptions()">
     <field-details-component-options
-      [selectableItem]="selectableItem"
+
       [fieldItem]="fieldItem"
       (updated)="onComponentOptionsUpdated($event)"
     ></field-details-component-options>

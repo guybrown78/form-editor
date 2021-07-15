@@ -8,11 +8,11 @@ import { FieldItemModel } from '../../to-share/field-item-model.interface';
 import { FieldItemComponentOptionsModel, OptionModel } from '../../to-share/field-item-component-options-model.interface';
 
 @Component({
-  selector: 'form-editor-field-details',
-  templateUrl: './field-details.component.html',
-  styleUrls: ['./field-details.component.css']
+  selector: 'form-editor-field',
+  templateUrl: './field.component.html',
+  styleUrls: ['./field.component.css']
 })
-export class FieldDetailsComponent implements OnInit {
+export class FieldComponent implements OnInit {
 
   selectedKeySubscription:Subscription
   fieldItem:FieldItemModel
@@ -34,12 +34,20 @@ export class FieldDetailsComponent implements OnInit {
       if(key){
         this.fieldItem = null;
         this.selectableItem = null;
+        if(this.form){
+          this.form.reset();
+        }
+
         this.formEditorService.getFieldItemFromTreeKey(key).subscribe(
           item => {
-            if(item){
-              this.fieldItem = item;
-              // when item has been inited get config data...
 
+            if(item){
+
+
+                this.fieldItem = item;
+
+
+              // when item has been inited get config data...
               this.formEditorConfig.getSelectableItemFromType(item.type).subscribe(selectableItem => {
                   if(selectableItem){
                     this.selectableItem = selectableItem;
@@ -48,9 +56,7 @@ export class FieldDetailsComponent implements OnInit {
                     this.selectableItem = null;
                   }
                 })
-              // if(!this.selectableItem){
-                // this.initialiseItemConfigData()
-              // }
+
             }else{
               this.fieldItem = null;
             }
@@ -63,58 +69,32 @@ export class FieldDetailsComponent implements OnInit {
     })
   }
 
-  initialiseItemConfigData(){
-    // when item has been inited get config data from 'type'...
-    this.formEditorConfig.getSelectableItemFromType(this.fieldItem.type).pipe(take(1)).subscribe(selectableItem => {
-
-     if(selectableItem){
-       this.selectableItem = { ...selectableItem};
-       this.initForm();
-     }else{
-       this.selectableItem = null;
-     }
-   })
- }
 
   initForm(): void {
     this.form = this.fb.group({});
-    // setRequired
-    if(this.selectableItem.editableConfig.setRequired){
-      this.form.addControl(
-        'required',
-        new FormControl(this.fieldItem.required, [])
-      );
+
+    // label
+    if(this.selectableItem.editableConfig.setLabel){
+      this.form.addControl('label', new FormControl(this.fieldItem.label, []))
     }
-    // setPermissions
-    if(this.selectableItem.editableConfig.setPermissions){
-      this.form.addControl(
-        'permissions',
-        new FormControl(this.fieldItem.permissions, [])
-      );
+    // description
+    if(this.selectableItem.editableConfig.setDesc){
+      this.form.addControl('description', new FormControl(this.fieldItem.description, []))
     }
-    // setReadonlyPermissions
-    // help
-    if(this.selectableItem.editableConfig.setHelp){
-      this.form.addControl(
-        'help',
-        new FormControl(this.fieldItem.help, [])
-      );
+    // placeholder
+    if(this.selectableItem.editableConfig.setPlaceholder){
+      this.form.addControl('placeholder', new FormControl(this.fieldItem.placeholder, []))
     }
-    //
-    // hasLayoutOptions
-    // if(this.selectableItem.editableConfig.hasLayoutOptions){
-    //   this.form.addControl(
-    //     'layout',
-    //     new FormControl(this.fieldItem, [])
-    //   );
-    // }
-    if(this.showDetailsComponentOptions()){
+    // hasComponentOptions
+    if(this.selectableItem.editableConfig.hasComponentOptions){
       this.form.addControl('componentOptions', new FormControl(this.fieldItem.componentOptions, []))
     }
-
+    // hasFieldGroup
+    if(this.selectableItem.editableConfig.hasFieldGroup){
+      this.form.addControl('fieldGroup', new FormControl(this.fieldItem.fieldGroup, []))
+    }
 
     this.onChanges();
-
   }
 
   onChanges(): void {
@@ -124,11 +104,10 @@ export class FieldDetailsComponent implements OnInit {
     });
   }
 
-
-  onComponentOptionsUpdated(cmpOptions:FieldItemComponentOptionsModel){
+  onOptionsUpdated(options:OptionModel[]){
     const componentOptions:FieldItemComponentOptionsModel = {
       ...this.fieldItem.componentOptions,
-      ...cmpOptions
+      options
     }
     this.fieldItem = {
       ...this.fieldItem,
@@ -137,15 +116,9 @@ export class FieldDetailsComponent implements OnInit {
     this.formEditorService.updateFormItem(this.fieldItem)
   }
 
-  showDetailsComponentOptions():boolean{
-    let show:boolean = false;
-    if(!this.selectableItem){
-      return show;
-    }
-    if(this.selectableItem.editableConfig.hasLayoutOptions){
-      show = true;
-    }
-    return show
+  addFieldGroupItem(selectedField:SelectableFieldItemModel){
+    const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
+    this.formEditorService.addFormItemToFieldGroup(this.fieldItem, formFieldItem);
   }
 
   destroy(){

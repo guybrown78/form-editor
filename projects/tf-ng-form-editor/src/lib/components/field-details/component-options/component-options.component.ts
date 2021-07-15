@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
-import { SelectableFieldItemModel } from '../../../form-editor-config.service';
+import { FormEditorConfigService, SelectableFieldItemModel } from '../../../form-editor-config.service';
 import { OptionModel, FieldItemComponentOptionsModel } from '../../../to-share/field-item-component-options-model.interface'
 import { FieldItemModel } from '../../../to-share/field-item-model.interface';
 import { FieldItemLayoutOption } from '../../../to-share/field-item-component-options-model.interface';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'field-details-component-options',
   templateUrl: './component-options.component.html',
@@ -14,7 +15,7 @@ export class ComponentOptionsComponent implements OnInit {
   @Output('updated') updated = new EventEmitter<FieldItemComponentOptionsModel>()
 
   private _selectableItem:SelectableFieldItemModel
-  @Input('selectableItem') set selectableItem(model:SelectableFieldItemModel){
+  set selectableItem(model:SelectableFieldItemModel){
     this.optionsName = model.editableConfigOptionsName || null;
     this._selectableItem = model;
   }
@@ -22,18 +23,35 @@ export class ComponentOptionsComponent implements OnInit {
     return this._selectableItem;
   }
 
-  @Input('fieldItem') fieldItem:FieldItemModel
+  private _fieldItem:FieldItemModel
+  @Input('fieldItem') set fieldItem(item:FieldItemModel){
+    this.formReady = false;
+    // get selectable item
+    this.formEditorConfig.getSelectableItemFromType(item.type).pipe(take(1)).subscribe(selectableItem => {
+      if(selectableItem){
+        this.selectableItem = selectableItem;
+        this._fieldItem = item;
+        this.initForm();
+      }
+    })
+  }
+
+  get fieldItem():FieldItemModel{
+    return this._fieldItem
+  }
 
   form: FormGroup;
   optionsName: string;
+  formReady:boolean = false;
 
   constructor(
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private formEditorConfig:FormEditorConfigService
   ) {}
 
   ngOnInit() {
-    this.initForm();
-    this.onChanges();
+    // this.initForm();
+    // this.onChanges();
   }
 
   initForm(){
@@ -53,6 +71,8 @@ export class ComponentOptionsComponent implements OnInit {
         new FormControl(this.getComponentOptionData('showBlocks', this.optionsName), [])
       );
     }
+    this.onChanges();
+    this.formReady = true;
   }
 
   onChanges(): void {
@@ -68,6 +88,11 @@ export class ComponentOptionsComponent implements OnInit {
   }
 
   getComponentOptionData(key, optionsName){
+    if(optionsName){
+      if(!this.fieldItem.componentOptions || !this.fieldItem.componentOptions[optionsName]){
+        return null;
+      }
+    }
     return !this.fieldItem.componentOptions ? null : optionsName ? this.fieldItem.componentOptions[optionsName][key] : this.fieldItem.componentOptions[key];
   }
 

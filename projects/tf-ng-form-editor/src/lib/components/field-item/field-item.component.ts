@@ -89,6 +89,12 @@ export class FieldItemComponent implements OnInit {
     if(this.selectableItem.editableConfig.hasComponentOptions){
       this.form.addControl('componentOptions', new FormControl(this.fieldItem.componentOptions, []))
     }
+
+    // hasFieldGroup
+    if(this.selectableItem.editableConfig.hasFieldGroup){
+      this.form.addControl('fieldGroup', new FormControl(this.fieldItem.fieldGroup, []))
+    }
+
     this.onChanges();
   }
 
@@ -110,6 +116,11 @@ export class FieldItemComponent implements OnInit {
       componentOptions
     }
     this.formEditorService.updateFormItem(this.fieldItem)
+  }
+
+  addFieldGroupItem(selectedField:SelectableFieldItemModel){
+    const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
+    this.formEditorService.addFormItemToFieldGroup(this.fieldItem, formFieldItem);
   }
 
   destroy(){

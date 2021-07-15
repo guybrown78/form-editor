@@ -1,0 +1,27 @@
+
+
+
+<div>Number of fields in this fieldGroup: {{ fieldItem.fieldGroup?.length || 0 }}</div>
+
+<nz-form-item>
+  <nz-form-control>
+    <nz-select
+      [ngModel]="types"
+      (ngModelChange)="onSelectItemChange($event)"
+      nzPlaceHolder="Select an field item to add"
+    >
+      <nz-option
+        *ngFor="let item of types"
+        [nzLabel]="item.label" [nzValue]="item.id"
+      ></nz-option>
+    </nz-select>
+  </nz-form-control>
+</nz-form-item>
+
+<pre>
+  {{ fieldItem |json }}
+</pre>
+
+<form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+
+</form>
