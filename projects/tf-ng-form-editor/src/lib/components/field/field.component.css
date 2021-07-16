@@ -6,3 +6,22 @@
   flex-direction: column;
   /* padding:1rem; */
 }
+
+
+
+.custom-node-header{
+  display: flex;
+  width: 100%;
+  /* position: absolute; */
+}
+.custom-node-header .text{
+  flex: 1 0 0%;
+}
+
+
+.header-button-container{
+  height: 30px;
+}
+.header-button-container button{
+  margin: 0 3px;
+}

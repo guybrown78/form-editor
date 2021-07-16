@@ -14,9 +14,12 @@ import { FormMetaModel } from './to-share/form-meta-model.interface';
 export interface FormTreeModel {
   title:string
   key:string
+  parentKey?:string
   selected?:boolean
   children?:FormTreeModel[]
   expanded?:boolean
+  isLeaf?:boolean
+
 }
 export interface SaveFormModel {
   type:SaveTypeEnum
@@ -84,15 +87,10 @@ export class TfNgFormEditorService {
 
   addFormItemToFieldGroup(parentItem:FieldItemModel, item:FieldItemModel, ordinum:number | null = null){
 
-    console.log(parentItem)
     if(!parentItem.fieldGroup){
       parentItem.fieldGroup = [];
     }
     parentItem.fieldGroup.push(item);
-
-    //
-
-    // console.log(parentItem)
 
     this.form.pipe(take(1)).subscribe(form => {
       // create tempory form data from existing
@@ -101,9 +99,7 @@ export class TfNgFormEditorService {
       const index = updatedForm.schema.findIndex(i => i.uuid === parentItem.uuid)
       updatedForm.schema[index] = parentItem;
       this._form.next(updatedForm);
-
       //this.setSelectedTreeKey(item.uuid);
-
 
     })
   }
@@ -119,6 +115,7 @@ export class TfNgFormEditorService {
       this._form.next(updatedForm);
     })
   }
+
 
   deleteFormItem(key:string){
     this.form.pipe(take(1)).subscribe(form => {
@@ -214,8 +211,19 @@ export class TfNgFormEditorService {
 		}))
 	}
 
+  getTreeItemFromKey(key:string){
+		return this._formTree.asObservable().pipe(map(tree => {
+			if(tree){
+				return this.findTreeItemFromKey(tree, key)
+			} else{
+				return null;
+			}
+		}))
+	}
+
   // RECURSIVE
 
+  // loop through a fieldItemModel fieldGroups
   findFieldItemFromTreeKey(list:FieldItemModel[], key:string):FieldItemModel{
     if (list) {
       for (let i = 0; i < list.length; i++) {
@@ -223,6 +231,20 @@ export class TfNgFormEditorService {
           return list[i];
         }
         let found = this.findFieldItemFromTreeKey(list[i].fieldGroup, key);
+        if (found) return found;
+      }
+    }
+  }
+
+
+  // loop thought the treeModels children
+  findTreeItemFromKey(list:FormTreeModel[], key:string):FormTreeModel{
+    if (list) {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].key == key) {
+          return list[i];
+        }
+        let found = this.findTreeItemFromKey(list[i].children, key);
         if (found) return found;
       }
     }
@@ -333,23 +355,30 @@ export class TfNgFormEditorService {
   parseFormToTree(schema:FieldItemModel[], currentSelectedKey:string):Observable<FormTreeModel[]>{
     let tree:FormTreeModel[];
     tree = schema.map(f => {
-      return this.parseItemToLeaf(f, currentSelectedKey);
+      return this.parseItemToLeaf(f, currentSelectedKey, null);
     })
     return of(tree);
   }
 
-  parseItemToLeaf(item:FieldItemModel, currentSelectedKey:string):FormTreeModel{
+  parseItemToLeaf(item:FieldItemModel, currentSelectedKey:string, parentKey:string):FormTreeModel{
     if(!item.uuid){
       item.uuid = uuidv4();
     }
     let leaf:FormTreeModel = {
       key:item.uuid,
       title:item.label,
+      parentKey,
       selected:item.uuid === currentSelectedKey,
+      expanded:item.uuid === currentSelectedKey,
     }
+    this.formEditorConfig.getSelectableItemFromType(item.type).pipe(take(1)).subscribe(configItem => {
+      leaf.isLeaf = !configItem.editableConfig.hasFieldGroup;
+    })
     if(item.fieldGroup){
-      const children:FormTreeModel[] = item.fieldGroup.map(f => this.parseItemToLeaf(f, currentSelectedKey));
-      leaf.expanded = children.filter(c => c.selected).length >= 1;
+      const children:FormTreeModel[] = item.fieldGroup.map(f => this.parseItemToLeaf(f, currentSelectedKey, item.uuid));
+      if(!leaf.expanded){
+        leaf.expanded = children.filter(c => c.selected).length >= 1;
+      }
       leaf.children = children;
     }
     return leaf

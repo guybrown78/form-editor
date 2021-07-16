@@ -16,18 +16,34 @@ export class FieldGroupComponent implements OnInit {
   @Output('selectedField') selectedField = new EventEmitter<SelectableFieldItemModel>()
 
   private _selectableItem:SelectableFieldItemModel
-  @Input('selectableItem') set selectableItem(model:SelectableFieldItemModel){
+  set selectableItem(model:SelectableFieldItemModel){
     this._selectableItem = model;
   }
   get selectableItem():SelectableFieldItemModel{
     return this._selectableItem;
   }
 
-  @Input('fieldItem') fieldItem:FieldItemModel
+  // @Input('fieldItem') fieldItem:FieldItemModel
+  private _fieldItem:FieldItemModel
+  @Input('fieldItem') set fieldItem(item:FieldItemModel){
+    this.formReady = false;
+    // get selectable item
+    this.formEditorConfig.getSelectableItemFromType(item.type).pipe(take(1)).subscribe(selectableItem => {
+      if(selectableItem){
+        this.selectableItem = selectableItem;
+        this._fieldItem = item;
+        // this.initForm();
+      }
+    })
+  }
+  get fieldItem():FieldItemModel{
+    return this._fieldItem
+  }
 
 
   form: FormGroup;
   types: SelectableFieldItemModel[];
+  formReady:boolean = false;
 
   constructor(
     private fb:FormBuilder,

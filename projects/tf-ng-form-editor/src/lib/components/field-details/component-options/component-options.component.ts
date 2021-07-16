@@ -35,7 +35,6 @@ export class ComponentOptionsComponent implements OnInit {
       }
     })
   }
-
   get fieldItem():FieldItemModel{
     return this._fieldItem
   }

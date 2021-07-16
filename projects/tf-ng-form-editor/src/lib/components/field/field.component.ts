@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/f
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { FormEditorConfigService, SelectableFieldItemModel, SelectableCategory } from '../../form-editor-config.service';
-import { TfNgFormEditorService } from '../../tf-ng-form-editor.service';
+import { FormTreeModel, OrdinalDirectionEnum, TfNgFormEditorService } from '../../tf-ng-form-editor.service';
 import { FieldItemModel } from '../../to-share/field-item-model.interface';
 import { FieldItemComponentOptionsModel, OptionModel } from '../../to-share/field-item-component-options-model.interface';
 
@@ -19,6 +19,8 @@ export class FieldComponent implements OnInit {
   selectableItem:SelectableFieldItemModel
 
   form: FormGroup;
+  treeItem:FormTreeModel
+
   constructor(
     private formEditorService:TfNgFormEditorService,
     private formEditorConfig:FormEditorConfigService,
@@ -44,18 +46,27 @@ export class FieldComponent implements OnInit {
             if(item){
 
 
-                this.fieldItem = item;
+              this.fieldItem = item;
+
+              this.formEditorService.getTreeItemFromKey(item.uuid).pipe(take(1)).subscribe(treeItem => {
+                if(treeItem){
+
+                  this.treeItem = treeItem;
+
+                  // when item has been inited get config data...
+                  this.formEditorConfig.getSelectableItemFromType(item.type).subscribe(selectableItem => {
+                    if(selectableItem){
+                      this.selectableItem = selectableItem;
+                      this.initForm();
+                    }else{
+                      this.selectableItem = null;
+                    }
+                  })
 
 
-              // when item has been inited get config data...
-              this.formEditorConfig.getSelectableItemFromType(item.type).subscribe(selectableItem => {
-                  if(selectableItem){
-                    this.selectableItem = selectableItem;
-                    this.initForm();
-                  }else{
-                    this.selectableItem = null;
-                  }
-                })
+                }
+              })
+
 
             }else{
               this.fieldItem = null;
@@ -120,6 +131,35 @@ export class FieldComponent implements OnInit {
     const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
     this.formEditorService.addFormItemToFieldGroup(this.fieldItem, formFieldItem);
   }
+
+
+
+  stopButtonEvent(event){
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  onOrderUp(event){
+    this.stopButtonEvent(event);
+    this.formEditorService.updateFormItemOrdinal(this.fieldItem.uuid, OrdinalDirectionEnum.UP);
+  }
+  onOrderDown(event){
+    this.stopButtonEvent(event);
+    this.formEditorService.updateFormItemOrdinal(this.fieldItem.uuid, OrdinalDirectionEnum.DOWN);
+  }
+  onDuplicate(event){
+    this.stopButtonEvent(event);
+    this.formEditorService.duplicateFormItem(this.fieldItem.uuid);
+  }
+  onUser(event){
+    this.stopButtonEvent(event);
+  }
+  onDelete(event){
+    this.stopButtonEvent(event);
+    this.formEditorService.deleteFormItem(this.fieldItem.uuid);
+  }
+
+
 
   destroy(){
     this.selectedKeySubscription.unsubscribe

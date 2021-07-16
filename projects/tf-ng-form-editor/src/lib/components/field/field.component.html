@@ -11,9 +11,65 @@
   <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
 
     <tf-ng-form-title class="title">
-      <h4 class="blue">
+      <!-- <h4 class="blue">
         {{ fieldItem?.label }}
-      </h4>
+      </h4> -->
+
+
+      <div class="custom-node-header">
+        <div class="header-button-container bg-navy">
+          <button
+            (click)="onOrderUp($event)"
+            nz-button nzShape="square"
+            nzSize="extra-small"
+            class="grey"
+            [disabled]="treeItem.parentKey"
+          >
+            <i nz-icon nzType="arrow-up" nzTheme="outline"></i>
+          </button>
+          <button
+            (click)="onOrderDown($event)"
+            nz-button nzShape="square"
+            nzSize="extra-small"
+            class="grey"
+            [disabled]="treeItem.parentKey"
+          >
+            <i nz-icon nzType="arrow-down" nzTheme="outline"></i>
+          </button>
+        </div>
+        <h4 class="text text-center blue">
+          {{ fieldItem?.label }}
+        </h4>
+        <div class="header-button-container bg-navy">
+          <button
+            (click)="onUser($event)"
+            nz-button nzShape="square"
+            nzSize="extra-small"
+            class="grey"
+          >
+            <i nz-icon nzType="user" nzTheme="outline"></i>
+          </button>
+          <button
+            (click)="onDuplicate($event)"
+            nz-button nzShape="square"
+            nzSize="extra-small"
+            class="grey"
+            [disabled]="treeItem.parentKey"
+          >
+            <i nz-icon nzType="copy" nzTheme="outline"></i>
+          </button>
+          <button
+            (click)="onDelete($event)"
+            nz-button nzShape="square"
+            nzSize="extra-small"
+            class="grey"
+            [disabled]="treeItem.parentKey"
+          >
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </button>
+        </div>
+      </div>
+
     </tf-ng-form-title>
 
     <nz-form-item *ngIf="selectableItem?.editableConfig.setLabel">
@@ -51,21 +107,20 @@
 
   <div *ngIf="selectableItem.editableConfig.hasFieldGroup">
     <form-item-field-group
-      [selectableItem]="selectableItem"
       [fieldItem]="fieldItem"
       (updated)="onComponentOptionsUpdated($event)"
       (selectedField)="addFieldGroupItem($event)"
     ></form-item-field-group>
   </div>
 
-  <div>
+  <!-- <div>
     {{ selectableItem.editableConfig.type }}
     {{ selectableItem.editableConfig.id }}
-  </div>
+  </div> -->
 
-  <pre>
+  <!-- <pre>
     {{ fieldItem |json }}
-  </pre>
+  </pre> -->
 
 </div>
 

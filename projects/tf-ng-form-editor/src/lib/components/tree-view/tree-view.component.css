@@ -1,3 +1,17 @@
 :host {
   display: block;
 }
+
+
+.custom-node {
+  cursor: pointer;
+  line-height: 24px;
+  margin-left: 4px;
+  display: inline-flex;
+  width: 100%;
+}
+
+.file-name,
+.folder-name {
+  margin-left: 4px;
+}
