@@ -51,6 +51,7 @@ export class FieldComponent implements OnInit {
               this.formEditorService.getTreeItemFromKey(item.uuid).pipe(take(1)).subscribe(treeItem => {
                 if(treeItem){
 
+
                   this.treeItem = treeItem;
 
                   // when item has been inited get config data...
@@ -141,22 +142,22 @@ export class FieldComponent implements OnInit {
 
   onOrderUp(event){
     this.stopButtonEvent(event);
-    this.formEditorService.updateFormItemOrdinal(this.fieldItem.uuid, OrdinalDirectionEnum.UP);
+    this.formEditorService.updateFormItemOrdinal(this.fieldItem.uuid, OrdinalDirectionEnum.UP, this.treeItem.parentKey);
   }
   onOrderDown(event){
     this.stopButtonEvent(event);
-    this.formEditorService.updateFormItemOrdinal(this.fieldItem.uuid, OrdinalDirectionEnum.DOWN);
+    this.formEditorService.updateFormItemOrdinal(this.fieldItem.uuid, OrdinalDirectionEnum.DOWN, this.treeItem.parentKey);
   }
   onDuplicate(event){
     this.stopButtonEvent(event);
-    this.formEditorService.duplicateFormItem(this.fieldItem.uuid);
+    this.formEditorService.duplicateFormItem(this.fieldItem.uuid, this.treeItem.parentKey)
   }
   onUser(event){
     this.stopButtonEvent(event);
   }
   onDelete(event){
     this.stopButtonEvent(event);
-    this.formEditorService.deleteFormItem(this.fieldItem.uuid);
+    this.formEditorService.deleteFormItem(this.fieldItem.uuid, this.treeItem.parentKey);
   }
 
 

@@ -117,59 +117,75 @@ export class TfNgFormEditorService {
   }
 
 
-  deleteFormItem(key:string){
+  deleteFormItem(key:string, parentKey:string = null){
     this.form.pipe(take(1)).subscribe(form => {
       // create tempFormData from existing
       const updatedForm:FormModel = { ...form }
+
+
+      // // get parent FieldItem fields
+      const parentItemFields:FieldItemModel[] = parentKey ? this.findFieldItemFromTreeKey(updatedForm.schema, parentKey).fieldGroup : updatedForm.schema;
+
+
       // find index
-      const index = updatedForm.schema.findIndex(i => i.uuid === key)
+      const index = parentItemFields.findIndex(i => i.uuid === key)
+
       // remove item from tempFormData
-      updatedForm.schema.splice(index, 1);
+      parentItemFields.splice(index, 1);
+
       // check current selectedTreeKey
       this.selectedTreeKey.pipe(take(1)).subscribe(currKey => {
         // if it matches the passed key, nullify
         if(currKey === key){
-          this.nullifySelectedTreeKey()
+          // this.nullifySelectedTreeKey()
+          this._selectedTreeKey.next(parentKey)
         }
         // set tempFormData to live
         this._form.next(updatedForm);
       })
     })
-
-    // this.getFieldItemFromTreeKey(key).pipe(take(1)).subscribe(item => {
-    //   if(item){
-    //     console.log(item)
-    //     // find index
-    //     const index = updatedForm.schema.findIndex(i => i.uuid === item.uuid)
-    //   }
-    // }, err => {
-    //   console.log(err);
-    //   // TODO - handle/display error
-    //   console.log("TODO couldn't delete")
-    // })
   }
 
-  duplicateFormItem(key:string){
+
+
+  duplicateFormItem(key:string, parentKey:string = null){
     this.form.pipe(take(1)).subscribe(form => {
       // create tempFormData from existing
       const updatedForm:FormModel = { ...form }
-      // find index
-      const index = updatedForm.schema.findIndex(i => i.uuid === key)
+
+      // get parent FieldItem=
+      const parentItem:FieldItemModel = parentKey ? this.findFieldItemFromTreeKey(updatedForm.schema, parentKey) : {};
+
+      // get a list of the current fields
+      const currFields:FieldItemModel[] = parentKey ? parentItem.fieldGroup : updatedForm.schema;
+
+      // find index of the item we are duplicating
+      const index = currFields.findIndex(i => i.uuid === key)
+
       // duplicate the item
-      const currItem:FieldItemModel = updatedForm.schema[index]
+      const currItem:FieldItemModel = { ...currFields[index]}
       const uuid:string = uuidv4();
       const newItem:FieldItemModel = {
         ...currItem,
         key:uuid,
         uuid
       }
-      //
-      const first:FieldItemModel[] = updatedForm.schema.slice(0, index + 1)
-      first.push(newItem)
-      // place newItem into schema, directly after the original item
-      const schema:FieldItemModel[] = first.concat(updatedForm.schema.slice(index + 1, updatedForm.schema.length));
-      //
-      updatedForm.schema = schema;
+
+      // add the new item back into the a list
+      let fields:FieldItemModel[] = currFields.reduce((res, current, i) => {
+        if(i === index){
+          return res.concat([current, newItem])
+        }
+        return res.concat([current]);
+      }, []);
+
+      // replace the current fields list with the new one
+      if(parentKey){
+        parentItem.fieldGroup = [ ...fields];
+      }else{
+        updatedForm.schema = [ ...fields];
+      }
+
       // set tempFormData to live
       this._form.next(updatedForm);
       // set the selectedTreeKey
@@ -177,24 +193,28 @@ export class TfNgFormEditorService {
     })
   }
 
-  updateFormItemOrdinal(key:string, direction:OrdinalDirectionEnum, increment:number = 1){
+  updateFormItemOrdinal(key:string, direction:OrdinalDirectionEnum, parentKey:string = null, increment:number = 1){
     this.form.pipe(take(1)).subscribe(form => {
       // create tempFormData from existing
       const updatedForm:FormModel = { ...form }
-      const maxIndex:number = updatedForm.schema.length - 1;
+
+      // get parent FieldItem fields
+      const parentItemFields:FieldItemModel[] = parentKey ? this.findFieldItemFromTreeKey(updatedForm.schema, parentKey).fieldGroup : updatedForm.schema;
+
+      const maxIndex:number = parentItemFields.length - 1;
       // find index
-      const index = updatedForm.schema.findIndex(i => i.uuid === key)
+      const index = parentItemFields.findIndex(i => i.uuid === key)
       //
       if(direction === OrdinalDirectionEnum.UP ? index > 0 : index < maxIndex){
         // get the swapped index depending on the direction
         const swappedIndex = direction === OrdinalDirectionEnum.UP ? index - increment : index + increment;
         // get an instance of the item
-        const item:FieldItemModel = updatedForm.schema[index]
+        const item:FieldItemModel = parentItemFields[index]
         // get an instance of the item to be swapped
-        const swappedItem:FieldItemModel = updatedForm.schema[swappedIndex]
+        const swappedItem:FieldItemModel = parentItemFields[swappedIndex]
         // swap
-        updatedForm.schema[index] = swappedItem;
-        updatedForm.schema[swappedIndex] = item;
+        parentItemFields[index] = swappedItem;
+        parentItemFields[swappedIndex] = item;
         // set tempFormData to live
         this._form.next(updatedForm);
       }
