@@ -1,0 +1,104 @@
+
+<div *ngIf="formReady">
+  <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+    <div class="form-grid">
+      <div nz-row class="grid-header-row" nzGutter="16">
+        <div
+          *ngFor="let col of columnDefs; let i = index;"
+          nz-col [nzSpan]="getColSpan(col, i)"
+          class="grid-header-cell bg-grey-50"
+          [ngClass]="'row-' + i"
+        >
+
+          <div
+            class="form-item-wrapper"
+            [formGroup]="form.get('columnDefs')['controls'][i]"
+          >
+            <nz-form-item>
+              <nz-form-control>
+                <input nz-input placeholder="Header" formControlName="headerName"/>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control>
+                <input nz-input placeholder="Identifier" formControlName="field"/>
+              </nz-form-control>
+            </nz-form-item>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+
+  <form
+    *ngIf="columnDefs.length"
+    nz-form [formGroup]="rowForm" nzLayout="vertical" class="width-all"
+  >
+
+    <nz-form-control>
+      <nz-form-label>Grid Rows</nz-form-label>
+    </nz-form-control>
+
+
+    <nz-form-item
+      *ngFor="let row of rowForm['controls']; let i = index"
+      [formGroup]="row"
+      class="grid-row-form-item bg-grey-50"
+    >
+
+      <div
+        nz-row
+        nzJustify="space-between" nzAlign="middle"
+        class="option-label-wrapper"
+      >
+
+        <div nz-col nzFlex="auto" class="row-key-input-wrapper">
+          <input nz-input formControlName="key" placeholder="Key / Row Identifiew"/>
+        </div>
+
+        <!-- <div nz-col> -->
+          <button nz-button nzShape="square" (click)="removeRow(i)" >
+            <i nz-icon nzType="close" nzTheme="outline"></i>
+          </button>
+        <!-- </div> -->
+
+      </div>
+
+      <div nz-row class="grid-row" nzGutter="16">
+        <div
+          *ngFor="let col of columnDefs; let i = index;"
+          nz-col [nzSpan]="getColSpan(col, i)"
+          class="grid-row-cell bg-white"
+          [ngClass]="'row-' + i"
+        >
+          xx
+        </div>
+      </div>
+    </nz-form-item>
+
+    <form-editor-add-row>
+      <tf-ng-hexagon
+        colour="white"
+        outline-colour="blue"
+        size="xs"
+        (click)="addRow()"
+      >
+        <i nz-icon nzType="plus" nzTheme="outline" class="blue"></i>
+      </tf-ng-hexagon>
+    </form-editor-add-row>
+
+  </form>
+
+
+
+</div>
+
+
+
+
+

@@ -1,7 +1,17 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
-import { FormEditorConfigService, SelectableFieldItemModel } from '../../../form-editor-config.service';
-import { OptionModel, FieldItemComponentOptionsModel } from '../../../to-share/field-item-component-options-model.interface'
+import {
+  FormEditorConfigService,
+  SelectableFieldItemModel,
+  SelectableGridColumnDefinitions,
+  SelectableGridColumnWidths
+} from '../../../form-editor-config.service';
+import {
+  OptionModel,
+  FieldItemComponentOptionsModel,
+  FieldItemGridOptionsColumnDefsModel
+} from '../../../to-share/field-item-component-options-model.interface'
+
 import { FieldItemModel } from '../../../to-share/field-item-model.interface';
 import { FieldItemLayoutOption } from '../../../to-share/field-item-component-options-model.interface';
 import { take } from 'rxjs/operators';
@@ -42,11 +52,16 @@ export class ComponentOptionsComponent implements OnInit {
   form: FormGroup;
   optionsName: string;
   formReady:boolean = false;
+  columnDefinitions:SelectableGridColumnDefinitions[];
+  selectedColumnDefinition:SelectableGridColumnDefinitions;
+  selectedColumnLayout:number[] ;
 
   constructor(
     private fb:FormBuilder,
     private formEditorConfig:FormEditorConfigService
-  ) {}
+  ) {
+    this.columnDefinitions = formEditorConfig._columnDefinitions;
+  }
 
   ngOnInit() {
     // this.initForm();
@@ -54,6 +69,10 @@ export class ComponentOptionsComponent implements OnInit {
   }
 
   initForm(){
+    //
+    if(this.selectableItem.editableConfig.hasGridOptions){
+      this.initialiseColumnDefinitions();
+    }
     //
     this.form = this.fb.group({});
     // hasLayoutOptions
@@ -70,8 +89,12 @@ export class ComponentOptionsComponent implements OnInit {
         new FormControl(this.getComponentOptionData('showBlocks', this.optionsName), [])
       );
     }
+    // hasColumn
     this.onChanges();
-    this.formReady = true;
+    // setTimeout(() => {
+      this.formReady = true;
+    // }, 0);
+
   }
 
   onChanges(): void {
@@ -95,4 +118,65 @@ export class ComponentOptionsComponent implements OnInit {
     return !this.fieldItem.componentOptions ? null : optionsName ? this.fieldItem.componentOptions[optionsName][key] : this.fieldItem.componentOptions[key];
   }
 
+  initialiseColumnDefinitions(){
+    if(this.selectedColumnLayout){
+      return
+    }
+    const columnDefs:FieldItemGridOptionsColumnDefsModel[] = this.getComponentOptionData('columnDefs', this.optionsName);
+    if(columnDefs){
+      const col:SelectableGridColumnDefinitions = this.columnDefinitions.filter(i => i.column === columnDefs.length)[0]
+      this.selectedColumnDefinition = col;
+
+      // TODO - the selectedColumnLayout = the correct value but somehow doesn't redraw. Maybe set the radio item into its own sub component and that has it's own lifecycle... or do a changeDetection hangeDetection: ChangeDetectionStrategy.OnPush similar to the form preview date-field ???????
+      //
+      setTimeout(() => {
+        this.selectedColumnLayout = [ ...columnDefs.map(curr => {
+          return curr.width;
+        })];
+      }, 50)
+
+    }
+
+  }
+
+  onColumnDefinitionChange(columnDefinition:SelectableGridColumnDefinitions){
+
+    this.selectedColumnDefinition = columnDefinition; //this.columnDefinitions.filter(i => i.column === columnCount)[0];
+    this.onColumnLayoutChange(this.selectedColumnDefinition.columnWidths.filter(w => w.default)[0].widths)
+  }
+
+  onColumnLayoutChange(columnWidths:number[]){
+    this.selectedColumnLayout = columnWidths;
+    //
+
+    const currentColumnDefs:FieldItemGridOptionsColumnDefsModel[] = this.getComponentOptionData('columnDefs', this.optionsName);
+
+
+    // let columnDefs:FieldItemGridOptionsColumnDefsModel[] =
+    //   currentColumnDefs
+    //     ? currentColumnDefs.map((c,i) => { return {...c, width:columnWidths[i] }})
+    //     : columnWidths.map(w => {
+    //   return { width:w }
+    // })
+
+    let columnDefs:FieldItemGridOptionsColumnDefsModel[] = columnWidths.map((w,i) => {
+      const existing:FieldItemGridOptionsColumnDefsModel = !currentColumnDefs ? {} : currentColumnDefs[i] || {};
+      return{
+        ...existing,
+        width:w
+      }
+    })
+    let model = {}
+    if(this.optionsName){
+      model[this.optionsName] = {
+        columnCount:this.selectedColumnLayout.length,
+        columnWidths:this.selectedColumnLayout,
+        columnDefs
+      };
+    }
+    else{
+      model = { ...columnDefs }
+    }
+    this.updated.emit(model)
+  }
 }

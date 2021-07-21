@@ -101,13 +101,25 @@
     ></form-editor-field-item-options>
   </div>
 
+  <!-- (updated)="onComponentOptionsUpdated($event)" -->
   <div *ngIf="selectableItem.editableConfig.hasFieldGroup">
     <form-item-field-group
       [fieldItem]="fieldItem"
-      (updated)="onComponentOptionsUpdated($event)"
       (selectedField)="addFieldGroupItem($event)"
     ></form-item-field-group>
   </div>
+
+
+  <div *ngIf="selectableItem.editableConfig.hasGridOptions">
+    <form-item-grid
+      (updated)="onGridOptionsUpdated($event)"
+      (updatedFieldGroup)="onFieldGroupUpdated($event)"
+      [fieldItem]="fieldItem"
+      (selectedField)="addFieldGridItem($event)"
+    >
+    </form-item-grid>
+  </div>
+
 
   <!-- <div>
     {{ selectableItem.editableConfig.type }}

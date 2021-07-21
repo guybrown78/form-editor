@@ -1,0 +1,60 @@
+:host {
+  display: block;
+}
+
+.form-grid{
+  margin-bottom: 10px;
+}
+
+.grid-header-row,
+.grid-row{
+  padding: 0 8px;
+  flex-wrap: nowrap;
+}
+.grid-row{
+  margin-top: 5px;
+}
+
+.grid-header-cell{
+  border-bottom: solid 1px #363154;
+  border-top: solid 1px #363154;
+  border-right: solid 1px #363154;
+  min-height: 125px;
+}
+
+.grid-header-cell.row-0 {
+  border-left: solid 1px #363154;
+}
+
+
+.grid-row-cell{
+  border-bottom: solid 1px #d2d7de;
+  border-top: solid 1px #d2d7de;
+  border-right: solid 1px #d2d7de;
+  min-height: 35px;
+}
+.grid-row-cell.row-0 {
+  border-left: solid 1px #d2d7de;
+}
+
+.grid-content-row{
+  min-height: 15px;
+}
+.form-item-wrapper{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: calc(100% - 16px);
+  padding-top: 10px;
+}
+.form-item-wrapper .grid-cell-form-control{
+  /* position: absolute; */
+}
+
+.grid-row-form-item{
+  padding:8px;
+}
+.row-key-input-wrapper{
+  margin-right: 10px;
+}
+

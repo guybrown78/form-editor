@@ -142,7 +142,10 @@ export class FieldDetailsComponent implements OnInit {
     if(!this.selectableItem){
       return show;
     }
-    if(this.selectableItem.editableConfig.hasLayoutOptions){
+    if(
+      this.selectableItem.editableConfig.hasLayoutOptions ||
+      this.selectableItem.editableConfig.hasGridOptions
+    ){
       show = true;
     }
     return show

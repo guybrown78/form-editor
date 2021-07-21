@@ -1,5 +1,58 @@
 <div *ngIf="formReady">
   <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+
+     <!-- GRID -->
+     <nz-form-item *ngIf="selectableItem?.editableConfig.hasGridOptions">
+      <nz-form-control>
+        <nz-form-label>
+          Select Grid Layout
+        </nz-form-label>
+        <nz-select
+          [(ngModel)]="selectedColumnDefinition"
+          [ngModelOptions]="{standalone: true}"
+          (ngModelChange)="onColumnDefinitionChange($event)"
+          nzPlaceHolder="Select the number of columns"
+        >
+          <nz-option
+            *ngFor="let item of columnDefinitions"
+            [nzLabel]="item.label" [nzValue]="item"
+          ></nz-option>
+        </nz-select>
+      </nz-form-control>
+
+      <div *ngIf="selectedColumnLayout && selectedColumnDefinition.columnWidths.length > 1">
+        <p ng-typography class="grid-width-desc grey">
+          Select the column widths layout:
+        </p>
+
+        <nz-radio-group
+          class="grid-width-selection-group"
+          [(ngModel)]="selectedColumnLayout"
+          [ngModelOptions]="{standalone: true}"
+          (ngModelChange)="onColumnLayoutChange($event)"
+        >
+          <!-- TODO - FIX STUPID BUG - ngModel is set on existing field models but doesn't show the selected value radio-button in the group -->
+          <label
+            *ngFor="let col of selectedColumnDefinition.columnWidths"
+            nz-radio [nzValue]="col.widths"
+            class="grid-label-wrapper"
+          >
+
+            <div class="grid-label">
+              <span class="label-text">{{ col.label }}</span>
+              <span nz-row class="grid-label-row">
+                <div *ngFor="let w of col.widths" nz-col [nzSpan]="w" class="grid-label-col bg-grey"></div>
+              </span>
+            </div>
+
+          </label>
+
+        </nz-radio-group>
+      </div>
+
+    </nz-form-item>
+
+
     <!-- LAYOUT -->
     <nz-form-item *ngIf="selectableItem?.editableConfig.hasLayoutOptions">
       <nz-form-control>

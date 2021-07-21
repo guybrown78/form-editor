@@ -1,3 +1,46 @@
 :host {
   display: block;
 }
+
+nz-radio-group.grid-width-selection-group{
+  width: 275px;
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-label,
+label.grid-label-wrapper{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width:100%;
+}
+label.grid-label-wrapper{
+  margin-top: 5px;
+  flex: 1 0 0%;
+}
+
+span.grid-label{
+  justify-content: space-between;
+  min-width:240px;
+}
+.label-text{
+  width:50px;
+}
+.grid-label-row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  min-width: 180px;
+  height: 100%;
+  margin-left: 10px;
+  flex: 1 0 0%;
+}
+.grid-label-col{
+  margin: 0 1px;
+  height: 15px;
+}
+p.grid-width-desc{
+  margin: 0.25rem 0;
+}

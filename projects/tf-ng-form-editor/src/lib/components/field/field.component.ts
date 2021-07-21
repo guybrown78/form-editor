@@ -5,7 +5,11 @@ import { take } from 'rxjs/operators';
 import { FormEditorConfigService, SelectableFieldItemModel, SelectableCategory } from '../../form-editor-config.service';
 import { FormTreeModel, OrdinalDirectionEnum, TfNgFormEditorService } from '../../tf-ng-form-editor.service';
 import { FieldItemModel } from '../../to-share/field-item-model.interface';
-import { FieldItemComponentOptionsModel, OptionModel } from '../../to-share/field-item-component-options-model.interface';
+import {
+  FieldItemComponentOptionsModel,
+  OptionModel,
+  FieldItemGridOptionsModel
+} from '../../to-share/field-item-component-options-model.interface';
 
 @Component({
   selector: 'form-editor-field',
@@ -111,16 +115,28 @@ export class FieldComponent implements OnInit {
 
   onChanges(): void {
     this.form.valueChanges.subscribe(val => {
-      this.fieldItem = { ...this.fieldItem, ...this.form.value}
+      this.fieldItem = {
+        ...this.fieldItem,
+        ...this.form.value
+      }
       this.formEditorService.updateFormItem(this.fieldItem)
     });
   }
 
+
   onOptionsUpdated(options:OptionModel[]){
-    const componentOptions:FieldItemComponentOptionsModel = {
+    this.updateComponentOptions({
       ...this.fieldItem.componentOptions,
       options
-    }
+    })
+  }
+  onGridOptionsUpdated(gridOptions:FieldItemGridOptionsModel){
+    this.updateComponentOptions({
+      ...this.fieldItem.componentOptions,
+      gridOptions
+    })
+  }
+  updateComponentOptions(componentOptions:FieldItemComponentOptionsModel){
     this.fieldItem = {
       ...this.fieldItem,
       componentOptions
@@ -128,12 +144,29 @@ export class FieldComponent implements OnInit {
     this.formEditorService.updateFormItem(this.fieldItem)
   }
 
+
   addFieldGroupItem(selectedField:SelectableFieldItemModel){
     const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
     this.formEditorService.addFormItemToFieldGroup(this.fieldItem, formFieldItem);
   }
 
+  addFieldGridItem(selectedField:SelectableFieldItemModel){
+    const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
+    // this.formEditorService.addFormItemToFieldGroup(this.fieldItem, formFieldItem);
+    console.log(formFieldItem)
+  }
 
+  onFieldGroupUpdated(fieldGroup:FieldItemModel[]){
+    console.log(fieldGroup)
+    this.fieldItem = {
+      ...this.fieldItem,
+      fieldGroup
+    }
+    console.log(this.fieldItem)
+    this.formEditorService.updateFormItem(this.fieldItem)
+  }
+  // onGridUpdated(options:OptionModel[]){
+  // }
 
   stopButtonEvent(event){
     event.preventDefault();

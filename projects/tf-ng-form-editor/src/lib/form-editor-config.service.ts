@@ -32,13 +32,25 @@ export interface SelectableFieldItemEditableConfigModel {
   hasFieldGroup?:boolean
   hasLayoutOptions?:boolean
   hasShowBlocks?:boolean
+  hasGridOptions?:boolean
 }
 export enum SelectableCategory {
   SIMPLE = "Simple",
   COMPLEX = "Complex",
-  LAYOUT = "Layout"
+  LAYOUT = "Layout",
+  HIDDEN = "Hidden"
 }
-
+export interface SelectableGridColumnDefinitions {
+  label:string;
+  id:string;
+  column:number;
+  columnWidths?:SelectableGridColumnWidths[];
+}
+export interface SelectableGridColumnWidths {
+  label:string;
+  widths:number[];
+  default?:boolean;
+}
 export enum EditableConfigType {
   GENERAL = 0,
   INPUT = 1,
@@ -48,7 +60,8 @@ export enum EditableConfigType {
   CHECKBOX_GROUP = 5,
   LAYOUT = 6,
   TEXT = 7,
-  NESTED = 8
+  NESTED = 8,
+  GRID = 9
 }
 
 @Injectable({
@@ -131,6 +144,21 @@ export class FormEditorConfigService {
       label:"Nested",
       category:SelectableCategory.COMPLEX,
       editableConfigType:EditableConfigType.NESTED
+    },
+    {
+      type:"grid",
+      id:"grid",
+      label:"Grid",
+      category:SelectableCategory.COMPLEX,
+      editableConfigType:EditableConfigType.GRID,
+      editableConfigOptionsName:"gridOptions"
+    },
+    {
+      type:"grid-row",
+      id:"grid-row",
+      label:null,
+      category:SelectableCategory.HIDDEN,
+      editableConfigType:EditableConfigType.GENERAL
     }
   ]
 
@@ -224,7 +252,94 @@ export class FormEditorConfigService {
       hasLayoutOptions:true,
       hasShowBlocks:true
     },
+    {
+      type:EditableConfigType.GRID,
+      id:"108",
+      setLabel:true,
+      setDesc:true,
+      setHelp:true,
+      hasGridOptions:true,
+    },
+    {
+      type:EditableConfigType.GENERAL,
+      id:"109"
+    },
   ]
+
+
+  readonly _columnDefinitions: SelectableGridColumnDefinitions[] = [
+    {
+      id:"oneCol",
+      label:"One Column",
+      column:1,
+      columnWidths:[
+        {
+          label:"24",
+          widths:[24],
+          default: true
+        }
+      ]
+    },
+    {
+      id:"twoCol",
+      label:"Two Columns",
+      column:2,
+      columnWidths:[
+        {
+          label:"16-8",
+          widths:[16,8],
+          default: true
+        },
+        {
+          label:"8-16",
+          widths:[8,16]
+        },
+        {
+          label:"12-12",
+          widths:[12,12]
+        }
+      ]
+    },
+    {
+      id:"threeCol",
+      label:"Three Columns",
+      column:3,
+      columnWidths:[
+        {
+          label:"12-6-6",
+          widths:[12,6,6],
+          default: true
+        },
+        {
+          label:"8-8-8",
+          widths:[8,8,8]
+        },
+        {
+          label:"10-10-4",
+          widths:[10,10,4]
+        }
+
+      ]
+    },
+    {
+      id:"fourCol",
+      label:"Four Columns",
+      column:4,
+      columnWidths:[
+        {
+          label:"9-5-5-5",
+          widths:[9,5,5,5],
+          default: true
+        },
+        {
+          label:"6-6-6-6",
+          widths:[6,6,6,6]
+        }
+      ]
+    }
+  ]
+
+
   private _selectableItems = new BehaviorSubject<SelectableFieldItemModel[]>(this._types);
   private _selectableItem = new Subject<SelectableFieldItemModel>()
 

@@ -11,6 +11,27 @@
   },
   "schema":[
     {
+      "label": "Grid",
+      "description":"Lorum ipsum solar dolar ....",
+      "type": "grid",
+      "componentOptions":{
+        "gridOptions":{
+          "columnDefs":[
+            {
+              "headerName":"Title",
+              "field": "title"
+            },
+            {
+              "field": "name"
+            },
+            {
+              "field": null
+            }
+          ]
+        }
+      }
+    },
+    {
       "label": "Name",
       "description":"Lorum ipsum solar dolar ....",
       "type": "input"

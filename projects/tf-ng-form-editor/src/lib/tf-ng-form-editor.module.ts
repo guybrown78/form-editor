@@ -29,6 +29,7 @@ import { SwitchWrapperComponent } from './components/switch-wrapper/switch-wrapp
 import { FieldGroupComponent } from './components/field-item/field-group/field-group.component';
 import { TreeDevComponent } from './components/tree-dev/tree-dev.component';
 import { FieldComponent } from './components/field/field.component';
+import { GridComponent } from './components/field-item/grid/grid.component';
 
 
 
@@ -53,6 +54,7 @@ import { FieldComponent } from './components/field/field.component';
     FieldGroupComponent,
     TreeDevComponent,
     FieldComponent,
+    GridComponent,
   ],
   imports: [
     CommonModule,
