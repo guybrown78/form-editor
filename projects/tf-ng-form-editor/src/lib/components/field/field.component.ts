@@ -153,16 +153,16 @@ export class FieldComponent implements OnInit {
   addFieldGridItem(selectedField:SelectableFieldItemModel){
     const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
     // this.formEditorService.addFormItemToFieldGroup(this.fieldItem, formFieldItem);
-    console.log(formFieldItem)
+    // console.log(formFieldItem)
   }
 
   onFieldGroupUpdated(fieldGroup:FieldItemModel[]){
-    console.log(fieldGroup)
     this.fieldItem = {
       ...this.fieldItem,
       fieldGroup
     }
-    console.log(this.fieldItem)
+    // console.log(this.fieldItem)
+
     this.formEditorService.updateFormItem(this.fieldItem)
   }
   // onGridUpdated(options:OptionModel[]){

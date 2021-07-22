@@ -46,7 +46,7 @@
 
 
     <nz-form-item
-      *ngFor="let row of rowForm['controls']; let i = index"
+      *ngFor="let row of rowForm['controls']; let rowIndex = index"
       [formGroup]="row"
       class="grid-row-form-item bg-grey-50"
     >
@@ -62,23 +62,35 @@
         </div>
 
         <!-- <div nz-col> -->
-          <button nz-button nzShape="square" (click)="removeRow(i)" >
+          <button nz-button nzShape="square" (click)="removeRow(rowIndex)" >
             <i nz-icon nzType="close" nzTheme="outline"></i>
           </button>
         <!-- </div> -->
 
       </div>
 
+
       <div nz-row class="grid-row" nzGutter="16">
         <div
-          *ngFor="let col of columnDefs; let i = index;"
-          nz-col [nzSpan]="getColSpan(col, i)"
+          formArrayName="fieldGroup"
+          *ngFor="let col of row.get('fieldGroup')['controls']; let colIndex = index;"
+          nz-col [nzSpan]="getColSpan(columnDefs[colIndex], colIndex)"
           class="grid-row-cell bg-white"
-          [ngClass]="'row-' + i"
+          [ngClass]="'row-' + colIndex"
         >
-          xx
+
+          <div  class="form-item-wrapper">
+            <!-- (fieldItem)="onRowCelFieldItem($event, rowIndex, colIndex)" -->
+            <form-item-grid-cell-formgroup
+              [formGroup]="col"
+            ></form-item-grid-cell-formgroup>
+          </div>
+
         </div>
+
       </div>
+
+
     </nz-form-item>
 
     <form-editor-add-row>

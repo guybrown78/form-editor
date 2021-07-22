@@ -30,6 +30,7 @@ import { FieldGroupComponent } from './components/field-item/field-group/field-g
 import { TreeDevComponent } from './components/tree-dev/tree-dev.component';
 import { FieldComponent } from './components/field/field.component';
 import { GridComponent } from './components/field-item/grid/grid.component';
+import { CellFormgroupComponent } from './components/field-item/grid/cell-formgroup/cell-formgroup.component';
 
 
 
@@ -55,6 +56,7 @@ import { GridComponent } from './components/field-item/grid/grid.component';
     TreeDevComponent,
     FieldComponent,
     GridComponent,
+    CellFormgroupComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,22 @@
+<nz-form-item [formGroup]="formGroup">
+
+
+  <nz-form-control *ngIf="toSelect">
+    <nz-select
+      [ngModel]="types"
+      [ngModelOptions]="{standalone: true}"
+      (ngModelChange)="onSelectItemChange($event)"
+      nzPlaceHolder="Select an field item"
+    >
+      <nz-option
+        *ngFor="let item of types"
+        [nzLabel]="item.label" [nzValue]="item.id"
+      ></nz-option>
+    </nz-select>
+  </nz-form-control>
+
+  <nz-form-control *ngIf="!toSelect">
+    {{ formGroup.controls['type'].value }}
+  </nz-form-control>
+
+</nz-form-item>

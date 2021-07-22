@@ -393,7 +393,9 @@ export class TfNgFormEditorService {
       expanded:item.uuid === currentSelectedKey,
     }
     this.formEditorConfig.getSelectableItemFromType(item.type).pipe(take(1)).subscribe(configItem => {
-      leaf.isLeaf = !configItem.editableConfig.hasFieldGroup;
+      if(configItem){
+        leaf.isLeaf = !configItem.editableConfig.hasFieldGroup;
+      }
     })
     if(item.fieldGroup){
       const children:FormTreeModel[] = item.fieldGroup.map(f => this.parseItemToLeaf(f, currentSelectedKey, item.uuid));
