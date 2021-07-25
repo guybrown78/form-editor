@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+.row-key-input-wrapper{
+  margin-right: 10px;
+}
+.label-button-wrapper{
+  flex-wrap: nowrap;
+}

@@ -1,0 +1,50 @@
+<form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+
+  <div class="grid-row-form-item bg-grey-50">
+
+
+    <div
+      nz-row
+      nzJustify="space-between" nzAlign="middle"
+      class="option-label-wrapper"
+    >
+
+      <div nz-col nzFlex="auto" class="row-key-input-wrapper">
+        <input nz-input formControlName="key" placeholder="Key / Row Identifiew"/>
+      </div>
+
+      <button nz-button nzShape="square" (click)="removeRow()" >
+        <i nz-icon nzType="close" nzTheme="outline"></i>
+      </button>
+
+    </div>
+
+
+    <div nz-row class="grid-row" nzGutter="16">
+      <div
+        *ngFor="let col of columnDefs; let colIndex = index;"
+        nz-col [nzSpan]="getColSpan(columnDefs[colIndex], colIndex)"
+        class="grid-row-cell bg-white"
+        [ngClass]="'row-' + colIndex"
+      >
+
+        <div  class="form-item-wrapper">
+          <!-- (fieldItem)="onRowCelFieldItem($event, rowIndex, colIndex)" -->
+          <!-- <form-item-grid-cell-formgroup
+            [formGroup]="col"
+          ></form-item-grid-cell-formgroup> -->
+          <form-grid-cell
+            [parentFieldItem]="fieldItem"
+            [parentKey]="parentKey"
+            [index]="colIndex"
+            [columnDef]="columnDefs[colIndex]"
+            [fieldItem]="getCellFieldItem(colIndex)"
+          >
+          </form-grid-cell>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</form>

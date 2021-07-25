@@ -1,0 +1,70 @@
+
+<nz-form-item [formGroup]="form">
+
+
+  <nz-form-control *ngIf="toSelect">
+    <nz-select
+      [ngModel]="types"
+      [ngModelOptions]="{standalone: true}"
+      (ngModelChange)="onSelectItemChange($event)"
+      nzPlaceHolder="Select an field item"
+    >
+      <nz-option
+        *ngFor="let item of types"
+        [nzLabel]="item.label" [nzValue]="item.id"
+      ></nz-option>
+    </nz-select>
+  </nz-form-control>
+
+  <nz-form-control *ngIf="!toSelect">
+
+
+    <div
+      nz-row
+      nzJustify="space-between" nzAlign="middle"
+      class="label-button-wrapper"
+    >
+
+      <div nz-col nzFlex="auto" class="row-key-input-wrapper">
+        {{ form.controls['type'].value }}
+      </div>
+
+      <button nz-button nzShape="square" class="grey" (click)="onCellFieldEdit()">
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+      </button>
+
+    </div>
+  </nz-form-control>
+
+</nz-form-item>
+
+
+
+ <!-- <div *ngIf="toSelect">
+  <nz-select
+    [ngModel]="types"
+    [ngModelOptions]="{standalone: true}"
+    (ngModelChange)="onSelectItemChange($event)"
+    nzPlaceHolder="Select an field item"
+  >
+    <nz-option
+      *ngFor="let item of types"
+      [nzLabel]="item.label" [nzValue]="item.id"
+    ></nz-option>
+  </nz-select>
+</div> -->
+
+<!-- <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all"> -->
+
+<!-- <nz-form-item [formGroup]="form">
+
+
+  <nz-form-control *ngIf="!toSelect">
+    {{ formGroup.controls['type'].value }}
+  </nz-form-control>
+
+</nz-form-item> -->
+
+
+<!-- </form> -->
+

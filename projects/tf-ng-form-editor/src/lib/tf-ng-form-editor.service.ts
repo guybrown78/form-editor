@@ -90,7 +90,12 @@ export class TfNgFormEditorService {
     if(!parentItem.fieldGroup){
       parentItem.fieldGroup = [];
     }
-    parentItem.fieldGroup.push(item);
+    if(!ordinum){
+      parentItem.fieldGroup.push(item);
+    }else{
+      parentItem.fieldGroup[ordinum] = item
+    }
+
 
     this.form.pipe(take(1)).subscribe(form => {
       // create tempory form data from existing

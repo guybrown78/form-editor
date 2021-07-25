@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  margin-bottom: 10px;
+}
+.grid-row-form-item{
+  padding:8px;
+  /* width: 100%!important; */
+}
+.row-key-input-wrapper{
+  margin-right: 10px;
+}
+
+.grid-row{
+  margin-top: 5px;
+  padding:0 8px;
+}
+.grid-row-cell{
+  border-bottom: solid 1px #d2d7de;
+  border-top: solid 1px #d2d7de;
+  border-right: solid 1px #d2d7de;
+  min-height: 55px;
+}
+.grid-row-cell.row-0 {
+  border-left: solid 1px #d2d7de;
+}
+.form-item-wrapper{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: calc(100% - 16px);
+  padding-top: 10px;
+}

@@ -35,17 +35,26 @@
   </form>
 
 
-  <form
+  <!-- <form
     *ngIf="columnDefs.length"
     nz-form [formGroup]="rowForm" nzLayout="vertical" class="width-all"
-  >
-
-    <nz-form-control>
+  > -->
+  <div class="width-all ant-form">
+    <!-- <nz-form-control> -->
       <nz-form-label>Grid Rows</nz-form-label>
-    </nz-form-control>
+    <!-- </nz-form-control> -->
+  </div>
 
 
-    <nz-form-item
+  <form-grid-row
+    *ngFor="let row of fieldItem?.fieldGroup; let rowIdx = index"
+    [index]="rowIdx"
+    [columnDefs]="columnDefs"
+    [fieldItem]="fieldItem"
+    (updated)="onRowUpdated($event)"
+  ></form-grid-row>
+
+    <!-- <nz-form-item
       *ngFor="let row of rowForm['controls']; let rowIndex = index"
       [formGroup]="row"
       class="grid-row-form-item bg-grey-50"
@@ -61,11 +70,11 @@
           <input nz-input formControlName="key" placeholder="Key / Row Identifiew"/>
         </div>
 
-        <!-- <div nz-col> -->
+
           <button nz-button nzShape="square" (click)="removeRow(rowIndex)" >
             <i nz-icon nzType="close" nzTheme="outline"></i>
           </button>
-        <!-- </div> -->
+
 
       </div>
 
@@ -80,7 +89,7 @@
         >
 
           <div  class="form-item-wrapper">
-            <!-- (fieldItem)="onRowCelFieldItem($event, rowIndex, colIndex)" -->
+
             <form-item-grid-cell-formgroup
               [formGroup]="col"
             ></form-item-grid-cell-formgroup>
@@ -91,8 +100,8 @@
       </div>
 
 
-    </nz-form-item>
-
+    </nz-form-item> -->
+  <div class="width-all ant-form">
     <form-editor-add-row>
       <tf-ng-hexagon
         colour="white"
@@ -104,8 +113,8 @@
       </tf-ng-hexagon>
     </form-editor-add-row>
 
-  </form>
-
+  <!-- </form> -->
+  </div>
 
 
 </div>

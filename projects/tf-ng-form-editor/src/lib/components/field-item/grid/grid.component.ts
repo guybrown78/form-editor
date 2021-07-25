@@ -12,6 +12,7 @@ import {
   FieldItemGridOptionsModel
 } from '../../../to-share/field-item-component-options-model.interface';
 import { TfNgFormEditorService } from '../../../tf-ng-form-editor.service';
+import { RowUpdateModel } from './row/row.component';
 
 
 
@@ -51,8 +52,17 @@ export class GridComponent implements OnInit {
           this.selectableItem = selectableItem;
           this.columnDefs = item.componentOptions?.gridOptions?.columnDefs || [];
           this._fieldItem = item;
+
+          // TODO - put this somewhere nicer
+          // if(this.fieldItem.fieldGroup){
+          //   if(this.fieldItem.fieldGroup.length > this.columnDefs.length){
+          //     // remove the unwanted items
+          //     const unwanted =  this.fieldItem.fieldGroup.splice(this.columnDefs.length, this.fieldItem.fieldGroup.length);
+          //   }
+          // }
+
           this.initForm();
-          this.initRowForm();
+          // this.initRowForm();
           // set changes
           setTimeout(() => {
 
@@ -76,14 +86,14 @@ export class GridComponent implements OnInit {
 
 
   form: FormGroup;
-  rowForm:FormArray;
+  // rowForm:FormArray;
 
   columnDefs:FieldItemGridOptionsColumnDefsModel[];
   types: SelectableFieldItemModel[];
   formReady:boolean = false;
   colDefaultsSpans
 
-  wrappersFormArray:FormArray = new FormArray([]);
+  // wrappersFormArray:FormArray = new FormArray([]);
 
   constructor(
     private fb:FormBuilder,
@@ -91,9 +101,10 @@ export class GridComponent implements OnInit {
     private formEditorService:TfNgFormEditorService
   )
   {
+    // TODO - get this from the formPreviewLib
     this.colDefaultsSpans = formEditorConfig._columnDefinitions.map(c => c.columnWidths.filter(cw => cw.default)[0].widths
     )
-    this.wrappersFormArray.push(new FormControl(SelectableWrapper.GRID_CELL_FIELD));
+    // this.wrappersFormArray.push(new FormControl(SelectableWrapper.GRID_CELL_FIELD));
   }
 
   ngOnInit() {
@@ -124,19 +135,20 @@ export class GridComponent implements OnInit {
       columnWidths: this.fb.control(this.columnDefs.map(w => w.width)),
       columnDefs: this.fb.array([ ...defs ])
     });
+
     // console.log(this.form.value.columnDefs);
   }
 
-  initRowForm(){
-    // initialise a form for the rows (fieldGroup)
-    const rows = [];
-    if(this.fieldItem.fieldGroup){
-      this.fieldItem.fieldGroup.map((row, i) => {
-        rows.push(this.createGridFormRow(i, row));
-      })
-    }
-    this.rowForm = this.fb.array([ ...rows]);
-  }
+  // initRowForm(){
+  //   // initialise a form for the rows (fieldGroup)
+  //   const rows = [];
+  //   if(this.fieldItem.fieldGroup){
+  //     this.fieldItem.fieldGroup.map((row, i) => {
+  //       rows.push(this.createGridFormRow(i, row));
+  //     })
+  //   }
+  //   this.rowForm = this.fb.array([ ...rows]);
+  // }
 
   createColumnDefFormGroup(item, index){
     const fg:FormGroup = this.fb.group({
@@ -153,75 +165,84 @@ export class GridComponent implements OnInit {
       // this.initRowForm();
     });
 
-    this.rowForm.valueChanges.subscribe((val) => {
-      this.updatedFieldGroup.emit(this.rowForm.value)
-    });
+    // this.rowForm.valueChanges.subscribe((val) => {
+    //   this.updatedFieldGroup.emit(this.rowForm.value)
+    // });
 
   }
 
   addRow(){
-    const rows = this.rowForm as FormArray;
-
+    // const rows = this.rowForm as FormArray;
+    console.log("add")
     this.formEditorConfig.getSelectableItemFromType("grid-row").subscribe(
       selectable => {
         if(selectable){
           const row:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectable);
-          row.key = `row-${rows.length}`,
-          rows.push(this.createGridFormRow(rows.length, row));
+          row.key = `row-${this.fieldItem.fieldGroup?.length || 0}`;
+          // rows.push(this.createGridFormRow(rows.length, row));
+          this.formEditorService.addFormItemToFieldGroup(this.fieldItem, row);
         }
       }
     )
 
   }
 
-  removeRow(index:number){
-    const rows = this.rowForm as FormArray;
-    rows.removeAt(index);
-  }
-
-  createGridFormRow(index:number, model:FieldItemModel){
-    let cels = [];
-    //const existingFieldGroup:FieldItemModel[] = model.fieldGroup.splice(0, this.columnDefs.length - 1);
-    if(model.fieldGroup){
-
+  // removeRow(index:number){
+  //   const rows = this.rowForm as FormArray;
+  //   rows.removeAt(index);
+  //   // this.formEditorService.deleteFormItem(this.fieldItem.uuid)
+  // }
+  onRowUpdated(row:RowUpdateModel){
+    this.fieldItem.fieldGroup[row.index] = {
+      ...this.fieldItem.fieldGroup[row.index],
+      ...row.fieldItem
     }
-
-    //
-    this.columnDefs.map((item, i) => {
-
-      let fg:FormGroup = this.fb.group({})
-
-      if(model.fieldGroup){
-        if(model.fieldGroup.length > this.columnDefs.length){
-          // remove the unwanted items
-          const unwanted =  model.fieldGroup.splice(this.columnDefs.length, model.fieldGroup.length);
-        }
-        if(model.fieldGroup[i]){
-          fg.addControl('type', new FormControl(model.fieldGroup[i].type));
-          fg.addControl('key', new FormControl(model.fieldGroup[i].key));
-        }else{
-          fg.addControl('type', new FormControl(null));
-          fg.addControl('key', new FormControl(this.columnDefs[i].field));
-        }
-      }else{
-        fg.addControl('type', new FormControl(null));
-        fg.addControl('key', new FormControl(this.columnDefs[i].field));
-      }
-      // add the [grid-cell-field] wrappers as standard (won't render the grid in preview properly without!)
-      fg.addControl('wrappers', this.wrappersFormArray)
-      cels.push(fg)
-
-    })
-
-    const fg:FormGroup = this.fb.group({
-      type: model?.type,
-      key: model?.key,
-      fieldGroup:this.fb.array([ ...cels ])
-    });
-    return fg;
+    this.updatedFieldGroup.emit(this.fieldItem.fieldGroup);
   }
 
-  onRowCelFieldItem(fieldItem:FieldItemModel, rowIndex:number, colIndex:number){
+  // createGridFormRow(index:number, model:FieldItemModel){
+  //   let cels = [];
+  //   //const existingFieldGroup:FieldItemModel[] = model.fieldGroup.splice(0, this.columnDefs.length - 1);
+  //   if(model.fieldGroup){
+
+  //   }
+
+  //   //
+  //   this.columnDefs.map((item, i) => {
+
+  //     let fg:FormGroup = this.fb.group({})
+
+  //     if(model.fieldGroup){
+  //       if(model.fieldGroup.length > this.columnDefs.length){
+  //         // remove the unwanted items
+  //         const unwanted =  model.fieldGroup.splice(this.columnDefs.length, model.fieldGroup.length);
+  //       }
+  //       if(model.fieldGroup[i]){
+  //         fg.addControl('type', new FormControl(model.fieldGroup[i].type));
+  //         fg.addControl('key', new FormControl(model.fieldGroup[i].key));
+  //       }else{
+  //         fg.addControl('type', new FormControl(null));
+  //         fg.addControl('key', new FormControl(this.columnDefs[i].field));
+  //       }
+  //     }else{
+  //       fg.addControl('type', new FormControl(null));
+  //       fg.addControl('key', new FormControl(this.columnDefs[i].field));
+  //     }
+  //     // add the [grid-cell-field] wrappers as standard (won't render the grid in preview properly without!)
+  //     fg.addControl('wrappers', this.wrappersFormArray)
+  //     cels.push(fg)
+
+  //   })
+
+  //   const fg:FormGroup = this.fb.group({
+  //     type: model?.type,
+  //     key: model?.key,
+  //     fieldGroup:this.fb.array([ ...cels ])
+  //   });
+  //   return fg;
+  // }
+
+  // onRowCelFieldItem(fieldItem:FieldItemModel, rowIndex:number, colIndex:number){
     // console.log(fieldItem.type, rowIndex, colIndex)
     // console.log(fieldItem)
     // const rowFG:FormGroup = this.rowForm.at(rowIndex) as FormGroup
@@ -237,7 +258,11 @@ export class GridComponent implements OnInit {
     //   uuid:fieldItem.uuid
     // });
     // console.log(colFG.value)
-  }
+  // }
+
+
+
+  // TODO - get this from the formPreviewLib
   getColSpan(col: any, index:number){
     const total = this.columnDefs.length
     if(col.width){

@@ -16,16 +16,21 @@
       "type": "grid",
       "componentOptions":{
         "gridOptions":{
+          "columnCount":3,
+          "columnWidths":[12,6,6],
           "columnDefs":[
             {
               "headerName":"Title",
-              "field": "title"
+              "field": "title",
+              "width":12
             },
             {
-              "field": "name"
+              "field": "name",
+              "width":6
             },
             {
-              "field": null
+              "field": null,
+              "width":6
             }
           ]
         }
