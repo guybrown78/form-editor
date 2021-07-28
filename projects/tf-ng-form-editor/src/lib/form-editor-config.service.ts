@@ -159,7 +159,14 @@ export class FormEditorConfigService {
       label:null,
       category:SelectableCategory.HIDDEN,
       editableConfigType:EditableConfigType.GENERAL
-    }
+    },
+    {
+      type:"empty-grid-cell",
+      id:"empty",
+      label:null,
+      category:SelectableCategory.HIDDEN,
+      editableConfigType:EditableConfigType.GENERAL
+    },
   ]
 
   readonly _editableConfigs: SelectableFieldItemEditableConfigModel[] = [

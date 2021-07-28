@@ -39,7 +39,7 @@ export class CellComponent implements OnInit {
       if(selectableItem){
         this.selectableItem = selectableItem;
         //
-        this.toSelect = item.type ? false : true;
+        this.toSelect = item.type !== "empty-grid-cell" ? false : true;
         this._fieldItem = item;
         this.initForm();
         this.onChanges();

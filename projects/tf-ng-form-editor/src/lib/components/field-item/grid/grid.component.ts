@@ -53,11 +53,16 @@ export class GridComponent implements OnInit {
           this.columnDefs = item.componentOptions?.gridOptions?.columnDefs || [];
           this._fieldItem = item;
 
-          // TODO - put this somewhere nicer
+          //
+
+          // console.log("...going")
+          // // TODO - put this somewhere nicer
           // if(this.fieldItem.fieldGroup){
+          //   console.log(this.fieldItem.fieldGroup.length, this.columnDefs.length);
           //   if(this.fieldItem.fieldGroup.length > this.columnDefs.length){
-          //     // remove the unwanted items
-          //     const unwanted =  this.fieldItem.fieldGroup.splice(this.columnDefs.length, this.fieldItem.fieldGroup.length);
+          //     console.log('change');
+          // //     // remove the unwanted items
+          // //     const unwanted =  this.fieldItem.fieldGroup.splice(this.columnDefs.length, this.fieldItem.fieldGroup.length);
           //   }
           // }
 
@@ -173,14 +178,27 @@ export class GridComponent implements OnInit {
 
   addRow(){
     // const rows = this.rowForm as FormArray;
-    console.log("add")
     this.formEditorConfig.getSelectableItemFromType("grid-row").subscribe(
       selectable => {
         if(selectable){
           const row:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectable);
           row.key = `row-${this.fieldItem.fieldGroup?.length || 0}`;
-          // rows.push(this.createGridFormRow(rows.length, row));
-          this.formEditorService.addFormItemToFieldGroup(this.fieldItem, row);
+          //
+          row.fieldGroup = []
+
+          this.formEditorConfig.getSelectableItemFromType("empty-grid-cell").subscribe(emptyCel => {
+            let cel:FieldItemModel = this.formEditorService.getFieldItemFromSelection(emptyCel);
+            cel.label = "";
+            cel.wrappers = [SelectableWrapper.GRID_CELL_FIELD]
+            this.columnDefs.map((col, i) => {
+              cel.key = col.field;
+              row.fieldGroup.push({ ...cel });
+            })
+            this.formEditorService.addFormItemToFieldGroup(this.fieldItem, row);
+
+          });
+
+
         }
       }
     )

@@ -4,7 +4,7 @@ import { Field } from '@ngx-formly/core';
 import { FormEditorConfigService, SelectableFieldItemModel } from 'projects/tf-ng-form-editor/src/lib/form-editor-config.service';
 import { TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/lib/tf-ng-form-editor.service';
 import { FieldItemGridOptionsColumnDefsModel } from 'projects/tf-ng-form-editor/src/lib/to-share/field-item-component-options-model.interface';
-import { FieldItemModel } from 'projects/tf-ng-form-editor/src/lib/to-share/field-item-model.interface';
+import { FieldItemModel, SelectableWrapper } from 'projects/tf-ng-form-editor/src/lib/to-share/field-item-model.interface';
 import { take } from 'rxjs/operators';
 
 export interface RowUpdateModel{
@@ -33,6 +33,49 @@ export class RowComponent implements OnInit {
 
   private _columnDefs:FieldItemGridOptionsColumnDefsModel[]
   @Input('columnDefs') set columnDefs(items:FieldItemGridOptionsColumnDefsModel[]){
+
+    // TODO - put this somewhere nicer
+
+    if(this.fieldItem && this.fieldItem.fieldGroup){
+
+
+      if(this.fieldItem.fieldGroup.length > items.length){
+        const newFieldGroup:FieldItemModel[] = []
+        items.map((col, i) => {
+          newFieldGroup.push(this.fieldItem.fieldGroup[i]);
+        })
+
+        this.formEditorService.updateFormItemsFieldGroup(this.fieldItem, newFieldGroup);
+      }
+      if(this.fieldItem.fieldGroup.length < items.length){
+        const newFieldGroup:FieldItemModel[] = []
+
+
+        this.formEditorConfig.getSelectableItemFromType("empty-grid-cell").subscribe(emptyCel => {
+          let cel:FieldItemModel = this.formEditorService.getFieldItemFromSelection(emptyCel);
+          cel.label = "";
+          cel.wrappers = [SelectableWrapper.GRID_CELL_FIELD]
+
+          items.map((col, i) => {
+            let currItem:FieldItemModel = {}
+            if(this.fieldItem.fieldGroup[i]){
+              currItem = { ...this.fieldItem.fieldGroup[i] }
+            }else{
+              cel.key = col.field;
+              currItem = { ...cel }
+            }
+            newFieldGroup.push(currItem);
+          })
+
+          this.formEditorService.updateFormItemsFieldGroup(this.fieldItem, newFieldGroup);
+
+        });
+
+
+        //
+
+      }
+    }
     this._columnDefs = items;
   }
   get columnDefs():FieldItemGridOptionsColumnDefsModel[]{
@@ -50,9 +93,34 @@ export class RowComponent implements OnInit {
         if(!this.fieldItem){
           this.parentKey = item.uuid;
           this._fieldItem = item.fieldGroup[this.index];
+
+          if(!this._fieldItem.fieldGroup){
+            // get empty item
+            const fieldGroup:FieldItemModel[] = [];
+            this.formEditorConfig.selectableItems.pipe(take(1)).subscribe(
+              types => {
+                if(types){
+                  let fieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(types.filter(t => t.type === "empty-grid-cell")[0]);
+                  fieldItem.label = "";
+                  fieldItem.wrappers = [SelectableWrapper.GRID_CELL_FIELD]
+                  //
+                  this.columnDefs.map((col, i) => {
+                    fieldItem.key = col.field;
+                    fieldGroup.push(fieldItem);
+                  })
+                }
+              }
+            )
+
+            // add them
+
+          }
+
           this.initForm();
           this.onChanges();
           this.formReady = true;
+
+
         }
         //
       }

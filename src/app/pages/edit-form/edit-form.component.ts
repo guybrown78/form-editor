@@ -27,7 +27,7 @@ export class EditFormComponent implements OnInit {
     this.formEditorService.getData(url).subscribe(data => {
       // data has loaded, the formService getData parses the data before it is returned here and stores the formFields, model and meta for the form.
       console.log("loaded")
-      console.log(data)
+      // console.log(data)
       // only thing left to do is listen for the submit button to be pressed
       this.initialiseFormSaveSubscription();
       this.initialiseFormCloseSubscription();

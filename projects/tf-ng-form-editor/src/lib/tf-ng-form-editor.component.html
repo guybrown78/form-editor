@@ -75,6 +75,17 @@
       <div nz-col nzFlex="280px">
         <div class="form-editor-field-detail rounded bg-white">
           <!--  -->
+          <tf-ng-item colour="white">
+            <!-- <p>
+              For development purposes you can select 'Show source' to see and copy the forms JSON
+            </p> -->
+            <button nz-button nzType="primary" nzBlock (click)="showFormSource()">
+              <i nz-icon nzType="code" nzTheme="outline"></i>
+              Show source
+            </button>
+          </tf-ng-item>
+
+
         </div>
       </div>
 

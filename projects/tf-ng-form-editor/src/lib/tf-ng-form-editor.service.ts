@@ -86,17 +86,14 @@ export class TfNgFormEditorService {
   }
 
   addFormItemToFieldGroup(parentItem:FieldItemModel, item:FieldItemModel, ordinum:number | null = null){
-
     if(!parentItem.fieldGroup){
       parentItem.fieldGroup = [];
     }
-    if(!ordinum){
+    if(ordinum === null){
       parentItem.fieldGroup.push(item);
     }else{
       parentItem.fieldGroup[ordinum] = item
     }
-
-
     this.form.pipe(take(1)).subscribe(form => {
       // create tempory form data from existing
       const updatedForm:FormModel = { ...form }
@@ -104,8 +101,21 @@ export class TfNgFormEditorService {
       const index = updatedForm.schema.findIndex(i => i.uuid === parentItem.uuid)
       updatedForm.schema[index] = parentItem;
       this._form.next(updatedForm);
-      //this.setSelectedTreeKey(item.uuid);
+    })
+  }
 
+  updateFormItemsFieldGroup(formItem:FieldItemModel, fieldGroup:FieldItemModel[]){
+    this.form.pipe(take(1)).subscribe(form => {
+      // create tempory form data from existing
+      const updatedForm:FormModel = { ...form }
+      // find index
+      const index = updatedForm.schema.findIndex(i => i.uuid === formItem.uuid)
+      formItem.fieldGroup = [ ...fieldGroup ];
+      updatedForm.schema[index] = {
+        ...formItem
+      };
+
+      this._form.next(updatedForm);
     })
   }
 
@@ -274,6 +284,7 @@ export class TfNgFormEditorService {
       }
     }
   }
+
 
   updateFieldItem(list:FieldItemModel[], updatedItem:FieldItemModel):FieldItemModel{
     if (list) {

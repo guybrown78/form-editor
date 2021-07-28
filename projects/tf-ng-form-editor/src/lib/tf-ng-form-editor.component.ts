@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TfNgFormService } from 'tf-ng-form';
+import { DisplayJsonService, TfNgFormService } from 'tf-ng-form';
 import { EditorModeEnum, TfNgFormEditorService } from './tf-ng-form-editor.service';
 import { FormEditorConfigService, SelectableFieldItemModel } from './form-editor-config.service';
 import { FieldItemModel } from './to-share/field-item-model.interface';
@@ -23,6 +23,7 @@ export class TfNgFormEditorComponent implements OnInit {
 
   constructor(
     private formService:TfNgFormService,
+    private displayJsonService:DisplayJsonService,
     private formEditorService:TfNgFormEditorService
   ) { }
 
@@ -72,7 +73,14 @@ export class TfNgFormEditorComponent implements OnInit {
   onToggleTreeDev(){
     this.treeDev = !this.treeDev;
   }
-
+  showFormSource(){
+     // for dev purposes, display the json nicely
+     this.formService.data.pipe(take(1)).subscribe(
+      data => {
+        this.displayJsonService.show(JSON.stringify(data), "Form JSON source");
+      }
+    )
+  }
   destroy(){
     this.formSubscription.unsubscribe;
     this.editorModeSubscription.unsubscribe;
