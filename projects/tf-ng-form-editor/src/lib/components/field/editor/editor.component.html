@@ -1,0 +1,70 @@
+<form
+  *ngIf="formReady"
+  nz-form [formGroup]="form"
+  nzLayout="vertical" class="width-all"
+>
+
+
+  <nz-form-item *ngIf="selectableItem?.editableConfig.setLabel">
+    <nz-form-control>
+      <nz-form-label nzFor="label">Label</nz-form-label>
+      <input nz-input formControlName="label" placeholder="Label"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="selectableItem?.editableConfig.setDesc">
+    <nz-form-control>
+      <nz-form-label nzFor="description">Description</nz-form-label>
+      <textarea rows="1" nz-input formControlName="description"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="selectableItem?.editableConfig.setPlaceholder">
+    <nz-form-control>
+      <nz-form-label nzFor="placeholder">Placeholder</nz-form-label>
+      <input nz-input formControlName="placeholder"/>
+    </nz-form-control>
+  </nz-form-item>
+
+</form>
+
+
+<!-- [optionItems]="fieldItem.componentOptions?.options || null" -->
+<div *ngIf="selectableItem.editableConfig.hasComponentOptions">
+  <form-editor-field-item-options
+    [fieldItem]="fieldItem"
+    (updated)="onOptionsUpdated($event)"
+  ></form-editor-field-item-options>
+</div>
+
+
+<!-- Items for fieldGroup -->
+<div *ngIf="selectableItem.editableConfig.hasFieldGroup">
+  <!-- (updated)="onComponentOptionsUpdated($event)" -->
+  <div *ngIf="hasFieldGroup()">
+    <form-item-field-group
+      [fieldItem]="fieldItem"
+      (selectedField)="addFieldGroupItem($event)"
+    ></form-item-field-group>
+  </div>
+
+
+  <!-- (selectedField)="addFieldGroupItem($event)" -->
+  <div *ngIf="hasTabs()">
+    <form-tab-items
+      [fieldItem]="fieldItem"
+      (updatedFieldGroup)="onFieldGroupUpdated($event)"
+    ></form-tab-items>
+  </div>
+</div>
+
+
+<div *ngIf="selectableItem.editableConfig.hasGridOptions">
+  <form-item-grid
+    (updated)="onGridOptionsUpdated($event)"
+    (updatedFieldGroup)="onFieldGroupUpdated($event)"
+    [fieldItem]="fieldItem"
+    (selectedField)="addFieldGridItem($event)"
+  >
+  </form-item-grid>
+</div>

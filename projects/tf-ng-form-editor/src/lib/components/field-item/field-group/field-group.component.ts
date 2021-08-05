@@ -84,6 +84,7 @@ export class FieldGroupComponent implements OnInit {
   }
 
   add(id): void {
+    console.log(id);
     this.formEditorConfig.getSelectableItemFromId(id).pipe(take(1)).subscribe(item => {
       this.selectedField.emit(item);
     })

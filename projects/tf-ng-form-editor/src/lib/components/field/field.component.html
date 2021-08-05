@@ -1,136 +1,59 @@
-<!-- <p>field-item works! {{ key }}</p> -->
-<div *ngIf="!fieldItem">
-  no item
+<div *ngIf="!fieldItem" class="wrapper width-all ant-form">
+  <tf-ng-form-title class="title">
+    <h4 ng-typography nz-col nzFlex="auto" class="blue">
+      Selected field details
+    </h4>
+  </tf-ng-form-title>
+  <p class="grey">Select a field item from the 'Overview' tree to start editing</p>
 </div>
 
+<div class="wrapper width-all ant-form" *ngIf="fieldItem && selectableItem">
 
-<div class="wrapper" *ngIf="fieldItem && selectableItem">
+  <tf-ng-form-title class="title">
 
-<!-- <div class="wrapper rounded bg-white"> -->
-
-  <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
-
-    <tf-ng-form-title class="title">
-      <!-- <h4 class="blue">
+    <div nz-row nzJustify="space-between" nzAlign="middle">
+      <h4 ng-typography nz-col nzFlex="auto" class="blue">
         {{ fieldItem?.label }}
-      </h4> -->
+      </h4>
+      <span nz-col class="blue">
+        Type: {{ selectableItem?.label }}
+      </span>
+    </div>
+
+  </tf-ng-form-title>
 
 
-      <div class="custom-node-header">
-        <div class="header-button-container bg-navy">
-          <button
-            (click)="onOrderUp($event)"
-            nz-button nzShape="square"
-            nzSize="extra-small"
-            class="grey"
-          >
-            <i nz-icon nzType="arrow-up" nzTheme="outline"></i>
-          </button>
-          <button
-            (click)="onOrderDown($event)"
-            nz-button nzShape="square"
-            nzSize="extra-small"
-            class="grey"
-          >
-            <i nz-icon nzType="arrow-down" nzTheme="outline"></i>
-          </button>
-        </div>
-        <h4 class="text text-center blue">
-          {{ fieldItem?.label }}
-        </h4>
-        <div class="header-button-container bg-navy">
-          <button
-            (click)="onUser($event)"
-            nz-button nzShape="square"
-            nzSize="extra-small"
-            class="grey"
-          >
-            <i nz-icon nzType="user" nzTheme="outline"></i>
-          </button>
-          <button
-            (click)="onDuplicate($event)"
-            nz-button nzShape="square"
-            nzSize="extra-small"
-            class="grey"
-          >
-            <i nz-icon nzType="copy" nzTheme="outline"></i>
-          </button>
-          <button
-            (click)="onDelete($event)"
-            nz-button nzShape="square"
-            nzSize="extra-small"
-            class="grey"
-          >
-            <i nz-icon nzType="delete" nzTheme="outline"></i>
-          </button>
-        </div>
-      </div>
+  <p *ngIf="selectableItem?.description" >
+    {{ selectableItem?.description }}
+  </p>
 
-    </tf-ng-form-title>
+  <nz-tabset class="navy">
 
-    <nz-form-item *ngIf="selectableItem?.editableConfig.setLabel">
-      <nz-form-control>
-        <nz-form-label nzFor="label">Label</nz-form-label>
-        <input nz-input formControlName="label" placeholder="Label"/>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item *ngIf="selectableItem?.editableConfig.setDesc">
-      <nz-form-control>
-        <nz-form-label nzFor="description">Description</nz-form-label>
-        <textarea rows="1" nz-input formControlName="description"></textarea>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item *ngIf="selectableItem?.editableConfig.setPlaceholder">
-      <nz-form-control>
-        <nz-form-label nzFor="placeholder">Placeholder</nz-form-label>
-        <input nz-input formControlName="placeholder"/>
-      </nz-form-control>
-    </nz-form-item>
-
-  </form>
-
-
-
-  <!-- [optionItems]="fieldItem.componentOptions?.options || null" -->
-  <div *ngIf="selectableItem.editableConfig.hasComponentOptions">
-    <form-editor-field-item-options
-      [fieldItem]="fieldItem"
-      (updated)="onOptionsUpdated($event)"
-    ></form-editor-field-item-options>
-  </div>
-
-  <!-- (updated)="onComponentOptionsUpdated($event)" -->
-  <div *ngIf="selectableItem.editableConfig.hasFieldGroup">
-    <form-item-field-group
-      [fieldItem]="fieldItem"
-      (selectedField)="addFieldGroupItem($event)"
-    ></form-item-field-group>
-  </div>
-
-
-  <div *ngIf="selectableItem.editableConfig.hasGridOptions">
-    <form-item-grid
-      (updated)="onGridOptionsUpdated($event)"
-      (updatedFieldGroup)="onFieldGroupUpdated($event)"
-      [fieldItem]="fieldItem"
-      (selectedField)="addFieldGridItem($event)"
+    <nz-tab
+      *ngFor="let tab of availableTabs"
+      [(nzSelectedIndex)]="tabIndex"
+      [nzTitle]="tab.label"
+      [nzDisabled]="tab.disabled"
     >
-    </form-item-grid>
-  </div>
 
+      <field-item-editor
+        *ngIf="tab.value === 'editor'"
+        [editorItemModel]="editorItemModel"
+      ></field-item-editor>
 
-  <!-- <div>
-    {{ selectableItem.editableConfig.type }}
-    {{ selectableItem.editableConfig.id }}
-  </div> -->
+      <field-item-layout
+        *ngIf="tab.value === 'layout'"
+        [editorItemModel]="editorItemModel"
+        (updatedFieldItem)="onUpdatedFieldItem($event)"
+      ></field-item-layout>
 
-  <!-- <pre>
-    {{ fieldItem |json }}
-  </pre> -->
+      <field-item-config-options
+        *ngIf="tab.value === 'options'"
+        [editorItemModel]="editorItemModel"
+      ></field-item-config-options>
+
+    </nz-tab>
+
+  </nz-tabset>
 
 </div>
-
-
-<!-- </div> -->

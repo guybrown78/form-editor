@@ -102,12 +102,12 @@ export class FieldDetailsComponent implements OnInit {
     }
     //
     // hasLayoutOptions
-    // if(this.selectableItem.editableConfig.hasLayoutOptions){
-    //   this.form.addControl(
-    //     'layout',
-    //     new FormControl(this.fieldItem, [])
-    //   );
-    // }
+    if(this.selectableItem.editableConfig.hasLayoutOptions){
+      this.form.addControl(
+        'layout',
+        new FormControl(this.fieldItem, [])
+      );
+    }
     if(this.showDetailsComponentOptions()){
       this.form.addControl('componentOptions', new FormControl(this.fieldItem.componentOptions, []))
     }

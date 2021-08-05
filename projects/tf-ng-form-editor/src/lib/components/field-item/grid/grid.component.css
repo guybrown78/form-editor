@@ -1,6 +1,10 @@
 :host {
   display: block;
 }
+.width-all{
+  width: 100%;
+  min-width: 100%;
+}
 
 .form-grid{
   margin-bottom: 10px;

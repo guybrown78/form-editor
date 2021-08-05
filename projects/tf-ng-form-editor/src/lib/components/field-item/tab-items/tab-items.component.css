@@ -2,11 +2,6 @@
   display: block;
 }
 
-.width-all{
-  width: 100%;
-  min-width: 100%;
-}
-
 .option-input-wrapper{
   margin-right: 10px;
 }

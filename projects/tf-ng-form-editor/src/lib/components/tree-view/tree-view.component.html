@@ -20,13 +20,22 @@ nzShowExpand=false
   [nzTreeTemplate]="nzTreeTemplate"
 ></nz-tree> -->
 
+<div class="wrapper width-all ant-form">
+  <tf-ng-form-title class="title">
+    <h4 ng-typography nz-col nzFlex="auto" class="blue">
+      Overview
+    </h4>
+  </tf-ng-form-title>
+</div>
 
-<nz-tree
-  class="tf-app-tree"
-  #nzTreeComponent
-  [nzData]="nodes"
-  (nzClick)="nzClick($event)"
-></nz-tree>
+<div class="tree-wrapper">
+  <nz-tree
+    class="tf-app-tree"
+    #nzTreeComponent
+    [nzData]="nodes"
+    (nzClick)="nzClick($event)"
+  ></nz-tree>
+</div>
 
 
 <!-- <ng-template #nzTreeTemplate let-node let-origin="origin">

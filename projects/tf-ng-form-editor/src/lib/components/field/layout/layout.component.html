@@ -1,0 +1,16 @@
+<!-- <form
+  *ngIf="formReady"
+  nz-form [formGroup]="form"
+  nzLayout="vertical" class="width-all"
+>
+
+
+
+</form> -->
+<div *ngIf="showDetailsComponentOptions()">
+  <field-details-component-options
+
+    [fieldItem]="fieldItem"
+    (updated)="onComponentOptionsUpdated($event)"
+  ></field-details-component-options>
+</div>

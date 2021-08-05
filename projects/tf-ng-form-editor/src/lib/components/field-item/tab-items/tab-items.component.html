@@ -1,0 +1,46 @@
+
+<form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+  <!-- <div>Number of tabs in this tabGroup: {{ fieldItem.fieldGroup?.length || 0 }}</div> -->
+
+  <nz-form-control>
+    <nz-form-label>Tabs</nz-form-label>
+  </nz-form-control>
+
+  <nz-form-item
+    formArrayName="fieldGroup"
+    *ngFor="let fieldGroup of form.get('fieldGroup')['controls']; let i = index"
+  >
+    <div
+      nz-row
+      nzJustify="space-between" nzAlign="middle"
+      class="option-label-wrapper"
+      [formGroup]="fieldGroup"
+    >
+
+      <div nz-col nzFlex="auto" class="option-input-wrapper">
+        <input nz-input formControlName="label" placeholder="Label"/>
+      </div>
+
+      <!-- <div nz-col> -->
+        <button nz-button nzShape="square" (click)="removeItem(i)" >
+          <i nz-icon nzType="close" nzTheme="outline"></i>
+        </button>
+      <!-- </div> -->
+
+    </div>
+
+  </nz-form-item>
+
+  <form-editor-add-row>
+    <tf-ng-hexagon
+      colour="white"
+      outline-colour="blue"
+      size="xs"
+      (click)="addItem()"
+    >
+      <i nz-icon nzType="plus" nzTheme="outline" class="blue"></i>
+    </tf-ng-hexagon>
+  </form-editor-add-row>
+
+
+</form>

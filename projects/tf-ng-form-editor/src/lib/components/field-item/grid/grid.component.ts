@@ -39,7 +39,6 @@ export class GridComponent implements OnInit {
   // @Input('fieldItem') fieldItem:FieldItemModel
   private _fieldItem:FieldItemModel
   @Input('fieldItem') set fieldItem(item:FieldItemModel){
-
     // get selectable item
     this.formEditorConfig.getSelectableItemFromType(item.type).pipe(take(1)).subscribe(selectableItem => {
       if(selectableItem){

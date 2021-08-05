@@ -19,7 +19,10 @@ export class TfNgFormEditorComponent implements OnInit {
 
   editorMode:EditorModeEnum;
 
-  treeDev:boolean = true;
+  showInlinePreview:boolean = true;
+  onShowInlinePreviewUpdated(value:boolean){
+    this.showInlinePreview = value;
+  }
 
   constructor(
     private formService:TfNgFormService,
@@ -70,9 +73,7 @@ export class TfNgFormEditorComponent implements OnInit {
   }
 
 
-  onToggleTreeDev(){
-    this.treeDev = !this.treeDev;
-  }
+
   showFormSource(){
      // for dev purposes, display the json nicely
      this.formService.data.pipe(take(1)).subscribe(

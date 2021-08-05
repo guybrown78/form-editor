@@ -1,0 +1,26 @@
+<form
+  *ngIf="formReady"
+  nz-form [formGroup]="form"
+  nzLayout="vertical" class="width-all"
+>
+  <div class="title-wrapper">
+
+    <!-- REQUIRED -->
+    <form-editor-switch-wrapper *ngIf="selectableItem?.editableConfig.setRequired">
+      <nz-form-label label nzFor="required">
+        Required
+      </nz-form-label>
+      <nz-switch switch formControlName="required"></nz-switch>
+    </form-editor-switch-wrapper>
+
+    <!-- HELP -->
+    <nz-form-item *ngIf="selectableItem?.editableConfig.setHelp">
+      <nz-form-control>
+        <nz-form-label nzFor="help">Help text</nz-form-label>
+        <input nz-input formControlName="help" />
+      </nz-form-control>
+    </nz-form-item>
+
+  </div>
+
+</form>

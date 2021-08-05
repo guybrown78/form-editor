@@ -126,8 +126,11 @@ export class TfNgFormEditorService {
       // find index
 //      const index = updatedForm.schema.findIndex(i => i.uuid === item.uuid)
 //      updatedForm.schema[index] = item;
-      this.updateFieldItem(updatedForm.schema, item)
-      this._form.next(updatedForm);
+      this.updateFieldItem(updatedForm.schema, item);
+      setTimeout(() => {
+        this._form.next(updatedForm);
+      }, 50);
+
     })
   }
 
@@ -299,6 +302,21 @@ export class TfNgFormEditorService {
     }
   }
 
+  // loop thought the treeModels children for any that are selectrs
+  isTreeChildSelected(list:FormTreeModel[]):boolean{
+    if (list) {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].selected) {
+          return true;
+        }
+        if(list[i].children){
+          const flag = this.isTreeChildSelected(list[i].children);
+          if (flag) return flag;
+        }
+      }
+    }
+  }
+
   getFieldItemFromSelection(selectedField:SelectableFieldItemModel):FieldItemModel{
     const fieldItem:FieldItemModel = {}
     const uuid:string = uuidv4();
@@ -340,7 +358,6 @@ export class TfNgFormEditorService {
     return this.http.get<FormModel>(url).pipe(
       tap((data) => {
         const { meta, schema, model } = data;
-        console.log(data);
         this._form.next(data);
       })
     )
@@ -416,12 +433,14 @@ export class TfNgFormEditorService {
     if(item.fieldGroup){
       const children:FormTreeModel[] = item.fieldGroup.map(f => this.parseItemToLeaf(f, currentSelectedKey, item.uuid));
       if(!leaf.expanded){
-        leaf.expanded = children.filter(c => c.selected).length >= 1;
+        //leaf.expanded = children.filter(c => c.selected).length >= 1;
+        leaf.expanded = this.isTreeChildSelected(children);
       }
       leaf.children = children;
     }
     return leaf
   }
+
 
   setSelectedTreeKey(key:string){
     this._selectedTreeKey.next(key);

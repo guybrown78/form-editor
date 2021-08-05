@@ -34,7 +34,11 @@ import { CellFormgroupComponent } from './components/field-item/grid/cell-formgr
 import { CellComponent } from './components/field-item/grid/cell/cell.component';
 import { RowComponent } from './components/field-item/grid/row/row.component';
 import { CellFieldItemComponent } from './components/field-item/grid/cell-field-item/cell-field-item.component';
-
+import { TabItemsComponent } from './components/field-item/tab-items/tab-items.component';
+import { EditorComponent } from './components/field/editor/editor.component';
+import { LayoutComponent } from './components/field/layout/layout.component';
+import { ConfigOptionsComponent } from './components/field/config-options/config-options.component';
+import { InlinePreviewComponent } from './components/inline-preview/inline-preview.component';
 
 
 @NgModule({
@@ -63,6 +67,11 @@ import { CellFieldItemComponent } from './components/field-item/grid/cell-field-
     CellComponent,
     RowComponent,
     CellFieldItemComponent,
+    TabItemsComponent,
+    EditorComponent,
+    LayoutComponent,
+    ConfigOptionsComponent,
+    InlinePreviewComponent,
   ],
   imports: [
     CommonModule,

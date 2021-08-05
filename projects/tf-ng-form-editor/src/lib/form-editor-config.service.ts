@@ -5,6 +5,10 @@ import { map } from 'rxjs/operators';
 import { FieldItemModel, SelectableWrapper } from './to-share/field-item-model.interface';
 
 
+export interface EditorItemModel {
+  fieldItem:FieldItemModel
+  selectableItem:SelectableFieldItemModel
+}
 
 export interface SelectableFieldItemModel {
   id:string
@@ -52,16 +56,18 @@ export interface SelectableGridColumnWidths {
   default?:boolean;
 }
 export enum EditableConfigType {
-  GENERAL = 0,
-  INPUT = 1,
-  SELECT = 2,
-  RADIO = 3,
-  CHECKBOX = 4,
-  CHECKBOX_GROUP = 5,
-  LAYOUT = 6,
-  TEXT = 7,
-  NESTED = 8,
-  GRID = 9
+  GENERAL,
+  INPUT,
+  SELECT,
+  RADIO,
+  CHECKBOX,
+  CHECKBOX_GROUP,
+  LAYOUT,
+  TEXT,
+  NESTED,
+  GRID,
+  TABS,
+  TAB,
 }
 
 @Injectable({
@@ -116,12 +122,19 @@ export class FormEditorConfigService {
       editableConfigType:EditableConfigType.NESTED
     },
     {
+      type:"tabs",
+      id:"tabs",
+      label:"Tabs",
+      category:SelectableCategory.LAYOUT,
+      description:"Descriptions explaining the tabs and how to use them etc...",
+      editableConfigType:EditableConfigType.TABS
+    },
+    {
       type:"tab",
       id:"tab",
       label:"Tab",
-      category:SelectableCategory.LAYOUT,
-      description:"Descriptions explaining the tabs and how to use them etc...",
-      editableConfigType:EditableConfigType.LAYOUT
+      category:SelectableCategory.HIDDEN,
+      editableConfigType:EditableConfigType.TAB
     },
     {
       type:"divider",
@@ -172,7 +185,7 @@ export class FormEditorConfigService {
   readonly _editableConfigs: SelectableFieldItemEditableConfigModel[] = [
     {
       type:EditableConfigType.INPUT,
-      id:"100",
+      id:"config-input",
       setLabel:true,
       setDesc:true,
       setHelp:true,
@@ -183,7 +196,7 @@ export class FormEditorConfigService {
     },
     {
       type:EditableConfigType.SELECT,
-      id:"101",
+      id:"config-select",
       setLabel:true,
       setDesc:true,
       setHelp:true,
@@ -196,7 +209,7 @@ export class FormEditorConfigService {
     },
     {
       type:EditableConfigType.RADIO,
-      id:"102",
+      id:"config-radio",
       setLabel:true,
       setDesc:true,
       setHelp:true,
@@ -209,7 +222,7 @@ export class FormEditorConfigService {
     },
     {
       type:EditableConfigType.LAYOUT,
-      id:"103",
+      id:"config-layout",
       setLabel:false,
       setDesc:false,
       setHelp:false,
@@ -222,13 +235,13 @@ export class FormEditorConfigService {
     },
     {
       type:EditableConfigType.TEXT,
-      id:"104",
+      id:"config-text",
       setLabel:true,
       setDesc:true
     },
     {
       type:EditableConfigType.CHECKBOX,
-      id:"105",
+      id:"config-checkbox",
       setLabel:true,
       setDesc:true,
       setHelp:true,
@@ -237,16 +250,8 @@ export class FormEditorConfigService {
       setReadonlyPermissions:true,
     },
     {
-      type:EditableConfigType.NESTED,
-      id:"106",
-      setLabel:true,
-      setDesc:true,
-      setHelp:true,
-      hasFieldGroup:true
-    },
-    {
       type:EditableConfigType.CHECKBOX_GROUP,
-      id:"107",
+      id:"config-checkbox-group",
       setLabel:true,
       setDesc:true,
       setHelp:true,
@@ -260,8 +265,28 @@ export class FormEditorConfigService {
       hasShowBlocks:true
     },
     {
+      type:EditableConfigType.NESTED,
+      id:"config-nested",
+      setLabel:true,
+      setDesc:true,
+      setHelp:true,
+      hasFieldGroup:true
+    },
+    {
+      type:EditableConfigType.TABS,
+      setLabel:true,
+      id:"config-tabs",
+      hasFieldGroup:true
+    },
+    {
+      type:EditableConfigType.TAB,
+      id:"config-tab",
+      setLabel:true,
+      hasFieldGroup:true
+    },
+    {
       type:EditableConfigType.GRID,
-      id:"108",
+      id:"config-grid",
       setLabel:true,
       setDesc:true,
       setHelp:true,
@@ -269,7 +294,7 @@ export class FormEditorConfigService {
     },
     {
       type:EditableConfigType.GENERAL,
-      id:"109"
+      id:"config-general"
     },
   ]
 

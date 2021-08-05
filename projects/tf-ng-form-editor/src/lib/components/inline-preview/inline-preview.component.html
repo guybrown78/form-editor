@@ -1,0 +1,53 @@
+<div
+  class="form-editor-field-detail rounded"
+  [ngClass]="[
+    showInlinePreview ? 'bg-white' : 'bg-blue'
+  ]">
+
+
+  <div *ngIf="showInlinePreview" class="wrapper width-all ant-form">
+
+    <tf-ng-form-title class="title">
+
+      <div nz-row nzJustify="space-between" nzAlign="middle">
+
+        <h4 ng-typography nz-col nzFlex="auto" class="blue" >
+          Preview
+        </h4>
+        <tf-ng-hexagon
+          nz-col
+          colour="aqua"
+          outline-colour="white"
+          size="xs" (click)="onToggleShowInlinePreview()"
+        >
+          <i
+            nz-icon class="blue"
+            nzType="arrow-right" nzTheme="outline"
+          ></i>
+        </tf-ng-hexagon>
+
+      </div>
+    </tf-ng-form-title>
+  </div>
+
+
+  <div *ngIf="!showInlinePreview" class="open-button wrapper width-all ant-form">
+    <tf-ng-hexagon
+      nz-col
+      colour="aqua"
+      outline-colour="blue"
+      size="xs" (click)="onToggleShowInlinePreview()"
+    >
+      <i
+        nz-icon class="blue"
+        nzType="arrow-left" nzTheme="outline"
+      ></i>
+    </tf-ng-hexagon>
+  </div>
+
+  <tf-ng-form
+    *ngIf="showInlinePreview"
+    [forceHideFormTitle]="true"
+    [forceFullFormWidth]="true"
+  ></tf-ng-form>
+</div>

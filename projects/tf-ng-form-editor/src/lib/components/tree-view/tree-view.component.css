@@ -2,7 +2,13 @@
   display: block;
 }
 
-
+.tree-wrapper{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1 0 0;
+  padding:0 1.4rem 1.4rem 0;
+}
 .custom-node {
   cursor: pointer;
   line-height: 24px;

@@ -2,6 +2,10 @@
   display: block;
   margin-bottom: 10px;
 }
+.width-all{
+  width: 100%;
+  min-width: 100%;
+}
 .grid-row-form-item{
   padding:8px;
   /* width: 100%!important; */

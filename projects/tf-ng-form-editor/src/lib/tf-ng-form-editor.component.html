@@ -18,16 +18,16 @@
 
 
       <div nz-col nzFlex="300px">
-        <div class="form-editor-fields rounded bg-white">
+        <div class="form-editor-field-detail rounded bg-white">
           <form-editor-tree-view></form-editor-tree-view>
         </div>
       </div>
 
-      <div nz-col nzFlex="345px">
+      <!-- <div nz-col nzFlex="345px">
         <div class="form-editor-field-detail rounded bg-white">
           <form-editor-field-details></form-editor-field-details>
         </div>
-      </div>
+      </div> -->
 
 
       <div nz-col nzFlex="auto">
@@ -36,26 +36,12 @@
         </div>
       </div>
 
-      <!-- <div nz-col [nzFlex]=" treeDev ? '260px' : '30px' ">
-        <div
-          class="form-editor-field-detail rounded"
-          [ngClass]="treeDev ? 'bg-white' : 'bg-blue'">
-          <div nz-row nzAlign="middle" nzJustify="end">
-            <tf-ng-hexagon
-              colour="aqua"
-              [outline-colour]="treeDev ? 'white' : 'blue'"
-              size="xs" (click)="onToggleTreeDev()"
-            >
-              <i
-                nz-icon class="blue"
-                [nzType]="treeDev ? 'arrow-right' : 'arrow-left'" nzTheme="outline"
-              ></i>
-            </tf-ng-hexagon>
-          </div>
-
-          <form-editor-tree-dev *ngIf="treeDev"></form-editor-tree-dev>
-        </div>
-      </div> -->
+      <div nz-col [nzFlex]="showInlinePreview ? '450px' : '30px' ">
+        <form-editor-inline-preview
+          [showInlinePreview]="showInlinePreview"
+          (updatedShowInlinePreview)="onShowInlinePreviewUpdated($event)"
+        ></form-editor-inline-preview>
+      </div>
 
     </div> <!-- END form-editor-details-->
 

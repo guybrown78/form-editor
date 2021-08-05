@@ -1,6 +1,10 @@
 :host {
   display: block;
 }
+.width-all{
+  width: 100%;
+  min-width: 100%;
+}
 
 nz-radio-group.grid-width-selection-group{
   width: 275px;
