@@ -48,16 +48,19 @@ export class FieldComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log("HERE.......")
     this.initialiseFormSubscription()
   }
 
   initialiseFormSubscription(){
     this.selectedKeySubscription = this.formEditorService.selectedTreeKey.subscribe(key => {
+
       if(key){
         this.fieldItem = null;
         this.selectableItem = null;
 
         this.formEditorService.getFieldItemFromTreeKey(key).pipe(take(1)).subscribe(
+
           item => {
 
             if(item){
@@ -66,8 +69,13 @@ export class FieldComponent implements OnInit {
               // set the fieldItem (field specific model for preview)
               this.fieldItem = item;
 
-              // when item has been inited get config data...
+              // force a pause to allow the tree data to be built as the selected key firest before the treeData build. TODO - maybe emit the selected key on tree success in the service?
+
+              setTimeout(() => {
+
+                // when item has been inited get config data...
               this.formEditorService.getTreeItemFromKey(item.uuid).pipe(take(1)).subscribe(treeItem => {
+
                 if(treeItem){
 
 
@@ -93,6 +101,10 @@ export class FieldComponent implements OnInit {
 
                 }
               })
+
+
+
+              }, 100)
 
 
             }else{
