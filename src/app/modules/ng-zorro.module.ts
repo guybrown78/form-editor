@@ -26,6 +26,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
@@ -63,6 +64,7 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
 		NzTableModule,
 		NzTabsModule,
 		NzToolTipModule,
+    NzPopoverModule,
 		NzCarouselModule,
 		NzModalModule,
     NzMessageModule,
@@ -94,6 +96,7 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
 		NzTableModule,
 		NzTabsModule,
 		NzToolTipModule,
+    NzPopoverModule,
 		NzCarouselModule,
 		NzModalModule,
     NzMessageModule,

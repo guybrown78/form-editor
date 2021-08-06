@@ -135,7 +135,7 @@ export class EditorComponent implements OnInit {
   }
 
   hasTabs(){
-    return this.selectableItem.editableConfig.type === EditableConfigType.TAB
+    return this.selectableItem.editableConfig.type === EditableConfigType.TABS
   }
 
 

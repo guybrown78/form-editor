@@ -1,25 +1,3 @@
-<!--
-
-  (nzContextMenu)="nzClick($event)"
-
-  nzDraggable
-  nzBlockNode
-  (nzOnDrop)="nzEvent($event)"
-
-nzShowExpand=false
--->
-
-
-<!-- <nz-tree
-  class="tf-form-edit-tree tf-custom-tree tf-app-tree tf-app-tree-hidden-line bg-grey"
-  #nzTreeComponent
-  [nzData]="nodes"
-
-  (nzClick)="nzClick($event)"
-
-  [nzTreeTemplate]="nzTreeTemplate"
-></nz-tree> -->
-
 <div class="wrapper width-all ant-form">
   <tf-ng-form-title class="title">
     <h4 ng-typography nz-col nzFlex="auto" class="blue">
@@ -34,16 +12,28 @@ nzShowExpand=false
     class="tf-app-tree"
     #nzTreeComponent
     [nzData]="nodes"
+    [nzTreeTemplate]="nzTreeTemplate"
     (nzClick)="nzClick($event)"
   ></nz-tree>
 </div>
 
 
-<!-- <ng-template #nzTreeTemplate let-node let-origin="origin">
-  <form-editor-tree-item [node]="origin"></form-editor-tree-item>
-</ng-template> -->
+<ng-template #nzTreeTemplate let-node let-origin="origin">
+  <div nz-row nzJustify="space-between" nzAlign="middle">
+    <span nz-col nzFlex="auto" class="node-name">
+      {{ node.title }}
+    </span>
 
-<ng-template #nodeDefaultIcons let-node let-origin="origin">
+
+    <i nz-col nz-icon nzType="ellipsis" nzTheme="outline" nz-button nz-popover [nzPopoverTitle]="titleTemplate" [nzPopoverContent]="contentTemplate" nzPopoverPlacement="right"></i>
+
+  </div>
+
+</ng-template>
+
+
+
+<!-- <ng-template #nodeDefaultIcons let-node let-origin="origin">
   <span class="custom-node">
     <span *ngIf="!node.isLeaf">
       <i nz-icon [nzType]="node.isExpanded ? 'folder-open' : 'folder'" (click)="openFolder(node)"></i>
@@ -54,4 +44,40 @@ nzShowExpand=false
       <span class="file-name">{{ node.title }}</span>
     </span>
   </span>
+</ng-template> -->
+
+
+<ng-template #titleTemplate>
+  Options
 </ng-template>
+
+<ng-template #contentTemplate>
+  <button
+    nz-button nzType="text" class="grey" nzBlock="true"
+  >
+    <i nz-icon nzType="user" nzTheme="outline"></i>
+    User
+  </button>
+
+  <button
+    nz-button nzType="text" class="grey" nzBlock="true"
+  >
+    <i nz-icon nzType="copy" nzTheme="outline"></i>
+    Copy
+  </button>
+
+  <button
+    nz-button nzType="text" class="grey" nzBlock="true"
+  >
+    <i nz-icon nzType="delete" nzTheme="outline"></i>
+    Delete
+  </button>
+  <!-- <tf-ng-item colour="white">
+    <i #start nz-icon nzType="search"></i>
+    <span>fdfdf</span>
+  </tf-ng-item> -->
+</ng-template>
+
+<!-- <i nz-icon nzType="user" nzTheme="outline"></i>
+<i nz-icon nzType="copy" nzTheme="outline"></i>
+ -->

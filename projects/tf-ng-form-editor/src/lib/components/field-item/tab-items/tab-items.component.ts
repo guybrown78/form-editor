@@ -136,7 +136,7 @@ export class TabItemsComponent implements OnInit {
   }
 
   removeItem(index:number) {
-    const options = this.form.get('options') as FormArray;
+    const options = this.form.get('fieldGroup') as FormArray;
     options.removeAt(index);
   }
 
