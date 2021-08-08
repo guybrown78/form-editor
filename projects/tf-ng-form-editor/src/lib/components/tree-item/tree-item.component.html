@@ -1,4 +1,4 @@
-<div
+<!-- <div
   class="custom-node bg-white"
   [ngClass]="isOpen ? 'selected' : 'unselected'"
 >
@@ -20,4 +20,52 @@
     </div>
 
   </div>
+</div> -->
+
+<div nz-row nzJustify="space-between" nzAlign="middle">
+  <span nz-col nzFlex="auto" class="node-name">
+    {{ node.title }}
+  </span>
+
+  <i
+    nz-col nz-icon
+    nzType="ellipsis" nzTheme="outline"
+    nz-button nz-popover
+    [nzPopoverTitle]="titleTemplate"
+    [nzPopoverContent]="contentTemplate"
+    [(nzPopoverVisible)]="popoverVisible"
+    nzPopoverPlacement="right" nzPopoverOverlayClassName="no-popover-content-padding"
+  ></i>
+
 </div>
+
+
+
+<ng-template #titleTemplate>
+  Options
+</ng-template>
+
+<ng-template #contentTemplate class="no-padding">
+  <ul nz-menu class="bg-white">
+    <li id="move-up" nz-menu-item (click)="onOrderUp($event)">
+      <i nz-icon nzType="arrow-up" nzTheme="outline"></i>
+      Move item up 1 place
+    </li>
+    <li id="move-down" nz-menu-item (click)="onOrderDown($event)">
+      <i nz-icon nzType="arrow-down" nzTheme="outline"></i>
+      Move down 1 place
+    </li>
+    <li id="move-up" nz-menu-divider></li>
+    <li id="permission" nz-menu-item (click)="onUser($event)" nzDisabled>
+      <i nz-icon nzType="user" nzTheme="outline"></i>User rights
+    </li>
+    <li id="duplicate" nz-menu-item (click)="onDuplicate($event)">
+      <i nz-icon nzType="copy" nzTheme="outline"></i>
+      Duplicate
+    </li>
+    <li id="delete" nz-menu-item (click)="onDelete($event)">
+      <i nz-icon nzType="delete" nzTheme="outline"></i>
+      Delete
+    </li>
+  </ul>
+</ng-template>

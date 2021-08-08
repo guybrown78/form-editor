@@ -21,3 +21,8 @@
 .folder-name {
   margin-left: 4px;
 }
+
+
+.tree-node-popover .ant-popover-inner-content {
+  padding: 0!important;
+}
