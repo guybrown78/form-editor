@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AppHeaderService, AppNavigationService, AppNavigationItem } from 'tf-ng-nz';
 
 const navigationData:AppNavigationItem[] = [
@@ -40,12 +41,31 @@ const navigationData:AppNavigationItem[] = [
 export class AppComponent {
   title = 'Form Editor';
   appReady:boolean = false;
-  hideHeader:boolean = true;
+
+  currentRoute:string = "";
+  hideHeader:boolean = false;
+
   constructor(
     private appHeaderService: AppHeaderService,
     private appNavigationService: AppNavigationService,
+    private router:Router
   ) {
     //
+    router.events.subscribe((val) => {
+      if(val instanceof NavigationEnd){
+        this.currentRoute = val.url;
+        switch(this.currentRoute){
+          case "/create":
+          case "/edit":
+          case "/preview":
+            this.hideHeader = true;
+            break;
+          default:
+            this.hideHeader = false;
+            break;
+        }
+      }
+    });
   }
 
   ngOnInit() {
@@ -70,5 +90,6 @@ export class AppComponent {
     //
     this.appReady = true;
   }
+
 
 }
