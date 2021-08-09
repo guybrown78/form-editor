@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { FormMetaModel } from '../../to-share/form-meta-model.interface';
   templateUrl: './meta-settings.component.html',
   styleUrls: ['./meta-settings.component.css']
 })
-export class MetaSettingsComponent implements OnInit {
+export class MetaSettingsComponent implements OnInit, OnDestroy {
 
   metaForm: FormGroup;
   metaUpdateSubscription:Subscription;
@@ -69,7 +69,7 @@ export class MetaSettingsComponent implements OnInit {
     });
   }
 
-  destroy(){
+  ngOnDestroy(){
     this.metaUpdateSubscription.unsubscribe;
   }
 

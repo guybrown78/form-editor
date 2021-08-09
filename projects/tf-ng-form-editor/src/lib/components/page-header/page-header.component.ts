@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { take } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { FormMetaModel } from '../../to-share/form-meta-model.interface';
   templateUrl: './page-header.component.html',
   styleUrls: ['./page-header.component.css']
 })
-export class PageHeaderComponent implements OnInit {
+export class PageHeaderComponent implements OnInit, OnDestroy {
 
 
   metaUpdateSubscription:Subscription;
@@ -121,7 +121,7 @@ export class PageHeaderComponent implements OnInit {
   handleCancelClose(){
     // console.log("CANCEL")
 	}
-  destroy(){
+  ngOnDestroy(){
     this.metaUpdateSubscription.unsubscribe;
     this.editorModeSubscription.unsubscribe;
     this.formUpdateSubscription.unsubscribe;

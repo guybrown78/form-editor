@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './edit-form.component.html',
   styleUrls: ['./edit-form.component.css']
 })
-export class EditFormComponent implements OnInit {
+export class EditFormComponent implements OnInit, OnDestroy {
 
   formSavedSubscription:Subscription;
   formCloseSubscription:Subscription;
@@ -26,7 +26,6 @@ export class EditFormComponent implements OnInit {
 
     this.formEditorService.getData(url).subscribe(data => {
       // data has loaded, the formService getData parses the data before it is returned here and stores the formFields, model and meta for the form.
-      console.log("loaded")
       // console.log(data)
       // only thing left to do is listen for the submit button to be pressed
       this.initialiseFormSaveSubscription();
@@ -65,7 +64,7 @@ export class EditFormComponent implements OnInit {
     })
   }
 
-  destroy(){
+  ngOnDestroy(){
     this.formSavedSubscription.unsubscribe;
     this.formCloseSubscription.unsubscribe;
   }

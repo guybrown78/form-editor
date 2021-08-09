@@ -123,7 +123,7 @@ export class FieldItemComponent implements OnInit {
     this.formEditorService.addFormItemToFieldGroup(this.fieldItem, formFieldItem);
   }
 
-  destroy(){
+  ngOnDestroy(){
     // this.selectedKeySubscription.unsubscribe
   }
 

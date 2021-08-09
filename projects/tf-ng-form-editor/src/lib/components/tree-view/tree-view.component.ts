@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NzSubmenuService } from 'ng-zorro-antd/menu';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NzTreeComponent, NzTreeNodeOptions, NzFormatEmitEvent } from 'ng-zorro-antd/tree';
 import { Subscription } from 'rxjs';
 import { TfNgFormEditorService } from '../../tf-ng-form-editor.service';
@@ -16,7 +15,7 @@ import { TfNgFormEditorService } from '../../tf-ng-form-editor.service';
 
 // TODO add a noce right click to quickly delete, move up/down etc
 
-export class TreeViewComponent implements OnInit {
+export class TreeViewComponent implements OnInit, OnDestroy {
   @ViewChild('nzTreeComponent', { static: false }) nzTreeComponent!: NzTreeComponent
 
   // popoverVisible: boolean = false;
@@ -47,7 +46,7 @@ export class TreeViewComponent implements OnInit {
 
 
 
-  destroy(){
+  ngOnDestroy(){
     this.formSubscription.unsubscribe
   }
 

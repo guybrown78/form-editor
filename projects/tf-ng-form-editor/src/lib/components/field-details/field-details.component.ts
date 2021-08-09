@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { FieldItemComponentOptionsModel, OptionModel } from '../../to-share/fiel
   templateUrl: './field-details.component.html',
   styleUrls: ['./field-details.component.css']
 })
-export class FieldDetailsComponent implements OnInit {
+export class FieldDetailsComponent implements OnInit, OnDestroy {
 
   selectedKeySubscription:Subscription
   fieldItem:FieldItemModel
@@ -151,7 +151,7 @@ export class FieldDetailsComponent implements OnInit {
     return show
   }
 
-  destroy(){
+  ngOnDestroy(){
     this.selectedKeySubscription.unsubscribe
   }
 

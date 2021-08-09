@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TfNgFormService } from 'tf-ng-form';
 @Component({
@@ -6,7 +6,7 @@ import { TfNgFormService } from 'tf-ng-form';
   templateUrl: './inline-preview.component.html',
   styleUrls: ['./inline-preview.component.css']
 })
-export class InlinePreviewComponent implements OnInit {
+export class InlinePreviewComponent implements OnInit, OnDestroy {
 
 
 
@@ -25,7 +25,6 @@ export class InlinePreviewComponent implements OnInit {
     this.dataSubscription = this.formService.data.subscribe(
       data => {
         this.hasFields = this.formService.fields.length > 0;
-        console.log(this.hasFields)
       }, dataErr => {
         this.hasFields = false;
       }
@@ -36,7 +35,7 @@ export class InlinePreviewComponent implements OnInit {
     this.updatedShowInlinePreview.emit(!this.showInlinePreview);
   }
 
-  destroy(){
+  ngOnDestroy(){
     this.dataSubscription.unsubscribe();
   }
 }

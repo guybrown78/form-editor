@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, BehaviorSubject, throwError, Observable, Subscription } from 'rxjs';
 import { take, tap, map } from 'rxjs/operators';
@@ -28,6 +28,7 @@ export interface SaveFormModel {
 export enum EditorModeEnum {
   EDIT = "edit",
   PREVIEW = "preview",
+  NONE = "none",
 }
 export enum SaveTypeEnum {
   DRAFT = "draft",
@@ -44,7 +45,7 @@ export enum OrdinalDirectionEnum {
 @Injectable({
   providedIn: 'root'
 })
-export class TfNgFormEditorService {
+export class TfNgFormEditorService implements OnDestroy {
   formSubscription:Subscription
 
 
@@ -359,6 +360,7 @@ export class TfNgFormEditorService {
       tap((data) => {
         const { meta, schema, model } = data;
         this._form.next(data);
+        this._metaUpdated.next(true)
       })
     )
   }
@@ -470,7 +472,7 @@ export class TfNgFormEditorService {
     this._close.next(true);
 	}
 
-  destroy(){
+  ngOnDestroy(){
     this.formSubscription.unsubscribe
   }
 

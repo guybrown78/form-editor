@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NzTreeComponent, NzTreeNodeOptions, NzFormatEmitEvent } from 'ng-zorro-antd/tree';
 import { Subscription } from 'rxjs';
 import { TfNgFormEditorService } from '../../tf-ng-form-editor.service';
@@ -8,7 +8,7 @@ import { TfNgFormEditorService } from '../../tf-ng-form-editor.service';
   templateUrl: './tree-dev.component.html',
   styleUrls: ['./tree-dev.component.css']
 })
-export class TreeDevComponent implements OnInit {
+export class TreeDevComponent implements OnInit, OnDestroy {
   @ViewChild('nzTreeComponent', { static: false }) nzTreeComponent!: NzTreeComponent
 
   formSubscription:Subscription
@@ -32,7 +32,7 @@ export class TreeDevComponent implements OnInit {
     this.formEditorService.setSelectedTreeKey(event.keys[0]);
   }
 
-  destroy(){
+  ngOnDestroy(){
     this.formSubscription.unsubscribe
   }
 

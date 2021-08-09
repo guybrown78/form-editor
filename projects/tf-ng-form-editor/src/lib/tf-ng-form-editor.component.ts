@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DisplayJsonService, TfNgFormService } from 'tf-ng-form';
 import { EditorModeEnum, TfNgFormEditorService } from './tf-ng-form-editor.service';
 import { FormEditorConfigService, SelectableFieldItemModel } from './form-editor-config.service';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './tf-ng-form-editor.component.html',
   styleUrls: ['./tf-ng-form-editor.component.css']
 })
-export class TfNgFormEditorComponent implements OnInit {
+export class TfNgFormEditorComponent implements OnInit, OnDestroy {
 
   formSubscription:Subscription
   editorModeSubscription:Subscription;
@@ -37,7 +37,7 @@ export class TfNgFormEditorComponent implements OnInit {
     // check if the form model has been initialised
     this.formEditorService.form.pipe(take(1)).subscribe(form => {
       if(form){
-        console.log("form has been initialised...");
+        // console.log("form has been initialised...");
         this.initialiseFormSubscription();
       }else{
         this.formEditorService.initialiseNewForm({
@@ -68,7 +68,18 @@ export class TfNgFormEditorComponent implements OnInit {
 
   initialiseEditorModeSubscription(){
     this.editorModeSubscription = this.formEditorService.editorMode.subscribe((mode:EditorModeEnum) => {
-      this.editorMode = mode;
+
+      // the inline preview forces the title and form width to be ignored so it fills the preview window. That sticks in the formservice so just reset when wanting the full preview
+      if(mode === EditorModeEnum.PREVIEW){
+        this.editorMode = EditorModeEnum.NONE;
+        setTimeout(() => {
+          this.formService.forceFullFormWidth = false;
+          this.formService.forceHideFormTitle = false;
+          this.editorMode = mode;
+        }, 50);
+      }else{
+        this.editorMode = mode;
+      }
     })
   }
 
@@ -82,7 +93,13 @@ export class TfNgFormEditorComponent implements OnInit {
       }
     )
   }
-  destroy(){
+
+
+  ngOnDestroy(){
+    // the inline preview forces the title and form width to be ignored so it fills the preview window. That sticks in the formservice so just reset when leaving
+    this.formService.forceFullFormWidth = false;
+    this.formService.forceHideFormTitle = false;
+    //
     this.formSubscription.unsubscribe;
     this.editorModeSubscription.unsubscribe;
   }

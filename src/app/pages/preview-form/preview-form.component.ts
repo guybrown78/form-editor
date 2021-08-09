@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TfNgFormService, TfNgFormPermissionService, DisplayJsonService } from 'tf-ng-form';
 import { Subscription } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './preview-form.component.html',
   styleUrls: ['./preview-form.component.css']
 })
-export class PreviewFormComponent implements OnInit {
+export class PreviewFormComponent implements OnInit, OnDestroy {
 
   submittedSubscription:Subscription;
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import {
@@ -24,7 +24,7 @@ interface TabItemModel {
   templateUrl: './field.component.html',
   styleUrls: ['./field.component.css']
 })
-export class FieldComponent implements OnInit {
+export class FieldComponent implements OnInit, OnDestroy {
 
   selectedKeySubscription:Subscription
 
@@ -48,7 +48,6 @@ export class FieldComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("HERE.......")
     this.initialiseFormSubscription()
   }
 
@@ -189,7 +188,7 @@ export class FieldComponent implements OnInit {
     }
   }
 
-  destroy(){
+  ngOnDestroy(){
     this.selectedKeySubscription.unsubscribe
   }
 

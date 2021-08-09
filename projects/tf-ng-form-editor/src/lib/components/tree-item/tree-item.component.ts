@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { OrdinalDirectionEnum } from '../../tf-ng-form-editor.service';
 import { Subscription } from 'rxjs';
 
@@ -11,10 +11,10 @@ import { NzTreeNode } from 'ng-zorro-antd/tree';
   templateUrl: './tree-item.component.html',
   styleUrls: ['./tree-item.component.css']
 })
-export class TreeItemComponent {
+export class TreeItemComponent implements OnDestroy {
   @Input('node') node:NzTreeNode;
 
-  selectedKeySubscription:Subscription
+  // selectedKeySubscription:Subscription
   fieldItem:FieldItemModel
   popoverVisible: boolean = false;
 
@@ -68,8 +68,8 @@ export class TreeItemComponent {
     this.formEditorService.deleteFormItem(this.node.key, this.node.parentNode?.key);
   }
 
-  destroy(){
-    this.selectedKeySubscription.unsubscribe
+  ngOnDestroy(){
+    // this.selectedKeySubscription.unsubscribe
   }
 
 }

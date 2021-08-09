@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './create-form.component.html',
   styleUrls: ['./create-form.component.css']
 })
-export class CreateFormComponent implements OnInit {
+export class CreateFormComponent implements OnInit, OnDestroy {
 
   formSavedSubscription:Subscription;
   formCloseSubscription:Subscription;
@@ -73,7 +73,7 @@ export class CreateFormComponent implements OnInit {
     })
   }
 
-  destroy(){
+  ngOnDestroy(){
     this.formSavedSubscription.unsubscribe;
     this.formCloseSubscription.unsubscribe;
   }
