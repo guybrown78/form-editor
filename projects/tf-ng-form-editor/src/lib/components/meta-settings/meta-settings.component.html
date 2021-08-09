@@ -38,6 +38,19 @@
       </nz-form-control>
     </nz-form-item>
 
+    <div nz-row nzJustify="end" nzAlign="middle">
+      <button
+        nz-col nz-button
+        nzType="primary" type="submit"
+        [ngClass]="!(metaForm.touched && metaForm.valid) ? 'grey' : 'aqua' "
+        [disabled]="!(metaForm.touched && metaForm.valid)"
+        (click)="onMetaFormUpdate()"
+        [nzLoading]="metaFormUpdating"
+      >
+        {{ metaFormUpdating ? 'Updating' : 'Update' }}
+      </button>
+    </div>
+
   </form>
 
   <!-- <pre>{{ selectableItem |json }}</pre> -->

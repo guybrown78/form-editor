@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
+import { CheckFormMetaData, CheckFormMetaDataStatus, EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
 import { Subscription } from 'rxjs';
 //
 
@@ -15,6 +15,7 @@ export class CreateFormComponent implements OnInit, OnDestroy {
 
   formSavedSubscription:Subscription;
   formCloseSubscription:Subscription;
+  checkFormMetaInputSubscription:Subscription;
   loaded:boolean = false;
 
   constructor(
@@ -38,6 +39,7 @@ export class CreateFormComponent implements OnInit, OnDestroy {
             this.formEditorService.setEditorMode(EditorModeEnum.EDIT);
             this.initialiseFormSaveSubscription();
             this.initialiseFormCloseSubscription();
+            this.initialiseFormMetaCheckSubscription()
             this.loaded = true;
 
         //   }
@@ -63,6 +65,28 @@ export class CreateFormComponent implements OnInit, OnDestroy {
     })
   }
 
+  initialiseFormMetaCheckSubscription(){
+    this.checkFormMetaInputSubscription = this.formEditorService.checkFormMetaOutput.subscribe((data:CheckFormMetaData) => {
+      //
+      console.log(data);
+      const returnedData:CheckFormMetaData = { ...data }
+      if(data.allowTitle === CheckFormMetaDataStatus.PENDING){
+        console.log(`Check form data title that '${data.title}' is allowed!`)
+        // assume it is allowed
+        returnedData.allowTitle = CheckFormMetaDataStatus.ALLOW
+      }
+      if(data.allowCode === CheckFormMetaDataStatus.PENDING){
+        console.log(`Check form data code that '${data.code}' is allowed!`)
+        // assume it is allowed
+        returnedData.allowCode = CheckFormMetaDataStatus.ALLOW
+      }
+      setTimeout(() => {
+        // send it back with a fake TEMPORARY timeout
+        this.formEditorService.checkFormMetaDataInput(returnedData)
+      }, 750);
+
+    })
+  }
   initialiseFormCloseSubscription(){
     this.formCloseSubscription = this.formEditorService.close.subscribe((close:boolean) => {
       if(close){
@@ -74,8 +98,9 @@ export class CreateFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.formSavedSubscription.unsubscribe;
-    this.formCloseSubscription.unsubscribe;
+    this.formSavedSubscription.unsubscribe();
+    this.formCloseSubscription.unsubscribe();
+    this.checkFormMetaInputSubscription.unsubscribe();
   }
 
 }

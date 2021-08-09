@@ -39,7 +39,17 @@ export enum OrdinalDirectionEnum {
   DOWN,
 }
 
-
+export interface CheckFormMetaData {
+  title?:string
+  allowTitle?:CheckFormMetaDataStatus
+  code?:string
+  allowCode?:CheckFormMetaDataStatus
+}
+export enum CheckFormMetaDataStatus {
+  PENDING,
+  ALLOW,
+  DISALLOW,
+}
 
 
 @Injectable({
@@ -58,6 +68,8 @@ export class TfNgFormEditorService implements OnDestroy {
   private _formUpdated = new Subject<boolean>();
   private _save = new Subject<SaveFormModel>();
   private _close = new Subject<boolean>();
+  private _checkFormMetaOutput = new Subject<CheckFormMetaData>();
+  private _checkFormMetaInput = new Subject<CheckFormMetaData>();
 
   // Observable stream
   form = this._form.asObservable();
@@ -68,6 +80,8 @@ export class TfNgFormEditorService implements OnDestroy {
   formUpdated = this._formUpdated.asObservable();
   save = this._save.asObservable();
   close = this._close.asObservable();
+  checkFormMetaOutput = this._checkFormMetaOutput.asObservable();
+  checkFormMetaInput = this._checkFormMetaInput.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -471,6 +485,14 @@ export class TfNgFormEditorService implements OnDestroy {
   closeFormEditor() {
     this._close.next(true);
 	}
+
+
+  checkFormMetaDataOutput(data:CheckFormMetaData){
+    this._checkFormMetaOutput.next(data);
+  }
+  checkFormMetaDataInput(data:CheckFormMetaData){
+    this._checkFormMetaInput.next(data);
+  }
 
   ngOnDestroy(){
     this.formSubscription.unsubscribe

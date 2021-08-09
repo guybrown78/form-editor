@@ -10,7 +10,7 @@ import { TfNgFormEditorComponent } from './tf-ng-form-editor.component';
 import { FieldPickerComponent } from './components/field-picker/field-picker.component';
 
 
-import { NgZorroModule } from '../../../../src/app/modules/ng-zorro.module'
+import { NgZorroModule } from './ng-zorro.module'
 
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { NavigationSideBarComponent } from './components/navigation-side-bar/navigation-side-bar.component';

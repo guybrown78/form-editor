@@ -72,6 +72,8 @@ export class AppComponent {
     this.appNavigationService.navigationData = navigationData;
     this.appNavigationService.navigationDataLoaded = true;
     //
+    // this.appNavigationService
+    //
     this.appHeaderService.setOptions({
       appCode: 'fb',
       appTitle: this.title,

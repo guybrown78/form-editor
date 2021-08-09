@@ -20,3 +20,28 @@ service ...
 
 
 `npm update --legacy-peer-deps`
+
+
+
+### To build `tf-ng-form-editor`
+
+
+**** UPDATE PACKAGE VERSION ****
+
+Build the project for prod which doesn't use IVY ngBuild as npm doesn't except pkgs built in ivy
+
+
+`ng build tf-ng-form-editor --prod`
+
+Navigate to the built project
+
+`cd dist/tf-ng-form-editor`
+
+Publish
+
+`npm publish`
+
+Return back to workplace
+
+`cd ../../`
+
