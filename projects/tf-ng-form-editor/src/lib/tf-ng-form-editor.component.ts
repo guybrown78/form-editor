@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DisplayJsonService, TfNgFormService } from 'tf-ng-form';
 import { EditorModeEnum, TfNgFormEditorService } from './tf-ng-form-editor.service';
-import { FormEditorConfigService, SelectableFieldItemModel } from './form-editor-config.service';
-import { FieldItemModel } from './to-share/field-item-model.interface';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 

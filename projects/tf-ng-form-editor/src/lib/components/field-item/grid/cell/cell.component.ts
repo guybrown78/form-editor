@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { FormEditorConfigService, SelectableFieldItemModel, SelectableCategory } from 'projects/tf-ng-form-editor/src/lib/form-editor-config.service';
-import { TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/lib/tf-ng-form-editor.service';
-import { FieldItemGridOptionsColumnDefsModel } from 'projects/tf-ng-form-editor/src/lib/to-share/field-item-component-options-model.interface';
-import { FieldItemModel, SelectableWrapper } from 'projects/tf-ng-form-editor/src/lib/to-share/field-item-model.interface';
+import { FormEditorConfigService, SelectableFieldItemModel, SelectableCategory } from '../../../../form-editor-config.service'
+import { TfNgFormEditorService } from '../../../../tf-ng-form-editor.service'
+import { FieldItemGridOptionsColumnDefsModel } from '../../../../to-share/field-item-component-options-model.interface'
+import { FieldItemModel, SelectableWrapper } from '../../../../to-share/field-item-model.interface';
 import { take } from 'rxjs/operators';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { CellFieldItemComponent } from '../cell-field-item/cell-field-item.component'

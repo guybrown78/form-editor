@@ -40,6 +40,9 @@ import { LayoutComponent } from './components/field/layout/layout.component';
 import { ConfigOptionsComponent } from './components/field/config-options/config-options.component';
 import { InlinePreviewComponent } from './components/inline-preview/inline-preview.component';
 
+import { TfNgFormEditorService } from './tf-ng-form-editor.service';
+import { FormEditorConfigService } from './form-editor-config.service';
+
 
 @NgModule({
   declarations: [

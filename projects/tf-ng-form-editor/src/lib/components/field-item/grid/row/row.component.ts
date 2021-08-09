@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Field } from '@ngx-formly/core';
-import { FormEditorConfigService, SelectableFieldItemModel } from 'projects/tf-ng-form-editor/src/lib/form-editor-config.service';
-import { TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/lib/tf-ng-form-editor.service';
-import { FieldItemGridOptionsColumnDefsModel } from 'projects/tf-ng-form-editor/src/lib/to-share/field-item-component-options-model.interface';
-import { FieldItemModel, SelectableWrapper } from 'projects/tf-ng-form-editor/src/lib/to-share/field-item-model.interface';
+import { FormEditorConfigService, SelectableFieldItemModel } from '../../../../form-editor-config.service';
+import { TfNgFormEditorService } from '../../../../tf-ng-form-editor.service';
+import { FieldItemGridOptionsColumnDefsModel } from '../../../../to-share/field-item-component-options-model.interface';
+import { FieldItemModel, SelectableWrapper } from '../../../../to-share/field-item-model.interface';
 import { take } from 'rxjs/operators';
 
 export interface RowUpdateModel{

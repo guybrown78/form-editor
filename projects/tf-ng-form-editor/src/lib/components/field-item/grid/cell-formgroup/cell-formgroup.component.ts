@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormEditorConfigService, SelectableCategory, SelectableFieldItemModel } from 'projects/tf-ng-form-editor/src/lib/form-editor-config.service';
-import { TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/lib/tf-ng-form-editor.service';
-import { FieldItemModel } from 'projects/tf-ng-form-editor/src/lib/to-share/field-item-model.interface';
+import { FormEditorConfigService, SelectableCategory, SelectableFieldItemModel } from '../../../../form-editor-config.service';
+import { TfNgFormEditorService } from '../../../../tf-ng-form-editor.service';
+import { FieldItemModel } from '../../../../to-share/field-item-model.interface';
 import { take } from 'rxjs/operators';
 
 

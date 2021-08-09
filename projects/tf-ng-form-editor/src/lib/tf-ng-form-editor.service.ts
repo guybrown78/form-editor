@@ -38,7 +38,6 @@ export enum OrdinalDirectionEnum {
   UP,
   DOWN,
 }
-
 export interface CheckFormMetaData {
   title?:string
   allowTitle?:CheckFormMetaDataStatus
