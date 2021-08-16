@@ -18,6 +18,11 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
   editorMode:EditorModeEnum;
 
   showInlinePreview:boolean = true;
+
+  ready:boolean = false;
+  initForm:boolean = false;
+
+
   onShowInlinePreviewUpdated(value:boolean){
     this.showInlinePreview = value;
   }
@@ -38,30 +43,46 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
         // console.log("form has been initialised...");
         this.initialiseFormSubscription();
       }else{
-        this.formEditorService.initialiseNewForm({
-          title:"New form",
-          version:"001",
-          jsonSchema:true
-        });
-        this.initialiseFormSubscription();
+        // this.formEditorService.initialiseNewForm({
+        //   title:"New form",
+        //   version:"001",
+        //   jsonSchema:true
+        // });
+        // this.initialiseFormSubscription();
+        setTimeout(() => {
+          this.initForm = true;
+        }, 500);
       }
     }, formError => {
       console.log("Form Editor service subscription error");
     })
   }
 
+  onFormCreated(){
+    this.initForm = false;
+    setTimeout(() => {
+      this.initialiseFormSubscription();
+    }, 500);
+  }
   initialiseFormSubscription(){
     this.formSubscription = this.formEditorService.form.subscribe(form => {
       // get current form
       this.formEditorService.form.pipe(take(1)).subscribe(form => {
         // if(form){
           // stringify and set to json
-          this.formService.setData(JSON.stringify(form)).subscribe(data => {
-            // CAN UPDATE PREVIEW HERE
-          })
+          if(form){
+            this.formService.setData(JSON.stringify(form)).subscribe(data => {
+              // CAN UPDATE PREVIEW HERE
+            })
+          }
+
         // }
       })
-    })
+    });
+
+    setTimeout(() => {
+      this.ready = true;
+    }, 500);
   }
 
   initialiseEditorModeSubscription(){
@@ -98,8 +119,12 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
     this.formService.forceFullFormWidth = false;
     this.formService.forceHideFormTitle = false;
     //
-    this.formSubscription.unsubscribe;
-    this.editorModeSubscription.unsubscribe;
+    if(this.formSubscription){
+      this.formSubscription.unsubscribe;
+    }
+    if(this.editorModeSubscription){
+      this.editorModeSubscription.unsubscribe;
+    }
   }
 
 }

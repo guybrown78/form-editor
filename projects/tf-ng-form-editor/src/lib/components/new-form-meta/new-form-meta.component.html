@@ -1,0 +1,94 @@
+
+
+<div nz-row nzJustify="center" nzAlign="middle">
+  <div nz-col nzSpan="12" nzLg="10" nzXl="8">
+    <tf-ng-card colour="white">
+      <tf-ng-form-title>
+        <h2 nz-typography class="navy">Create a new form</h2>
+      </tf-ng-form-title>
+
+      <form nz-form [formGroup]="metaForm" nzLayout="vertical">
+
+        <nz-form-item>
+          <nz-form-control
+            [nzValidateStatus]="
+              allowTitle === 2 ? 'error' : ''
+          ">
+            <nz-form-label nzFor="title">Form Title</nz-form-label>
+            <nz-input-group [nzSuffix]="suffixTitle">
+              <input nz-input formControlName="title" placeholder="eg: My Form"/>
+            </nz-input-group>
+
+            <ng-template #suffixTitle>
+              <i nz-icon nzType="sync" [nzSpin]="true" class="grey" *ngIf="allowTitle === 0"></i>
+              <i nz-icon nzType="check-circle" nzTheme="outline" class="green" *ngIf="allowTitle === 1"></i>
+              <i nz-icon nzType="close-circle" nzTheme="outline" class="red" *ngIf="allowTitle === 2"></i>
+            </ng-template>
+
+
+          </nz-form-control>
+        </nz-form-item>
+
+        <div
+          nz-row nzAlign="middle" nzJustify="end"
+          class="switch-wrapper"
+        >
+          <nz-form-label
+            nz-col nzFlex="auto"
+            nzFor="showTitle"
+          >Show title in form</nz-form-label>
+          <nz-form-control nz-col nzFlex="45px">
+            <nz-switch formControlName="showTitle"></nz-switch>
+          </nz-form-control>
+        </div>
+
+
+        <nz-form-item>
+          <nz-form-control
+            [nzValidateStatus]="
+              allowCode === 2 ? 'error' : ''
+          ">
+            <nz-form-label nzFor="code">Code</nz-form-label>
+            <nz-input-group  [nzSuffix]="suffixCode">
+              <input nz-input formControlName="code" placeholder="eg: form-001"/>
+            </nz-input-group>
+
+            <ng-template #suffixCode>
+              <i nz-icon nzType="sync" [nzSpin]="true" class="grey" *ngIf="allowCode === 0"></i>
+              <i nz-icon nzType="check-circle" nzTheme="outline" class="green" *ngIf="allowCode === 1"></i>
+              <i nz-icon nzType="close-circle" nzTheme="outline" class="red" *ngIf="allowCode === 2"></i>
+            </ng-template>
+
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control>
+            <nz-form-label nzFor="code">Version</nz-form-label>
+            <input nz-input formControlName="version"/>
+          </nz-form-control>
+        </nz-form-item>
+
+        <p nz-typography *ngIf="allowCode === 0 || allowTitle === 0" class="grey">
+          Checking form {{ allowTitle === 0 ? 'title' : '' }}{{ allowTitle === 0 && allowCode === 0 ? ' and ' : '' }}{{ allowCode === 0 ? 'code' : '' }}...
+        </p>
+        <p nz-typography *ngIf="allowCode !== 0 && allowTitle !== 0">&nbsp;</p>
+
+        <div nz-row nzJustify="end" nzAlign="top" class="form-submit-wrapper">
+          <button
+            nz-col nz-button
+            nzType="primary" type="submit"
+            [ngClass]="!(metaForm.dirty && metaForm.valid) ? 'grey' : 'aqua' "
+            [disabled]="!(metaForm.dirty && metaForm.valid)"
+            (click)="onMetaFormUpdate()"
+            [nzLoading]="metaFormUpdating"
+          >
+            {{ metaFormUpdating ? 'Creating' : 'Create Form' }}
+          </button>
+        </div>
+
+      </form>
+
+    </tf-ng-card>
+  </div>
+</div>

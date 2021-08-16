@@ -1,21 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
-import { combineAll, take } from 'rxjs/operators';
-import { TfNgFormService } from 'tf-ng-form';
+
 import { CheckFormMetaData, CheckFormMetaDataStatus, TfNgFormEditorService } from '../../tf-ng-form-editor.service';
 
 import { FormMetaModel } from '../../to-share/form-meta-model.interface';
+
 @Component({
-  selector: 'form-editor-meta-settings',
-  templateUrl: './meta-settings.component.html',
-  styleUrls: ['./meta-settings.component.css']
+  selector: 'form-editor-new-form',
+  templateUrl: './new-form-meta.component.html',
+  styleUrls: ['./new-form-meta.component.css']
 })
-export class MetaSettingsComponent implements OnInit, OnDestroy {
+export class NewFormMetaComponent implements OnInit {
 
   metaForm: FormGroup;
-  metaUpdateSubscription:Subscription;
+  // metaUpdateSubscription:Subscription;
   checkFormMetaInputSubscription:Subscription;
   metaData:FormMetaModel;
   loaded:boolean = false;
@@ -24,62 +23,29 @@ export class MetaSettingsComponent implements OnInit, OnDestroy {
   allowTitle:CheckFormMetaDataStatus = CheckFormMetaDataStatus.UNSET;
   allowCode:CheckFormMetaDataStatus = CheckFormMetaDataStatus.UNSET;
 
+  @Output('formInited') formInited = new EventEmitter<boolean>();
+
   constructor(
     private formEditorService:TfNgFormEditorService,
     private fb:FormBuilder,
-    private message: NzMessageService
   ) { }
 
   ngOnInit(): void {
-    this.initialiseMetaUpdateSubscription();
-    this.getMetaData()
+    this.metaData = {
+      title:null,
+      code:null,
+      showTitle:true,
+      version:"1"
+    }
+    this.initForm();
   }
 
-  initialiseMetaUpdateSubscription(){
-    this.metaUpdateSubscription = this.formEditorService.metaUpdated.subscribe(updated => {
-      if(updated){
-        this.getMetaData();
-      }
-    }, err => {
-      // TODO
-    })
-  }
-
-  getMetaData(){
-    // this.formSubscription =
-    this.formEditorService.form.pipe(take(1)).subscribe(form => {
-      if(form){
-        this.metaData = form.meta;
-        this.initForm();
-        this.loaded = true;
-      }
-    }, err => {
-      // TODO
-    })
-  }
 
   initForm(): void {
     this.metaForm = this.fb.group({
-      title: [
-        this.metaData.title,
-        {
-          validators: [Validators.required],
-          updateOn: 'change'
-        }
-      ],
-      showTitle:[
-        this.metaData.showTitle || null,
-        {
-          updateOn: 'change'
-        }
-      ],
-      code: [
-        this.metaData.code || null,
-        {
-          validators: [Validators.required],
-          updateOn: 'change'
-        }
-      ],
+      title: [this.metaData.title,[Validators.required]],
+      showTitle:[this.metaData.showTitle],
+      code: [this.metaData.code,[Validators.required]],
       version: [this.metaData.version]
     });
     this.metaForm.controls['version'].disable();
@@ -131,7 +97,7 @@ export class MetaSettingsComponent implements OnInit, OnDestroy {
             this.allowCode = cmd.allowCode
           }
           if(allow === check){
-            this.syncFormDataToModel();
+            this.setMetaData();
           }else{
             // reset the updating state
             this.metaForm.markAsPristine();
@@ -143,29 +109,33 @@ export class MetaSettingsComponent implements OnInit, OnDestroy {
         this.formEditorService.checkFormMetaDataOutput(checkMetaData)
       }else{
         // 3. if they don't - send the form to sync
-        this.syncFormDataToModel();
+        this.setMetaData();
       }
 
     }
   }
 
-  // checkMetaData
-  syncFormDataToModel(){
+
+  setMetaData(){
+    console.log("Done")
+    this.formEditorService.initialiseNewForm({
+      ...this.metaForm.value,
+      jsonSchema:true
+    });
+    // reset the updating state
     this.metaForm.markAsPristine();
     this.metaFormUpdating = false;
-    if((this.allowTitle !== 0 && this.allowTitle !== 2) && (this.allowCode !== 0 && this.allowCode !== 2)){
-      this.metaData = { ...this.metaData, ...this.metaForm.value}
-      this.formEditorService.updateMetaData(this.metaData);
-      this.message.create('success', `Form meta data has been updated`);
-    }
+    // output
+    this.formInited.emit(true);
 
   }
 
   ngOnDestroy(){
-    this.metaUpdateSubscription.unsubscribe;
+    // this.metaUpdateSubscription.unsubscribe;
     if(this.checkFormMetaInputSubscription){
-      this.checkFormMetaInputSubscription.unsubscribe;
+      this.checkFormMetaInputSubscription.unsubscribe
     }
   }
+
 
 }

@@ -1,5 +1,14 @@
 
-<div nz-row class="form-editor-page">
+<div nz-row nzJustify="center" nzAlign="middle" class="initial-page-wrapper" *ngIf="!ready">
+  <div nz-col *ngIf="!initForm">
+    <i class="white text-super-xl" nz-icon [nzType]="'loading'"></i>
+  </div>
+  <form-editor-new-form nz-col nzFlex="auto" *ngIf="initForm" (formInited)="onFormCreated()"></form-editor-new-form>
+</div>
+
+
+<!-- Form has been created -->
+<div nz-row class="form-editor-page" *ngIf="ready">
 
   <div nz-col nzFlex="80px" class="form-editor-navigation">
     <form-editor-navigation

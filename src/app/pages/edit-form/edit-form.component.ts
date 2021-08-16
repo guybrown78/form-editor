@@ -14,7 +14,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
 
   formSavedSubscription:Subscription;
   formCloseSubscription:Subscription;
-
+  ready:boolean = false;
   constructor(
     private formEditorService: TfNgFormEditorService,
     private message: NzMessageService,
@@ -32,7 +32,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
       // only thing left to do is listen for the submit button to be pressed
       this.initialiseFormSaveSubscription();
       this.initialiseFormCloseSubscription();
-
+      this.ready = true;
     }, err => {
       // if the data can't load, then make the UI nice and show the user
       console.log("error loading data in controllong app")

@@ -2,12 +2,21 @@
   display: block;
 }
 
+.initial-page-wrapper{
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  margin-top: -98px;
+}
+
+
+
 .form-editor-page{
   display: flex;
   /* flex-direction: column; */
   min-height: 100vh;
   position: relative;
-
+  flex-wrap: nowrap;
   margin-top: -98px;
   margin-left: -0.6rem;
 }
@@ -62,4 +71,7 @@
   transition-property: flex;
 	transition-duration: 200ms;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.text-super-xl{
+  font-size: 40px;
 }
