@@ -36,7 +36,7 @@
         </div>
       </div>
 
-      <div nz-col [nzFlex]="showInlinePreview ? '450px' : '30px' ">
+      <div nz-col [nzFlex]="showInlinePreview ? '450px' : '30px' " class="dynamic-width">
         <form-editor-inline-preview
           [showInlinePreview]="showInlinePreview"
           (updatedShowInlinePreview)="onShowInlinePreviewUpdated($event)"

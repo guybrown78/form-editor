@@ -11,3 +11,9 @@
 .switch-wrapper{
   margin-bottom: 8px;
 }
+.form-submit-wrapper{
+  flex-wrap: nowrap;
+}
+.form-submit-wrapper p{
+  margin-right: 10px;
+}

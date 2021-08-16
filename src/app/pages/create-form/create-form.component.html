@@ -2,3 +2,37 @@
 <tf-ng-form-editor *ngIf="loaded"></tf-ng-form-editor>
 
 
+<!-- For demo purposes only - show the checks / toggle of CheckFormMetaData -->
+<ng-template #modalContent>
+
+  <p nz-typography class="grey">
+    <span class="bold italic">This is for demo purposes only.</span> It allows you to toggle the allowCode and allowTitle flags (where applicable) in the CheckFormMetaData. The CheckFormMetaData is then passed returned back to the tf-ng-form-editor once confirmed.
+  </p>
+
+  <div nz-row nzAlign="middle" nzJustify="end" class="no-wrap" *ngIf="returnedMetaDataCheck?.allowTitle">
+    <div nz-col nzFlex="auto">
+      Allow the form title to be changed to {{returnedMetaDataCheck.title}}
+    </div>
+    <nz-form-control nz-col nzFlex="45px">
+      <nz-switch
+        [ngModel]="false"
+        (ngModelChange)="onMetaSwitchUpdate($event,'title')"
+      ></nz-switch>
+    </nz-form-control>
+  </div>
+
+  <nz-divider *ngIf="returnedMetaDataCheck?.allowTitle && returnedMetaDataCheck?.allowCode"></nz-divider>
+
+  <div nz-row nzAlign="middle" nzJustify="end" class="no-wrap" *ngIf="returnedMetaDataCheck?.allowCode">
+    <div nz-col nzFlex="auto">
+      Allow the form code to be changed to <span class="bold italic">{{returnedMetaDataCheck.code}}</span>
+    </div>
+    <nz-form-control nz-col nzFlex="45px">
+      <nz-switch
+        [ngModel]="false"
+        (ngModelChange)="onMetaSwitchUpdate($event,'code')"
+      ></nz-switch>
+    </nz-form-control>
+  </div>
+
+</ng-template>

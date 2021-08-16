@@ -1,5 +1,12 @@
 
-:host,
+:host{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1 0 0;
+  margin: 0;
+  padding: 0;
+}
 .form-editor-field-detail{
   display: flex;
   flex-direction: column;
@@ -11,10 +18,12 @@
   flex-direction: column;
   /* padding:1rem; */
 }
-
+.flex-title-wrapper{
+  margin-top: -7px;
+}
 tf-ng-form{
   margin-top: -32px;
 }
 .open-button{
-  margin-top: 20px;
+  margin-top: 13px;
 }

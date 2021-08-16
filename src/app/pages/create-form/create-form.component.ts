@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-// import { CheckFormMetaData, CheckFormMetaDataStatus, EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
-import { CheckFormMetaData, CheckFormMetaDataStatus, EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'tf-ng-form-editor'
-
+import { CheckFormMetaData, CheckFormMetaDataStatus, EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
+// import { CheckFormMetaData, CheckFormMetaDataStatus, EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'tf-ng-form-editor'
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { Subscription } from 'rxjs';
 //
 
@@ -15,15 +15,22 @@ import { Subscription } from 'rxjs';
 })
 export class CreateFormComponent implements OnInit, OnDestroy {
 
+  @ViewChild("modalContent") modalContent: TemplateRef<any>;
+
   formSavedSubscription:Subscription;
   formCloseSubscription:Subscription;
   checkFormMetaInputSubscription:Subscription;
   loaded:boolean = false;
 
+  // keep an instance of the check model to sync with the form editor and return back
+  returnedMetaDataCheck:CheckFormMetaData
+
+
   constructor(
     private formEditorService: TfNgFormEditorService,
     private message: NzMessageService,
-    private router: Router
+    private router: Router,
+    private modal:NzModalService
   ) { }
 
   ngOnInit(): void {
@@ -69,26 +76,35 @@ export class CreateFormComponent implements OnInit, OnDestroy {
 
   initialiseFormMetaCheckSubscription(){
     this.checkFormMetaInputSubscription = this.formEditorService.checkFormMetaOutput.subscribe((data:CheckFormMetaData) => {
-      //
-      console.log(data);
-      const returnedData:CheckFormMetaData = { ...data }
+
+      // sync the views model to match the form editor
+      this.returnedMetaDataCheck = { ...data }
+
+      // for demo purposes, set the allow flags to DISALLOW (false) beacuse the demo uses a switch true/false
       if(data.allowTitle === CheckFormMetaDataStatus.PENDING){
-        console.log(`Check form data title that '${data.title}' is allowed!`)
-        // assume it is allowed
-        returnedData.allowTitle = CheckFormMetaDataStatus.ALLOW
+        this.returnedMetaDataCheck.allowTitle = CheckFormMetaDataStatus.DISALLOW
       }
       if(data.allowCode === CheckFormMetaDataStatus.PENDING){
-        console.log(`Check form data code that '${data.code}' is allowed!`)
-        // assume it is allowed
-        returnedData.allowCode = CheckFormMetaDataStatus.ALLOW
+        this.returnedMetaDataCheck.allowCode = CheckFormMetaDataStatus.DISALLOW
       }
-      setTimeout(() => {
-        // send it back with a fake TEMPORARY timeout
-        this.formEditorService.checkFormMetaDataInput(returnedData)
-      }, 750);
+
+      // show a example modal for demo purposes to allow/disallow meta data
+      this.modal.confirm({
+        nzTitle: 'Confirm form meta data',
+        nzClassName:"tf-app-modal-single-btn",
+        nzContent: this.modalContent,
+        nzCancelText:null,
+        nzClosable:false,
+        nzOkText:'Confirm',
+        nzOnOk: () => {
+          this.formEditorService.checkFormMetaDataInput(this.returnedMetaDataCheck);
+          this.returnedMetaDataCheck = null;
+        }
+      })
 
     })
   }
+
   initialiseFormCloseSubscription(){
     this.formCloseSubscription = this.formEditorService.close.subscribe((close:boolean) => {
       if(close){
@@ -97,6 +113,16 @@ export class CreateFormComponent implements OnInit, OnDestroy {
         this.router.navigate(['dashboard'])
       }
     })
+  }
+
+
+  onMetaSwitchUpdate(selected:boolean, type:string){
+    if(type === 'title'){
+      this.returnedMetaDataCheck.allowTitle = selected ? CheckFormMetaDataStatus.ALLOW : CheckFormMetaDataStatus.DISALLOW
+    }
+    if(type === 'code'){
+      this.returnedMetaDataCheck.allowCode = selected ? CheckFormMetaDataStatus.ALLOW : CheckFormMetaDataStatus.DISALLOW;
+    }
   }
 
   ngOnDestroy(){

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-// import { SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
-import { SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'tf-ng-form-editor'
+import { SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
+// import { SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'tf-ng-form-editor'
 
 import { Subscription } from 'rxjs';
 @Component({

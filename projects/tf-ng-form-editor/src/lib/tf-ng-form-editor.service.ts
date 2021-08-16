@@ -45,9 +45,10 @@ export interface CheckFormMetaData {
   allowCode?:CheckFormMetaDataStatus
 }
 export enum CheckFormMetaDataStatus {
-  PENDING,
-  ALLOW,
-  DISALLOW,
+  UNSET = -1,
+  PENDING = 0,
+  ALLOW = 1,
+  DISALLOW = 2,
 }
 
 
