@@ -23,6 +23,8 @@ export class NewFormMetaComponent implements OnInit {
   allowTitle:CheckFormMetaDataStatus = CheckFormMetaDataStatus.UNSET;
   allowCode:CheckFormMetaDataStatus = CheckFormMetaDataStatus.UNSET;
 
+  returnedCheckedFormMetaData:CheckFormMetaData;
+
   @Output('formInited') formInited = new EventEmitter<boolean>();
 
   constructor(
@@ -56,6 +58,7 @@ export class NewFormMetaComponent implements OnInit {
   onMetaFormUpdate(){
     if(this.metaForm.valid){
       this.metaFormUpdating = true;
+      this.returnedCheckedFormMetaData = {}
       // 1. check if title or code need checking?
       let check:number = 0;
       let checkMetaData:CheckFormMetaData = {}
@@ -76,35 +79,45 @@ export class NewFormMetaComponent implements OnInit {
           this.checkFormMetaInputSubscription.unsubscribe();
           let allow:number = 0;
           //
-          if(cmd.allowTitle){
-            if(cmd.allowTitle === CheckFormMetaDataStatus.ALLOW){
-              allow++;
-              this.metaData = {
-                ...this.metaData,
-                title:cmd.title
+          if(cmd){
+            //
+            this.returnedCheckedFormMetaData = cmd;
+            //
+            if(cmd.allowTitle){
+              if(cmd.allowTitle === CheckFormMetaDataStatus.ALLOW){
+                allow++;
+                this.metaData = {
+                  ...this.metaData,
+                  title:cmd.title
+                }
               }
+              this.allowTitle = cmd.allowTitle
             }
-            this.allowTitle = cmd.allowTitle
-          }
-          if(cmd.allowCode){
-            if(cmd.allowCode === CheckFormMetaDataStatus.ALLOW){
-              allow++
-              this.metaData = {
-                ...this.metaData,
-                code:cmd.code
+            if(cmd.allowCode){
+              if(cmd.allowCode === CheckFormMetaDataStatus.ALLOW){
+                allow++
+                this.metaData = {
+                  ...this.metaData,
+                  code:cmd.code
+                }
               }
+              this.allowCode = cmd.allowCode
             }
-            this.allowCode = cmd.allowCode
-          }
-          if(allow === check){
-            this.setMetaData();
+            if(allow === check){
+              this.setMetaData();
+            }else{
+              // reset the updating state
+              this.metaForm.markAsPristine();
+              this.metaFormUpdating = false;
+              // need to let user know what isn't correct
+
+            }
           }else{
-            // reset the updating state
+            // no data returned!
             this.metaForm.markAsPristine();
             this.metaFormUpdating = false;
-            // need to let user know what isn't correct
-
           }
+
         })
         this.formEditorService.checkFormMetaDataOutput(checkMetaData)
       }else{
@@ -117,7 +130,6 @@ export class NewFormMetaComponent implements OnInit {
 
 
   setMetaData(){
-    console.log("Done")
     this.formEditorService.initialiseNewForm({
       ...this.metaForm.value,
       jsonSchema:true

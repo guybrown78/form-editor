@@ -24,6 +24,9 @@ export class MetaSettingsComponent implements OnInit, OnDestroy {
   allowTitle:CheckFormMetaDataStatus = CheckFormMetaDataStatus.UNSET;
   allowCode:CheckFormMetaDataStatus = CheckFormMetaDataStatus.UNSET;
 
+  returnedCheckedFormMetaData:CheckFormMetaData;
+
+
   constructor(
     private formEditorService:TfNgFormEditorService,
     private fb:FormBuilder,
@@ -90,6 +93,7 @@ export class MetaSettingsComponent implements OnInit, OnDestroy {
   onMetaFormUpdate(){
     if(this.metaForm.valid){
       this.metaFormUpdating = true;
+      this.returnedCheckedFormMetaData = {}
       // 1. check if title or code need checking?
       let check:number = 0;
       let checkMetaData:CheckFormMetaData = {}
@@ -110,35 +114,47 @@ export class MetaSettingsComponent implements OnInit, OnDestroy {
           this.checkFormMetaInputSubscription.unsubscribe();
           let allow:number = 0;
           //
-          if(cmd.allowTitle){
-            if(cmd.allowTitle === CheckFormMetaDataStatus.ALLOW){
-              allow++;
-              this.metaData = {
-                ...this.metaData,
-                title:cmd.title
+
+          if(cmd){
+            //
+            this.returnedCheckedFormMetaData = cmd;
+            //
+            if(cmd.allowTitle){
+              if(cmd.allowTitle === CheckFormMetaDataStatus.ALLOW){
+                allow++;
+                this.metaData = {
+                  ...this.metaData,
+                  title:cmd.title
+                }
               }
+              this.allowTitle = cmd.allowTitle
             }
-            this.allowTitle = cmd.allowTitle
-          }
-          if(cmd.allowCode){
-            if(cmd.allowCode === CheckFormMetaDataStatus.ALLOW){
-              allow++
-              this.metaData = {
-                ...this.metaData,
-                code:cmd.code
+            if(cmd.allowCode){
+              if(cmd.allowCode === CheckFormMetaDataStatus.ALLOW){
+                allow++
+                this.metaData = {
+                  ...this.metaData,
+                  code:cmd.code
+                }
               }
+              this.allowCode = cmd.allowCode
             }
-            this.allowCode = cmd.allowCode
-          }
-          if(allow === check){
-            this.syncFormDataToModel();
+            if(allow === check){
+              this.syncFormDataToModel();
+            }else{
+              // reset the updating state
+              this.metaForm.markAsPristine();
+              this.metaFormUpdating = false;
+              // need to let user know what isn't correct
+
+            }
           }else{
-            // reset the updating state
+            // no data returned!
             this.metaForm.markAsPristine();
             this.metaFormUpdating = false;
-            // need to let user know what isn't correct
-
           }
+
+
         })
         this.formEditorService.checkFormMetaDataOutput(checkMetaData)
       }else{
@@ -158,7 +174,6 @@ export class MetaSettingsComponent implements OnInit, OnDestroy {
       this.formEditorService.updateMetaData(this.metaData);
       this.message.create('success', `Form meta data has been updated`);
     }
-
   }
 
   ngOnDestroy(){

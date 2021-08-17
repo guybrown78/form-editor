@@ -40,7 +40,6 @@ export class FieldGroupComponent implements OnInit {
     return this._fieldItem
   }
 
-
   form: FormGroup;
   types: SelectableFieldItemModel[];
   formReady:boolean = false;
@@ -78,13 +77,11 @@ export class FieldGroupComponent implements OnInit {
     });
   }
 
-
   onSelectItemChange(value: string): void {
     this.add(value);
   }
 
   add(id): void {
-    console.log(id);
     this.formEditorConfig.getSelectableItemFromId(id).pipe(take(1)).subscribe(item => {
       this.selectedField.emit(item);
     })

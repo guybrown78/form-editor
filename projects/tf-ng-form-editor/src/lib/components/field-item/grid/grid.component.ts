@@ -81,7 +81,7 @@ export class GridComponent implements OnInit {
         }
       }
     }, err => {
-      console.log("err")
+      // console.log("err")
     })
   }
   get fieldItem():FieldItemModel{

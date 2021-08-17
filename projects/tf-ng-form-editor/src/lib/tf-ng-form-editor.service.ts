@@ -5,7 +5,7 @@ import { take, tap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { FormModel } from './to-share/form-model.interface';
 import { FieldItemModel } from './to-share/field-item-model.interface';
-import { FormEditorConfigService, SelectableFieldItemModel } from './form-editor-config.service';
+import { FormEditorConfigService, SelectableCategory, SelectableFieldItemModel } from './form-editor-config.service';
 import { v4 as uuidv4 } from 'uuid';
 import { FormMetaModel } from './to-share/form-meta-model.interface';
 
@@ -41,8 +41,10 @@ export enum OrdinalDirectionEnum {
 export interface CheckFormMetaData {
   title?:string
   allowTitle?:CheckFormMetaDataStatus
+  titleErrMessage?:string
   code?:string
   allowCode?:CheckFormMetaDataStatus
+  codeErrMessage?:string
 }
 export enum CheckFormMetaDataStatus {
   UNSET = -1,
@@ -333,13 +335,24 @@ export class TfNgFormEditorService implements OnDestroy {
   }
 
   getFieldItemFromSelection(selectedField:SelectableFieldItemModel):FieldItemModel{
-    const fieldItem:FieldItemModel = {}
+    let fieldItem:FieldItemModel = {}
     const uuid:string = uuidv4();
     fieldItem.uuid = fieldItem.key = uuid
     fieldItem.label = selectedField.label;
     fieldItem.type = selectedField.type;
     if(selectedField.wrappers){
       fieldItem.wrappers = [ ...selectedField.wrappers ]
+    }
+    // check if complex
+    if(selectedField.category === SelectableCategory.COMPLEX){
+      // if so, set pre defined data to the fieldItem
+      const predefinedItem:FieldItemModel = this.formEditorConfig.preDefinedComplexItems.filter(item => item.type === selectedField.type)[0];
+      if(predefinedItem){
+        fieldItem = {
+          ...fieldItem,
+          ...predefinedItem
+        }
+      }
     }
     //
     return fieldItem;

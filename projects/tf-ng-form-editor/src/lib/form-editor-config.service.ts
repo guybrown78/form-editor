@@ -371,7 +371,44 @@ export class FormEditorConfigService {
     }
   ]
 
-
+  readonly preDefinedComplexItems:FieldItemModel[] = [
+    {
+      type:"address",
+      label:"Address",
+      componentOptions:{},
+      fieldGroup:[
+        {
+          type:"input",
+          key:"addressLine1",
+          label:"Address Line 1",
+          required:true
+        },
+        {
+          type:"input",
+          key:"addressLine2",
+          label:"Address Line 2"
+        },
+        {
+          type:"input",
+          key:"town",
+          label:"Town",
+          required:true
+        },
+        {
+          type:"input",
+          key:"county",
+          label:"County",
+          required:true
+        },
+        {
+          type:"input",
+          key:"postcode",
+          label:"Postcode",
+          required:true
+        }
+      ]
+    }
+  ]
   private _selectableItems = new BehaviorSubject<SelectableFieldItemModel[]>(this._types);
   private _selectableItem = new Subject<SelectableFieldItemModel>()
 

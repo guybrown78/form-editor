@@ -5,9 +5,9 @@
 
     <nz-form-item>
       <nz-form-control
-        [nzValidateStatus]="
-          allowTitle === 2 ? 'error' : ''
-      ">
+        [nzValidateStatus]="allowTitle === 2 ? 'error' : ''"
+        [nzErrorTip]="returnedCheckedFormMetaData?.titleErrMessage || 'Form title cannot be used in this format. Please change and try again'"
+      >
 
         <nz-form-label nzFor="title">Form Title</nz-form-label>
 
@@ -41,9 +41,9 @@
 
     <nz-form-item>
       <nz-form-control
-        [nzValidateStatus]="
-          allowCode === 2 ? 'error' : ''
-      ">
+        [nzValidateStatus]="allowCode === 2 ? 'error' : ''"
+        [nzErrorTip]="returnedCheckedFormMetaData?.codeErrMessage || 'Form code cannot be used in this format. Please change and try again'"
+      >
         <nz-form-label nzFor="code">Code</nz-form-label>
         <nz-input-group  [nzSuffix]="suffixCode">
           <input nz-input formControlName="code" placeholder="eg: form-001"/>

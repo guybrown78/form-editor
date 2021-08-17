@@ -26,9 +26,19 @@
       <span class="navy">Set user permission levels;</span>
       <div nz-row>
 
+        <!-- Titles -->
+        <div nz-col nzSpan="8">
+          <h6 class="tf-app-column-header-text navy">User Level</h6>
+          <div>
+            <div *ngFor="let pt of availablePermissions">
+              <label>{{pt.label}}</label>
+            </div>
+          </div>
+        </div>
+
         <!-- read / write -->
-        <div nz-col nzSpan="12">
-          <h4 class="navy">Read/Write</h4>
+        <div nz-col nzSpan="8">
+          <h6 class="tf-app-column-header-text navy">Read/Write</h6>
           <nz-checkbox-wrapper
             (nzOnChange)="onPermissionUpdated($event)"
           >
@@ -39,15 +49,15 @@
                   [ngModel]="p.checked"
                   [ngModelOptions]="{standalone: true}"
                   [nzValue]="p.value"
-                >{{p.label}}</label>
+                ></label>
               </div>
             </div>
           </nz-checkbox-wrapper>
         </div>
 
         <!-- READ-ONLY-PERMISSIONS -->
-        <div nz-col nzSpan="12" *ngIf="selectableItem?.editableConfig.setReadonlyPermissions">
-          <h4 class="navy">Read Only</h4>
+        <div nz-col nzSpan="8" *ngIf="selectableItem?.editableConfig.setReadonlyPermissions">
+          <h6 class="tf-app-column-header-text navy">Read Only</h6>
           <nz-checkbox-wrapper
             (nzOnChange)="onReadOnlyPermissionUpdated($event)"
           >
@@ -58,7 +68,7 @@
                   [ngModel]="rop.checked"
                   [ngModelOptions]="{standalone: true}"
                   [nzValue]="rop.value"
-                >{{rop.label}}</label>
+                ></label>
               </div>
             </div>
           </nz-checkbox-wrapper>

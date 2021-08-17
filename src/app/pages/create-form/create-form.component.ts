@@ -1,7 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { CheckFormMetaData, CheckFormMetaDataStatus, EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
+import {
+  CheckFormMetaData,
+  CheckFormMetaDataStatus,
+  EditorModeEnum,
+  SaveFormModel,
+  SaveTypeEnum,
+  TfNgFormEditorService
+} from 'projects/tf-ng-form-editor/src/public-api';
 // import { CheckFormMetaData, CheckFormMetaDataStatus, EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'tf-ng-form-editor'
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Subscription } from 'rxjs';
@@ -97,6 +104,7 @@ export class CreateFormComponent implements OnInit, OnDestroy {
         nzClosable:false,
         nzOkText:'Confirm',
         nzOnOk: () => {
+          this.returnedMetaDataCheck.titleErrMessage = `The form title '${this.returnedMetaDataCheck.title}' conflicts with another form title in our system. Please change and try again.`
           this.formEditorService.checkFormMetaDataInput(this.returnedMetaDataCheck);
           this.returnedMetaDataCheck = null;
         }
