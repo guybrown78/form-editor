@@ -1,0 +1,22 @@
+
+<tf-ng-item colour="white">
+  <h4>Permissions</h4>
+  <p nz-typography>Set the current user permissions</p>
+  <nz-select
+    nzPlaceHolder="Select User Permissions..."
+    [(ngModel)]="selectedPermissionLevel"
+    (ngModelChange)="onPermissionChange($event)"
+    class="select-item"
+  >
+    <nz-option *ngFor="let p of permissions" [nzLabel]="p.label" [nzValue]="p.level"></nz-option>
+  </nz-select>
+</tf-ng-item>
+
+<nz-divider></nz-divider>
+
+<tf-ng-item colour="white">
+  <button nz-button nzType="primary" nzBlock (click)="showFormSource()">
+    <i nz-icon nzType="code" nzTheme="outline"></i>
+    Show source
+  </button>
+</tf-ng-item>

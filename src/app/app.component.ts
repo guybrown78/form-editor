@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppHeaderService, AppNavigationService, AppNavigationItem } from 'tf-ng-nz';
+import { TfNgFormPermissionService, TfNgFormPermissionInterface } from 'tf-ng-form';
 
 const navigationData:AppNavigationItem[] = [
   {
@@ -31,8 +32,24 @@ const navigationData:AppNavigationItem[] = [
   }
 ]
 
+// permissions
+/*
+The tennants permission structure (in this example WOOD). This is used to set up the permissions within the form preview lib (tf-ng-form).
+
+  If used;
+  - The list is exposed to the form editor and the read/write permissions can be set for each form item.
+  - The current user's permissions/level can be set in the preview
+
+*/
+const tenantsFormPermissions:TfNgFormPermissionInterface[] = [
+  { label:"Delegate", level:0 },
+  { label:"Accessor", level:1 },
+  { label:"Verifier", level:2 },
+  { label:"IQA", level:3 }
+]
 
 // https://xd.adobe.com/view/0a077198-1588-4c4f-aba5-b1a13caa4fde-5f54/screen/6921a962-d6cc-4cc4-ab06-571c99282869
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -48,7 +65,8 @@ export class AppComponent {
   constructor(
     private appHeaderService: AppHeaderService,
     private appNavigationService: AppNavigationService,
-    private router:Router
+    private router:Router,
+    private formPermissionService:TfNgFormPermissionService,
   ) {
     //
     router.events.subscribe((val) => {
@@ -89,6 +107,9 @@ export class AppComponent {
         console.log("Sign out confirmed, tell identity")
       }
     );
+    //
+    // Set this gloabally within the app for the loaded tennant according to the tennants structure... TODO, can make this configerable
+    this.formPermissionService.setUserPermissions([ ...tenantsFormPermissions ])
     //
     this.appReady = true;
   }

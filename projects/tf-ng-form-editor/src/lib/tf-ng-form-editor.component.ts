@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DisplayJsonService, TfNgFormService } from 'tf-ng-form';
+import { TfNgFormService } from 'tf-ng-form';
 import { EditorModeEnum, TfNgFormEditorService } from './tf-ng-form-editor.service';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -29,26 +29,17 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
 
   constructor(
     private formService:TfNgFormService,
-    private displayJsonService:DisplayJsonService,
     private formEditorService:TfNgFormEditorService
   ) { }
 
   ngOnInit(): void {
     //
     this.initialiseEditorModeSubscription();
-    //
     // check if the form model has been initialised
     this.formEditorService.form.pipe(take(1)).subscribe(form => {
       if(form){
-        // console.log("form has been initialised...");
         this.initialiseFormSubscription();
       }else{
-        // this.formEditorService.initialiseNewForm({
-        //   title:"New form",
-        //   version:"001",
-        //   jsonSchema:true
-        // });
-        // this.initialiseFormSubscription();
         setTimeout(() => {
           this.initForm = true;
         }, 500);
@@ -68,15 +59,13 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
     this.formSubscription = this.formEditorService.form.subscribe(form => {
       // get current form
       this.formEditorService.form.pipe(take(1)).subscribe(form => {
-        // if(form){
-          // stringify and set to json
-          if(form){
-            this.formService.setData(JSON.stringify(form)).subscribe(data => {
-              // CAN UPDATE PREVIEW HERE
-            })
-          }
+        // stringify and set to json
+        if(form){
+          this.formService.setData(JSON.stringify(form)).subscribe(data => {
+            // CAN UPDATE PREVIEW HERE
+          })
+        }
 
-        // }
       })
     });
 
@@ -102,16 +91,6 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
     })
   }
 
-
-
-  showFormSource(){
-     // for dev purposes, display the json nicely
-     this.formService.data.pipe(take(1)).subscribe(
-      data => {
-        this.displayJsonService.show(JSON.stringify(data), "Form JSON source");
-      }
-    )
-  }
 
 
   ngOnDestroy(){

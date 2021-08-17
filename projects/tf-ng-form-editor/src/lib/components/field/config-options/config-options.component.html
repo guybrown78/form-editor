@@ -21,6 +21,58 @@
       </nz-form-control>
     </nz-form-item>
 
+    <!-- PERMISSIONS -->
+    <nz-form-item *ngIf="selectableItem?.editableConfig.setPermissions">
+      <span class="navy">Set user permission levels;</span>
+      <div nz-row>
+
+        <!-- read / write -->
+        <div nz-col nzSpan="12">
+          <h4 class="navy">Read/Write</h4>
+          <nz-checkbox-wrapper
+            (nzOnChange)="onPermissionUpdated($event)"
+          >
+            <div>
+              <div *ngFor="let p of availablePermissions">
+                <label
+                  nz-checkbox
+                  [ngModel]="p.checked"
+                  [ngModelOptions]="{standalone: true}"
+                  [nzValue]="p.value"
+                >{{p.label}}</label>
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+
+        <!-- READ-ONLY-PERMISSIONS -->
+        <div nz-col nzSpan="12" *ngIf="selectableItem?.editableConfig.setReadonlyPermissions">
+          <h4 class="navy">Read Only</h4>
+          <nz-checkbox-wrapper
+            (nzOnChange)="onReadOnlyPermissionUpdated($event)"
+          >
+            <div>
+              <div *ngFor="let rop of availableReadOnlyPermissions">
+                <label
+                  nz-checkbox
+                  [ngModel]="rop.checked"
+                  [ngModelOptions]="{standalone: true}"
+                  [nzValue]="rop.value"
+                >{{rop.label}}</label>
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+
+      </div>
+
+    </nz-form-item>
+
+
+
+
+
+
   </div>
 
 </form>

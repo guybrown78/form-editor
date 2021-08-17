@@ -44,6 +44,7 @@ import { InlinePreviewComponent } from './components/inline-preview/inline-previ
 import { TfNgFormEditorService } from './tf-ng-form-editor.service';
 import { FormEditorConfigService } from './form-editor-config.service';
 import { NewFormMetaComponent } from './components/new-form-meta/new-form-meta.component';
+import { PreviewSettingsComponent } from './components/preview-settings/preview-settings.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { NewFormMetaComponent } from './components/new-form-meta/new-form-meta.c
     ConfigOptionsComponent,
     InlinePreviewComponent,
     NewFormMetaComponent,
+    PreviewSettingsComponent,
   ],
   imports: [
     CommonModule,

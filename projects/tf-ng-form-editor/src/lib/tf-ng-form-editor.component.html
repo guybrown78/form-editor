@@ -25,7 +25,7 @@
 
     <div nz-row nzGutter="16" class="form-editor-page-details" *ngIf="editorMode === 'edit'">
 
-
+      <!-- TREE VIEW -->
       <div nz-col nzFlex="300px">
         <div class="form-editor-field-detail rounded bg-white">
           <form-editor-tree-view></form-editor-tree-view>
@@ -38,13 +38,14 @@
         </div>
       </div> -->
 
-
+      <!-- FIELD -->
       <div nz-col nzFlex="auto">
         <div class="form-editor-field-detail rounded bg-white">
           <form-editor-field></form-editor-field>
         </div>
       </div>
 
+      <!-- INLINE PREVIEW -->
       <div nz-col [nzFlex]="showInlinePreview ? '450px' : '30px' " class="dynamic-width">
         <form-editor-inline-preview
           [showInlinePreview]="showInlinePreview"
@@ -69,18 +70,7 @@
 
       <div nz-col nzFlex="280px">
         <div class="form-editor-field-detail rounded bg-white">
-          <!--  -->
-          <tf-ng-item colour="white">
-            <!-- <p>
-              For development purposes you can select 'Show source' to see and copy the forms JSON
-            </p> -->
-            <button nz-button nzType="primary" nzBlock (click)="showFormSource()">
-              <i nz-icon nzType="code" nzTheme="outline"></i>
-              Show source
-            </button>
-          </tf-ng-item>
-
-
+          <form-editor-preview-settings></form-editor-preview-settings>
         </div>
       </div>
 
