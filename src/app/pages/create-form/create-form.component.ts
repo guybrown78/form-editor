@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import {
-  CheckFormMetaData,
-  CheckFormMetaDataStatus,
-  EditorModeEnum,
-  SaveFormModel,
-  SaveTypeEnum,
-  TfNgFormEditorService
-} from 'projects/tf-ng-form-editor/src/public-api';
-// import { CheckFormMetaData, CheckFormMetaDataStatus, EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'tf-ng-form-editor'
+// import {
+//   CheckFormMetaData,
+//   CheckFormMetaDataStatus,
+//   EditorModeEnum,
+//   SaveFormModel,
+//   SaveTypeEnum,
+//   TfNgFormEditorService
+// } from 'projects/tf-ng-form-editor/src/public-api';
+import { CheckFormMetaData, CheckFormMetaDataStatus, EditorModeEnum, SaveFormModel, SaveTypeEnum, TfNgFormEditorService } from 'tf-ng-form-editor'
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Subscription } from 'rxjs';
 //

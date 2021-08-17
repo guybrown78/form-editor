@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
+
 import { TfNgCoreModule } from 'tf-ng-core'
 import { TfNgFormModule} from 'tf-ng-form'
 
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { TfNgFormEditorComponent } from './tf-ng-form-editor.component';
 import { FieldPickerComponent } from './components/field-picker/field-picker.component';
@@ -45,6 +47,8 @@ import { TfNgFormEditorService } from './tf-ng-form-editor.service';
 import { FormEditorConfigService } from './form-editor-config.service';
 import { NewFormMetaComponent } from './components/new-form-meta/new-form-meta.component';
 import { PreviewSettingsComponent } from './components/preview-settings/preview-settings.component';
+import { PermissionsComponent } from './components/field/permissions/permissions.component';
+import { RichTextComponent } from './components/rich-text/rich-text.component';
 
 
 @NgModule({
@@ -80,6 +84,8 @@ import { PreviewSettingsComponent } from './components/preview-settings/preview-
     InlinePreviewComponent,
     NewFormMetaComponent,
     PreviewSettingsComponent,
+    PermissionsComponent,
+    RichTextComponent,
   ],
   imports: [
     CommonModule,
@@ -87,7 +93,9 @@ import { PreviewSettingsComponent } from './components/preview-settings/preview-
     ReactiveFormsModule,
     TfNgCoreModule,
     TfNgFormModule,
-    NgZorroModule
+    NgZorroModule,
+    FroalaEditorModule,
+    FroalaViewModule
   ],
   exports: [
     TfNgFormEditorComponent

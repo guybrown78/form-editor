@@ -10,9 +10,6 @@ import {
 import { TfNgFormEditorService } from '../../../tf-ng-form-editor.service';
 import { FieldItemModel } from '../../../to-share/field-item-model.interface';
 
-// label: string;
-// value: string;
-// checked?: boolean;
 
 
 @Component({
@@ -28,11 +25,7 @@ export class ConfigOptionsComponent implements OnInit {
       this.formReady = false;
       this.selectableItem = item.selectableItem;
       this.fieldItem = item.fieldItem;
-      if(this.selectableItem.editableConfig.setPermissions){
-        this.getPermissions()
-      }else{
-        this.initForm();
-      }
+      this.initForm();
     }
   }
   get editorItemModel():EditorItemModel{
@@ -45,13 +38,13 @@ export class ConfigOptionsComponent implements OnInit {
   form: FormGroup;
   formReady:boolean = false;
 
-  // permissions
-  availablePermissions:any[];
-  selectedPermissions:number[];
+  // // permissions
+  // availablePermissions:any[];
+  // selectedPermissions:number[];
 
-  // read only
-  availableReadOnlyPermissions:any[];
-  selectedReadOnlyPermissions:number[];
+  // // read only
+  // availableReadOnlyPermissions:any[];
+  // selectedReadOnlyPermissions:number[];
 
 
   constructor(
@@ -63,50 +56,6 @@ export class ConfigOptionsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getPermissions(){
-    this.formPermissionService.userPermissions.pipe(take(1)).subscribe( permissions => {
-
-      if(permissions){
-        this.selectedPermissions = this.fieldItem.permissions ? [ ...this.fieldItem.permissions ] : []
-
-        this.availablePermissions = permissions.map(p => {
-          return {
-            label:p.label,
-            value:p.level,
-            checked:this.selectedPermissions.includes(p.level)
-          }
-        })
-      }else{
-        this.availablePermissions = [];
-      }
-      //
-      if(this.selectableItem.editableConfig.setReadonlyPermissions){
-        this.getReadOnlyPermissions();
-      } else {
-        this.initForm();
-      }
-    })
-  }
-
-  getReadOnlyPermissions(){
-    this.formPermissionService.userPermissions.pipe(take(1)).subscribe( permissions => {
-
-      if(permissions){
-        this.selectedReadOnlyPermissions = this.fieldItem.readonlyPermissions ? [ ...this.fieldItem.readonlyPermissions ] : []
-
-        this.availableReadOnlyPermissions = permissions.map(p => {
-          return {
-            label:p.label,
-            value:p.level,
-            checked:this.selectedReadOnlyPermissions.includes(p.level)
-          }
-        })
-      }else{
-        this.availableReadOnlyPermissions = [];
-      }
-      this.initForm();
-    })
-  }
 
   initForm(): void {
     this.form = this.fb.group({});
@@ -115,20 +64,6 @@ export class ConfigOptionsComponent implements OnInit {
       this.form.addControl(
         'required',
         new FormControl(this.fieldItem.required, [])
-      );
-    }
-    // setPermissions
-    if(this.selectableItem.editableConfig.setPermissions){
-      this.form.addControl(
-        'permissions',
-        new FormControl(this.selectedPermissions, [])
-      );
-    }
-    // setReadonlyPermissions
-    if(this.selectableItem.editableConfig.setReadonlyPermissions){
-      this.form.addControl(
-        'readonlyPermissions',
-        new FormControl(this.selectedReadOnlyPermissions, [])
       );
     }
     // help
@@ -149,11 +84,4 @@ export class ConfigOptionsComponent implements OnInit {
     });
   }
 
-  onPermissionUpdated(selected:any[]){
-    this.form.controls['permissions'].setValue(selected);
-  }
-
-  onReadOnlyPermissionUpdated(selected:any[]){
-    this.form.controls['readonlyPermissions'].setValue(selected);
-  }
 }

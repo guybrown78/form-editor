@@ -15,7 +15,8 @@
   <nz-form-item *ngIf="selectableItem?.editableConfig.setDesc">
     <nz-form-control>
       <nz-form-label nzFor="description">Description</nz-form-label>
-      <textarea rows="1" nz-input formControlName="description"></textarea>
+      <!-- <textarea rows="1" nz-input formControlName="description"></textarea> -->
+      <form-editor-rich-text (encodedRichText)="onRichTextUpdated($event)"></form-editor-rich-text>
     </nz-form-control>
   </nz-form-item>
 

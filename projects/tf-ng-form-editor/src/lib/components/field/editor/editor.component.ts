@@ -138,5 +138,7 @@ export class EditorComponent implements OnInit {
     return this.selectableItem.editableConfig.type === EditableConfigType.TABS
   }
 
-
+  onRichTextUpdated(value:string){
+    this.form.controls['description'].setValue(value)
+  }
 }

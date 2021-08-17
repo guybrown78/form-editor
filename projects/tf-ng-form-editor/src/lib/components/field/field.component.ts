@@ -177,12 +177,21 @@ export class FieldComponent implements OnInit, OnDestroy {
     // set the available tabs based of config
     if(
       this.selectableItem.editableConfig.setRequired ||
-      this.selectableItem.editableConfig.setPermissions ||
       this.selectableItem.editableConfig.setHelp
     ){
       this.availableTabs.push({
         label:"Options",
         value:"options",
+        disabled:false
+      })
+    }
+    if(
+      this.selectableItem.editableConfig.setPermissions ||
+      this.selectableItem.editableConfig.setReadonlyPermissions
+    ){
+      this.availableTabs.push({
+        label:"Permissions",
+        value:"permissions",
         disabled:false
       })
     }

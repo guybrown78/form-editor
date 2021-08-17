@@ -52,6 +52,11 @@
         [editorItemModel]="editorItemModel"
       ></field-item-config-options>
 
+      <field-item-permissions
+        *ngIf="tab.value === 'permissions'"
+        [editorItemModel]="editorItemModel"
+      ></field-item-permissions>
+
     </nz-tab>
 
   </nz-tabset>
