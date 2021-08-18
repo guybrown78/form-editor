@@ -32,8 +32,8 @@
             "styles": [
               "src/theme.less",
               "src/styles.css",
-              "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
-              "./node_modules/froala-editor/css/froala_style.min.css"
+              "./node_modules/tf-ng-form-editor/assets/css/froala_editor.pkgd.min.css",
+              "./node_modules/tf-ng-form-editor/assets/css/froala_style.min.css"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [

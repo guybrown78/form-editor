@@ -11,4 +11,3 @@ export * from './lib/to-share/field-item-component-options-model.interface';
 export * from './lib/to-share/field-item-model.interface';
 export * from './lib/to-share/form-meta-model.interface';
 export * from './lib/to-share/form-model.interface';
-

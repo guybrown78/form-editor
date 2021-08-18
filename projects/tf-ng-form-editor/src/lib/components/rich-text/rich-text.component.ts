@@ -7,7 +7,6 @@ enum FroalaEventAction{
   FroalaChange = 'INTERNAL_FROALA_CHANGE',
 }
 
-// CSS node_modules/froala-editor/css/froala_editor.pkgd.min.css
 
 @Component({
   selector: 'form-editor-rich-text',

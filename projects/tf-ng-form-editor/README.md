@@ -1,24 +1,39 @@
-# TfNgFormEditor
+# tf-ng-form-editor
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
 
-## Code scaffolding
+Install tf-ng-form-editor from npm
 
-Run `ng generate component component-name --project tf-ng-form-editor` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project tf-ng-form-editor`.
-> Note: Don't forget to add `--project tf-ng-form-editor` or else it will be added to the default project in your `angular.json` file. 
+`npm install tf-ng-form-editor`
 
-## Build
 
-Run `ng build tf-ng-form-editor` to build the project. The build artifacts will be stored in the `dist/` directory.
+If it errors then install it with --legacy-peer-deps
 
-## Publishing
+`npm install tf-ng-form-editor --legacy-peer-deps`
 
-After building your library with `ng build tf-ng-form-editor`, go to the dist folder `cd dist/tf-ng-form-editor` and run `npm publish`.
+This also solves the error when updating to future versions
 
-## Running unit tests
+`npm update --legacy-peer-deps`
 
-Run `ng test tf-ng-form-editor` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Integration
 
-## Further help
+"./node_modules/tf-ng-form-editor/assets/css/froala_editor.pkgd.min.css",
+              "./node_modules/tf-ng-form-editor/assets/css/froala_style.min.css"
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+The editor makes use of froala rich text editor (angular-froala-wysiwyg). If your app already has this installed, and you have followed the froala instructions to integrate then skip this. If you haven't already got froala then we need to add some global styles... open angular.json file and insert a new entry into the styles array
+
+```
+"styles": [
+  "styles.css",
+  "./node_modules/tf-ng-form-editor/assets/css/froala_editor.pkgd.min.css",
+  "./node_modules/tf-ng-form-editor/assets/css/froala_style.min.css"
+]
+```
+
+You will also need to add CSS styles into the main index.html file
+
+```
+<!-- index.html -->
+<link href="node_modules/tf-ng-form-editor/assets/css/froala_editor.pkgd.min.css" rel="stylesheet">
+```
+

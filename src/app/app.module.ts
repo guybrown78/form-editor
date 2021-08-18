@@ -11,7 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { TfNgCoreModule } from 'tf-ng-core';
 import { TfNgNzModule } from 'tf-ng-nz';
@@ -50,9 +49,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    TfNgFormEditorModule,
-    // FroalaEditorModule.forRoot(),
-    // FroalaViewModule.forRoot()
+    TfNgFormEditorModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]
