@@ -1,5 +1,33 @@
-<div
-  [froalaEditor]="froalaOptions"
-  [(froalaModel)]="froalaContent"
->
-</div>
+
+
+<nz-form-control *ngIf="ready">
+
+  <div nz-row nzJustify="space-between" nzAlign="middle">
+    <div nz-col nzFlex="auto" class="title-wrapper">
+      <nz-form-label [nzFor]="passedFormControlName">
+        {{ title }}
+      </nz-form-label>
+    </div>
+
+    <span nz-col class="icon-toggle-wrapper">
+      <div nz-button nzType="text" class="toggle-icon-button grey" nzSize="small" (click)="onToggleEditMode()">
+        <i nz-icon nzType="edit" [nzTheme]="isDynamic ? 'fill' : 'outline' " [ngClass]="isDynamic ? 'blue' : 'navy'"></i>
+      </div>
+    </span>
+
+  </div>
+
+
+  <textarea
+    *ngIf="!isDynamic"
+    [rows]="rowCount" nz-input
+    [formControl]="passedFormControl"
+  ></textarea>
+
+  <div
+    *ngIf="isDynamic"
+    [froalaEditor]="froalaOptions"
+    [(froalaModel)]="froalaContent"
+  >
+  </div>
+</nz-form-control>

@@ -1,4 +1,5 @@
 import { Component, SecurityContext, Input, Output, EventEmitter } from '@angular/core';
+import { Form, FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 
 enum FroalaEventAction{
@@ -7,7 +8,13 @@ enum FroalaEventAction{
   FroalaChange = 'INTERNAL_FROALA_CHANGE',
 }
 
-
+const isHTML = (str) => !(str || '')
+  // replace html tag with content
+  .replace(/<([^>]+?)([^>]*?)>(.*?)<\/\1>/ig, '')
+  // remove remaining self closing tags
+  .replace(/(<([^>]+)>)/ig, '')
+  // remove extra space at start and end
+  .trim();
 @Component({
   selector: 'form-editor-rich-text',
   templateUrl: './rich-text.component.html',
@@ -29,7 +36,57 @@ export class RichTextComponent{
 
   encodedContent:string;
 
-  @Output('encodedRichText') encodedRichText = new EventEmitter<string>();
+  @Input('passedFormControlName') passedFormControlName:string;
+
+  @Input('title') title:string;
+
+  private _passedFormControl:FormControl
+  @Input('passedFormControl') set passedFormControl(control:FormControl){
+    this._passedFormControl = control;
+
+    const decodedValue = decodeURIComponent(control.value);
+    if(isHTML(decodedValue)){
+      console.log("Is HTML")
+      this.froalaContent = decodedValue;
+      this.isDynamic = true;
+    }else{
+      console.log("Is NOT HTML")
+      this.isDynamic = false;
+    }
+    this.ready = true;
+  }
+  get passedFormControl():FormControl{
+    return this._passedFormControl;
+
+  }
+
+  @Input('rowCount') rowCount:number = 1;
+
+  // @Output('encodedRichText') encodedRichText = new EventEmitter<string>();
+
+  private _isDynamic:boolean = false;
+  set isDynamic(value:boolean){
+    const decodedValue = decodeURIComponent(this.passedFormControl.value);
+    if(value){
+      // add message to text;
+      this.froalaContent = decodedValue;
+    }else{
+      if(this.froalaContent){
+        const div = document.createElement("div");
+        div.innerHTML = decodedValue;
+        const text = div.textContent || div.innerText || "";
+        this.passedFormControl.setValue(text)
+      }
+    }
+    this._isDynamic = value;
+  }
+  get isDynamic():boolean{
+    return this._isDynamic;
+  }
+
+
+  ready:boolean = false;
+
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -39,9 +96,7 @@ export class RichTextComponent{
   onFroalaEvent(eventType:FroalaEventAction, event:any){
     if(eventType === FroalaEventAction.FroalaChange){
       this.sanitizeRichText(this.froalaContent);
-      // console.log(this.encodedContent);
-      // console.log(decodeURIComponent(this.encodedContent))
-      this.encodedRichText.emit(this.encodedContent);
+      this.passedFormControl.setValue(this.encodedContent)
     }
   }
 
@@ -54,4 +109,7 @@ export class RichTextComponent{
     return decodeURIComponent(str)
   }
 
+  onToggleEditMode(){
+    this.isDynamic = !this.isDynamic;
+  }
 }

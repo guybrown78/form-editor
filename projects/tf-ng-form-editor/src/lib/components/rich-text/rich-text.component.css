@@ -1,3 +1,12 @@
 :host {
   display: block;
 }
+.title-wrapper{
+  margin-right: 10px;
+}
+.icon-toggle-wrapper{
+
+}
+.toggle-icon-button{
+  cursor: pointer;
+}

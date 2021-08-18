@@ -17,8 +17,8 @@ import { TfNgNzModule } from 'tf-ng-nz';
 import { TfNgFormModule } from 'tf-ng-form';
 import { NgZorroModule } from './modules/ng-zorro.module';
 //
-// import { TfNgFormEditorModule } from 'projects/tf-ng-form-editor/src/public-api';
-import { TfNgFormEditorModule } from 'tf-ng-form-editor'
+import { TfNgFormEditorModule } from 'projects/tf-ng-form-editor/src/public-api';
+// import { TfNgFormEditorModule } from 'tf-ng-form-editor'
 //
 import { PreviewFormComponent } from './pages/preview-form/preview-form.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
