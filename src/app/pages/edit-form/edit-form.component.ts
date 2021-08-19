@@ -71,6 +71,12 @@ export class EditFormComponent implements OnInit, OnDestroy {
     })
   }
 
+  canDeactivate(){
+    return this.formEditorService.canDeactivate().then(result => {
+      return result;
+    })
+  }
+
   ngOnDestroy(){
     this.formSavedSubscription.unsubscribe;
     this.formCloseSubscription.unsubscribe;

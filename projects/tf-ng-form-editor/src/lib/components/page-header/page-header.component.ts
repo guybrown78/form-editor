@@ -89,9 +89,6 @@ export class PageHeaderComponent implements OnInit, OnDestroy {
   }
 
   onClose(){
-
-
-
     if(!this.disabledSave){
       this.modal.warning({
         nzTitle: 'You have unsaved changes to your form.',

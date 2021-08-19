@@ -9,6 +9,9 @@ import { FormEditorConfigService, SelectableCategory, SelectableFieldItemModel }
 import { v4 as uuidv4 } from 'uuid';
 import { FormMetaModel } from './to-share/form-meta-model.interface';
 import { FieldItemType } from './to-share/field-item-component-options-model.interface';
+import { NzModalService } from 'ng-zorro-antd/modal';
+
+
 
 
 
@@ -60,8 +63,8 @@ export enum CheckFormMetaDataStatus {
 })
 export class TfNgFormEditorService implements OnDestroy {
   formSubscription:Subscription
-
-
+  formUpdateSubscription:Subscription
+  unsavedItems:boolean = false;
   // Observable sources
   private _form = new BehaviorSubject<FormModel>(null);
   private _formTree = new BehaviorSubject<FormTreeModel[]>(null);
@@ -88,7 +91,9 @@ export class TfNgFormEditorService implements OnDestroy {
 
   constructor(
     private http: HttpClient,
-    private formEditorConfig:FormEditorConfigService
+    private formEditorConfig:FormEditorConfigService,
+    private modal:NzModalService,
+
   ) {
     this.initialiseFormSubscription();
   }
@@ -366,6 +371,7 @@ export class TfNgFormEditorService implements OnDestroy {
         schema: [],
         model: {}
       });
+      this.unsavedItems = false;
     })
   }
 
@@ -387,6 +393,7 @@ export class TfNgFormEditorService implements OnDestroy {
       tap((data) => {
         const { meta, schema, model } = data;
         this._form.next(data);
+        this.unsavedItems = false;
         this._metaUpdated.next(true)
       })
     )
@@ -401,6 +408,7 @@ export class TfNgFormEditorService implements OnDestroy {
 
   nullifyForm():Observable<boolean>{
     this._form.next(null)
+    this.unsavedItems = false;
     return of(true);
   }
 
@@ -431,10 +439,21 @@ export class TfNgFormEditorService implements OnDestroy {
         })
         // trigger the formUpdate subscr
         this._formUpdated.next(true);
+        if(!this.formUpdateSubscription){
+          this.initialiseFormUpdateSubscription()
+        }
       }
     })
   }
 
+  initialiseFormUpdateSubscription(){
+    this.formUpdateSubscription = this.formUpdated.subscribe(updated => {
+      if(updated){
+        // changes have been made, able to save
+        this.unsavedItems = true;
+      }
+    })
+  }
   parseFormToTree(schema:FieldItemModel[], currentSelectedKey:string):Observable<FormTreeModel[]>{
     let tree:FormTreeModel[];
     tree = schema.map(f => {
@@ -491,6 +510,7 @@ export class TfNgFormEditorService implements OnDestroy {
           data:JSON.stringify(form)
         }
         this._save.next(data);
+        this.unsavedItems = false;
       }
     })
 	}
@@ -507,8 +527,44 @@ export class TfNgFormEditorService implements OnDestroy {
     this._checkFormMetaInput.next(data);
   }
 
+  async canDeactivate() {
+
+    let promiseResolve, promiseReject;
+    const promise = new Promise(function(resolve, reject){
+      promiseResolve = resolve;
+      promiseReject = reject;
+    });
+    if(this.unsavedItems){
+      // changes have been made, able to save
+      // return window.confirm('Discard changes?');
+      this.modal.confirm({
+        nzTitle: 'You have unsaved changes to your form.',
+        nzContent: `
+          <p>If you close this form without saving, you will lose your changes.</p>
+          <p>Are you sure you want to close the form editor with unsaved changes?</p>`,
+        nzCancelText:'Cancel',
+        nzOnCancel: async () => {
+          promiseResolve(false)
+          return true;
+        },
+        nzOkText:'Yes, close form without saving',
+        nzOnOk: async () => {
+          promiseResolve(true)
+          return true;
+        }
+
+      })
+
+    }else{
+      promiseResolve(true)
+    }
+    return promise;
+  }
+
+
   ngOnDestroy(){
-    this.formSubscription.unsubscribe
+    this.formSubscription.unsubscribe()
+    this.formUpdateSubscription.unsubscribe()
   }
 
 }

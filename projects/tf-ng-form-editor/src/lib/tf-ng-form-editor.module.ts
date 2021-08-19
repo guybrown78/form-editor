@@ -51,6 +51,7 @@ import { PermissionsComponent } from './components/field/permissions/permissions
 import { RichTextComponent } from './components/rich-text/rich-text.component';
 import { DateOptionsComponent } from './components/field/config-options/date-options/date-options.component';
 
+import { CanDeactivateGuard } from './tf-ng-form-editor.guard'
 
 @NgModule({
   declarations: [
@@ -101,6 +102,9 @@ import { DateOptionsComponent } from './components/field/config-options/date-opt
   ],
   exports: [
     TfNgFormEditorComponent
+  ],
+  providers: [
+    CanDeactivateGuard
   ]
 })
 export class TfNgFormEditorModule { }

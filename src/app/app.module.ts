@@ -17,7 +17,10 @@ import { TfNgNzModule } from 'tf-ng-nz';
 import { TfNgFormModule } from 'tf-ng-form';
 import { NgZorroModule } from './modules/ng-zorro.module';
 //
-import { TfNgFormEditorModule } from 'projects/tf-ng-form-editor/src/public-api';
+import { TfNgFormEditorModule, CanDeactivateGuard } from 'projects/tf-ng-form-editor/src/public-api';
+// import { TfNgFormEditorModule } from 'tf-ng-form-editor'
+
+// import { CanDeactivateGuard } from 'projects/tf-ng-form-editor/src/public-api';
 // import { TfNgFormEditorModule } from 'tf-ng-form-editor'
 //
 import { PreviewFormComponent } from './pages/preview-form/preview-form.component';
@@ -25,6 +28,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateFormComponent } from './pages/create-form/create-form.component';
 import { EditFormComponent } from './pages/edit-form/edit-form.component';
 import { StatsComponent } from './pages/dashboard/stats/stats.component';
+
 
 
 registerLocaleData(en);
@@ -51,7 +55,10 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     TfNgFormEditorModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_GB }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_GB },
+    CanDeactivateGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
