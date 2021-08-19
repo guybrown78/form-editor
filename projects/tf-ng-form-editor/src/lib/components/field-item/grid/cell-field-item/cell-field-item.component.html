@@ -70,10 +70,15 @@
       </nz-form-item>
 
       <nz-form-item *ngIf="selectableItem?.editableConfig.setDesc">
-        <nz-form-control>
+        <!-- <nz-form-control>
           <nz-form-label nzFor="description">Description</nz-form-label>
           <textarea rows="1" nz-input formControlName="description"></textarea>
-        </nz-form-control>
+        </nz-form-control> -->
+        <form-editor-rich-text
+          [title]="getDescriptionFieldLabel()"
+          [passedFormControlName]="'description'"
+          [passedFormControl]="form?.controls['description']"
+        ></form-editor-rich-text>
       </nz-form-item>
 
       <nz-form-item *ngIf="selectableItem?.editableConfig.setPlaceholder">

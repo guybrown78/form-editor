@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { TfNgFormPermissionInterface, TfNgFormPermissionService } from 'tf-ng-form';
@@ -9,8 +9,7 @@ import {
 } from '../../../form-editor-config.service';
 import { TfNgFormEditorService } from '../../../tf-ng-form-editor.service';
 import { FieldItemModel } from '../../../to-share/field-item-model.interface';
-
-
+import { FieldItemComponentOptionsModel } from '../../../to-share/field-item-component-options-model.interface';
 
 @Component({
   selector: 'field-item-config-options',
@@ -18,6 +17,8 @@ import { FieldItemModel } from '../../../to-share/field-item-model.interface';
   styleUrls: ['./config-options.component.css']
 })
 export class ConfigOptionsComponent implements OnInit {
+
+  @Output("updatedFieldItem") updatedFieldItem = new EventEmitter<FieldItemModel>();
 
   private _editorItemModel:EditorItemModel
   @Input('editorItemModel') set editorItemModel(item:EditorItemModel){
@@ -82,6 +83,34 @@ export class ConfigOptionsComponent implements OnInit {
       this.fieldItem = { ...this.fieldItem, ...this.form.value}
       this.formEditorService.updateFormItem(this.fieldItem)
     });
+  }
+
+  onComponentOptionsUpdated(cmpOptions:FieldItemComponentOptionsModel){
+    const componentOptions:FieldItemComponentOptionsModel = {
+      ...this.fieldItem.componentOptions,
+      ...cmpOptions
+    }
+    this.fieldItem = {
+      ...this.fieldItem,
+      componentOptions
+    }
+    this.formEditorService.updateFormItem(this.fieldItem);
+    this.updatedFieldItem.emit(this.fieldItem)
+  }
+
+  showDetailsComponentOptions():boolean{
+
+    let show:boolean = false;
+    if(!this.selectableItem){
+      return show;
+    }
+    if(
+      this.selectableItem.editableConfig.hasDateOptions
+    ){
+      show = true;
+    }
+    console.log(this.selectableItem.editableConfig.hasDateOptions, show)
+    return show
   }
 
 }

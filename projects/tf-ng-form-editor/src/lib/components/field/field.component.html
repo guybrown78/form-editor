@@ -50,6 +50,7 @@
       <field-item-config-options
         *ngIf="tab.value === 'options'"
         [editorItemModel]="editorItemModel"
+        (updatedFieldItem)="onUpdatedFieldItem($event)"
       ></field-item-config-options>
 
       <field-item-permissions

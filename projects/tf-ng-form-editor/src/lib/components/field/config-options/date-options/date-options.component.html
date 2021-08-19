@@ -1,0 +1,30 @@
+<div>
+  <nz-divider></nz-divider>
+</div>
+
+<div *ngIf="formReady">
+  <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+
+    <nz-form-item>
+      <nz-form-label>Date Mode</nz-form-label>
+      <nz-form-control [nzSpan]="24">
+        <nz-select
+          name="mode"
+          nzPlaceHolder="Select a date mode"
+          [(ngModel)]="selectedMode"
+          [ngModelOptions]="{standalone: true}"
+          (ngModelChange)="onModeChange($event)"
+        >
+          <nz-option
+            *ngFor="let item of availableDateModes"
+            [nzLabel]="item.label" [nzValue]="item.value"
+          ></nz-option>
+
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+
+  </form>
+
+</div>

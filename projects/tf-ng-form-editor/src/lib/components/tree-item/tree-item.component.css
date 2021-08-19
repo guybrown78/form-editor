@@ -34,3 +34,6 @@
   max-height: 0px;
   pointer-events: none;
 }
+.tree-item-wrapper{
+  flex-wrap: nowrap;
+}

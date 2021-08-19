@@ -24,10 +24,12 @@ export interface SelectableFieldItemModel {
 export interface SelectableFieldItemEditableConfigModel {
   type:EditableConfigType
   id:string,
+  disableEdit?:boolean
   setLabel?:boolean
   setDesc?:boolean
   setHelp?:boolean
   setPlaceholder?:boolean
+  multiplePlaceholders?:boolean
   setRequired?:boolean
   setPermissions?:boolean
   setReadonlyPermissions?:boolean
@@ -37,6 +39,7 @@ export interface SelectableFieldItemEditableConfigModel {
   hasLayoutOptions?:boolean
   hasShowBlocks?:boolean
   hasGridOptions?:boolean
+  hasDateOptions?:boolean
 }
 export enum SelectableCategory {
   SIMPLE = "Simple",
@@ -63,11 +66,13 @@ export enum EditableConfigType {
   CHECKBOX,
   CHECKBOX_GROUP,
   LAYOUT,
+  STATIC,
   TEXT,
   NESTED,
   GRID,
   TABS,
   TAB,
+  DATE
 }
 
 @Injectable({
@@ -97,6 +102,15 @@ export class FormEditorConfigService {
       label:"Radio Select",
       category:SelectableCategory.SIMPLE,
       editableConfigType:EditableConfigType.RADIO
+    },
+    {
+      type:"radio-group",
+      id:"radio-group",
+      label:"Radio Group",
+      wrappers:[SelectableWrapper.FORM_FIELD],
+      category:SelectableCategory.SIMPLE,
+      editableConfigType:EditableConfigType.CHECKBOX_GROUP,
+      editableConfigOptionsName:"checkboxOptions"
     },
     {
       type:"checkbox",
@@ -141,8 +155,8 @@ export class FormEditorConfigService {
       id:"divider",
       label:"Divider",
       category:SelectableCategory.LAYOUT,
-      description:"Lorum ipsum divider ...",
-      editableConfigType:EditableConfigType.LAYOUT
+      description:"A graphical divider that helps to break up key parts of your form",
+      editableConfigType:EditableConfigType.STATIC
     },
     {
       type:"text",
@@ -180,6 +194,35 @@ export class FormEditorConfigService {
       category:SelectableCategory.HIDDEN,
       editableConfigType:EditableConfigType.GENERAL
     },
+    {
+      type:"date",
+      id:"date",
+      label:"Date",
+      wrappers:[SelectableWrapper.DATE_FIELD],
+      description:"Date field item description goes here...",
+      category:SelectableCategory.SIMPLE,
+      editableConfigType:EditableConfigType.DATE,
+      editableConfigOptionsName:"dateOptions"
+    },
+    {
+      type:"date-range",
+      id:"date-range",
+      label:"Date Range",
+      wrappers:[SelectableWrapper.DATE_FIELD],
+      description:"Date range item description goes here...",
+      category:SelectableCategory.SIMPLE,
+      editableConfigType:EditableConfigType.DATE,
+      editableConfigOptionsName:"dateOptions"
+    },
+    {
+      type:"rate",
+      id:"rate",
+      label:"Rate",
+      wrappers:[SelectableWrapper.FORM_FIELD],
+      category:SelectableCategory.SIMPLE,
+      editableConfigType:EditableConfigType.CHECKBOX,
+      editableConfigOptionsName:"rateOptions"
+    }
   ]
 
   readonly _editableConfigs: SelectableFieldItemEditableConfigModel[] = [
@@ -219,6 +262,11 @@ export class FormEditorConfigService {
       setReadonlyPermissions:true,
       setHideExpressions:false,
       hasComponentOptions:true,
+    },
+    {
+      type:EditableConfigType.STATIC,
+      id:"config-static",
+      disableEdit:true,
     },
     {
       type:EditableConfigType.LAYOUT,
@@ -295,6 +343,19 @@ export class FormEditorConfigService {
     {
       type:EditableConfigType.GENERAL,
       id:"config-general"
+    },
+    {
+      type:EditableConfigType.DATE,
+      id:"config-date",
+      setLabel:true,
+      setDesc:true,
+      setHelp:true,
+      setPlaceholder:true,
+      multiplePlaceholders:true,
+      setRequired:true,
+      setPermissions:true,
+      setReadonlyPermissions:true,
+      hasDateOptions:true
     },
   ]
 

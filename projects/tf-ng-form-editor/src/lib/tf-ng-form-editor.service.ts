@@ -8,6 +8,7 @@ import { FieldItemModel } from './to-share/field-item-model.interface';
 import { FormEditorConfigService, SelectableCategory, SelectableFieldItemModel } from './form-editor-config.service';
 import { v4 as uuidv4 } from 'uuid';
 import { FormMetaModel } from './to-share/form-meta-model.interface';
+import { FieldItemType } from './to-share/field-item-component-options-model.interface';
 
 
 
@@ -354,7 +355,6 @@ export class TfNgFormEditorService implements OnDestroy {
         }
       }
     }
-    //
     return fieldItem;
   }
 

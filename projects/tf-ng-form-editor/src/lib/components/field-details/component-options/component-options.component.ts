@@ -1,5 +1,17 @@
-import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormArray
+} from '@angular/forms';
 import {
   FormEditorConfigService,
   SelectableFieldItemModel,
@@ -9,11 +21,13 @@ import {
 import {
   OptionModel,
   FieldItemComponentOptionsModel,
-  FieldItemGridOptionsColumnDefsModel
+  FieldItemGridOptionsColumnDefsModel,
+  FieldItemDateOptionsModel,
+  FieldItemDateModeOption,
 } from '../../../to-share/field-item-component-options-model.interface'
 
 import { FieldItemModel } from '../../../to-share/field-item-model.interface';
-import { FieldItemLayoutOption } from '../../../to-share/field-item-component-options-model.interface';
+
 import { take } from 'rxjs/operators';
 @Component({
   selector: 'field-details-component-options',
@@ -89,6 +103,7 @@ export class ComponentOptionsComponent implements OnInit {
         new FormControl(this.getComponentOptionData('showBlocks', this.optionsName), [])
       );
     }
+
     // hasColumn
     this.onChanges();
     // setTimeout(() => {

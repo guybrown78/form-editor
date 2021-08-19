@@ -2,6 +2,10 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/tf-ng-form-editor",
   "assets": ["./assets"],
+  "allowedNonPeerDependencies": [
+    "tslib",
+    "angular-froala-wysiwyg"
+  ],
   "lib": {
     "entryFile": "src/public-api.ts"
   }

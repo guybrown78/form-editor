@@ -157,13 +157,14 @@ export class FieldComponent implements OnInit, OnDestroy {
   initTabNavigation(){
     this.availableTabs = []
     this.tabIndex = 0;
-
     // always allow the Editor initial tab
-    this.availableTabs.push({
-      label:"Editor",
-      value:"editor",
-      disabled:false
-    })
+    if(!this.selectableItem.editableConfig.disableEdit){
+      this.availableTabs.push({
+        label:"Editor",
+        value:"editor",
+        disabled:false
+      })
+    }
     if(
       this.selectableItem.editableConfig.hasLayoutOptions ||
       this.selectableItem.editableConfig.hasGridOptions
@@ -177,7 +178,8 @@ export class FieldComponent implements OnInit, OnDestroy {
     // set the available tabs based of config
     if(
       this.selectableItem.editableConfig.setRequired ||
-      this.selectableItem.editableConfig.setHelp
+      this.selectableItem.editableConfig.setHelp ||
+      this.selectableItem.editableConfig.hasDateOptions
     ){
       this.availableTabs.push({
         label:"Options",

@@ -22,10 +22,27 @@
   </nz-form-item>
 
   <nz-form-item *ngIf="selectableItem?.editableConfig.setPlaceholder">
-    <nz-form-control>
+    <nz-form-control *ngIf="!selectableItem.editableConfig.multiplePlaceholders">
       <nz-form-label nzFor="placeholder">Placeholder</nz-form-label>
       <input nz-input formControlName="placeholder"/>
     </nz-form-control>
+
+    <nz-form-control *ngIf="selectableItem.editableConfig.multiplePlaceholders">
+      <nz-form-label>Placeholder{{ selectableItem.type !== 'date' ? 's' : ''}}</nz-form-label>
+      <div nz-row nzGutter="16">
+        <div nz-col [nzSpan]="selectableItem.type !== 'date' ? 12 : 24">
+          <input nz-input [value]="fieldItem.placeholder ? fieldItem.placeholder[0] ? fieldItem.placeholder[0] : '' : ''"
+            (keyup)="onMultiplePlaceholderUpdate($event, 0)"
+          />
+        </div>
+        <div nz-col nzSpan="12" *ngIf="selectableItem.type !== 'date' ">
+          <input nz-input [value]="fieldItem.placeholder ? fieldItem.placeholder[1] ? fieldItem.placeholder[1] : '' : ''"
+            (keyup)="onMultiplePlaceholderUpdate($event, 1)"
+          />
+        </div>
+      </div>
+    </nz-form-control>
+
   </nz-form-item>
 
 </form>

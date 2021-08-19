@@ -1,6 +1,6 @@
 {
   "name": "tf-ng-form-editor",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "peerDependencies": {
     "@angular/common": "^11.2.14",
     "@angular/core": "^11.2.14",
@@ -10,10 +10,10 @@
     "@ngx-formly/ng-zorro-antd": "^6.0.0-next.1",
     "ng-zorro-antd": "^11.3.0",
     "tf-ng-core": "^0.0.36",
-    "tf-ng-nz": "^0.0.3",
-    "angular-froala-wysiwyg": "^4.0.4"
+    "tf-ng-nz": "^0.0.3"
   },
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "angular-froala-wysiwyg": "^4.0.4"
   }
 }

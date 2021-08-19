@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
   FormEditorConfigService,
   SelectableFieldItemModel,
@@ -143,5 +143,11 @@ export class EditorComponent implements OnInit {
       return 'Text'
     }
     return 'Description'
+  }
+
+  onMultiplePlaceholderUpdate(event, index){
+    let currPlaceholders = this.form.controls['placeholder'].value || [];
+    currPlaceholders[index] = event.target.value
+    this.form.controls['placeholder'].setValue(currPlaceholders)
   }
 }

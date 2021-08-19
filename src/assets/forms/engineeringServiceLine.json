@@ -12,6 +12,7 @@
   "schema":[
     {
       "type":"tabs",
+      "label":"Tabs",
       "componentOptions":{
         "tabsOptions":{
           "size":"small",
@@ -23,13 +24,15 @@
         {
           "key":"candidateInfo",
           "label":"Candidate Information",
+          "type":"tab",
           "fieldGroup":[
             {
               "label": "Name",
               "type": "input"
             },
             {
-              "type": "divider"
+              "type": "divider",
+              "label":"Divider"
             },
             {
               "label": "Email",
@@ -208,6 +211,7 @@
         {
           "key":"knowledgeBase",
           "label":"Knowledge Base",
+          "type":"tab",
           "fieldGroup":[
             {
               "label":"Qualifications",
@@ -230,6 +234,7 @@
         {
           "key":"assessmentSummary",
           "label":"Assessment Summary",
+          "type":"tab",
           "fieldGroup":[
             {
               "key":"candidate",
@@ -255,7 +260,8 @@
               ]
             },
             {
-              "type":"divider"
+              "type":"divider",
+              "label":"Divider"
             },
             {
               "key":"assessor",
@@ -383,6 +389,7 @@
         },
         {
           "label":"Knowledge Table Key",
+          "type":"tab",
           "fieldGroup":[
             {
               "type":"grid",
@@ -497,6 +504,7 @@
         {
           "key":"behaviouralCompetencies",
           "label":"Behavioural Competencies (Behavioural Standard)",
+          "type":"tab",
           "fieldGroup":[]
         }
       ]

@@ -49,6 +49,7 @@ import { NewFormMetaComponent } from './components/new-form-meta/new-form-meta.c
 import { PreviewSettingsComponent } from './components/preview-settings/preview-settings.component';
 import { PermissionsComponent } from './components/field/permissions/permissions.component';
 import { RichTextComponent } from './components/rich-text/rich-text.component';
+import { DateOptionsComponent } from './components/field/config-options/date-options/date-options.component';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { RichTextComponent } from './components/rich-text/rich-text.component';
     PreviewSettingsComponent,
     PermissionsComponent,
     RichTextComponent,
+    DateOptionsComponent,
   ],
   imports: [
     CommonModule,

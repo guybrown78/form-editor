@@ -22,6 +22,14 @@
     </nz-form-item>
 
 
+
   </div>
 
 </form>
+
+<div *ngIf="selectableItem.editableConfig.hasDateOptions">
+  <form-item-date-options
+    [fieldItem]="fieldItem"
+    (updated)="onComponentOptionsUpdated($event)"
+  ></form-item-date-options>
+</div>

@@ -8,7 +8,7 @@ export interface FieldItemModel {
   key?:string
   type?:string
   label?:string
-  placeholder?:string
+  placeholder?:string[] | string
   help?:string
   description?:string
   wrappers?:SelectableWrapper[]

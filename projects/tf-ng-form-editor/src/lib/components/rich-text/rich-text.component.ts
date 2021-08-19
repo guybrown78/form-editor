@@ -46,11 +46,9 @@ export class RichTextComponent{
 
     const decodedValue = decodeURIComponent(control.value);
     if(isHTML(decodedValue)){
-      console.log("Is HTML")
       this.froalaContent = decodedValue;
       this.isDynamic = true;
     }else{
-      console.log("Is NOT HTML")
       this.isDynamic = false;
     }
     this.ready = true;

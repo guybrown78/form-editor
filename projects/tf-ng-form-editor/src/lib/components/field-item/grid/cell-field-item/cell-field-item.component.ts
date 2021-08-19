@@ -110,4 +110,11 @@ export class CellFieldItemComponent implements OnInit {
     this.formEditorService.updateFormItem(this.fieldItem)
   }
 
+  getDescriptionFieldLabel(){
+    if(this.selectableItem.type === "text"){
+      return 'Text'
+    }
+    return 'Description'
+  }
+
 }

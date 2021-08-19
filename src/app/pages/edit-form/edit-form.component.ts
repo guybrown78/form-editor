@@ -27,8 +27,9 @@ export class EditFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    const url = 'assets/forms/engineeringServiceLine.json'
     // const url = 'assets/forms/TraineeCADOperator_Americas.json'
-    const url = 'assets/forms/test.json'
+    // const url = 'assets/forms/test.json'
 
     this.formEditorService.getData(url).subscribe(data => {
       // data has loaded, the formService getData parses the data before it is returned here and stores the formFields, model and meta for the form.
