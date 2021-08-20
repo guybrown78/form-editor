@@ -39,14 +39,14 @@
       </div> -->
 
       <!-- FIELD -->
-      <div nz-col nzFlex="auto">
+      <div nz-col nzFlex="auto" *ngIf="hasFormSchema">
         <div class="form-editor-field-detail rounded bg-white">
           <form-editor-field></form-editor-field>
         </div>
       </div>
 
       <!-- INLINE PREVIEW -->
-      <div nz-col [nzFlex]="showInlinePreview ? '450px' : '30px' " class="dynamic-width">
+      <div nz-col [nzFlex]="showInlinePreview ? '450px' : '30px' " class="dynamic-width" *ngIf="hasFormSchema">
         <form-editor-inline-preview
           [showInlinePreview]="showInlinePreview"
           (updatedShowInlinePreview)="onShowInlinePreviewUpdated($event)"

@@ -22,6 +22,7 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
   ready:boolean = false;
   initForm:boolean = false;
 
+  hasFormSchema:boolean = false;
 
   onShowInlinePreviewUpdated(value:boolean){
     this.showInlinePreview = value;
@@ -61,6 +62,7 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
       this.formEditorService.form.pipe(take(1)).subscribe(form => {
         // stringify and set to json
         if(form){
+          this.hasFormSchema = form.schema.length > 0;
           this.formService.setData(JSON.stringify(form)).subscribe(data => {
             // CAN UPDATE PREVIEW HERE
           })
@@ -92,26 +94,6 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
   }
 
 
-  canDeactivate() {
-    console.log('!!!!!!!!! i am navigating away');
-
-    this.formEditorService.formUpdated.pipe(take(1)).subscribe(updated => {
-      console.log("....", updated)
-      if(updated){
-        // changes have been made, able to save
-        // this.disabledSave = false;
-        return window.confirm('Discard changes?');
-      }
-      return true;
-    });
-
-    // // if the editName !== this.user.name
-    // if (this.user.name !== this.editName) {
-    //   return window.confirm('Discard changes?');
-    // }
-
-    // return true;
-  }
 
   ngOnDestroy(){
     // the inline preview forces the title and form width to be ignored so it fills the preview window. That sticks in the formservice so just reset when leaving

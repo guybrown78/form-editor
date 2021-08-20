@@ -85,7 +85,6 @@ export class FieldComponent implements OnInit, OnDestroy {
                     if(selectableItem){
 
                       this.selectableItem = selectableItem;
-
                       this.editorItemModel = {
                         fieldItem: this.fieldItem,
                         selectableItem: this.selectableItem
@@ -199,6 +198,10 @@ export class FieldComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  onSelectedTabIndexChange(index){
+    this.tabIndex = index;
+  }
   ngOnDestroy(){
     this.selectedKeySubscription.unsubscribe
   }

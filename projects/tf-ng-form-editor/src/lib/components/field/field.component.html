@@ -27,7 +27,10 @@
     {{ selectableItem?.description }}
   </p>
 
-  <nz-tabset class="navy">
+  <nz-tabset
+    class="navy"
+    (nzSelectedIndexChange)="onSelectedTabIndexChange($event)"
+  >
 
     <nz-tab
       *ngFor="let tab of availableTabs"
@@ -38,23 +41,28 @@
 
       <field-item-editor
         *ngIf="tab.value === 'editor'"
+        [active]="availableTabs[tabIndex].value === 'editor'"
         [editorItemModel]="editorItemModel"
+        (updatedFieldItem)="onUpdatedFieldItem($event)"
       ></field-item-editor>
 
       <field-item-layout
         *ngIf="tab.value === 'layout'"
+        [active]="availableTabs[tabIndex].value === 'layout'"
         [editorItemModel]="editorItemModel"
         (updatedFieldItem)="onUpdatedFieldItem($event)"
       ></field-item-layout>
 
       <field-item-config-options
         *ngIf="tab.value === 'options'"
+        [active]="availableTabs[tabIndex].value === 'options'"
         [editorItemModel]="editorItemModel"
         (updatedFieldItem)="onUpdatedFieldItem($event)"
       ></field-item-config-options>
 
       <field-item-permissions
         *ngIf="tab.value === 'permissions'"
+        [active]="availableTabs[tabIndex].value === 'permissions'"
         [editorItemModel]="editorItemModel"
       ></field-item-permissions>
 

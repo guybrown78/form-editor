@@ -82,52 +82,107 @@ export class FormEditorConfigService {
 
   private _types: SelectableFieldItemModel[] = [
     {
+      type:"text",
+      id:"text",
+      label:"Paragraph",
+      description:"Good for introducing the form or key parts. It allows you to add text and images",
+      category:SelectableCategory.SIMPLE,
+      editableConfigType:EditableConfigType.TEXT
+    },
+    {
       type:"input",
       id:"input",
-      label:"Input",
+      label:"Text Input",
       category:SelectableCategory.SIMPLE,
-      description:"Lorum ipsum",
+      description:"Allow the form user to add a single line of text",
+      editableConfigType:EditableConfigType.INPUT
+    },
+    {
+      type:"number",
+      id:"number",
+      label:"Number Input",
+      category:SelectableCategory.SIMPLE,
+      description:"Allow the form user to add a number",
+      editableConfigType:EditableConfigType.INPUT
+    },
+    {
+      type:"email",
+      id:"email",
+      label:"Email Input",
+      wrappers:[SelectableWrapper.FORM_FIELD],
+      category:SelectableCategory.SIMPLE,
+      description:"Allow the form user to add a email address",
+      editableConfigType:EditableConfigType.INPUT
+    },
+    {
+      type:"text-area",
+      id:"text-area",
+      label:"Multiline Text Input",
+      wrappers:[SelectableWrapper.FORM_FIELD],
+      category:SelectableCategory.SIMPLE,
+      description:"Allow the form user to add multiple lines of text",
       editableConfigType:EditableConfigType.INPUT
     },
     {
       type:"select",
       id:"select",
-      label:"Select Dropdown",
+      label:"Dropdown Select",
       category:SelectableCategory.SIMPLE,
       editableConfigType:EditableConfigType.SELECT
     },
-    {
-      type:"radio",
-      id:"radio",
-      label:"Radio Select",
-      category:SelectableCategory.SIMPLE,
-      editableConfigType:EditableConfigType.RADIO
-    },
+
     {
       type:"radio-group",
       id:"radio-group",
-      label:"Radio Group",
+      label:"Single Select",
+      description:"For when you want the user to give a single answer to a question or statement",
       wrappers:[SelectableWrapper.FORM_FIELD],
       category:SelectableCategory.SIMPLE,
       editableConfigType:EditableConfigType.CHECKBOX_GROUP,
       editableConfigOptionsName:"checkboxOptions"
     },
-    {
-      type:"checkbox",
-      id:"checkbox",
-      label:"Checkbox Single Select",
-      category:SelectableCategory.SIMPLE,
-      editableConfigType:EditableConfigType.CHECKBOX
-    },
+
     {
       type:"checkbox-group",
       id:"checkbox-group",
-      label:"Checkbox Group",
+      label:"Multi Select",
+      description:"Ideal for when you want the user to have multiple options to choose from",
       wrappers:[SelectableWrapper.FORM_FIELD],
       category:SelectableCategory.SIMPLE,
       editableConfigType:EditableConfigType.CHECKBOX_GROUP,
       editableConfigOptionsName:"checkboxOptions"
     },
+    {
+      type:"rate",
+      id:"rate",
+      label:"Rating",
+      description:"For when you want to ask the form user to give a star rating for something",
+      wrappers:[SelectableWrapper.FORM_FIELD],
+      category:SelectableCategory.SIMPLE,
+      editableConfigType:EditableConfigType.CHECKBOX,
+      editableConfigOptionsName:"rateOptions"
+    },
+    {
+      type:"date",
+      id:"date",
+      label:"Date",
+      wrappers:[SelectableWrapper.DATE_FIELD],
+      description:"Allow the form user to add key dates such as their date of birth",
+      category:SelectableCategory.SIMPLE,
+      editableConfigType:EditableConfigType.DATE,
+      editableConfigOptionsName:"dateOptions"
+    },
+    {
+      type:"date-range",
+      id:"date-range",
+      label:"Date Range",
+      wrappers:[SelectableWrapper.DATE_FIELD],
+      description:"For when you want to capture a range of dates such as start and end date",
+      category:SelectableCategory.SIMPLE,
+      editableConfigType:EditableConfigType.DATE,
+      editableConfigOptionsName:"dateOptions"
+    },
+
     {
       type:"address",
       id:"address",
@@ -140,7 +195,7 @@ export class FormEditorConfigService {
       id:"tabs",
       label:"Tabs",
       category:SelectableCategory.LAYOUT,
-      description:"Descriptions explaining the tabs and how to use them etc...",
+      description:"This allows you to break down longer forms into multiple sections",
       editableConfigType:EditableConfigType.TABS
     },
     {
@@ -150,6 +205,22 @@ export class FormEditorConfigService {
       category:SelectableCategory.HIDDEN,
       editableConfigType:EditableConfigType.TAB
     },
+
+    {
+      type:"radio",
+      id:"radio",
+      label:"Radio Select",
+      category:SelectableCategory.HIDDEN,
+      editableConfigType:EditableConfigType.RADIO
+    },
+    {
+      type:"checkbox",
+      id:"checkbox",
+      label:"Single Checkbox",
+      category:SelectableCategory.HIDDEN,
+      editableConfigType:EditableConfigType.CHECKBOX
+    },
+
     {
       type:"divider",
       id:"divider",
@@ -158,13 +229,7 @@ export class FormEditorConfigService {
       description:"A graphical divider that helps to break up key parts of your form",
       editableConfigType:EditableConfigType.STATIC
     },
-    {
-      type:"text",
-      id:"text",
-      label:"Text",
-      category:SelectableCategory.SIMPLE,
-      editableConfigType:EditableConfigType.TEXT
-    },
+
     {
       type:"nested",
       id:"nested",
@@ -194,35 +259,7 @@ export class FormEditorConfigService {
       category:SelectableCategory.HIDDEN,
       editableConfigType:EditableConfigType.GENERAL
     },
-    {
-      type:"date",
-      id:"date",
-      label:"Date",
-      wrappers:[SelectableWrapper.DATE_FIELD],
-      description:"Date field item description goes here...",
-      category:SelectableCategory.SIMPLE,
-      editableConfigType:EditableConfigType.DATE,
-      editableConfigOptionsName:"dateOptions"
-    },
-    {
-      type:"date-range",
-      id:"date-range",
-      label:"Date Range",
-      wrappers:[SelectableWrapper.DATE_FIELD],
-      description:"Date range item description goes here...",
-      category:SelectableCategory.SIMPLE,
-      editableConfigType:EditableConfigType.DATE,
-      editableConfigOptionsName:"dateOptions"
-    },
-    {
-      type:"rate",
-      id:"rate",
-      label:"Rate",
-      wrappers:[SelectableWrapper.FORM_FIELD],
-      category:SelectableCategory.SIMPLE,
-      editableConfigType:EditableConfigType.CHECKBOX,
-      editableConfigOptionsName:"rateOptions"
-    }
+
   ]
 
   readonly _editableConfigs: SelectableFieldItemEditableConfigModel[] = [

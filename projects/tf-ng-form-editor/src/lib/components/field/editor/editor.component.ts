@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
   FormEditorConfigService,
@@ -21,6 +21,11 @@ import { FieldItemModel } from '../../../to-share/field-item-model.interface';
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
+
+
+  @Output("updatedFieldItem") updatedFieldItem = new EventEmitter<FieldItemModel>();
+
+  @Input('active') active:boolean
 
   private _editorItemModel:EditorItemModel
   @Input('editorItemModel') set editorItemModel(item:EditorItemModel){
@@ -107,6 +112,7 @@ export class EditorComponent implements OnInit {
       componentOptions
     }
     this.formEditorService.updateFormItem(this.fieldItem)
+    this.updatedFieldItem.emit(this.fieldItem)
   }
 
 

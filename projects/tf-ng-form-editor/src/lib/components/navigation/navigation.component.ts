@@ -44,9 +44,9 @@ export class NavigationComponent implements OnInit {
   // TODO, move this to config - at the moment relies too much on the 4 booleans above
   navigationItems:any[] = [
     {label:"Layout menu", type:"layout-menu", icon:"edit"},
-    {label:"Complex menu", type:"complex-menu", icon:"appstore"},
     {label:"Single Item menu", type:"single-menu", icon:"export"},
-    {label:"Form menu", type:"form-menu", icon:"setting"}
+    {label:"Complex menu", type:"complex-menu", icon:"appstore"},
+    {label:"Form menu", type:"form-menu", icon:"form"}
   ]
 
   constructor(

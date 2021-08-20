@@ -17,11 +17,15 @@ import { FieldItemModel } from '../../../to-share/field-item-model.interface';
 })
 export class LayoutComponent implements OnInit {
 
+
   @Output("updatedFieldItem") updatedFieldItem = new EventEmitter<FieldItemModel>();
+
+  @Input('active') active:boolean
 
   private _editorItemModel:EditorItemModel
   @Input('editorItemModel') set editorItemModel(item:EditorItemModel){
-    if(item.fieldItem.uuid !== this.fieldItem?.uuid){
+
+    if(!this.active || (item.fieldItem.uuid !== this.fieldItem?.uuid)){
       this.formReady = false;
       this.selectableItem = item.selectableItem;
       this.fieldItem = item.fieldItem;
