@@ -57,11 +57,15 @@
 
 
 
-  <!-- <div
+  <div
     class="form-editor-navigation-drawer-wrapper"
     [ngClass]="anyMenuVisable ? 'show' : 'hide'"
   >
-    <div class="form-editor-navigation-drawer-bg" ></div> -->
+    <div
+      class="form-editor-navigation-drawer-bg"
+      [ngClass]="anyMenuVisable ? 'show' : 'hide'"
+      (click)="closeAll()"
+    ></div>
 
     <div
       *ngFor="let item of navigationItems"
@@ -109,7 +113,7 @@
 
 
     </div>
-  <!-- </div> -->
+  </div>
 
 
 
@@ -160,5 +164,6 @@
 
   </div> -->
 
-</div>
 
+
+</div>

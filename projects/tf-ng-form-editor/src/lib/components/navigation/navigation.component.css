@@ -48,16 +48,28 @@ tf-ng-side-bar{
 .form-editor-navigation-drawer-wrapper{
   position: absolute;
   display: flex;
-  height: 100vh;
+  height: 100%;
   min-height: 100vh;
-  width: 100%;
+  width: calc(100vw - 95px);
   min-width: 100%;
   z-index: 25;
-  /* border: solid 10px red; */
+  pointer-events:none;
 }
 
 .form-editor-navigation-drawer-bg{
-
+  position: relative;
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  min-width: 100%;
+}
+.form-editor-navigation-drawer-bg.show{
+  display: flex;
+  pointer-events:all;
+}
+.form-editor-navigation-drawer-bg.hide{
+  display: none;
+  pointer-events:none;
 }
 .form-editor-navigation-drawer{
   position: absolute;
