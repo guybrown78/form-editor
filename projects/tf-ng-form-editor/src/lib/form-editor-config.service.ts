@@ -193,7 +193,7 @@ export class FormEditorConfigService {
     {
       type:"tabs",
       id:"tabs",
-      label:"Tabs",
+      label:"Sections",
       category:SelectableCategory.LAYOUT,
       description:"This allows you to break down longer forms into multiple sections",
       editableConfigType:EditableConfigType.TABS

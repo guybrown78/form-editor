@@ -20,13 +20,35 @@
           [disabled]="disabled"
           outline-colour="white"
           size="m"
-          [as-button]="false"
+          [as-button]="true"
         >
-          <i
+          <!-- <i
             nz-icon
             [ngClass]="getHexMenuColour(item.type).icon"
             [nzType]="item.icon" nzTheme="outline"
-          ></i>
+          ></i> -->
+
+          <tf-ng-tf-ng-icon-layout
+            [ngClass]="item.type"
+            *ngIf="item.type === 'layout-menu'"
+            [colour]="getHexMenuColour(item.type).icon"
+          ></tf-ng-tf-ng-icon-layout>
+          <tf-ng-icon-basic-input
+            [ngClass]="item.type"
+            *ngIf="item.type === 'single-menu'"
+            [colour]="getHexMenuColour(item.type).icon"
+          ></tf-ng-icon-basic-input>
+          <tf-ng-icon-pre-built-items
+            [ngClass]="item.type"
+            *ngIf="item.type === 'complex-menu'"
+            [colour]="getHexMenuColour(item.type).icon"
+          ></tf-ng-icon-pre-built-items>
+          <tf-ng-tf-ng-icon-edit
+            [ngClass]="item.type"
+            *ngIf="item.type === 'form-menu'"
+            [colour]="getHexMenuColour(item.type).icon"
+          ></tf-ng-tf-ng-icon-edit>
+
         </tf-ng-hexagon>
 
       </div>
@@ -34,7 +56,64 @@
   </nz-layout>
 
 
-  <div
+
+  <!-- <div
+    class="form-editor-navigation-drawer-wrapper"
+    [ngClass]="anyMenuVisable ? 'show' : 'hide'"
+  >
+    <div class="form-editor-navigation-drawer-bg" ></div> -->
+
+    <div
+      *ngFor="let item of navigationItems"
+      class="form-editor-navigation-drawer"
+      [ngClass]="[
+        getMenuDrawerStateClass(item.type),
+        item.type,
+        item.type === 'form-menu' ? 'bg-white' : 'bg-blue'
+      ]"
+    >
+      <div class="title-wrapper">
+        <tf-ng-form-title class="title">
+          <h4 [ngClass]="item.type === 'form-menu' ? 'blue' : 'white'">
+            {{ item.label }}
+          </h4>
+        </tf-ng-form-title>
+      </div>
+
+
+      <form-editor-field-picker
+        *ngIf="item.type === 'layout-menu'"
+        category="Layout"
+        (selectedField)="onSelectedField($event)"
+      ></form-editor-field-picker>
+
+      <form-editor-field-picker
+        *ngIf="item.type === 'complex-menu'"
+        category="Complex"
+        (selectedField)="onSelectedField($event)"
+      ></form-editor-field-picker>
+
+
+      <form-editor-field-picker
+        *ngIf="item.type === 'single-menu'"
+        category="Simple"
+        (selectedField)="onSelectedField($event)"
+      ></form-editor-field-picker>
+
+      <div
+        class="content-wrapper"
+        *ngIf="item.type === 'form-menu'"
+      >
+        <form-editor-meta-settings></form-editor-meta-settings>
+      </div>
+
+
+    </div>
+  <!-- </div> -->
+
+
+
+  <!-- <div
     *ngFor="let item of navigationItems"
     class="form-editor-navigation-drawer"
     [ngClass]="[
@@ -79,7 +158,7 @@
     </div>
 
 
-  </div>
+  </div> -->
 
 </div>
 

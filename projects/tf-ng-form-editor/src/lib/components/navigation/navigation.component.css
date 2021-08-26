@@ -45,12 +45,26 @@ tf-ng-side-bar{
   transition-property: opacity, left;
 }
 
+.form-editor-navigation-drawer-wrapper{
+  position: absolute;
+  display: flex;
+  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
+  min-width: 100%;
+  z-index: 25;
+  /* border: solid 10px red; */
+}
 
+.form-editor-navigation-drawer-bg{
+
+}
 .form-editor-navigation-drawer{
   position: absolute;
   display: flex;
   flex-direction: column;
   height: 100vh;
+  min-height: 100vh;
   z-index: 25;
   transition: left 0.3s cubic-bezier(0.7, 0.3, 0.1, 1), box-shadow 0.3s cubic-bezier(0.7, 0.3, 0.1, 1);
 }
@@ -64,6 +78,7 @@ tf-ng-side-bar{
 }
 
 .form-editor-navigation-drawer.show{
+
   left: 80px;
   box-shadow: 6px 0 16px -8px rgb(0 0 0 / 8%), 9px 0 28px 0 rgb(0 0 0 / 5%), 12px 0 48px 16px rgb(0 0 0 / 3%);
   pointer-events: all;
@@ -87,4 +102,16 @@ tf-ng-side-bar{
 .form-editor-side-bar-nav-wrapper tf-ng-hexagon{
   margin-bottom: 1rem;
   cursor: pointer;
+}
+.layout-menu, .complex-menu{
+  height:30px;
+  pointer-events: none;
+}
+.single-menu{
+  width:35px;
+  pointer-events: none;
+}
+.form-menu{
+  height:36px;
+  pointer-events: none;
 }

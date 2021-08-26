@@ -12,7 +12,7 @@
   "schema":[
     {
       "type":"tabs",
-      "label":"Tabs",
+      "label":"Sections",
       "componentOptions":{
         "tabsOptions":{
           "size":"small",

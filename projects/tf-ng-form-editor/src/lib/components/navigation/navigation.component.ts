@@ -35,6 +35,7 @@ export class NavigationComponent implements OnInit {
   //
 
   // TODO, remove booleans for wach item and just have a current selctect item (move booleans to array maybe and set by index?)
+  anyMenuVisable:boolean = false;
   layoutMenuVisible:boolean = false;
   complexMenuVisible:boolean = false;
   singleMenuVisible:boolean = false;
@@ -62,6 +63,7 @@ export class NavigationComponent implements OnInit {
       return
     }
 
+    this.anyMenuVisable = !this.anyMenuVisable;
     switch(menu){
       case "layout-menu":
         this.layoutMenuVisible = !this.layoutMenuVisible
@@ -133,6 +135,7 @@ export class NavigationComponent implements OnInit {
     this.complexMenuVisible = false;
     this.singleMenuVisible = false;
     this.formMenuVisible = false;
+    this.anyMenuVisable = false;
   }
   onSelectedField(selectedField:SelectableFieldItemModel): void {
     const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
