@@ -60,7 +60,8 @@ export class PermissionsComponent implements OnInit {
     this.formPermissionService.userPermissions.pipe(take(1)).subscribe( permissions => {
 
       if(permissions){
-        this.selectedPermissions = this.fieldItem.permissions ? [ ...this.fieldItem.permissions ] : []
+        // TODO set all as default
+        this.selectedPermissions = this.fieldItem.permissions ? [ ...this.fieldItem.permissions ] : permissions.map(p => p.level)
 
         this.availablePermissions = permissions.map(p => {
           return {
@@ -135,6 +136,7 @@ export class PermissionsComponent implements OnInit {
   }
 
   onReadOnlyPermissionUpdated(selected:any[]){
+    this.selectedReadOnlyPermissions = [ ...selected ]
     this.form.controls['readonlyPermissions'].setValue(selected);
   }
 

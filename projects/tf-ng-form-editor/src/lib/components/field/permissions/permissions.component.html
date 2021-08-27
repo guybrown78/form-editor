@@ -22,7 +22,7 @@
 
         <!-- read / write -->
         <div nz-col nzSpan="8">
-          <h6 class="tf-app-column-header-text navy">Read/Write</h6>
+          <h6 class="tf-app-column-header-text navy">Visible</h6>
           <nz-checkbox-wrapper
             (nzOnChange)="onPermissionUpdated($event)"
           >
@@ -33,6 +33,7 @@
                   [ngModel]="p.checked"
                   [ngModelOptions]="{standalone: true}"
                   [nzValue]="p.value"
+                  [nzDisabled]="selectedReadOnlyPermissions.includes(p.value)"
                 ></label>
               </div>
             </div>

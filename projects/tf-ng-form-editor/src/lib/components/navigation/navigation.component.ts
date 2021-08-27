@@ -62,7 +62,6 @@ export class NavigationComponent implements OnInit {
     if(this.disabled){
       return
     }
-
     this.anyMenuVisable = !this.anyMenuVisable;
     switch(menu){
       case "layout-menu":
