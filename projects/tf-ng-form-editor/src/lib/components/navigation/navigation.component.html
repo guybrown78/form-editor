@@ -17,7 +17,7 @@
           *ngFor="let item of navigationItems"
           (click)="onToggleDrawer(item.type)"
           [colour]="getHexMenuColour(item.type).hex"
-          [disabled]="disabled"
+          [disabled]="getIsDisabled(item.type)"
           outline-colour="white"
           size="m"
           [as-button]="true"

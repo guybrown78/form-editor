@@ -22,6 +22,7 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
   ready:boolean = false;
   initForm:boolean = false;
 
+  hasTabs:boolean = false;
   hasFormSchema:boolean = false;
 
   onShowInlinePreviewUpdated(value:boolean){
@@ -62,7 +63,15 @@ export class TfNgFormEditorComponent implements OnInit, OnDestroy {
       this.formEditorService.form.pipe(take(1)).subscribe(form => {
         // stringify and set to json
         if(form){
+          let hasTabs = false;
+          form.schema.map(rootItem => {
+            if(rootItem.type === 'tabs'){
+              hasTabs = true;
+            }
+          })
+          this.hasTabs = hasTabs;
           this.hasFormSchema = form.schema.length > 0;
+
           this.formService.setData(JSON.stringify(form)).subscribe(data => {
             // CAN UPDATE PREVIEW HERE
           })

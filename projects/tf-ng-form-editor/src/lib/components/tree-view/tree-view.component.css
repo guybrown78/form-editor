@@ -26,3 +26,16 @@
 .tree-node-popover .ant-popover-inner-content {
   padding: 0!important;
 }
+
+.ant-tree-switcher-line-icon{
+  font-size: 10px;
+}
+.node-switcher{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34px;
+  height: 34px;
+  cursor: default;
+}

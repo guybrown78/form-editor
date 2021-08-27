@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NzTreeComponent, NzTreeNodeOptions, NzFormatEmitEvent } from 'ng-zorro-antd/tree';
+import { NzTreeComponent, NzTreeNodeOptions, NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
 import { Subscription } from 'rxjs';
 import { TfNgFormEditorService } from '../../tf-ng-form-editor.service';
+import { FieldItemModel } from '../../to-share/field-item-model.interface';
 
 
 
@@ -44,8 +45,10 @@ export class TreeViewComponent implements OnInit, OnDestroy {
     })
   }
 
-
-
+  onSupressExpansion(event){
+    event.stopPropagation();
+    event.preventDefault();
+  }
   ngOnDestroy(){
     this.formSubscription.unsubscribe
   }

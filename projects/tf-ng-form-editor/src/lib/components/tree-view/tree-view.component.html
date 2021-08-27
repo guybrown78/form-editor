@@ -12,10 +12,19 @@
     class="tf-app-tree"
     #nzTreeComponent
     [nzData]="nodes"
+    [nzExpandedIcon]="multiExpandedIconTpl"
     [nzTreeTemplate]="nzTreeTemplate"
     (nzClick)="nzClick($event)"
   ></nz-tree>
 </div>
+
+<ng-template #multiExpandedIconTpl let-node let-origin="origin">
+  <!-- <i *ngIf="origin.isTab" nz-icon [nzType]="node.isExpanded ? 'folder-open' : 'folder'" class="ant-tree-switcher-line-icon"></i> -->
+  <div *ngIf="origin.isTab" class="node-switcher" (click)="onSupressExpansion($event)">
+    <i nz-icon nzType="caret-down" class="grey ant-tree-switcher-line-icon"></i>
+  </div>
+  <i *ngIf="!origin.isTab" nz-icon [nzType]="node.isExpanded ? 'caret-down' : 'caret-right'" class="ant-tree-switcher-line-icon"></i>
+</ng-template>
 
 <ng-template #nzTreeTemplate let-node let-origin="origin">
   <form-editor-tree-item [node]="node" [isOpen]="origin.isOpen"></form-editor-tree-item>

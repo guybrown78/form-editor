@@ -15,6 +15,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 
 
 
+
 export interface FormTreeModel {
   title:string
   key:string
@@ -23,7 +24,7 @@ export interface FormTreeModel {
   children?:FormTreeModel[]
   expanded?:boolean
   isLeaf?:boolean
-
+  isTab?:boolean
 }
 export interface SaveFormModel {
   type:SaveTypeEnum
@@ -102,6 +103,25 @@ export class TfNgFormEditorService implements OnDestroy {
     this.form.pipe(take(1)).subscribe(form => {
       // create tempory form data from existing
       const updatedForm:FormModel = { ...form }
+      updatedForm.schema.push(item);
+      this.setSelectedTreeKey(item.uuid);
+      this._form.next(updatedForm);
+    })
+  }
+
+  addTabsFormItem(item:FieldItemModel, ordinum:number | null = null){
+    this.form.pipe(take(1)).subscribe(form => {
+      // create tempory form data from existing
+      item.fieldGroup = [{
+        type:'tab',
+        label:'Default Tab',
+        fieldGroup:[ ...form.schema ]
+      }];
+      const updatedForm:FormModel = {
+        meta:form.meta,
+        schema:[],
+        model:form.model
+      }
       updatedForm.schema.push(item);
       this.setSelectedTreeKey(item.uuid);
       this._form.next(updatedForm);
@@ -480,8 +500,10 @@ export class TfNgFormEditorService implements OnDestroy {
     })
     if(item.fieldGroup){
       const children:FormTreeModel[] = item.fieldGroup.map(f => this.parseItemToLeaf(f, currentSelectedKey, item.uuid));
-      if(!leaf.expanded){
-        //leaf.expanded = children.filter(c => c.selected).length >= 1;
+      if(item.type === 'tabs'){
+        leaf.expanded = true;
+        leaf.isTab = true;
+      }else if(!leaf.expanded){
         leaf.expanded = this.isTreeChildSelected(children);
       }
       leaf.children = children;

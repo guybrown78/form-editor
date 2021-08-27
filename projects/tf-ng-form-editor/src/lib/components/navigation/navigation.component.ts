@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { FieldItemModel } from '../../to-share/field-item-model.interface';
 
 import { TfNgFormEditorService } from '../../tf-ng-form-editor.service';
 import { SelectableFieldItemModel } from '../../form-editor-config.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'form-editor-navigation',
@@ -22,6 +24,20 @@ export class NavigationComponent implements OnInit {
   get disabled():boolean{
     return this._disabled;
   }
+
+  private _hasTabs:boolean = false;
+  @Input('hasTabs') set hasTabs(value:boolean){
+    if(value){
+      this.closeAll();
+    }
+    this._hasTabs = value;
+  }
+  get hasTabs():boolean{
+    return this._hasTabs;
+  }
+
+  @Input('hasFormSchema') hasFormSchema:boolean = false;
+
   @Input('hide') hide:boolean = false;
   @Input('hideNavigation') hideNavigation:boolean = false;
   @Input('animateHideToggles') animateHideToggles:boolean = true;
@@ -51,7 +67,8 @@ export class NavigationComponent implements OnInit {
   ]
 
   constructor(
-    private formEditorService:TfNgFormEditorService
+    private formEditorService:TfNgFormEditorService,
+    private modal: NzModalService,
   ) { }
 
   ngOnInit(): void {
@@ -64,18 +81,27 @@ export class NavigationComponent implements OnInit {
     }
     switch(menu){
       case "layout-menu":
+        if(this.hasTabs){
+          return
+        }
         this.anyMenuVisable = this.layoutMenuVisible = !this.layoutMenuVisible
         this.complexMenuVisible = false;
         this.singleMenuVisible = false;
         this.formMenuVisible = false;
         break;
       case "complex-menu":
+        if(this.hasTabs){
+          return
+        }
         this.layoutMenuVisible = false;
         this.anyMenuVisable = this.complexMenuVisible = !this.complexMenuVisible;
         this.singleMenuVisible = false;
         this.formMenuVisible = false;
         break;
       case "single-menu":
+        if(this.hasTabs){
+          return
+        }
         this.layoutMenuVisible = false;
         this.complexMenuVisible = false;
         this.anyMenuVisable = this.singleMenuVisible = !this.singleMenuVisible;
@@ -135,12 +161,45 @@ export class NavigationComponent implements OnInit {
     this.formMenuVisible = false;
     this.anyMenuVisable = false;
   }
+
+
+  getIsDisabled(menu:string){
+    if(this.disabled){
+      return true;
+    }
+    if(this.hasTabs && menu !== "form-menu"){
+      return true;
+    }
+    return false
+  }
   onSelectedField(selectedField:SelectableFieldItemModel): void {
     const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
-    this.formEditorService.addFormItem(formFieldItem);
     //
-    this.closeAll();
+    if(formFieldItem.type === 'tabs'){
+      this.formEditorService.form.pipe(take(1)).subscribe(form => {
+        if(form){
+          this.modal.confirm({
+            nzTitle: '<b>Adding sections</b>',
+            nzContent: `
+              <p>Adding section tabs to a form changes the form structure. Every field within the form will have to be placed into a section tab.</p>
+              ${form.schema.length > 0 ? '<p><b>The fields you have added already will be placed into the first tab</b></p>' : ''}
+            `,
+            nzOnOk: () => {
+              this.formEditorService.addTabsFormItem(formFieldItem);
+              this.closeAll();
+            }
+          });
+        }
+      })
+    }else{
+      this.addFormItem(formFieldItem)
+    }
+
    }
 
 
+   addFormItem(formFieldItem:FieldItemModel){
+    this.formEditorService.addFormItem(formFieldItem);
+    this.closeAll();
+   }
 }
