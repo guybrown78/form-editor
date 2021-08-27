@@ -157,6 +157,15 @@ export class FieldComponent implements OnInit, OnDestroy {
     this.availableTabs = []
     this.tabIndex = 0;
     // always allow the Editor initial tab
+    if(
+      this.selectableItem.editableConfig.hasGridOptions
+    ){
+      this.availableTabs.push({
+        label:"Grid Layout",
+        value:"layout",
+        disabled:false
+      })
+    }
     if(!this.selectableItem.editableConfig.disableEdit){
       this.availableTabs.push({
         label:"Editor",
@@ -165,8 +174,7 @@ export class FieldComponent implements OnInit, OnDestroy {
       })
     }
     if(
-      this.selectableItem.editableConfig.hasLayoutOptions ||
-      this.selectableItem.editableConfig.hasGridOptions
+      this.selectableItem.editableConfig.hasLayoutOptions
     ){
       this.availableTabs.push({
         label:"Layout",
