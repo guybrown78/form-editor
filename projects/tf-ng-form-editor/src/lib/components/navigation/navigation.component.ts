@@ -62,31 +62,30 @@ export class NavigationComponent implements OnInit {
     if(this.disabled){
       return
     }
-    this.anyMenuVisable = !this.anyMenuVisable;
     switch(menu){
       case "layout-menu":
-        this.layoutMenuVisible = !this.layoutMenuVisible
+        this.anyMenuVisable = this.layoutMenuVisible = !this.layoutMenuVisible
         this.complexMenuVisible = false;
         this.singleMenuVisible = false;
         this.formMenuVisible = false;
         break;
       case "complex-menu":
         this.layoutMenuVisible = false;
-        this.complexMenuVisible = !this.complexMenuVisible;
+        this.anyMenuVisable = this.complexMenuVisible = !this.complexMenuVisible;
         this.singleMenuVisible = false;
         this.formMenuVisible = false;
         break;
       case "single-menu":
         this.layoutMenuVisible = false;
         this.complexMenuVisible = false;
-        this.singleMenuVisible = !this.singleMenuVisible;
+        this.anyMenuVisable = this.singleMenuVisible = !this.singleMenuVisible;
         this.formMenuVisible = false;
         break;
       case "form-menu":
         this.layoutMenuVisible = false;
         this.complexMenuVisible = false;
         this.singleMenuVisible = false;
-        this.formMenuVisible = !this.formMenuVisible;
+        this.anyMenuVisable = this.formMenuVisible = !this.formMenuVisible;
         break;
     }
   }
