@@ -128,12 +128,19 @@ export class CellComponent implements OnInit {
       maxHeight:'800px',
       overflow:'auto'
     }
+    const maskStyle = {
+      backgroundColor:'rgb(34,69,149, 0.8)',
+      overflow:'auto'
+    }
     const modalEL: NzModalRef = this.modal.create({
       nzTitle: title,
       nzContent:CellFieldItemComponent,
+
       nzComponentParams: {
         fieldItem:this.fieldItem
       },
+      nzMask:true,
+      nzMaskStyle:maskStyle,
       nzBodyStyle:style,
       // nzFooter: [
         // {

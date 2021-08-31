@@ -14,7 +14,7 @@ import {
 import { FieldItemModel } from '../../to-share/field-item-model.interface';
 
 
-interface TabItemModel {
+export interface TabItemModel {
   label:string
   value:string
   disabled:boolean

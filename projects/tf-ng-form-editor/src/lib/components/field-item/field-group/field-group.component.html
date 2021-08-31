@@ -9,15 +9,28 @@
   <nz-form-item>
     <nz-form-control>
       <nz-select
+        nzShowSearch
         [ngModel]="types"
         [ngModelOptions]="{standalone: true}"
         (ngModelChange)="onSelectItemChange($event)"
         nzPlaceHolder="Select an field item to add"
       >
-        <nz-option
-          *ngFor="let item of types"
-          [nzLabel]="item.label" [nzValue]="item.id"
-        ></nz-option>
+
+
+        <nz-option-group nzLabel="Basic Inputs">
+          <nz-option
+            *ngFor="let item of types"
+            [nzLabel]="item.label" [nzValue]="item.id"
+          ></nz-option>
+        </nz-option-group>
+
+        <nz-option-group nzLabel="Complex">
+          <nz-option
+            *ngFor="let complexItem of complexTypes"
+            [nzLabel]="complexItem.label" [nzValue]="complexItem.id"
+          ></nz-option>
+        </nz-option-group>
+
       </nz-select>
     </nz-form-control>
   </nz-form-item>

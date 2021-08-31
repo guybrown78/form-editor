@@ -6,7 +6,7 @@ import {
   SelectableFieldItemModel,
   SelectableCategory
 } from '../../../form-editor-config.service';
-import { take } from 'rxjs/operators';
+import { last, take } from 'rxjs/operators';
 import {
   FieldItemGridOptionsColumnDefsModel,
   FieldItemGridOptionsModel
@@ -177,30 +177,49 @@ export class GridComponent implements OnInit {
 
   addRow(){
     // const rows = this.rowForm as FormArray;
-    this.formEditorConfig.getSelectableItemFromType("grid-row").subscribe(
-      selectable => {
-        if(selectable){
-          const row:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectable);
-          row.key = `row-${this.fieldItem.fieldGroup?.length || 0}`;
-          //
-          row.fieldGroup = []
+    console.log(this.fieldItem.fieldGroup?.length);
+    //
+    const lastRow:FieldItemModel = this.fieldItem.fieldGroup?.length > 0 ? this.fieldItem.fieldGroup[this.fieldItem.fieldGroup?.length - 1] : null
+    // if(this.fieldItem.fieldGroup?.length > 0){
+    //   const row:FieldItemModel = { ...this.fieldItem.fieldGroup[this.fieldItem.fieldGroup?.length - 1] }
+    //   row.key = `row-${this.fieldItem.fieldGroup?.length}`;
+    //   this.formEditorService.addFormItemToFieldGroup(this.fieldItem, row);
+    // }else{
+      this.formEditorConfig.getSelectableItemFromType("grid-row").subscribe(
+        selectable => {
+          if(selectable){
+            const row:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectable);
+            row.key = `row-${this.fieldItem.fieldGroup?.length || 0}`;
+            //
+            row.fieldGroup = []
 
-          this.formEditorConfig.getSelectableItemFromType("empty-grid-cell").subscribe(emptyCel => {
-            let cel:FieldItemModel = this.formEditorService.getFieldItemFromSelection(emptyCel);
-            cel.label = "";
-            cel.wrappers = [SelectableWrapper.GRID_CELL_FIELD]
-            this.columnDefs.map((col, i) => {
-              cel.key = col.field;
-              row.fieldGroup.push({ ...cel });
-            })
-            this.formEditorService.addFormItemToFieldGroup(this.fieldItem, row);
+            this.formEditorConfig.getSelectableItemFromType("empty-grid-cell").subscribe(emptyCel => {
+              let cel:FieldItemModel = this.formEditorService.getFieldItemFromSelection(emptyCel);
+              cel.label = "";
+              cel.wrappers = [SelectableWrapper.GRID_CELL_FIELD]
+              this.columnDefs.map((col, i) => {
+                cel.key = col.field;
+                if(!lastRow){
+                  row.fieldGroup.push({ ...cel });
+                }else{
+                  const currCel:FieldItemModel = { ...lastRow.fieldGroup[i] };
+                  row.fieldGroup.push({
+                    ...currCel,
+                    uuid:this.formEditorService.getUuid()
+                  });
+                }
 
-          });
+              })
+              this.formEditorService.addFormItemToFieldGroup(this.fieldItem, row);
+
+            });
 
 
+          }
         }
-      }
-    )
+      )
+    // }
+
 
   }
 

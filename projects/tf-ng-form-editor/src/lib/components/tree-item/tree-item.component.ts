@@ -69,9 +69,9 @@ export class TreeItemComponent implements OnDestroy {
     this.stopButtonEvent(event);
 
     this.modal.confirm({
-      nzTitle: '<b>Delete Item?</b>',
+      nzTitle: `<b>Delete ${ this.node.title  }?</b>`,
       nzContent: `
-        <p>Deleting this item will remove it, and all it's children from the form schema.</p>
+        <p>Deleting this item will remove it${ this.node.children.length > 0 ? ", and all it's children" : "" } from the form schema.</p>
        `,
       nzOnOk: () => {
         this.formEditorService.deleteFormItem(this.node.key, this.node.parentNode?.key);

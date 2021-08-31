@@ -219,8 +219,9 @@ export class TfNgFormEditorService implements OnDestroy {
     })
   }
 
-
-
+  getUuid(){
+    return uuidv4();
+  }
   duplicateFormItem(key:string, parentKey:string = null){
     this.form.pipe(take(1)).subscribe(form => {
       // create tempFormData from existing
@@ -237,7 +238,7 @@ export class TfNgFormEditorService implements OnDestroy {
 
       // duplicate the item
       const currItem:FieldItemModel = { ...currFields[index]}
-      const uuid:string = uuidv4();
+      const uuid:string = this.getUuid();
       const newItem:FieldItemModel = {
         ...currItem,
         key:uuid,
@@ -374,7 +375,7 @@ export class TfNgFormEditorService implements OnDestroy {
 
   getFieldItemFromSelection(selectedField:SelectableFieldItemModel):FieldItemModel{
     let fieldItem:FieldItemModel = {}
-    const uuid:string = uuidv4();
+    const uuid:string = this.getUuid();
     fieldItem.uuid = fieldItem.key = uuid
     fieldItem.label = selectedField.label;
     fieldItem.type = selectedField.type;
@@ -496,7 +497,7 @@ export class TfNgFormEditorService implements OnDestroy {
 
   parseItemToLeaf(item:FieldItemModel, currentSelectedKey:string, parentKey:string):FormTreeModel{
     if(!item.uuid){
-      item.uuid = uuidv4();
+      item.uuid = this.getUuid();
     }
     let leaf:FormTreeModel = {
       key:item.uuid,

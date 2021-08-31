@@ -506,6 +506,18 @@ export class FormEditorConfigService {
           required:true
         }
       ]
+    },
+    {
+      type:"grid",
+      componentOptions: {
+        gridOptions: {
+          columnCount: 1,
+          columnWidths: [ 24 ],
+          columnDefs: [
+            { width: 24 }
+          ]
+        }
+      }
     }
   ]
   private _selectableItems = new BehaviorSubject<SelectableFieldItemModel[]>(this._types);

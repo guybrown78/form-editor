@@ -42,6 +42,7 @@ export class FieldGroupComponent implements OnInit {
 
   form: FormGroup;
   types: SelectableFieldItemModel[];
+  complexTypes: SelectableFieldItemModel[];
   formReady:boolean = false;
 
   constructor(
@@ -58,10 +59,12 @@ export class FieldGroupComponent implements OnInit {
       types => {
         if(types){
           this.types = [ ...types.filter(t => t.category === SelectableCategory.SIMPLE)];
+          this.complexTypes = [ ...types.filter(t => t.category === SelectableCategory.COMPLEX) ]
           this.initForm();
           this.onChanges();
         }else{
           this.types = [];
+          this.complexTypes = [];
         }
       }
     )
