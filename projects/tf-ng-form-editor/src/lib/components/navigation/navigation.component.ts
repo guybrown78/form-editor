@@ -185,8 +185,12 @@ export class NavigationComponent implements OnInit {
               ${form.schema.length > 0 ? '<p><b>The fields you have added already will be placed into the first tab</b></p>' : ''}
             `,
             nzOnOk: () => {
-              this.formEditorService.addTabsFormItem(formFieldItem);
-              this.closeAll();
+              if(form.schema.length > 0){
+                this.formEditorService.addTabsFormItem(formFieldItem);
+                this.closeAll();
+              }else{
+                this.addFormItem(formFieldItem);
+              }
             }
           });
         }

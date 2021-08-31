@@ -109,22 +109,34 @@ export class TfNgFormEditorService implements OnDestroy {
     })
   }
 
-  addTabsFormItem(item:FieldItemModel, ordinum:number | null = null){
+  addTabsFormItem(item:FieldItemModel){
     this.form.pipe(take(1)).subscribe(form => {
       // create tempory form data from existing
-      item.fieldGroup = [{
-        type:'tab',
-        label:'Default Tab',
-        fieldGroup:[ ...form.schema ]
-      }];
-      const updatedForm:FormModel = {
-        meta:form.meta,
-        schema:[],
-        model:form.model
-      }
-      updatedForm.schema.push(item);
-      this.setSelectedTreeKey(item.uuid);
-      this._form.next(updatedForm);
+      //const uuid:string = uuidv4();
+      const fieldGroup:FieldItemModel[] = new Array()
+      form.schema.map(fi => {
+        fieldGroup.push({ ...fi });
+      });
+      // Get Tab config item
+      this.formEditorConfig.getSelectableItemFromId('tab').pipe(take(1)).subscribe(tabSelectableItem => {
+        // Create tab
+        const tabItem = this.getFieldItemFromSelection(tabSelectableItem)
+        tabItem.label = "Default Tab";
+        tabItem.key = "defaultTab";
+        tabItem.fieldGroup = [ ...fieldGroup ]
+
+        item.fieldGroup = [];
+        item.fieldGroup.push(tabItem)
+        const updatedForm:FormModel = {
+          meta:form.meta,
+          schema:[],
+          model:form.model
+        }
+        updatedForm.schema.push({ ...item });
+        this.setSelectedTreeKey(item.uuid);
+        this._form.next(updatedForm);
+      })
+
     })
   }
 
@@ -498,6 +510,7 @@ export class TfNgFormEditorService implements OnDestroy {
         leaf.isLeaf = !configItem.editableConfig.hasFieldGroup;
       }
     })
+
     if(item.fieldGroup){
       const children:FormTreeModel[] = item.fieldGroup.map(f => this.parseItemToLeaf(f, currentSelectedKey, item.uuid));
       if(item.type === 'tabs'){

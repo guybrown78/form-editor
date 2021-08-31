@@ -469,6 +469,7 @@ export class FormEditorConfigService {
     }
   ]
 
+
   readonly preDefinedComplexItems:FieldItemModel[] = [
     {
       type:"address",

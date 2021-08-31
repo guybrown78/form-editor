@@ -96,14 +96,21 @@ export class TabItemsComponent implements OnInit {
   }
 
   createTabFormGroup(item:FieldItemModel){
+    const fieldGroup:FieldItemModel[] = [];
+    if(item.fieldGroup?.length){
+      item.fieldGroup.map(fgi => {
+        fieldGroup.push(fgi)
+      })
+    }
     const fg:FormGroup = this.fb.group({
       label: item.label,
       key: item.key,
       type: item.type,
       uuid: item.uuid,
-      fieldGroup: item.fieldGroup
+      fieldGroup: this.fb.array([ ...fieldGroup ])
     });
     return fg;
+
   }
 
   onChanges(): void {
@@ -120,13 +127,10 @@ export class TabItemsComponent implements OnInit {
 
 
   addItem(label:string = null) {
-
     this.formEditorConfig.getSelectableItemFromId('tab').pipe(take(1)).subscribe(item => {
-
       item.label = label
       const fieldGroup = this.form.get('fieldGroup') as FormArray;
       fieldGroup.push(this.createTabFormGroup(item));
-
       // this.selectedField.emit(item);
     })
 
