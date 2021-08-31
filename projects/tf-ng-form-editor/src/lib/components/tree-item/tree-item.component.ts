@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { OrdinalDirectionEnum } from '../../tf-ng-form-editor.service';
 import { Subscription } from 'rxjs';
 
@@ -19,7 +20,8 @@ export class TreeItemComponent implements OnDestroy {
   popoverVisible: boolean = false;
 
   constructor(
-    private formEditorService:TfNgFormEditorService
+    private formEditorService:TfNgFormEditorService,
+    private modal: NzModalService
   ) { }
 
 
@@ -65,7 +67,18 @@ export class TreeItemComponent implements OnDestroy {
   }
   onDelete(event){
     this.stopButtonEvent(event);
-    this.formEditorService.deleteFormItem(this.node.key, this.node.parentNode?.key);
+
+    this.modal.confirm({
+      nzTitle: '<b>Delete Item?</b>',
+      nzContent: `
+        <p>Deleting this item will remove it, and all it's children from the form schema.</p>
+       `,
+      nzOnOk: () => {
+        this.formEditorService.deleteFormItem(this.node.key, this.node.parentNode?.key);
+      }
+    });
+
+
   }
 
   ngOnDestroy(){
