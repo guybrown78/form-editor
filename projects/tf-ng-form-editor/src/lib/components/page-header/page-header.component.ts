@@ -91,13 +91,13 @@ export class PageHeaderComponent implements OnInit, OnDestroy {
   onClose(){
     if(!this.disabledSave){
       this.modal.warning({
-        nzTitle: 'You have unsaved changes to your form.',
+        nzTitle: 'Are you sure you want to leave?',
         nzContent: `
-          <p>If you close this form without saving, you will lose your changes.</p>
-          <p>Are you sure you want to close the form editor with unsaved changes?</p>`,
-        nzCancelText:'Cancel',
+          <p>Your latest work on this form will be lost. Are you sure you want to close the editor?</p>
+        `,
+        nzCancelText:'Take me back to the editor  ',
         nzOnCancel: () => this.handleCancelClose(),
-        nzOkText:'Yes, close form without saving',
+        nzOkText:'Yes, close without saving',
         nzOnOk: () => this.formEditorService.closeFormEditor()
       })
 		}else{

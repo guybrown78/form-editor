@@ -4,26 +4,21 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy
 } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  FormArray
 } from '@angular/forms';
 import {
   FormEditorConfigService,
   SelectableFieldItemModel,
   SelectableGridColumnDefinitions,
-  SelectableGridColumnWidths
 } from '../../../form-editor-config.service';
 import {
   OptionModel,
   FieldItemComponentOptionsModel,
   FieldItemGridOptionsColumnDefsModel,
-  FieldItemDateOptionsModel,
-  FieldItemDateModeOption,
 } from '../../../to-share/field-item-component-options-model.interface'
 
 import { FieldItemModel } from '../../../to-share/field-item-model.interface';
@@ -37,6 +32,7 @@ import { take } from 'rxjs/operators';
 export class ComponentOptionsComponent implements OnInit {
 
   @Output('updated') updated = new EventEmitter<FieldItemComponentOptionsModel>()
+  @Output('nextStep') nextStep = new EventEmitter<boolean>()
 
   private _selectableItem:SelectableFieldItemModel
   set selectableItem(model:SelectableFieldItemModel){
@@ -105,6 +101,7 @@ export class ComponentOptionsComponent implements OnInit {
     }
 
     // hasColumn
+    this.form.markAsPristine();
     this.onChanges();
     // setTimeout(() => {
       this.formReady = true;
@@ -156,23 +153,16 @@ export class ComponentOptionsComponent implements OnInit {
 
   onColumnDefinitionChange(columnDefinition:SelectableGridColumnDefinitions){
 
-    this.selectedColumnDefinition = columnDefinition; //this.columnDefinitions.filter(i => i.column === columnCount)[0];
+    this.selectedColumnDefinition = columnDefinition;
     this.onColumnLayoutChange(this.selectedColumnDefinition.columnWidths.filter(w => w.default)[0].widths)
   }
 
   onColumnLayoutChange(columnWidths:number[]){
     this.selectedColumnLayout = columnWidths;
-    //
+
 
     const currentColumnDefs:FieldItemGridOptionsColumnDefsModel[] = this.getComponentOptionData('columnDefs', this.optionsName);
 
-
-    // let columnDefs:FieldItemGridOptionsColumnDefsModel[] =
-    //   currentColumnDefs
-    //     ? currentColumnDefs.map((c,i) => { return {...c, width:columnWidths[i] }})
-    //     : columnWidths.map(w => {
-    //   return { width:w }
-    // })
 
     let columnDefs:FieldItemGridOptionsColumnDefsModel[] = columnWidths.map((w,i) => {
       const existing:FieldItemGridOptionsColumnDefsModel = !currentColumnDefs ? {} : currentColumnDefs[i] || {};
@@ -193,5 +183,9 @@ export class ComponentOptionsComponent implements OnInit {
       model = { ...columnDefs }
     }
     this.updated.emit(model)
+  }
+
+  onNextStep(){
+    this.nextStep.emit(true)
   }
 }

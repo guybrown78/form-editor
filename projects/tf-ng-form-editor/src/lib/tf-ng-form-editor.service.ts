@@ -573,17 +573,22 @@ export class TfNgFormEditorService implements OnDestroy {
     if(this.unsavedItems){
       // changes have been made, able to save
       // return window.confirm('Discard changes?');
+      const style = {
+        minWidth:'450px',
+        overflow:'auto'
+      }
       this.modal.confirm({
-        nzTitle: 'You have unsaved changes to your form.',
+        nzTitle: 'Are you sure you want to leave?',
         nzContent: `
-          <p>If you close this form without saving, you will lose your changes.</p>
-          <p>Are you sure you want to close the form editor with unsaved changes?</p>`,
-        nzCancelText:'Cancel',
+          <p>Your latest work on this form will be lost. Are you sure you want to close the editor?</p>
+        `,
+        // nzBodyStyle:style,
+        nzCancelText:'Cancel',//'Take me back to the editor  ',
         nzOnCancel: async () => {
           promiseResolve(false)
           return true;
         },
-        nzOkText:'Yes, close form without saving',
+        nzOkText:'Yes, close without saving',
         nzOnOk: async () => {
           promiseResolve(true)
           return true;

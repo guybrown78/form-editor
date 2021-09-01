@@ -210,6 +210,12 @@ export class FieldComponent implements OnInit, OnDestroy {
   onSelectedTabIndexChange(index){
     this.tabIndex = index;
   }
+
+  onNextStep(event){
+    console.log("booom", this.tabIndex)
+    this.tabIndex = 1;
+  }
+
   ngOnDestroy(){
     this.selectedKeySubscription.unsubscribe
   }

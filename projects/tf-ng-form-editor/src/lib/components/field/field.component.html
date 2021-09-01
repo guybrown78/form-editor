@@ -30,11 +30,11 @@
   <nz-tabset
     class="navy"
     (nzSelectedIndexChange)="onSelectedTabIndexChange($event)"
+    [nzSelectedIndex]="tabIndex"
   >
 
     <nz-tab
       *ngFor="let tab of availableTabs"
-      [(nzSelectedIndex)]="tabIndex"
       [nzTitle]="tab.label"
       [nzDisabled]="tab.disabled"
     >
@@ -51,6 +51,7 @@
         [active]="availableTabs[tabIndex].value === 'layout'"
         [editorItemModel]="editorItemModel"
         (updatedFieldItem)="onUpdatedFieldItem($event)"
+        (nextStep)="onNextStep($event)"
       ></field-item-layout>
 
       <field-item-config-options

@@ -233,7 +233,7 @@ export class FormEditorConfigService {
     {
       type:"nested",
       id:"nested",
-      label:"Nested",
+      label:"Combinations",
       category:SelectableCategory.COMPLEX,
       editableConfigType:EditableConfigType.NESTED
     },

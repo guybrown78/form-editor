@@ -51,7 +51,8 @@ import { PermissionsComponent } from './components/field/permissions/permissions
 import { RichTextComponent } from './components/rich-text/rich-text.component';
 import { DateOptionsComponent } from './components/field/config-options/date-options/date-options.component';
 
-import { CanDeactivateGuard } from './tf-ng-form-editor.guard'
+import { CanDeactivateGuard } from './tf-ng-form-editor.guard';
+import { GridColumnLayoutSelectionComponent } from './components/field-details/grid-column-layout-selection/grid-column-layout-selection.component'
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { CanDeactivateGuard } from './tf-ng-form-editor.guard'
     PermissionsComponent,
     RichTextComponent,
     DateOptionsComponent,
+    GridColumnLayoutSelectionComponent,
   ],
   imports: [
     CommonModule,

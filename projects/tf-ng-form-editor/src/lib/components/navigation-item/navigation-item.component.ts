@@ -1,7 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormEditorConfigService, SelectableFieldItemModel, SelectableCategory } from '../../form-editor-config.service';
-import { FieldItemModel } from '../../to-share/field-item-model.interface';
+import { Component, Input } from '@angular/core';
+import { SelectableFieldItemModel } from '../../form-editor-config.service';
+
 
 
 @Component({

@@ -19,6 +19,7 @@ export class LayoutComponent implements OnInit {
 
 
   @Output("updatedFieldItem") updatedFieldItem = new EventEmitter<FieldItemModel>();
+  @Output('nextStep') nextStep = new EventEmitter<boolean>()
 
   @Input('active') active:boolean
 
@@ -105,4 +106,7 @@ export class LayoutComponent implements OnInit {
     return show
   }
 
+  onNextStep(){
+    this.nextStep.emit(true)
+  }
 }

@@ -1,0 +1,27 @@
+
+<p ng-typography class="grid-width-desc grey">
+  Select the column widths layout:
+</p>
+
+<nz-radio-group
+  class="grid-width-selection-group"
+  [(ngModel)]="selected"
+  [ngModelOptions]="{standalone: true}"
+  (ngModelChange)="onColumnLayoutChange($event)"
+>
+  <label
+    *ngFor="let col of selectedColumnDefinition.columnWidths"
+    nz-radio [nzValue]="col.widths.toString()"
+    class="grid-label-wrapper"
+  >
+
+    <div class="grid-label">
+      <span class="label-text">{{ col.label }}</span>
+      <span nz-row class="grid-label-row">
+        <div *ngFor="let w of col.widths" nz-col [nzSpan]="w" class="grid-label-col bg-grey"></div>
+      </span>
+    </div>
+
+  </label>
+
+</nz-radio-group>

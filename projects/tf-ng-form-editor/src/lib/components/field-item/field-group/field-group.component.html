@@ -4,7 +4,10 @@
 </pre> -->
 
 <form nz-form nzLayout="vertical" class="width-all">
-  <div>Number of fields in this fieldGroup: {{ fieldItem.fieldGroup?.length || 0 }}</div>
+
+  <div nz-row nzJustify="space-between" nzAlign="middle" nzGutter="16">
+    <div nz-col nzFlex="auto">Select a form input to add to this combination</div>
+    <div nz-col>Number of inputs added:{{ fieldItem.fieldGroup?.length || 0 }}</div></div>
 
   <nz-form-item>
     <nz-form-control>
@@ -24,7 +27,7 @@
           ></nz-option>
         </nz-option-group>
 
-        <nz-option-group nzLabel="Complex">
+        <nz-option-group nzLabel="Advanced layouts">
           <nz-option
             *ngFor="let complexItem of complexTypes"
             [nzLabel]="complexItem.label" [nzValue]="complexItem.id"

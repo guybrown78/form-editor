@@ -1,6 +1,11 @@
 
 <div *ngIf="formReady">
   <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+
+    <p ng-typography class="grid-width-desc grey">
+      You have chosen {{ form.value.columnCount }} {{ form.value.columnCount != '1' ? 'columns' : 'column.' }} {{ form.value.columnCount != '1' ? ' with a ' + form.value.columnWidths.toString() + ' ratio split.' : '' }}
+    </p>
+
     <div class="form-grid">
       <div nz-row class="grid-header-row" nzGutter="16">
         <div

@@ -9,8 +9,8 @@
 </form> -->
 <div *ngIf="showDetailsComponentOptions()">
   <field-details-component-options
-
     [fieldItem]="fieldItem"
     (updated)="onComponentOptionsUpdated($event)"
+    (nextStep)="onNextStep($event)"
   ></field-details-component-options>
 </div>
