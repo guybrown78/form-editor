@@ -1,5 +1,6 @@
 :host {
   display: block;
+  margin-top:10px;
 }
 
 
@@ -42,6 +43,6 @@ span.grid-label{
   margin: 0 1px;
   height: 15px;
 }
-p.grid-width-desc{
-  margin: 0.25rem 0;
-}
+/* p.grid-width-desc{
+  margin: 10px 0;
+} */
