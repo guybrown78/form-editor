@@ -47,7 +47,7 @@ export class NewFormMetaComponent implements OnInit {
     this.metaForm = this.fb.group({
       title: [this.metaData.title,[Validators.required]],
       showTitle:[this.metaData.showTitle],
-      code: [this.metaData.code,[Validators.required]],
+      code: [this.metaData.code],
       version: [this.metaData.version]
     });
     this.metaForm.controls['version'].disable();

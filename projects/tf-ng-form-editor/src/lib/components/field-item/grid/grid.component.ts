@@ -4,7 +4,8 @@ import { FieldItemModel, SelectableWrapper } from '../../../to-share/field-item-
 import {
   FormEditorConfigService,
   SelectableFieldItemModel,
-  SelectableCategory
+  SelectableCategory,
+  SelectableGridColumnDefinitions
 } from '../../../form-editor-config.service';
 import { last, take } from 'rxjs/operators';
 import {
@@ -97,6 +98,7 @@ export class GridComponent implements OnInit {
   formReady:boolean = false;
   colDefaultsSpans
 
+  columnDefinitions:SelectableGridColumnDefinitions[]
   // wrappersFormArray:FormArray = new FormArray([]);
 
   constructor(
@@ -113,6 +115,7 @@ export class GridComponent implements OnInit {
 
   ngOnInit() {
     this.initAvailableItems();
+    this.columnDefinitions = this.formEditorConfig._columnDefinitions;
   }
 
   initAvailableItems(){
@@ -305,5 +308,11 @@ export class GridComponent implements OnInit {
       return Math.round(col.width || 24 / total);
     }
     return this.colDefaultsSpans[total-1][index];
+  }
+
+  getColFormation(){
+    console.log(" ... ")
+    console.log(this.form.value);
+    console.log(this.columnDefinitions)
   }
 }

@@ -28,7 +28,8 @@ span.grid-label{
   min-width:240px;
 }
 .label-text{
-  width:50px;
+  /* width:110px; */
+  margin-right:5px;
 }
 .grid-label-row{
   display: flex;

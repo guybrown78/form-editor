@@ -55,6 +55,7 @@ export interface SelectableGridColumnDefinitions {
 }
 export interface SelectableGridColumnWidths {
   label:string;
+  percentages:string;
   widths:number[];
   default?:boolean;
 }
@@ -405,6 +406,7 @@ export class FormEditorConfigService {
       columnWidths:[
         {
           label:"24",
+          percentages:"100%",
           widths:[24],
           default: true
         }
@@ -417,15 +419,18 @@ export class FormEditorConfigService {
       columnWidths:[
         {
           label:"16-8",
+          percentages:"64%-33%",
           widths:[16,8],
           default: true
         },
         {
           label:"8-16",
+          percentages:"33%-64%",
           widths:[8,16]
         },
         {
           label:"12-12",
+          percentages:"50%-50%",
           widths:[12,12]
         }
       ]
@@ -437,15 +442,18 @@ export class FormEditorConfigService {
       columnWidths:[
         {
           label:"12-6-6",
+          percentages:"50%-25%-25%",
           widths:[12,6,6],
           default: true
         },
         {
           label:"8-8-8",
+          percentages:"33.3%-33.3%-33.3%",
           widths:[8,8,8]
         },
         {
           label:"10-10-4",
+          percentages:"42%-42%-16%",
           widths:[10,10,4]
         }
 
@@ -458,11 +466,13 @@ export class FormEditorConfigService {
       columnWidths:[
         {
           label:"9-5-5-5",
+          percentages:"34%-22%-22%-22%",
           widths:[9,5,5,5],
           default: true
         },
         {
           label:"6-6-6-6",
+          percentages:"25%-25%-25%-25%",
           widths:[6,6,6,6]
         }
       ]
