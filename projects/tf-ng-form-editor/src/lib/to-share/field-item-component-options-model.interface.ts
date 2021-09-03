@@ -5,6 +5,8 @@ export interface FieldItemComponentOptionsModel {
   layout?:FieldItemLayoutOption
   showBlocks?:boolean
   type?:FieldItemType
+  min?:number
+  max?:number
   checkboxOptions?:FieldItemOptionsModel
   gridOptions?:FieldItemGridOptionsModel
   dateOptions?:FieldItemDateOptionsModel

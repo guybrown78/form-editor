@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -14,6 +14,8 @@ import { FieldPickerComponent } from './components/field-picker/field-picker.com
 
 
 import { NgZorroModule } from './ng-zorro.module'
+
+import { Configurations } from './moduleConfig';
 
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { NavigationSideBarComponent } from './components/navigation-side-bar/navigation-side-bar.component';
@@ -52,7 +54,12 @@ import { RichTextComponent } from './components/rich-text/rich-text.component';
 import { DateOptionsComponent } from './components/field/config-options/date-options/date-options.component';
 
 import { CanDeactivateGuard } from './tf-ng-form-editor.guard';
-import { GridColumnLayoutSelectionComponent } from './components/field-details/grid-column-layout-selection/grid-column-layout-selection.component'
+import { GridColumnLayoutSelectionComponent } from './components/field-details/grid-column-layout-selection/grid-column-layout-selection.component';
+import { NumberOptionsComponent } from './components/field-details/number-options/number-options.component'
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -91,6 +98,7 @@ import { GridColumnLayoutSelectionComponent } from './components/field-details/g
     RichTextComponent,
     DateOptionsComponent,
     GridColumnLayoutSelectionComponent,
+    NumberOptionsComponent,
   ],
   imports: [
     CommonModule,
@@ -106,7 +114,18 @@ import { GridColumnLayoutSelectionComponent } from './components/field-details/g
     TfNgFormEditorComponent
   ],
   providers: [
-    CanDeactivateGuard
+    CanDeactivateGuard,
   ]
 })
-export class TfNgFormEditorModule { }
+// export class TfNgFormEditorModule { }
+export class TfNgFormEditorModule {
+  // Create this static method in the library module.
+  public static forRoot(config: Configurations): ModuleWithProviders<TfNgFormEditorModule> {
+    return {
+      ngModule: TfNgFormEditorModule,
+      providers: [
+        { provide: Configurations, useValue: config }
+      ]
+    };
+  }
+}

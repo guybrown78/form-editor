@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, Optional } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, BehaviorSubject, throwError, Observable, Subscription } from 'rxjs';
 import { take, tap, map } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { FormMetaModel } from './to-share/form-meta-model.interface';
 import { FieldItemType } from './to-share/field-item-component-options-model.interface';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
-
+import { Configurations } from './moduleConfig';
 
 
 
@@ -63,6 +63,11 @@ export enum CheckFormMetaDataStatus {
   providedIn: 'root'
 })
 export class TfNgFormEditorService implements OnDestroy {
+
+
+  private _froalaKey = 'No value';
+
+
   formSubscription:Subscription
   formUpdateSubscription:Subscription
   unsavedItems:boolean = false;
@@ -94,9 +99,16 @@ export class TfNgFormEditorService implements OnDestroy {
     private http: HttpClient,
     private formEditorConfig:FormEditorConfigService,
     private modal:NzModalService,
-
+    @Optional() config?: Configurations
   ) {
+    if (config) {
+      this._froalaKey = config.froalaKey;
+    }
     this.initialiseFormSubscription();
+  }
+
+  get froalaKey() {
+    return this._froalaKey;
   }
 
   addFormItem(item:FieldItemModel, ordinum:number | null = null){
@@ -383,7 +395,7 @@ export class TfNgFormEditorService implements OnDestroy {
       fieldItem.wrappers = [ ...selectedField.wrappers ]
     }
     // check if complex
-    if(selectedField.category !== SelectableCategory.SIMPLE){
+    // if(selectedField.category !== SelectableCategory.SIMPLE){
       // if so, set pre defined data to the fieldItem
       const predefinedItem:FieldItemModel = this.formEditorConfig.preDefinedComplexItems.filter(item => item.type === selectedField.type)[0];
       if(predefinedItem){
@@ -392,7 +404,7 @@ export class TfNgFormEditorService implements OnDestroy {
           ...predefinedItem
         }
       }
-    }
+    // }
     return fieldItem;
   }
 

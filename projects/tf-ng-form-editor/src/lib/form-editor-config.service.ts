@@ -40,6 +40,7 @@ export interface SelectableFieldItemEditableConfigModel {
   hasShowBlocks?:boolean
   hasGridOptions?:boolean
   hasDateOptions?:boolean
+  hasNumberOptions?:boolean
 }
 export enum SelectableCategory {
   SIMPLE = "Simple",
@@ -62,6 +63,7 @@ export interface SelectableGridColumnWidths {
 export enum EditableConfigType {
   GENERAL,
   INPUT,
+  NUMBER,
   SELECT,
   RADIO,
   CHECKBOX,
@@ -104,7 +106,7 @@ export class FormEditorConfigService {
       label:"Number Input",
       category:SelectableCategory.SIMPLE,
       description:"Allow the form user to add a number",
-      editableConfigType:EditableConfigType.INPUT
+      editableConfigType:EditableConfigType.NUMBER
     },
     {
       type:"email",
@@ -275,6 +277,18 @@ export class FormEditorConfigService {
       setRequired:true,
       setPermissions:true,
       setReadonlyPermissions:true
+    },
+    {
+      type:EditableConfigType.NUMBER,
+      id:"config-number",
+      setLabel:true,
+      setDesc:true,
+      setHelp:true,
+      setPlaceholder:true,
+      setRequired:true,
+      setPermissions:true,
+      setReadonlyPermissions:true,
+      hasNumberOptions:true
     },
     {
       type:EditableConfigType.SELECT,
@@ -538,7 +552,15 @@ export class FormEditorConfigService {
           showSubmitButton:true,
         }
       }
+    },
+    {
+      type:"number",
+      componentOptions:{
+        min:Number.MIN_SAFE_INTEGER,
+        max:Number.MAX_SAFE_INTEGER
+      }
     }
+
   ]
   private _selectableItems = new BehaviorSubject<SelectableFieldItemModel[]>(this._types);
   private _selectableItem = new Subject<SelectableFieldItemModel>()

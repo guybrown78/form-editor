@@ -47,6 +47,8 @@
 
 </form>
 
+<form-editor-number-options *ngIf="selectableItem.editableConfig.hasNumberOptions">
+</form-editor-number-options>
 
 <!-- [optionItems]="fieldItem.componentOptions?.options || null" -->
 <div *ngIf="selectableItem.editableConfig.hasComponentOptions">

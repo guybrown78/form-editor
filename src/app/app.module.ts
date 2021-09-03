@@ -28,6 +28,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateFormComponent } from './pages/create-form/create-form.component';
 import { EditFormComponent } from './pages/edit-form/edit-form.component';
 import { StatsComponent } from './pages/dashboard/stats/stats.component';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -53,7 +54,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    TfNgFormEditorModule
+    TfNgFormEditorModule.forRoot({ froalaKey: environment.froalaKey })
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_GB },
