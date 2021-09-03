@@ -54,7 +54,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    TfNgFormEditorModule.forRoot({ froalaKey: environment.froalaKey })
+    TfNgFormEditorModule//.forRoot({ froalaKey: environment.froalaKey })
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_GB },

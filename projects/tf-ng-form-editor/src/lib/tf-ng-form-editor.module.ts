@@ -117,15 +117,15 @@ import { NumberOptionsComponent } from './components/field-details/number-option
     CanDeactivateGuard,
   ]
 })
-// export class TfNgFormEditorModule { }
-export class TfNgFormEditorModule {
-  // Create this static method in the library module.
-  public static forRoot(config: Configurations): ModuleWithProviders<TfNgFormEditorModule> {
-    return {
-      ngModule: TfNgFormEditorModule,
-      providers: [
-        { provide: Configurations, useValue: config }
-      ]
-    };
-  }
-}
+export class TfNgFormEditorModule { }
+// export class TfNgFormEditorModule {
+//   // Create this static method in the library module.
+//   public static forRoot(config: Configurations): ModuleWithProviders<TfNgFormEditorModule> {
+//     return {
+//       ngModule: TfNgFormEditorModule,
+//       providers: [
+//         { provide: Configurations, useValue: config }
+//       ]
+//     };
+//   }
+// }

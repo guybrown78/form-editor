@@ -65,7 +65,7 @@ export enum CheckFormMetaDataStatus {
 export class TfNgFormEditorService implements OnDestroy {
 
 
-  private _froalaKey = 'No value';
+  private _froalaKey = '9KH3cB3D3D2D3F3B2zPAENHMf1JPQRFZBTBf1WWEPYDbB3H3E2A17A19B7A5C6D3F2==';
 
 
   formSubscription:Subscription
@@ -99,11 +99,11 @@ export class TfNgFormEditorService implements OnDestroy {
     private http: HttpClient,
     private formEditorConfig:FormEditorConfigService,
     private modal:NzModalService,
-    @Optional() config?: Configurations
+    // @Optional() config?: Configurations
   ) {
-    if (config) {
-      this._froalaKey = config.froalaKey;
-    }
+    // if (config) {
+      // this._froalaKey = config.froalaKey;
+    // }
     this.initialiseFormSubscription();
   }
 
