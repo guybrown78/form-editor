@@ -27,10 +27,20 @@
     {{ selectableItem?.description }}
   </p>
 
+
+
+  <field-item-editor
+    *ngIf="availableTabs.length === 1"
+    active="true"
+    [editorItemModel]="editorItemModel"
+    (updatedFieldItem)="onUpdatedFieldItem($event)"
+  ></field-item-editor>
+
   <nz-tabset
     class="navy"
     (nzSelectedIndexChange)="onSelectedTabIndexChange($event)"
     [nzSelectedIndex]="tabIndex"
+    *ngIf="availableTabs.length > 1"
   >
 
     <nz-tab
