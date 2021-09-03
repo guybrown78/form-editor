@@ -79,7 +79,6 @@ export class MetaSettingsComponent implements OnInit, OnDestroy {
       code: [
         this.metaData.code || null,
         {
-          validators: [Validators.required],
           updateOn: 'change'
         }
       ],

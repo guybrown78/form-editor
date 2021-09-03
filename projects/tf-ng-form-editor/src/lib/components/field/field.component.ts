@@ -161,7 +161,7 @@ export class FieldComponent implements OnInit, OnDestroy {
       this.selectableItem.editableConfig.hasGridOptions
     ){
       this.availableTabs.push({
-        label:"Grid Layout",
+        label:"Table Layout",
         value:"layout",
         disabled:false
       })

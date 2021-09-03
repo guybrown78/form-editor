@@ -3,7 +3,7 @@
   <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
 
     <p ng-typography class="grid-width-desc">
-      You have chosen {{ form.value.columnCount }} {{ form.value.columnCount != '1' ? 'columns' : 'column.' }} {{ form.value.columnCount != '1' ? ' with a ' + form.value.columnWidths.toString() + ' ratio split.' : '' }}
+      You have chosen {{ form.value.columnCount }} {{ form.value.columnCount != '1' ? 'columns' : 'column.' }} {{ getColFormation() }}
     </p>
 
     <div class="form-grid">
@@ -46,7 +46,7 @@
   > -->
   <div class="width-all ant-form">
     <!-- <nz-form-control> -->
-      <nz-form-label>Grid Rows</nz-form-label>
+      <nz-form-label>Add your table rows</nz-form-label>
     <!-- </nz-form-control> -->
   </div>
 

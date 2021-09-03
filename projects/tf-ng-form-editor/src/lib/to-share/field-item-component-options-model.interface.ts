@@ -8,6 +8,7 @@ export interface FieldItemComponentOptionsModel {
   checkboxOptions?:FieldItemOptionsModel
   gridOptions?:FieldItemGridOptionsModel
   dateOptions?:FieldItemDateOptionsModel
+  tabsOptions?:FieldItemTabOptionsModel
 }
 export interface FieldItemOptionsModel {
   layout?:FieldItemLayoutOption
@@ -38,6 +39,12 @@ export interface FieldItemGridOptionsColumnDefsModel {
   headerName?:string,
   field?:string,
   width?:number
+}
+
+export interface FieldItemTabOptionsModel {
+  size?:string,
+  submitLabel?:string,
+  showSubmitButton?:boolean
 }
 export interface FieldItemDateOptionsModel {
   mode?:string,

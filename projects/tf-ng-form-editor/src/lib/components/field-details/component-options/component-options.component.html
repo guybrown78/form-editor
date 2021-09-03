@@ -5,7 +5,7 @@
      <nz-form-item *ngIf="selectableItem?.editableConfig.hasGridOptions">
       <nz-form-control>
         <nz-form-label>
-          Select Grid Layout
+          Select table layout
         </nz-form-label>
         <nz-select
           [(ngModel)]="selectedColumnDefinition"
@@ -28,9 +28,18 @@
         (onSelectedColumnLayout)="onColumnLayoutChange($event)"
       ></form-editor-grid-column-layout-selection>
 
-      <button nz-button class="blue outline next-step" (click)="onNextStep($event)">
-        Start editing your grid
-      </button>
+      <!-- [ngClass]="!form.dirty ? 'grey' : 'blue' "
+      [disabled]="!form.dirty" -->
+      <div nz-row nzJustify="end">
+        <button nz-button
+        (click)="onNextStep($event)"
+        class="blue outline next-step"
+      >
+          Start editing your table
+        </button>
+      </div>
+
+
     </nz-form-item>
 
 

@@ -176,15 +176,18 @@ export class NavigationComponent implements OnInit {
     const formFieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(selectedField)
     //
     if(formFieldItem.type === 'tabs'){
+      //
       this.formEditorService.form.pipe(take(1)).subscribe(form => {
         if(form){
           this.modal.confirm({
             nzTitle: '<b>Adding sections</b>',
             nzContent: `
-              <p>Adding section tabs to a form changes the form structure. Every field within the form will have to be placed into a section tab.</p>
-              ${form.schema.length > 0 ? '<p><b>The fields you have added already will be placed into the first tab</b></p>' : ''}
+              <p>When adding the sections feature to a form it changes the structure. This means that every element within the form needs to be placed into a section.</p>
+              ${form.schema.length > 0 ? '<p><b>The fields you have added already will be placed into the first section</b></p>' : ''}
             `,
             nzOnOk: () => {
+              this.formEditorService.updateMetaData({ showSubmitButton:false });
+              //
               if(form.schema.length > 0){
                 this.formEditorService.addTabsFormItem(formFieldItem);
                 this.closeAll();

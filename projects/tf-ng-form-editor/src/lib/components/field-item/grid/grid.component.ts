@@ -311,8 +311,13 @@ export class GridComponent implements OnInit {
   }
 
   getColFormation(){
-    console.log(" ... ")
-    console.log(this.form.value);
-    console.log(this.columnDefinitions)
+    const { columnCount, columnWidths } = this.form.value
+    if(Number(columnCount) === 1){
+      return ''
+    }
+    const currentDefinition:SelectableGridColumnDefinitions = this.columnDefinitions.filter(d => d.column === columnCount)[0];
+    //
+    const currColWidth = currentDefinition.columnWidths.filter(cw => JSON.stringify(cw.widths) === JSON.stringify(columnWidths))[0];
+    return ` with a ${currColWidth.percentages} split.`
   }
 }

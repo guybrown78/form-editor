@@ -23,19 +23,25 @@
 </ng-template>
 
 <ng-template #contentTemplate class="no-padding">
-  <ul nz-menu class="bg-white">
-    <li id="move-up" nz-menu-item (click)="onOrderUp($event)">
+  <ul nz-menu class="bg-white" *ngIf="fieldItem">
+    <li
+      id="move-up" nz-menu-item (click)="onOrderUp($event)"
+      [nzDisabled]="fieldItem.type === 'tabs' "
+    >
       <i nz-icon nzType="arrow-up" nzTheme="outline"></i>
       Move up
     </li>
-    <li id="move-down" nz-menu-item (click)="onOrderDown($event)">
+    <li
+      id="move-down" nz-menu-item (click)="onOrderDown($event)"
+      [nzDisabled]="fieldItem.type === 'tabs' "
+    >
       <i nz-icon nzType="arrow-down" nzTheme="outline"></i>
       Move down
     </li>
     <li id="move-up" nz-menu-divider></li>
-    <li id="permission" nz-menu-item (click)="onUser($event)" nzDisabled>
+    <!-- <li id="permission" nz-menu-item (click)="onUser($event)" nzDisabled>
       <i nz-icon nzType="user" nzTheme="outline"></i>User rights
-    </li>
+    </li> -->
     <li id="duplicate" nz-menu-item (click)="onDuplicate($event)">
       <i nz-icon nzType="copy" nzTheme="outline"></i>
       Duplicate

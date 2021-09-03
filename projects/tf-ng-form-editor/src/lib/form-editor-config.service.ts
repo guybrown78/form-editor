@@ -196,13 +196,13 @@ export class FormEditorConfigService {
       id:"tabs",
       label:"Sections",
       category:SelectableCategory.LAYOUT,
-      description:"This allows you to break down longer forms into multiple sections",
+      description:"Using sections allows you to split the form into multiple sections instead of the form being presented on one page.",
       editableConfigType:EditableConfigType.TABS
     },
     {
       type:"tab",
       id:"tab",
-      label:"Tab",
+      label:"Section",
       category:SelectableCategory.HIDDEN,
       editableConfigType:EditableConfigType.TAB
     },
@@ -234,14 +234,15 @@ export class FormEditorConfigService {
     {
       type:"nested",
       id:"nested",
-      label:"Combinations",
+      label:"Group",
+      description:"This allows you to group together multiple inputs to create one form element",
       category:SelectableCategory.COMPLEX,
       editableConfigType:EditableConfigType.NESTED
     },
     {
       type:"grid",
       id:"grid",
-      label:"Grid",
+      label:"Table",
       category:SelectableCategory.COMPLEX,
       editableConfigType:EditableConfigType.GRID,
       editableConfigOptionsName:"gridOptions"
@@ -406,7 +407,7 @@ export class FormEditorConfigService {
       columnWidths:[
         {
           label:"24",
-          percentages:"100%",
+          percentages:"100",
           widths:[24],
           default: true
         }
@@ -419,18 +420,18 @@ export class FormEditorConfigService {
       columnWidths:[
         {
           label:"16-8",
-          percentages:"64%-33%",
+          percentages:"60-40",
           widths:[16,8],
           default: true
         },
         {
           label:"8-16",
-          percentages:"33%-64%",
+          percentages:"40-60",
           widths:[8,16]
         },
         {
           label:"12-12",
-          percentages:"50%-50%",
+          percentages:"50-50",
           widths:[12,12]
         }
       ]
@@ -442,18 +443,18 @@ export class FormEditorConfigService {
       columnWidths:[
         {
           label:"12-6-6",
-          percentages:"50%-25%-25%",
+          percentages:"50-25-25",
           widths:[12,6,6],
           default: true
         },
         {
           label:"8-8-8",
-          percentages:"33.3%-33.3%-33.3%",
+          percentages:"33.3-33.3-33.3",
           widths:[8,8,8]
         },
         {
           label:"10-10-4",
-          percentages:"42%-42%-16%",
+          percentages:"44-40-20",
           widths:[10,10,4]
         }
 
@@ -466,13 +467,13 @@ export class FormEditorConfigService {
       columnWidths:[
         {
           label:"9-5-5-5",
-          percentages:"34%-22%-22%-22%",
+          percentages:"40-20-20-20",
           widths:[9,5,5,5],
           default: true
         },
         {
           label:"6-6-6-6",
-          percentages:"25%-25%-25%-25%",
+          percentages:"25-25-25-25",
           widths:[6,6,6,6]
         }
       ]
@@ -526,6 +527,15 @@ export class FormEditorConfigService {
           columnDefs: [
             { width: 24 }
           ]
+        }
+      }
+    },
+    {
+      type:"tabs",
+      componentOptions: {
+        tabsOptions: {
+          size: "small",
+          showSubmitButton:true,
         }
       }
     }

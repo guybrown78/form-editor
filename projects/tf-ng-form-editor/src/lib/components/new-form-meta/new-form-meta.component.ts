@@ -130,6 +130,7 @@ export class NewFormMetaComponent implements OnInit {
 
 
   setMetaData(){
+    this.metaForm.controls['version'].enable();
     this.formEditorService.initialiseNewForm({
       ...this.metaForm.value,
       jsonSchema:true

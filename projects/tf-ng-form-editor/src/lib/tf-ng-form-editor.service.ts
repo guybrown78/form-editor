@@ -124,7 +124,7 @@ export class TfNgFormEditorService implements OnDestroy {
         tabItem.label = "Default Tab";
         tabItem.key = "defaultTab";
         tabItem.fieldGroup = [ ...fieldGroup ]
-
+        // tabItem.componentOptions.t
         item.fieldGroup = [];
         item.fieldGroup.push(tabItem)
         const updatedForm:FormModel = {
@@ -383,7 +383,7 @@ export class TfNgFormEditorService implements OnDestroy {
       fieldItem.wrappers = [ ...selectedField.wrappers ]
     }
     // check if complex
-    if(selectedField.category === SelectableCategory.COMPLEX){
+    if(selectedField.category !== SelectableCategory.SIMPLE){
       // if so, set pre defined data to the fieldItem
       const predefinedItem:FieldItemModel = this.formEditorConfig.preDefinedComplexItems.filter(item => item.type === selectedField.type)[0];
       if(predefinedItem){
@@ -411,8 +411,15 @@ export class TfNgFormEditorService implements OnDestroy {
   updateMetaData(meta:FormMetaModel){
     this.form.pipe(take(1)).subscribe(form => {
       if(form){
+        const updatedMeta:FormMetaModel = {
+          ...form.meta,
+          ...meta
+        }
         // create tempFormData from existing
-        const updatedForm:FormModel = { ...form, meta }
+        const updatedForm:FormModel = {
+          ...form,
+          meta:updatedMeta,
+        }
         // set tempFormData to live
         this._form.next(updatedForm);
         this._metaUpdated.next(true);
