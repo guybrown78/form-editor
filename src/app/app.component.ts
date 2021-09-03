@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppHeaderService, AppNavigationService, AppNavigationItem } from 'tf-ng-nz';
 import { TfNgFormPermissionService, TfNgFormPermissionInterface } from 'tf-ng-form';
+import { TfNgFormEditorService } from 'projects/tf-ng-form-editor/src/public-api';
+import { environment } from 'src/environments/environment';
 
 const navigationData:AppNavigationItem[] = [
   {
@@ -67,7 +69,10 @@ export class AppComponent {
     private appNavigationService: AppNavigationService,
     private router:Router,
     private formPermissionService:TfNgFormPermissionService,
+    private formEditorService:TfNgFormEditorService
   ) {
+    //
+    formEditorService.froalaKey = environment.froalaKey;
     //
     router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){

@@ -1,4 +1,4 @@
-import { Component, SecurityContext, Input, Output, EventEmitter } from '@angular/core';
+import { Component, SecurityContext, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { Form, FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TfNgFormEditorService } from '../../tf-ng-form-editor.service';
@@ -93,7 +93,7 @@ export class RichTextComponent{
 
   constructor(
     private sanitizer: DomSanitizer,
-    private formEditorService:TfNgFormEditorService
+    private formEditorService:TfNgFormEditorService,
   ) {
     this.froalaKey = formEditorService.froalaKey;
     this.froalaOptions['key'] = this.froalaKey;
