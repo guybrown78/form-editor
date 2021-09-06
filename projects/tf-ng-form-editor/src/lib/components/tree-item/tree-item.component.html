@@ -42,7 +42,7 @@
     <!-- <li id="permission" nz-menu-item (click)="onUser($event)" nzDisabled>
       <i nz-icon nzType="user" nzTheme="outline"></i>User rights
     </li> -->
-    <li id="duplicate" nz-menu-item (click)="onDuplicate($event)">
+    <li id="duplicate" nz-menu-item (click)="onDuplicate($event)" [nzDisabled]="fieldItem.type === 'tabs' || fieldItem.type === 'tab' " >
       <i nz-icon nzType="copy" nzTheme="outline"></i>
       Duplicate
     </li>

@@ -67,6 +67,9 @@ export class TreeItemComponent implements OnInit, OnDestroy {
   }
   onDuplicate(event){
     this.stopButtonEvent(event);
+    if(this.fieldItem.type === 'tabs' || this.fieldItem.type === 'tab'){
+      return;
+    }
     this.formEditorService.duplicateFormItem(this.node.key, this.node.parentNode?.key)
   }
   onUser(event){
