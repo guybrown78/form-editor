@@ -102,13 +102,14 @@ export class RichTextComponent{
 
   onFroalaEvent(eventType:FroalaEventAction, event:any){
     if(eventType === FroalaEventAction.FroalaChange){
+
       this.sanitizeRichText(this.froalaContent);
       this.passedFormControl.setValue(this.encodedContent)
     }
   }
 
   sanitizeRichText(str:string){
-    const sanitized = this.sanitizer.sanitize(SecurityContext.HTML, str);
+    const sanitized = this.sanitizer.sanitize(SecurityContext.NONE, str);
     this.encodedContent = encodeURIComponent(sanitized);
   }
 

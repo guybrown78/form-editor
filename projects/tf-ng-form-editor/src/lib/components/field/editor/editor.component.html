@@ -8,7 +8,7 @@
   <nz-form-item *ngIf="selectableItem?.editableConfig.setLabel">
     <nz-form-control>
       <nz-form-label nzFor="label">Label</nz-form-label>
-      <input nz-input formControlName="label" placeholder="Label"/>
+      <input nz-input formControlName="label" placeholder="Label" maxlength="255"/>
     </nz-form-control>
   </nz-form-item>
 
@@ -24,7 +24,7 @@
   <nz-form-item *ngIf="selectableItem?.editableConfig.setPlaceholder">
     <nz-form-control *ngIf="!selectableItem.editableConfig.multiplePlaceholders">
       <nz-form-label nzFor="placeholder">Placeholder</nz-form-label>
-      <input nz-input formControlName="placeholder"/>
+      <input nz-input formControlName="placeholder" maxlength="255"/>
     </nz-form-control>
 
     <nz-form-control *ngIf="selectableItem.editableConfig.multiplePlaceholders">
@@ -32,12 +32,12 @@
       <div nz-row nzGutter="16">
         <div nz-col [nzSpan]="selectableItem.type !== 'date' ? 12 : 24">
           <input nz-input [value]="fieldItem.placeholder ? fieldItem.placeholder[0] ? fieldItem.placeholder[0] : '' : ''"
-            (keyup)="onMultiplePlaceholderUpdate($event, 0)"
+            (keyup)="onMultiplePlaceholderUpdate($event, 0)" maxlength="255"
           />
         </div>
         <div nz-col nzSpan="12" *ngIf="selectableItem.type !== 'date' ">
           <input nz-input [value]="fieldItem.placeholder ? fieldItem.placeholder[1] ? fieldItem.placeholder[1] : '' : ''"
-            (keyup)="onMultiplePlaceholderUpdate($event, 1)"
+            (keyup)="onMultiplePlaceholderUpdate($event, 1)" maxlength="255"
           />
         </div>
       </div>

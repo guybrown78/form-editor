@@ -15,7 +15,7 @@
     <nz-form-item *ngIf="selectableItem?.editableConfig.setLabel">
       <nz-form-control>
         <nz-form-label nzFor="label">Label</nz-form-label>
-        <input nz-input formControlName="label" placeholder="Label"/>
+        <input nz-input formControlName="label" placeholder="Label" maxlength="255"/>
       </nz-form-control>
     </nz-form-item>
 
@@ -24,14 +24,14 @@
     <nz-form-item *ngIf="selectableItem?.editableConfig.setDesc">
       <nz-form-control>
         <nz-form-label nzFor="description">Description</nz-form-label>
-        <textarea rows="1" nz-input formControlName="description"></textarea>
+        <textarea rows="1" nz-input formControlName="description" maxlength="255"></textarea>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item *ngIf="selectableItem?.editableConfig.setPlaceholder">
       <nz-form-control>
         <nz-form-label nzFor="placeholder">Placeholder</nz-form-label>
-        <input nz-input formControlName="placeholder"/>
+        <input nz-input formControlName="placeholder" maxlength="255"/>
       </nz-form-control>
     </nz-form-item>
 

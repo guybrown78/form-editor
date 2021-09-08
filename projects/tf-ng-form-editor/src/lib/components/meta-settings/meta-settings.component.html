@@ -12,7 +12,7 @@
         <nz-form-label nzFor="title">Form Title</nz-form-label>
 
         <nz-input-group [nzSuffix]="suffixTitle">
-          <input nz-input formControlName="title"/>
+          <input nz-input formControlName="title" maxlength="255"/>
         </nz-input-group>
 
         <ng-template #suffixTitle>
@@ -46,7 +46,7 @@
       >
         <nz-form-label nzFor="code">Code</nz-form-label>
         <nz-input-group  [nzSuffix]="suffixCode">
-          <input nz-input formControlName="code" placeholder="eg: form-001"/>
+          <input nz-input formControlName="code" placeholder="eg: form-001" maxlength="255"/>
         </nz-input-group>
 
         <ng-template #suffixCode>
@@ -61,7 +61,7 @@
     <nz-form-item>
       <nz-form-control>
         <nz-form-label nzFor="code">Version</nz-form-label>
-        <input nz-input formControlName="version"/>
+        <input nz-input formControlName="version" maxlength="255"/>
       </nz-form-control>
     </nz-form-item>
 
