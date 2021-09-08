@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
 import { FieldItemModel } from '../../../to-share/field-item-model.interface';
 import { FormEditorConfigService, SelectableFieldItemModel, SelectableCategory } from '../../../form-editor-config.service';
@@ -57,6 +57,8 @@ export class TabItemsComponent implements OnInit {
   form: FormGroup;
   types: SelectableFieldItemModel[];
   formReady:boolean = false;
+
+  @ViewChild('inviableInput') inviableInputElement: ElementRef;
 
   constructor(
     private fb:FormBuilder,
@@ -120,6 +122,16 @@ export class TabItemsComponent implements OnInit {
     });
   }
 
+  onEnterKey() {
+    // takes focus away from a visible input
+    this.inviableInputElement.nativeElement.focus();
+  }
+
+
+  onSubmit(event){
+    event.stopPropagation();
+    event.preventDefault();
+  }
 
   // onSelectItemChange(value: string): void {
   //   this.add(value);

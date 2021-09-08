@@ -10,3 +10,10 @@
 .option-input-wrapper{
   margin-right: 10px;
 }
+
+.invisable-input{
+  opacity: 0;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+}

@@ -1,5 +1,5 @@
 
-<form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+<form nz-form [formGroup]="form" nzLayout="vertical" class="width-all" (ngSubmit)="onSubmit($event)">
   <!-- <div>Number of tabs in this tabGroup: {{ fieldItem.fieldGroup?.length || 0 }}</div> -->
 
   <nz-form-control>
@@ -18,11 +18,16 @@
     >
 
       <div nz-col nzFlex="auto" class="option-input-wrapper">
-        <input nz-input formControlName="label" placeholder="Label"/>
+        <input
+          nz-input
+          formControlName="label"
+          placeholder="Label"
+          (keyup.enter)="onEnterKey()"
+        />
       </div>
 
       <!-- <div nz-col> -->
-        <button nz-button nzShape="square" (click)="removeItem(i)" >
+        <button nz-button nzShape="square" (click)="removeItem(i)" type="button">
           <i nz-icon nzType="close" nzTheme="outline"></i>
         </button>
       <!-- </div> -->
@@ -30,6 +35,8 @@
     </div>
 
   </nz-form-item>
+
+
 
   <form-editor-add-row>
     <tf-ng-hexagon
@@ -42,5 +49,6 @@
     </tf-ng-hexagon>
   </form-editor-add-row>
 
-
 </form>
+
+<input #inviableInput class="invisable-input"/>

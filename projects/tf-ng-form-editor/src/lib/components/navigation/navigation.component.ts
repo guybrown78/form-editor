@@ -62,7 +62,7 @@ export class NavigationComponent implements OnInit {
   navigationItems:any[] = [
     {label:"Layout", type:"layout-menu", icon:"edit"},
     {label:"Basic Inputs", type:"single-menu", icon:"export"},
-    {label:"Advanced layouts", type:"complex-menu", icon:"appstore"},
+    {label:"Advanced Layouts", type:"complex-menu", icon:"appstore"},
     {label:"Settings", type:"form-menu", icon:"form"}
   ]
 

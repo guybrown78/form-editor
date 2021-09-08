@@ -81,15 +81,19 @@ export class TreeItemComponent implements OnInit, OnDestroy {
       backgroundColor:'rgb(34,69,149, 0.8)',
       overflow:'auto'
     }
+
+    let msg = "<p>Are you sure you want to delete the selected item</p>"//`<p>This will delete the ${ this.fieldItem.label } item of the form. </p>`;
+    // if(this.fieldItem.fieldGroup.length > 0){
+    //   msg = `<p>This will delete the ${ this.fieldItem.label } item of the form including all form inputs within it.</p>`
+    // }
+    // if(this.fieldItem.type === "tab"){
+    //   msg = `<p>This will delete all the ${ this.fieldItem.label } section and inputs within the form. </p>`
+    // }
+
     this.modal.confirm({
       // nzTitle: `<b>Delete ${ this.node.title  }?</b>`,
       nzTitle: `<b>Are you sure?</b>`,
-      // nzContent: `
-      //   <p>Deleting this item will remove it${ this.node.children.length > 0 ? ", and all it's children" : "" } from the form schema.</p>
-      //  `,
-       nzContent: `
-       <p>If you delete this it will delete the whole section including all the inputs within it.</p>
-      `,
+      nzContent: msg,
       nzOkText:'Yes, delete it',
       nzMaskStyle:maskStyle,
       nzOnOk: () => {

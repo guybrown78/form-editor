@@ -10,6 +10,11 @@
     ]"
   >
 
+  <!-- nz-tooltip
+  [nzTooltipTitle]="item.label"
+  nzTooltipOverlayClassName="tf-sidebar-tooltip"
+  nzTooltipPlacement="right" -->
+
     <form-editor-navigation-side-bar>
       <div body class="form-editor-side-bar-nav-wrapper">
 
@@ -18,6 +23,9 @@
           (click)="onToggleDrawer(item.type)"
           [colour]="getHexMenuColour(item.type).hex"
           [disabled]="getIsDisabled(item.type)"
+
+
+
           outline-colour="white"
           size="m"
           [as-button]="true"

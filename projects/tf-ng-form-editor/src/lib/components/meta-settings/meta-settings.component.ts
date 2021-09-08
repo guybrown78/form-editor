@@ -171,7 +171,7 @@ export class MetaSettingsComponent implements OnInit, OnDestroy {
     if((this.allowTitle !== 0 && this.allowTitle !== 2) && (this.allowCode !== 0 && this.allowCode !== 2)){
       this.metaData = { ...this.metaData, ...this.metaForm.value}
       this.formEditorService.updateMetaData(this.metaData);
-      this.message.create('success', `Form meta data has been updated`);
+      this.message.create('success', `Your form settings have been updated`);
     }
   }
 
