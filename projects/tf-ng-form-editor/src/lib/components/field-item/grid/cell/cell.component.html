@@ -26,12 +26,23 @@
     >
 
       <div nz-col nzFlex="auto" class="row-key-input-wrapper">
-        {{ form.controls['type'].value }}
+        <!-- {{ form.controls['type'].value }} -->
+        {{ selectableItem.label }}
       </div>
 
-      <button nz-button nzShape="square" class="grey" (click)="onCellFieldEdit()">
+      <!-- <button nz-button nzShape="square" class="grey" (click)="onCellFieldEdit()">
         <i nz-icon nzType="edit" nzTheme="outline"></i>
-      </button>
+      </button> -->
+
+      <i
+        nz-col nz-icon
+        nzType="ellipsis" nzTheme="outline"
+        nz-button nz-popover
+        [nzPopoverTitle]="titleTemplate"
+        [nzPopoverContent]="contentTemplate"
+        [(nzPopoverVisible)]="popoverVisible"
+        nzPopoverPlacement="right" nzPopoverOverlayClassName="no-popover-content-padding"
+      ></i>
 
     </div>
   </nz-form-control>
@@ -68,3 +79,14 @@
 
 <!-- </form> -->
 
+
+<ng-template #contentTemplate class="no-padding">
+  <ul nz-menu class="bg-white" *ngIf="fieldItem">
+    <li id="edit-cell" nz-menu-item (click)="onCellFieldEdit()">
+      Edit <i nz-icon nzType="edit" nzTheme="outline"></i>
+    </li>
+    <li id="delete-cell" nz-menu-item (click)="onCellDelete()">
+      <span class="red">Delete <i nz-icon nzType="delete" nzTheme="outline"></i></span>
+    </li>
+  </ul>
+</ng-template>

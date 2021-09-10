@@ -373,7 +373,7 @@ export class TfNgFormEditorService implements OnDestroy {
     }
   }
 
-  // loop thought the treeModels children for any that are selectrs
+  // loop thought the treeModels children for any that are selectors
   isTreeChildSelected(list:FormTreeModel[]):boolean{
     if (list) {
       for (let i = 0; i < list.length; i++) {
@@ -387,6 +387,24 @@ export class TfNgFormEditorService implements OnDestroy {
       }
     }
   }
+
+
+
+  // loop through and nullify keys
+  removeFieldItemKeys(list:FieldItemModel[]){
+    if (list) {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].uuid == list[i].key) {
+          delete list[i].key;
+        }
+        if(list[i].fieldGroup){
+          list[i].fieldGroup = this.removeFieldItemKeys(list[i].fieldGroup);
+        }
+      }
+      return list
+    }
+  }
+
 
   getFieldItemFromSelection(selectedField:SelectableFieldItemModel):FieldItemModel{
     let fieldItem:FieldItemModel = {}
@@ -563,9 +581,18 @@ export class TfNgFormEditorService implements OnDestroy {
   saveForm(type:SaveTypeEnum) {
     this.form.pipe(take(1)).subscribe(form => {
       if(form){
+        // Deep clone
+        let updatedSchema:FieldItemModel[] = JSON.parse(JSON.stringify(form.schema))
+        // let updatedSchema:FieldItemModel[] = [ ...form.schema ]
+        // remove all the key's from form.schema (if the key === uuid)
+        const updatedForm:FormModel = {
+          meta:form.meta,
+          schema:this.removeFieldItemKeys(updatedSchema),
+          model:form.model
+        }
         const data:SaveFormModel = {
           type,
-          data:JSON.stringify(form)
+          data:JSON.stringify(updatedForm)
         }
         this._save.next(data);
         this.unsavedItems = false;

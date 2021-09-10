@@ -83,7 +83,8 @@ export class ConfigOptionsComponent implements OnInit {
   onChanges(): void {
     this.form.valueChanges.subscribe(val => {
       this.fieldItem = { ...this.fieldItem, ...this.form.value}
-      this.formEditorService.updateFormItem(this.fieldItem)
+      this.formEditorService.updateFormItem(this.fieldItem);
+      this.updatedFieldItem.emit(this.fieldItem)
     });
   }
 

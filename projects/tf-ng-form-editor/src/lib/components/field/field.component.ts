@@ -212,7 +212,6 @@ export class FieldComponent implements OnInit, OnDestroy {
   }
 
   onNextStep(event){
-    console.log("booom", this.tabIndex)
     this.tabIndex = 1;
   }
 

@@ -179,8 +179,6 @@ export class GridComponent implements OnInit {
   }
 
   addRow(){
-    // const rows = this.rowForm as FormArray;
-    console.log(this.fieldItem.fieldGroup?.length);
     //
     const lastRow:FieldItemModel = this.fieldItem.fieldGroup?.length > 0 ? this.fieldItem.fieldGroup[this.fieldItem.fieldGroup?.length - 1] : null
     // if(this.fieldItem.fieldGroup?.length > 0){

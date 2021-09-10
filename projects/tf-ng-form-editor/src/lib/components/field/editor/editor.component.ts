@@ -90,6 +90,7 @@ export class EditorComponent implements OnInit {
         ...this.form.value
       }
       this.formEditorService.updateFormItem(this.fieldItem)
+      this.updatedFieldItem.emit(this.fieldItem)
     });
   }
 

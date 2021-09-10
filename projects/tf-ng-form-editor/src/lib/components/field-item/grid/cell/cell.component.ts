@@ -58,6 +58,7 @@ export class CellComponent implements OnInit {
   formReady:boolean = false;
   toSelect:boolean = true;
   types: SelectableFieldItemModel[];
+  popoverVisible: boolean = false;
 
   // set form on fieldItem
   constructor(
@@ -121,6 +122,11 @@ export class CellComponent implements OnInit {
 
   onCellFieldEdit(){
     this.showFieldItemModal();
+  }
+
+  onCellDelete(){
+    this.add('empty')
+    this.popoverVisible = false;
   }
 
   showFieldItemModal(title:string = "Edit Field Item"){
