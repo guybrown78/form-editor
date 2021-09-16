@@ -41,7 +41,6 @@
   height: 100%;
 }
 .message-wrapper.show{
-  max-height: 100vh;
   opacity: 1;
   pointer-events: all;
   transition-property: all;
@@ -49,10 +48,12 @@
 	transition-duration: 350ms;
 }
 .message-wrapper.hide{
-  max-height: 0;
   opacity: 0;
   pointer-events: none;
   transition-property: all;
 	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 	transition-duration: 100ms;
+}
+.dark-grey{
+  color: #737A7C;
 }

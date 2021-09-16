@@ -60,6 +60,9 @@ export class CellComponent implements OnInit {
   types: SelectableFieldItemModel[];
   popoverVisible: boolean = false;
 
+  dropdownStyle = {
+    minWidth:'180px'
+  }
   // set form on fieldItem
   constructor(
     private fb:FormBuilder,

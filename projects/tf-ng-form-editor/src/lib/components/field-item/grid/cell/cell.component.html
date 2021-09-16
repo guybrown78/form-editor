@@ -5,6 +5,7 @@
   <nz-form-control *ngIf="toSelect">
     <nz-select
       [ngModel]="types"
+      [nzDropdownStyle]="dropdownStyle"
       [ngModelOptions]="{standalone: true}"
       (ngModelChange)="onSelectItemChange($event)"
       nzPlaceHolder="Select an field item"
@@ -25,7 +26,7 @@
       class="label-button-wrapper"
     >
 
-      <div nz-col nzFlex="auto" class="row-key-input-wrapper">
+      <div nz-col nzFlex="auto" class="row-key-input-wrapper" [title]="selectableItem.label">
         <!-- {{ form.controls['type'].value }} -->
         {{ selectableItem.label }}
       </div>
@@ -83,10 +84,14 @@
 <ng-template #contentTemplate class="no-padding">
   <ul nz-menu class="bg-white" *ngIf="fieldItem">
     <li id="edit-cell" nz-menu-item (click)="onCellFieldEdit()">
-      Edit <i nz-icon nzType="edit" nzTheme="outline"></i>
+      <i nz-icon nzType="edit" nzTheme="outline"></i>
+      Edit
     </li>
     <li id="delete-cell" nz-menu-item (click)="onCellDelete()">
-      <span class="red">Delete <i nz-icon nzType="delete" nzTheme="outline"></i></span>
+      <span class="red">
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+        Delete
+      </span>
     </li>
   </ul>
 </ng-template>

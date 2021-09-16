@@ -37,3 +37,9 @@
 .tree-item-wrapper{
   flex-wrap: nowrap;
 }
+/* .node-name{
+  border: solid 1px red;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */

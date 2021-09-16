@@ -1,6 +1,6 @@
 
 <div nz-row nzJustify="space-between" nzAlign="middle" class="tree-item-wrapper">
-  <span nz-col nzFlex="auto" class="node-name">
+  <span nz-col nzFlex="auto" class="node-name" [title]="node.title">
     {{ node.title }}
   </span>
 
@@ -47,8 +47,10 @@
       Duplicate
     </li>
     <li id="delete" nz-menu-item (click)="onDelete($event)">
-      <i nz-icon nzType="delete" nzTheme="outline"></i>
-      Delete
+      <span class="red">
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+        Delete
+      </span>
     </li>
   </ul>
 </ng-template>
