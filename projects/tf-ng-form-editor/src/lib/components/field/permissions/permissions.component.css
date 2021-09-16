@@ -17,6 +17,7 @@
   overflow: hidden;
   height: 100%;
 }
+
 .permissions-wrapper.show{
   max-height: 100vh;
   opacity: 1;
@@ -36,9 +37,10 @@
 
 
 .message-wrapper{
-  display: block;
+  display: flex;
   overflow: hidden;
   height: 100%;
+  /* align-items: center; */
 }
 .message-wrapper.show{
   opacity: 1;
@@ -56,4 +58,12 @@
 }
 .dark-grey{
   color: #737A7C;
+}
+.message-wrapper .icon{
+  display: block;
+  margin-right: 15px;
+  font-size: 30px;
+}
+.message-wrapper .span{
+  display: block;
 }

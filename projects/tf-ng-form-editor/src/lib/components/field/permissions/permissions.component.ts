@@ -49,7 +49,7 @@ export class PermissionsComponent implements OnInit {
   availableReadOnlyPermissions:any[];
   selectedReadOnlyPermissions:number[];
 
-  message:string = "The permissions for this form field are currently not set which is the default setting. This means that all user groups can read and write with this form field.";
+  message:string = "Permissions allow you set how each user interacts with the form. By default all inputs are fillable for all users.";
 
   constructor(
     private formEditorService:TfNgFormEditorService,
@@ -221,11 +221,11 @@ export class PermissionsComponent implements OnInit {
     this.selectedPermissions = [ ...permissions ]
     if(!this.selectedPermissions.length){
       this.modal.warning({
-        nzTitle: 'Permissions reverting to default settings',
+        nzTitle: 'Alert',
         nzContent: `
           <p>You cannot set all user groups to 'hidden'. The permissions will be reverted back to the default setting</p>
         `,
-        nzOkText:'Remove permissions',
+        nzOkText:'OK',
         nzOnOk: () => {
           this.update()
           this.allowSetPermissions = false;
