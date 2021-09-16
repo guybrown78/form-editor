@@ -559,6 +559,22 @@ export class FormEditorConfigService {
         min:Number.MIN_SAFE_INTEGER,
         max:Number.MAX_SAFE_INTEGER
       }
+    },
+    {
+      type:"date",
+      componentOptions:{
+        dateOptions:{
+          format:"dd/MM/yyyy"
+        }
+      }
+    },
+    {
+      type:"date-range",
+      componentOptions:{
+        dateOptions:{
+          format:"dd/MM/yyyy"
+        }
+      }
     }
 
   ]

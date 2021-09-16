@@ -109,6 +109,9 @@ export class CellComponent implements OnInit {
         const fieldItem:FieldItemModel = this.formEditorService.getFieldItemFromSelection(item);
         //
         fieldItem.label = "";
+        if(id === "number"){
+          fieldItem.placeholder = " ";
+        }
         fieldItem.key = this.columnDef.field
         fieldItem.wrappers = [SelectableWrapper.GRID_CELL_FIELD]
         // 3. add it

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { TfNgFormPermissionInterface, TfNgFormPermissionService } from 'tf-ng-form';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import {
   FormEditorConfigService,
   SelectableFieldItemModel,
@@ -22,7 +23,7 @@ export class PermissionsComponent implements OnInit {
   private _editorItemModel:EditorItemModel
   @Input('editorItemModel') set editorItemModel(item:EditorItemModel){
     if(!this.active || (item.fieldItem.uuid !== this.fieldItem?.uuid)){
-      this.formReady = false;
+      // this.formReady = false;
       this.selectableItem = item.selectableItem;
       this.fieldItem = item.fieldItem;
       this.getPermissions()
@@ -31,12 +32,14 @@ export class PermissionsComponent implements OnInit {
   get editorItemModel():EditorItemModel{
     return this._editorItemModel
   }
-
+  //
+  allowSetPermissions:boolean;
+  //
   fieldItem:FieldItemModel
   selectableItem:SelectableFieldItemModel
 
-  form: FormGroup;
-  formReady:boolean = false;
+  // form: FormGroup;
+  // formReady:boolean = false;
 
   // permissions
   availablePermissions:any[];
@@ -46,12 +49,14 @@ export class PermissionsComponent implements OnInit {
   availableReadOnlyPermissions:any[];
   selectedReadOnlyPermissions:number[];
 
+  message:string = "The permissions for this form field are currently not set which is the default setting. This means that all user groups can read and write with this form field.";
 
   constructor(
     private formEditorService:TfNgFormEditorService,
     private formEditorConfig:FormEditorConfigService,
-    private fb:FormBuilder,
-    private formPermissionService:TfNgFormPermissionService
+    // private fb:FormBuilder,
+    private formPermissionService:TfNgFormPermissionService,
+    private modal:NzModalService
   ) { }
 
   ngOnInit(): void {}
@@ -61,7 +66,7 @@ export class PermissionsComponent implements OnInit {
 
       if(permissions){
         // TODO set all as default
-        this.selectedPermissions = this.fieldItem.permissions ? [ ...this.fieldItem.permissions ] : permissions.map(p => p.level)
+        this.selectedPermissions = this.fieldItem.permissions ? [ ...this.fieldItem.permissions ] : []//permissions.map(p => p.level)
 
         this.availablePermissions = permissions.map(p => {
           return {
@@ -77,7 +82,7 @@ export class PermissionsComponent implements OnInit {
       if(this.selectableItem.editableConfig.setReadonlyPermissions){
         this.getReadOnlyPermissions();
       } else {
-        this.initForm();
+        this.initSetPermissionsToggle();
       }
     })
   }
@@ -95,49 +100,140 @@ export class PermissionsComponent implements OnInit {
             checked:this.selectedReadOnlyPermissions.includes(p.level)
           }
         })
+
       }else{
         this.availableReadOnlyPermissions = [];
       }
-      this.initForm();
+      this.initSetPermissionsToggle();
     })
   }
-
-  initForm(): void {
-    this.form = this.fb.group({});
-
-    // setPermissions
-    if(this.selectableItem.editableConfig.setPermissions){
-      this.form.addControl(
-        'permissions',
-        new FormControl(this.selectedPermissions, [])
-      );
+  initSetPermissionsToggle(){
+    if(this.selectedPermissions.length || this.selectedReadOnlyPermissions.length){
+      this.allowSetPermissions = true;
+    }else{
+      this.allowSetPermissions = false;
     }
-    // setReadonlyPermissions
-    if(this.selectableItem.editableConfig.setReadonlyPermissions){
-      this.form.addControl(
-        'readonlyPermissions',
-        new FormControl(this.selectedReadOnlyPermissions, [])
-      );
-    }
+  }
+  // initForm(): void {
+  //   this.form = this.fb.group({});
 
-    this.onChanges();
-    this.formReady = true;
+  //   // setPermissions
+  //   if(this.selectableItem.editableConfig.setPermissions){
+  //     this.form.addControl(
+  //       'permissions',
+  //       new FormControl(this.selectedPermissions, [])
+  //     );
+  //   }
+  //   // setReadonlyPermissions
+  //   if(this.selectableItem.editableConfig.setReadonlyPermissions){
+  //     this.form.addControl(
+  //       'readonlyPermissions',
+  //       new FormControl(this.selectedReadOnlyPermissions, [])
+  //     );
+  //   }
+
+  //   this.onChanges();
+  //   this.formReady = true;
+  // }
+
+  // onChanges(): void {
+  //   this.form.valueChanges.subscribe(val => {
+  //     this.fieldItem = { ...this.fieldItem, ...this.form.value}
+  //     this.formEditorService.updateFormItem(this.fieldItem)
+  //   });
+  // }
+
+  toggleAllowSetPermissions(value:boolean){
+    if(value){
+      this.selectedReadOnlyPermissions = []
+      this.selectedPermissions = this.availablePermissions.map(p => {
+        return p.value
+      })
+    }else{
+      this.selectedReadOnlyPermissions = []
+      this.selectedPermissions = []
+    }
+    this.allowSetPermissions = value
   }
 
-  onChanges(): void {
-    this.form.valueChanges.subscribe(val => {
-      this.fieldItem = { ...this.fieldItem, ...this.form.value}
-      this.formEditorService.updateFormItem(this.fieldItem)
-    });
+  update(){
+    this.fieldItem = {
+      ...this.fieldItem,
+      permissions:this.selectedPermissions,
+      readonlyPermissions:this.selectedReadOnlyPermissions
+    }
+    this.formEditorService.updateFormItem(this.fieldItem)
   }
-
   onPermissionUpdated(selected:any[]){
-    this.form.controls['permissions'].setValue(selected);
+    this.selectedPermissions = [ ...selected ]
+    this.update();
   }
 
   onReadOnlyPermissionUpdated(selected:any[]){
     this.selectedReadOnlyPermissions = [ ...selected ]
-    this.form.controls['readonlyPermissions'].setValue(selected);
+    this.update();
   }
+
+  getLevelPermission(level){
+    if(this.selectedReadOnlyPermissions.includes(level)){
+      return "read-only"
+    }
+    if(!this.selectedPermissions.includes(level)){
+      return "hidden"
+    }
+    return "fillable"
+  }
+
+  onPermissionSelected(permissionValue:string, permissionLevel:string){
+    const level:number = Number(permissionLevel)
+    let permissions:number[] = [ ...this.selectedPermissions ];
+    let readonly:number[] = [ ...this.selectedReadOnlyPermissions  ];
+    //
+    if(permissionValue === 'read-only'){
+      // needs to be added to permissions
+      if(!permissions.includes(level)){
+        permissions.push(level);
+      }
+      //
+      if(!readonly.includes(level)){
+        readonly.push(level)
+      }
+    }
+    //
+    if(permissionValue !== 'read-only'){
+      // remove from readonly
+      if(readonly.includes(level)){
+        readonly = readonly.filter(c => c !== level)
+      }
+      //
+      if(permissionValue === 'hidden'){
+        if(permissions.includes(level)){
+          permissions = permissions.filter(c => c !== level);
+        }
+      }else{
+        if(!permissions.includes(level)){
+          permissions.push(level);
+        }
+      }
+    }
+    this.selectedReadOnlyPermissions = [ ...readonly ]
+    this.selectedPermissions = [ ...permissions ]
+    if(!this.selectedPermissions.length){
+      this.modal.warning({
+        nzTitle: 'Permissions reverting to default settings',
+        nzContent: `
+          <p>You cannot set all user groups to 'hidden'. The permissions will be reverted back to the default setting</p>
+        `,
+        nzOkText:'Remove permissions',
+        nzOnOk: () => {
+          this.update()
+          this.allowSetPermissions = false;
+        }
+      })
+    }else{
+      this.update();
+    }
+  }
+
 
 }

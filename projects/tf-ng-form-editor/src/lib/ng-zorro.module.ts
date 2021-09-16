@@ -32,6 +32,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
 		NzModalModule,
     NzMessageModule,
     NzEmptyModule,
-    NzTreeModule
+    NzTreeModule,
+    NzCollapseModule
   ],
   exports:[
     NzTypographyModule,
@@ -101,7 +103,8 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
 		NzModalModule,
     NzMessageModule,
     NzEmptyModule,
-    NzTreeModule
+    NzTreeModule,
+    NzCollapseModule
   ]
 })
 export class NgZorroModule { }
