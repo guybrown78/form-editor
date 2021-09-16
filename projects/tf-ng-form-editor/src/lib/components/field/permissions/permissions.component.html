@@ -7,7 +7,7 @@
   <div class="title-wrapper" *ngIf="selectableItem?.editableConfig.setPermissions">
 
     <div nz-row>
-      <div nz-col nzSpan="16">
+      <div nz-col nzSpan="24">
         <form-editor-switch-wrapper>
           <nz-form-label label>
             Set permissions
@@ -40,7 +40,7 @@
           </div>
 
           <!-- DROP DOWN SELECT -->
-          <div nz-col nzSpan="8">
+          <div nz-col nzSpan="16">
             <h6 class="tf-app-column-header-text navy">Permission</h6>
             <div class="col-items">
               <div class="item" *ngFor="let p of availablePermissions">
