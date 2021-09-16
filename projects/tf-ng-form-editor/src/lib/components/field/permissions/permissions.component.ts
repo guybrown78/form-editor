@@ -151,7 +151,8 @@ export class PermissionsComponent implements OnInit {
       })
     }else{
       this.selectedReadOnlyPermissions = []
-      this.selectedPermissions = []
+      this.selectedPermissions = [];
+      this.update();
     }
     this.allowSetPermissions = value
   }
