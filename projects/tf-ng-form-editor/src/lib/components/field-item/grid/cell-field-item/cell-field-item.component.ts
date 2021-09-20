@@ -32,6 +32,10 @@ export class CellFieldItemComponent implements OnInit {
   private _fieldItem:FieldItemModel
   @Input('fieldItem') set fieldItem(item:FieldItemModel){
 
+    if(this.fieldItem && this.fieldItem.uuid === item.uuid){
+      this._fieldItem = item;
+      return
+    }
     // get selectable item
     this.formEditorConfig.getSelectableItemFromType(item.type).pipe(take(1)).subscribe(selectableItem => {
       if(selectableItem){
@@ -40,8 +44,6 @@ export class CellFieldItemComponent implements OnInit {
         this.selectableItem = selectableItem;
         //
         this._fieldItem = item;
-        // this.initForm();
-        // this.onChanges();
         this.editorItemModel = {
           fieldItem: this.fieldItem,
           selectableItem: this.selectableItem
@@ -54,6 +56,8 @@ export class CellFieldItemComponent implements OnInit {
     }, err => {
       console.log("err")
     })
+
+
   }
   get fieldItem():FieldItemModel{
     return this._fieldItem
@@ -77,60 +81,6 @@ export class CellFieldItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  // initForm(){
-  //   this.form = this.fb.group({});
-
-  //   // label
-  //   if(this.selectableItem.editableConfig.setLabel){
-  //     this.form.addControl('label', new FormControl(this.fieldItem.label, []))
-  //   }
-  //   // description
-  //   if(this.selectableItem.editableConfig.setDesc){
-  //     this.form.addControl('description', new FormControl(this.fieldItem.description, []))
-  //   }
-  //   // placeholder
-  //   if(this.selectableItem.editableConfig.setPlaceholder){
-  //     this.form.addControl('placeholder', new FormControl(this.fieldItem.placeholder, []))
-  //   }
-  //   // hasComponentOptions
-  //   if(this.selectableItem.editableConfig.hasComponentOptions){
-  //     this.form.addControl('componentOptions', new FormControl(this.fieldItem.componentOptions, []))
-  //   }
-  // }
-
-  // onChanges(): void {
-  //   this.form.valueChanges.subscribe((val) => {
-  //     this.fieldItem = {
-  //       ...this.fieldItem,
-  //       ...this.form.value
-  //     }
-  //     this.formEditorService.updateFormItem(this.fieldItem)
-  //   });
-  // }
-
-  // onOptionsUpdated(options:OptionModel[]){
-  //   this.updateComponentOptions({
-  //     ...this.fieldItem.componentOptions,
-  //     options
-  //   })
-  // }
-
-  // updateComponentOptions(componentOptions:FieldItemComponentOptionsModel){
-  //   this.fieldItem = {
-  //     ...this.fieldItem,
-  //     componentOptions
-  //   }
-  //   this.formEditorService.updateFormItem(this.fieldItem)
-  // }
-
-  // getDescriptionFieldLabel(){
-  //   if(this.selectableItem.type === "text"){
-  //     return 'Text'
-  //   }
-  //   return 'Description'
-  // }
-
 
 
 

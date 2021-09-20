@@ -7,7 +7,7 @@ import { FieldItemModel, SelectableWrapper } from '../../../../to-share/field-it
 import { take } from 'rxjs/operators';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { CellFieldItemComponent } from '../cell-field-item/cell-field-item.component'
-
+// import { FieldComponent } from '../../../field/field.component'
 @Component({
   selector: 'form-grid-cell',
   templateUrl: './cell.component.html',
@@ -147,43 +147,14 @@ export class CellComponent implements OnInit {
     const modalEL: NzModalRef = this.modal.create({
       nzTitle: title,
       nzContent:CellFieldItemComponent,
-
+      // nzContent:FieldComponent,
       nzComponentParams: {
         fieldItem:this.fieldItem
       },
       nzMask:true,
       nzMaskStyle:maskStyle,
       nzBodyStyle:style,
-      // nzFooter: [
-        // {
-        //   label: 'Cancel',
-        //   type: 'dashed',
-        //   loading: false,
-        //   onClick(): void {
-        //     console.log("cancel")
-        //     // this.loading = true;
-        //     // var dummy = document.createElement("textarea");
-        //     // document.body.appendChild(dummy);
-        //     // dummy.value = data;
-        //     // dummy.select();
-        //     // document.execCommand("copy");
-        //     // document.body.removeChild(dummy);
-        //     // this.label = 'copying JSON';
-        //     // setTimeout(() => {
-        //     //   this.loading = false;
-        //     //   this.disabled = true;
-        //     //   this.label = 'copied to clipboard';
-        //     // }, 1000);
-        //   }
-        // },
-        // {
-        //   label: 'Done',
-        //   type: 'primary',
-        //   onClick(): void {
-        //    modalEL.close();
-        //   }
-        // }
-      // ]
+
     });
   }
 }

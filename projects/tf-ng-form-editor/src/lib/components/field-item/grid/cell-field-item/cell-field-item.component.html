@@ -44,8 +44,64 @@
  -->
  <div class="wrapper width-all ant-form" *ngIf="fieldItem && selectableItem">
 
+  <p *ngIf="selectableItem?.description" >
+    {{ selectableItem?.description }}
+  </p>
 
 
+
+  <field-item-editor
+    *ngIf="availableTabs.length === 1"
+    active="true"
+    [editorItemModel]="editorItemModel"
+    (updatedFieldItem)="onUpdatedFieldItem($event)"
+  ></field-item-editor>
+
+  <nz-tabset
+    class="navy"
+    (nzSelectedIndexChange)="onSelectedTabIndexChange($event)"
+    [nzSelectedIndex]="tabIndex"
+    *ngIf="availableTabs.length > 1"
+  >
+
+    <nz-tab
+      *ngFor="let tab of availableTabs"
+      [nzTitle]="tab.label"
+      [nzDisabled]="tab.disabled"
+    >
+
+      <field-item-editor
+        *ngIf="tab.value === 'editor'"
+        [active]="availableTabs[tabIndex].value === 'editor'"
+        [editorItemModel]="editorItemModel"
+        (updatedFieldItem)="onUpdatedFieldItem($event)"
+      ></field-item-editor>
+
+      <field-item-layout
+        *ngIf="tab.value === 'layout'"
+        [active]="availableTabs[tabIndex].value === 'layout'"
+        [editorItemModel]="editorItemModel"
+        (updatedFieldItem)="onUpdatedFieldItem($event)"
+        (nextStep)="onNextStep($event)"
+      ></field-item-layout>
+
+      <field-item-config-options
+        *ngIf="tab.value === 'options'"
+        [active]="availableTabs[tabIndex].value === 'options'"
+        [editorItemModel]="editorItemModel"
+        (updatedFieldItem)="onUpdatedFieldItem($event)"
+      ></field-item-config-options>
+
+      <field-item-permissions
+        *ngIf="tab.value === 'permissions'"
+        [active]="availableTabs[tabIndex].value === 'permissions'"
+        [editorItemModel]="editorItemModel"
+      ></field-item-permissions>
+
+    </nz-tab>
+
+  </nz-tabset>
+<!--
   <p *ngIf="selectableItem?.description" >
     {{ selectableItem?.description }}
   </p>
@@ -91,6 +147,6 @@
 
     </nz-tab>
 
-  </nz-tabset>
+  </nz-tabset> -->
 
 </div>
