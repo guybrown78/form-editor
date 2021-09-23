@@ -1,4 +1,4 @@
-<form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+<form nz-form [formGroup]="form" nzLayout="vertical" class="width-all" (ngSubmit)="onSubmit($event)">
 
   <div class="grid-row-form-item bg-grey-50">
 
@@ -10,14 +10,14 @@
     >
 
       <div nz-col nzFlex="auto" class="row-key-input-wrapper">
-        <input nz-input formControlName="key" placeholder="Key / Row Identifier" maxlength="255"/>
+        <input nz-input formControlName="key" placeholder="Key / Row Identifier" maxlength="255" (keydown.enter)="onEnterKeyPressed()"/>
       </div>
 
       <span nz-tooltip nzTooltipTitle="This is the row identifier key that represents the row within the final form model" class="row-key-input-wrapper">
         <i nz-icon nzType="info-circle" nzTheme="outline"></i>
       </span>
 
-      <button nz-button nzShape="square" (click)="removeRow()" >
+      <button nz-button nzShape="square" (click)="removeRow()" type="button">
         <i nz-icon nzType="close" nzTheme="outline"></i>
       </button>
 
@@ -52,3 +52,5 @@
     </div>
   </div>
 </form>
+
+<input #inviableInput class="invisable-input"/>

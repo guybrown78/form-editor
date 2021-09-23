@@ -1,7 +1,7 @@
 
 
 <div *ngIf="formReady">
-  <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all">
+  <form nz-form [formGroup]="form" nzLayout="vertical" class="width-all" (ngSubmit)="onSubmit($event)">
 
     <nz-form-control>
       <nz-form-label>Options</nz-form-label>
@@ -19,11 +19,17 @@
       >
 
         <div nz-col nzFlex="auto" class="option-input-wrapper">
-          <input nz-input formControlName="label" placeholder="Label" maxlength="255"/>
+          <input
+            nz-input
+            formControlName="label"
+            placeholder="Label"
+            (keydown.enter)="onEnterKeyPressed()"
+            maxlength="255"
+          />
         </div>
 
         <!-- <div nz-col> -->
-          <button nz-button nzShape="square" (click)="removeItem(i)" >
+          <button nz-button nzShape="square" (click)="removeItem(i)" type="button">
             <i nz-icon nzType="close" nzTheme="outline"></i>
           </button>
         <!-- </div> -->
@@ -46,6 +52,8 @@
 
 
   </form>
+
+  <input #inviableInput class="invisable-input"/>
 
 </div>
 

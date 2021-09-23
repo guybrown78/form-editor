@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
 import { OptionModel } from '../../../to-share/field-item-component-options-model.interface'
 import { FieldItemModel } from '../../../to-share/field-item-model.interface';
@@ -54,6 +54,8 @@ export class OptionsComponent implements OnInit {
   form: FormGroup;
   formReady:boolean = false;
 
+  @ViewChild('inviableInput') inviableInputElement: ElementRef;
+
   constructor(
     private fb:FormBuilder
   ) {}
@@ -85,6 +87,17 @@ export class OptionsComponent implements OnInit {
   // get options() {
   //   return this.form.get('options') as FormArray;
   // }
+
+  onEnterKeyPressed() {
+    // takes focus away from a visible input
+    this.inviableInputElement.nativeElement.focus();
+  }
+
+
+  onSubmit(event){
+    event.stopPropagation();
+    event.preventDefault();
+  }
 
   addItem(label:string = null) {
     const options = this.form.get('options') as FormArray;

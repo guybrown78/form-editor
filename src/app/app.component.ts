@@ -29,6 +29,11 @@ const navigationData:AppNavigationItem[] = [
         routerLink:"/preview",
         hasSub:false,
         label:"Preview existing form"
+      },
+      {
+        routerLink:"/review",
+        hasSub:false,
+        label:"Review existing form"
       }
     ]
   }
@@ -81,6 +86,7 @@ export class AppComponent {
           case "/create":
           case "/edit":
           case "/preview":
+          case "/review":
             this.hideHeader = true;
             break;
           default:

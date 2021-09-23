@@ -29,6 +29,7 @@ import { CreateFormComponent } from './pages/create-form/create-form.component';
 import { EditFormComponent } from './pages/edit-form/edit-form.component';
 import { StatsComponent } from './pages/dashboard/stats/stats.component';
 import { environment } from 'src/environments/environment';
+import { ReviewFormComponent } from './pages/review-form/review-form.component';
 
 
 
@@ -42,6 +43,7 @@ registerLocaleData(en);
     CreateFormComponent,
     EditFormComponent,
     StatsComponent,
+    ReviewFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Field } from '@ngx-formly/core';
 import { FormEditorConfigService, SelectableFieldItemModel } from '../../../../form-editor-config.service';
@@ -137,6 +137,8 @@ export class RowComponent implements OnInit {
   parentKey:string;
   colDefaultsSpans
 
+  @ViewChild('inviableInput') inviableInputElement: ElementRef;
+
   // set form on fieldItem
   constructor(
     private fb:FormBuilder,
@@ -165,6 +167,18 @@ export class RowComponent implements OnInit {
         index:this.index
       })
     });
+  }
+
+
+  onEnterKeyPressed() {
+    // takes focus away from a visible input
+    this.inviableInputElement.nativeElement.focus();
+  }
+
+
+  onSubmit(event){
+    event.stopPropagation();
+    event.preventDefault();
   }
 
   removeRow(){

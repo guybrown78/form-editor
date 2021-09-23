@@ -4,6 +4,7 @@ import { CreateFormComponent } from './pages/create-form/create-form.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EditFormComponent } from './pages/edit-form/edit-form.component';
 import { PreviewFormComponent } from './pages/preview-form/preview-form.component';
+import { ReviewFormComponent } from './pages/review-form/review-form.component';
 import { CanDeactivateGuard } from 'projects/tf-ng-form-editor/src/public-api';
 // import { CanDeactivateGuard} from 'tf-ng-form-editor'
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     canDeactivate: [CanDeactivateGuard]
   },
   { path:"preview", component:PreviewFormComponent, data:{}},
+  { path:"review", component:ReviewFormComponent, data:{}},
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
