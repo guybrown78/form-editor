@@ -82,7 +82,7 @@ export class TreeItemComponent implements OnInit, OnDestroy {
       overflow:'auto'
     }
 
-    let msg = "<p>Are you sure you want to delete the selected item</p>"//`<p>This will delete the ${ this.fieldItem.label } item of the form. </p>`;
+    let msg = "<p>Are you sure you want to delete the selected item?</p>"//`<p>This will delete the ${ this.fieldItem.label } item of the form. </p>`;
     // if(this.fieldItem.fieldGroup.length > 0){
     //   msg = `<p>This will delete the ${ this.fieldItem.label } item of the form including all form inputs within it.</p>`
     // }

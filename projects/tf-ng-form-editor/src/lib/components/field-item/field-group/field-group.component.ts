@@ -59,7 +59,11 @@ export class FieldGroupComponent implements OnInit {
       types => {
         if(types){
           this.types = [ ...types.filter(t => t.category === SelectableCategory.SIMPLE)];
-          this.complexTypes = [ ...types.filter(t => t.category === SelectableCategory.COMPLEX) ]
+          this.complexTypes = [ ...types.filter(t => {
+            if(this.fieldItem.type !== t.type){
+              return t.category === SelectableCategory.COMPLEX
+            }
+          }) ]
           this.initForm();
           this.onChanges();
         }else{
