@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import {
@@ -37,7 +37,8 @@ export class CreateFormComponent implements OnInit, OnDestroy {
     private formEditorService: TfNgFormEditorService,
     private message: NzMessageService,
     private router: Router,
-    private modal:NzModalService
+    private modal:NzModalService,
+    private viewContainerRef: ViewContainerRef
   ) { }
 
   ngOnInit(): void {
@@ -89,17 +90,21 @@ export class CreateFormComponent implements OnInit, OnDestroy {
 
       // for demo purposes, set the allow flags to DISALLOW (false) beacuse the demo uses a switch true/false
       if(data.allowTitle === CheckFormMetaDataStatus.PENDING){
-        this.returnedMetaDataCheck.allowTitle = CheckFormMetaDataStatus.DISALLOW
+        this.returnedMetaDataCheck.allowTitle = CheckFormMetaDataStatus.ALLOW
       }
       if(data.allowCode === CheckFormMetaDataStatus.PENDING){
-        this.returnedMetaDataCheck.allowCode = CheckFormMetaDataStatus.DISALLOW
+        this.returnedMetaDataCheck.allowCode = CheckFormMetaDataStatus.ALLOW
       }
-
+      let count:number = 1;
       // show a example modal for demo purposes to allow/disallow meta data
-      this.modal.confirm({
+      const modal = this.modal.confirm({
         nzTitle: 'Confirm form meta data',
         nzClassName:"tf-app-modal-single-btn",
         nzContent: this.modalContent,
+        nzViewContainerRef: this.viewContainerRef,
+        nzComponentParams: {
+          count:count
+        },
         nzCancelText:null,
         nzClosable:false,
         nzOkText:'Confirm',
@@ -109,6 +114,24 @@ export class CreateFormComponent implements OnInit, OnDestroy {
           this.returnedMetaDataCheck = null;
         }
       })
+
+      const t = setInterval(() => {
+        if(count === 0){
+          clearInterval(t);
+          this.modal.closeAll();
+          this.returnedMetaDataCheck.titleErrMessage = `The form title '${this.returnedMetaDataCheck.title}' conflicts with another form title in our system. Please change and try again.`
+          this.formEditorService.checkFormMetaDataInput(this.returnedMetaDataCheck);
+          this.returnedMetaDataCheck = null;
+          return
+        }else{
+          count -= 1;
+          // modal.updateConfig({
+          //   nzComponentParams:{
+          //     count:count
+          //   }
+          // });
+        }
+      },1000);
 
     })
   }

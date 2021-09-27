@@ -3,7 +3,7 @@
 
 
 <!-- For demo purposes only - show the checks / toggle of CheckFormMetaData -->
-<ng-template #modalContent>
+<ng-template #modalContent let-params>
 
   <p nz-typography class="grey">
     <span class="bold italic">This is for demo purposes only.</span> It allows you to toggle the allowCode and allowTitle flags (where applicable) in the CheckFormMetaData. The CheckFormMetaData is then passed returned back to the tf-ng-form-editor once confirmed.
@@ -15,7 +15,7 @@
     </div>
     <nz-form-control nz-col nzFlex="45px">
       <nz-switch
-        [ngModel]="false"
+        [ngModel]="true"
         (ngModelChange)="onMetaSwitchUpdate($event,'title')"
       ></nz-switch>
     </nz-form-control>
@@ -29,10 +29,20 @@
     </div>
     <nz-form-control nz-col nzFlex="45px">
       <nz-switch
-        [ngModel]="false"
+        [ngModel]="true"
         (ngModelChange)="onMetaSwitchUpdate($event,'code')"
       ></nz-switch>
     </nz-form-control>
+  </div>
+
+  <div nz-row nzAlign="middle" nzJustify="end" class="no-wrap">
+    {{ value }}
+    <div nz-col nzFlex="auto">
+      This popup will auto close in:
+      <span class="red italic">
+        <span class="bold">{{ params.count }}</span> seconds
+      </span>
+    </div>
   </div>
 
 </ng-template>
